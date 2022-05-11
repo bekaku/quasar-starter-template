@@ -18,8 +18,12 @@ export default () => {
     return new Promise((resolve, reject) => {
       api.defaults.headers = reqHeader();
       console.log('api', api.defaults);
-      api
-        .get(req.API)
+
+      api({
+        method: req.method,
+        url: req.API,
+        data: req.body ? req.body : undefined,
+      })
         .then((response) => {
           resolve(response.data);
         })
@@ -32,6 +36,21 @@ export default () => {
             timeout: 10 * 1000,
           });
         });
+
+      // api
+      //   .get(req.API)
+      //   .then((response) => {
+      //     resolve(response.data);
+      //   })
+      //   .catch((error) => {
+      //     reject(error.message);
+      //     WeeLoader(false);
+      //     WeeToast(error.message, {
+      //       multiLine: true,
+      //       type: 'negative',
+      //       timeout: 10 * 1000,
+      //     });
+      //   });
     });
   };
   return { useFetch };
