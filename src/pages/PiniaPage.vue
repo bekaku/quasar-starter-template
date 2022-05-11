@@ -18,9 +18,29 @@
 import { defineComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useCounterStore } from 'stores/counter';
+import { useMeta } from 'quasar';
 export default defineComponent({
   components: {},
   setup() {
+    useMeta({
+      title: 'Penia Page',
+      meta: {
+        description: { name: 'description', content: 'Penia Page' },
+        keywords: { name: 'keywords', content: 'Quasar website' },
+        equiv: {
+          'http-equiv': 'Content-Type',
+          content: 'text/html; charset=UTF-8',
+        },
+        // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+        ogTitle: {
+          property: 'og:title',
+          // optional; similar to titleTemplate, but allows templating with other meta properties
+          template() {
+            return 'Penia Page';
+          },
+        },
+      },
+    });
     const counterStore = useCounterStore();
     const { t } = useLang();
     return { t, counterStore };

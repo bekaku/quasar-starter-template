@@ -1,9 +1,11 @@
 import { useI18n } from 'vue-i18n';
-import { watch, onBeforeMount } from 'vue';
-import { useCookies } from '@vueuse/integrations/useCookies';
+import { watch } from 'vue';
+// import { useCookies } from '@vueuse/integrations/useCookies';
 import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
 import { LocaleKey } from 'src/utils/constant';
 import { addDateByDays } from 'src/utils/dateUtil';
+// import { preFetch } from 'quasar/wrappers';
+import { Cookies } from 'quasar';
 export interface ILocales {
   [key: string]: {
     name: string;
@@ -25,11 +27,14 @@ export const availableLocales: ILocales = {
   },
 };
 
-export const LanguageManager = () => {
+export const LanguageManager = (ssrContext: any) => {
+  const localeCookies = process.env.SERVER
+    ? Cookies.parseSSR(ssrContext)
+    : Cookies; // otherwise we're on client
   // composable
   const langugeAndThemeStore = useLangugeAndThemeStore();
   const { locale } = useI18n();
-  const localeCookies = useCookies([LocaleKey]);
+  // const localeCookies = useCookies([LocaleKey]);
   // methods
   const getSystemLocale = (): string => {
     try {
@@ -45,24 +50,34 @@ export const LanguageManager = () => {
 
   // watchers
   watch(langugeAndThemeStore, (state) => {
-    localeCookies.set(LocaleKey, state.locale, {
+    setLocale(state.locale);
+  });
+
+  const setLocale = (lang: string) => {
+    localeCookies.set(LocaleKey, lang, {
       // maxAge: 60 * 60 * 24 * 365 * 5,
       expires: addDateByDays(365),
     });
-    locale.value = state.locale;
-  });
+    locale.value = lang;
+  };
 
   // init locale
-  const init = () => {
+  const initLang = () => {
     const currentLocale = getUserLocale();
+    console.log(
+      'currentLocale > ',
+      currentLocale,
+      ' cookies',
+      localeCookies.get(LocaleKey)
+    );
     langugeAndThemeStore.setLocale(currentLocale);
     locale.value = currentLocale;
   };
 
   // lifecycle
-  onBeforeMount(() => init());
+  // onBeforeMount(() => initLang());
 
   return {
-    init,
+    initLang,
   };
 };

@@ -21,16 +21,20 @@ module.exports = configure(function (ctx) {
       errors: true,
     },
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
-    // preFetch: true,
+    preFetch: true,
 
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['i18n', 'axios'],
+    boot: [
+      'i18n',
+      'axios',
+      'requireAuth',
+      // { path: 'i18n', server: false },
+    ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ['app.scss'],
-
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       // 'ionicons-v4',
@@ -111,13 +115,13 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Loading', 'Notify', 'Dialog'],
+      plugins: ['Loading', 'Notify', 'Dialog', 'Meta', 'Cookies'],
       iconSet: 'mdi-v6', // Quasar icon set
     },
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
-      open: true, // opens browser window automatically
+      open: false, // opens browser window automatically
       port: ctx.mode.spa ? 8000 : ctx.mode.pwa ? 9000 : 9090,
     },
 
@@ -146,15 +150,20 @@ module.exports = configure(function (ctx) {
       // extendPackageJson (json) {},
 
       pwa: false,
-
       // manualStoreHydration: true,
       // manualPostHydrationTrigger: true,
-
       prodPort: 3000, // The default port that the production server should use
-      // (gets superseded if process.env.PORT is specified at runtime)
-
+      /**
+       * Manually handle the store hydration instead of letting Quasar CLI do it.
+       * For Pinia: store.state.value = window.__INITIAL_STATE__
+       * For Vuex: store.replaceState(window.__INITIAL_STATE__)
+       */
+      // manualStoreHydration: true,
+      maxAge: 0,
       middlewares: [
+        // ctx.prod ? 'compression' : '',
         'render', // keep this as last one
+        // 'logger',
       ],
     },
 

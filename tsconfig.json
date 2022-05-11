@@ -14,7 +14,8 @@
       "stores/*": ["src/stores/*"],
       "interface/*": ["src/interface/*"],
       "composables/*": ["src/composables/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "middleware/*": ["src/middleware/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]

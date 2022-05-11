@@ -74,6 +74,10 @@ export default defineComponent({
   },
 
   setup() {
+    // const ready = ref(false);
+    // nextTick(() => {
+    //   ready.value = true;
+    // });
     const leftDrawerOpen = ref(false);
 
     return {

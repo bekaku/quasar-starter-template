@@ -20,11 +20,42 @@
 </template>
 
 <script lang="ts">
+import { useMeta } from 'quasar';
 import { Todo, Meta } from 'src/interface/models';
 import { defineComponent, ref, defineAsyncComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useCounterStore } from 'stores/counter';
 import useBase from 'src/composables/useBase';
+const metaData = {
+  // sets document title
+  title: 'Index Page',
+  titleTemplate: (title: string) => `${title} - My Website`,
+  // meta tags
+  meta: {
+    description: { name: 'description', content: 'Page 1' },
+    keywords: { name: 'keywords', content: 'Quasar website' },
+    equiv: {
+      'http-equiv': 'Content-Type',
+      content: 'text/html; charset=UTF-8',
+    },
+    // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+    ogTitle: {
+      property: 'og:title',
+      // optional; similar to titleTemplate, but allows templating with other meta properties
+      template(ogTitle: string) {
+        return `${ogTitle} - My Website`;
+      },
+    },
+  },
+
+  // CSS tags
+  link: {
+    material: {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+    },
+  },
+};
 export default defineComponent({
   name: 'IndexPage',
   components: {
@@ -33,6 +64,7 @@ export default defineComponent({
     ),
   },
   setup() {
+    useMeta(metaData);
     const { WeeLoader, WeeToast, WeeConfirm } = useBase();
     const counterStore = useCounterStore();
     const { t } = useLang();

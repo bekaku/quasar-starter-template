@@ -1,9 +1,8 @@
 import { LanguageManager } from './lang';
-export const AppSetup = () => {
+// import LanguageManager from './lang';
+export const AppSetup = (useSSRContext: any) => {
   // use language manager
-  const languageManager = LanguageManager();
-
-  return {
-    languageManager,
-  };
+  const { initLang } = LanguageManager(useSSRContext);
+  initLang();
+  return {};
 };
