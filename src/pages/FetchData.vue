@@ -2,48 +2,64 @@
   <q-page class="row items-center justify-evenly">
     <p>FetchData</p>
     <q-btn label="Load data" @click="loadData" />
+    <p>Post from prefect {{ post }}</p>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount } from 'vue';
+import { defineComponent, ref, onBeforeMount, computed } from 'vue';
 import useBase from 'src/composables/useBase';
 import useCallApi from 'src/composables/useCallApi';
 import { Post } from 'src/interface/models';
 import { useMeta } from 'quasar';
+// import { preFetch } from 'quasar/wrappers';
+import { useTestPost } from 'stores/testPostStore';
+import usePreFetch from 'src/composables/usePreFetch';
+interface ITest {
+  camelToSnake: string;
+  i18nMessage: string;
+  requestFrom: string;
+  AUTHORIZATION: string;
+  ACCEPT_LANGUGE: string;
+  userAgent: string;
+}
 export default defineComponent({
   components: {},
-  setup() {
-    useMeta({
-      title: 'Fetch Data Page',
-      meta: {
-        description: { name: 'description', content: 'Fetch Data Page' },
-        keywords: { name: 'keywords', content: 'Quasar website' },
-        equiv: {
-          'http-equiv': 'Content-Type',
-          content: 'text/html; charset=UTF-8',
-        },
-        // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
-        ogTitle: {
-          property: 'og:title',
-          // optional; similar to titleTemplate, but allows templating with other meta properties
-          template() {
-            return 'Fetch Data Page';
-          },
-        },
-      },
+  // preFetch: preFetch<ITest>(async ({ ssrContext }) => {
+  async preFetch({ ssrContext }) {
+    const { useFetch } = usePreFetch(ssrContext);
+    const data = await useFetch<ITest>({
+      API: '/test',
+      method: 'GET',
     });
+    const testPostStore = useTestPost();
+    testPostStore.setData(data);
+    // const { useFetch } = useCallApi();
+    // const response = await useFetch<ITest>({
+    //   API: '/test',
+    //   method: 'GET',
+    // });
+    // console.log('preFetch', response);
+    console.log('preFetch', data);
+  },
+  setup() {
     const { WeeLoader } = useBase();
     const { useFetch } = useCallApi();
     const data = ref<Post[]>([]);
 
-    onBeforeMount(async () => {
-      const response = await useFetch<unknown[]>({
-        API: '/test',
-        method: 'GET',
-      });
-      console.log('response', response);
+    const dataTest = ref<ITest>();
+    const testPostStore = useTestPost();
+
+    useMeta({
+      title: testPostStore.item ? testPostStore.item.i18nMessage : 'No Data',
     });
+
+    const post = computed(() => testPostStore.item);
+
+    onBeforeMount(async () => {
+      console.log('onBeforeMount', dataTest.value);
+    });
+
     const loadData = async () => {
       WeeLoader();
       // get
@@ -78,7 +94,7 @@ export default defineComponent({
       console.log('response', response);
     };
 
-    return { data, loadData };
+    return { data, loadData, post };
   },
 });
 </script>

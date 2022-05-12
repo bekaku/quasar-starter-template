@@ -1,6 +1,7 @@
 import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
-
+import { Cookies } from 'quasar';
+import { LocaleKey } from 'src/utils/constant';
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $axios: AxiosInstance;
@@ -20,11 +21,27 @@ const api = axios.create({
       : 'https://api.example.com',
   withCredentials: false,
   timeout: 5 * 60000, // 60000 = 1 minute, 0 = no timeout
+  headers: {
+    // Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'Accept-Apiclient': 'default',
+    // 'Accept-Language': locale,
+  },
 });
-
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
-
+  api.interceptors.request.use(
+    (config) => {
+      // const ck = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
+      // const token = '000000000000000000000';
+      // config.headers.Authorization = `bearer ${token}`;
+      // config.headers['Accept-Language'] = ck.get(LocaleKey);
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
   app.config.globalProperties.$axios = axios;
   // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
   //       so you won't necessarily have to import axios in each vue file

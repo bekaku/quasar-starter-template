@@ -6,17 +6,19 @@ export default () => {
   const { WeeToast, WeeLoader } = userBase();
   const { locale } = useLang();
   const token = '0000000009';
-  const reqHeader = () => {
-    return {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Accept-Apiclient': 'default',
-      'Accept-Language': locale.value,
-    };
-  };
+  // const reqHeader = () => {
+  //   return {
+  //     Authorization: `Bearer ${token}`,
+  //     'Content-Type': 'application/json',
+  //     'Accept-Apiclient': 'default',
+  //     'Accept-Language': locale.value,
+  //   };
+  // };
   const useFetch = <T>(req: RequestType): Promise<T> => {
     return new Promise((resolve, reject) => {
-      api.defaults.headers = reqHeader();
+      // api.defaults.headers = reqHeader();
+      api.defaults.headers['Accept-Language'] = locale.value;
+      api.defaults.headers.Authorization = `Bearer ${token}`;
       console.log('api', api.defaults);
 
       api({

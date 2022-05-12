@@ -122,7 +122,7 @@ module.exports = configure(function (ctx) {
     devServer: {
       // https: true
       open: false, // opens browser window automatically
-      port: ctx.mode.spa ? 8000 : ctx.mode.pwa ? 9000 : 9090,
+      port: ctx.mode.spa ? 8000 : ctx.mode.pwa ? 9000 : 9100,
     },
 
     // animations: 'all', // --- includes all animations

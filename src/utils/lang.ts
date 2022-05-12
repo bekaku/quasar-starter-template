@@ -4,15 +4,9 @@ import { watch } from 'vue';
 import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
 import { LocaleKey } from 'src/utils/constant';
 import { addDateByDays } from 'src/utils/dateUtil';
+import { ILocales } from 'src/interface/common';
 // import { preFetch } from 'quasar/wrappers';
 import { Cookies } from 'quasar';
-export interface ILocales {
-  [key: string]: {
-    name: string;
-    iso: string;
-    flag: string;
-  };
-}
 
 export const availableLocales: ILocales = {
   en: {
