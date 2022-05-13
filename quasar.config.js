@@ -103,6 +103,9 @@ module.exports = configure(function (ctx) {
         //   info: '#209CEE',
         //   warning: '#FF9F43',
         // },
+        loadingBar: {
+          color: 'primary',
+        },
       },
 
       lang: 'en-US', // Quasar language pack
@@ -115,7 +118,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Loading', 'Notify', 'Dialog', 'Meta', 'Cookies'],
+      plugins: ['Loading', 'Notify', 'Dialog', 'Meta', 'Cookies', 'LoadingBar'],
       iconSet: 'mdi-v6', // Quasar icon set
     },
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer

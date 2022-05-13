@@ -31,6 +31,7 @@
 
     <q-page-container>
       <language-switcher />
+      <theme-switcher />
 
       <router-view />
     </q-page-container>
@@ -38,8 +39,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, defineAsyncComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
+import LanguageSwitcher from 'components/LanguageSwitcher.vue';
+import ThemeSwitcher from 'components/ThemeSwitcher.vue';
 const linksList = [
   {
     title: 'Home',
@@ -72,9 +75,8 @@ export default defineComponent({
 
   components: {
     EssentialLink,
-    LanguageSwitcher: defineAsyncComponent(
-      () => import('@/components/LanguageSwitcher.vue')
-    ),
+    LanguageSwitcher,
+    ThemeSwitcher,
   },
 
   setup() {

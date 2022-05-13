@@ -1,8 +1,7 @@
 import { useI18n } from 'vue-i18n';
 import { watch } from 'vue';
-// import { useCookies } from '@vueuse/integrations/useCookies';
 import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
-import { LocaleKey } from 'src/utils/constant';
+import { LocaleKey, DefaultLocale } from 'src/utils/constant';
 import { addDateByDays } from 'src/utils/dateUtil';
 import { ILocales } from 'src/interface/common';
 // import { preFetch } from 'quasar/wrappers';
@@ -22,50 +21,43 @@ export const availableLocales: ILocales = {
 };
 
 export const LanguageManager = (ssrContext: any) => {
-  const localeCookies = process.env.SERVER
-    ? Cookies.parseSSR(ssrContext)
-    : Cookies; // otherwise we're on client
+  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   // composable
   const langugeAndThemeStore = useLangugeAndThemeStore();
   const { locale } = useI18n();
   // const localeCookies = useCookies([LocaleKey]);
   // methods
-  const getSystemLocale = (): string => {
-    try {
-      return window
-        ? window.navigator.language.substring(0, 2)
-        : availableLocales.en.iso;
-    } catch (error) {
-      return availableLocales.en.iso;
-    }
-  };
-  const getUserLocale = (): string =>
-    localeCookies.get(LocaleKey) || getSystemLocale();
+  // const getSystemLocale = (): string => {
+  //   try {
+  //     return window
+  //       ? window.navigator.language.substring(0, 2)
+  //       : availableLocales.en.iso;
+  //   } catch (error) {
+  //     return availableLocales.en.iso;
+  //   }
+  // };
+  const getUserLocale = (): string => cookies.get(LocaleKey) || DefaultLocale;
 
   // watchers
   watch(langugeAndThemeStore, (state) => {
-    setLocale(state.locale);
+    if (state.locale) {
+      setLocale(state.locale);
+    }
   });
 
   const setLocale = (lang: string) => {
-    localeCookies.set(LocaleKey, lang, {
+    cookies.set(LocaleKey, lang, {
       // maxAge: 60 * 60 * 24 * 365 * 5,
       expires: addDateByDays(365),
     });
     locale.value = lang;
+    langugeAndThemeStore.setLocale(lang);
   };
 
   // init locale
   const initLang = () => {
-    const currentLocale = getUserLocale();
-    console.log(
-      'currentLocale > ',
-      currentLocale,
-      ' cookies',
-      localeCookies.get(LocaleKey)
-    );
-    langugeAndThemeStore.setLocale(currentLocale);
-    locale.value = currentLocale;
+    const locale = getUserLocale();
+    setLocale(locale);
   };
 
   // lifecycle

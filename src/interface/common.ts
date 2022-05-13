@@ -9,7 +9,8 @@ export enum HttpMethod {
 }
 // type
 export type IMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
-
+export type IThemeSettingOptions = 'dark' | 'light' | 'system' | 'realtime';
+export type ITheme = 'dark' | 'light';
 // interface
 export interface ILocales {
   [key: string]: {

@@ -8,11 +8,19 @@ export const useLangugeAndThemeStore = defineStore('langugeAndTheme', {
   // }),
   state: () => ({
     locale: '',
+    theme: '',
+    themeSetting: '',
   }),
   getters: {},
   actions: {
     setLocale(iso: string) {
       this.locale = iso;
+    },
+    setTheme(theme: string) {
+      this.theme = theme;
+    },
+    setThemeSetting(themeSetting: string) {
+      this.themeSetting = themeSetting;
     },
   },
 });

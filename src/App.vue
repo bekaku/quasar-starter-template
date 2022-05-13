@@ -3,18 +3,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch } from 'vue';
 import { AppSetup } from './utils/app';
 import { useSSRContext } from 'vue';
+import { useQuasar } from 'quasar';
+import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { ITheme } from 'src/interface/common';
 export default defineComponent({
   name: 'App',
   setup() {
-    // const ready = ref(false);
-    // nextTick(() => {
-    //   ready.value = true;
-    // });
+    const $q = useQuasar();
+    const langugeAndThemeStore = useLangugeAndThemeStore();
     const ssrContext = process.env.SERVER ? useSSRContext() : null;
     AppSetup(ssrContext);
+    const setDark = (theme: ITheme) => {
+      if (theme == 'dark') {
+        $q.dark.set(true);
+      } else {
+        $q.dark.set(false);
+      }
+    };
+    setDark(langugeAndThemeStore.theme as ITheme);
+    watch(langugeAndThemeStore, (state) => {
+      setDark(state.theme as ITheme);
+    });
     return {};
   },
 });
