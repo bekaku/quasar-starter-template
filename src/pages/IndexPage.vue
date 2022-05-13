@@ -5,9 +5,9 @@
     <div>Pinia Counter : {{ counterStore.counter }}</div>
 
     <div class="q-gutter-lg">
-      <q-btn label="show loading" @click="loader" />
-      <q-btn label="show toast" @click="toaster" />
-      <q-btn label="show confirm" @click="confirm" />
+      <q-btn label="show loading" color="primary" @click="loader" />
+      <q-btn label="show toast" color="warning" @click="toaster" />
+      <q-btn label="show confirm" color="negative" @click="confirm" />
     </div>
 
     <example-component

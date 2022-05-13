@@ -16,9 +16,11 @@ $primary: #00d1b2;
 $secondary: #3273dc;
 $accent: #9c27b0;
 
-$dark: #1d1d1d;
-
 $positive: #23d160;
 $negative: #ff3860;
 $info: #209cee;
 $warning: #ff9f43;
+// used by dark mode
+$dark-page: #2a303c !default;
+$dark: #2a303c !default;
+$separator-dark-color: rgb(49, 55, 65) !default;
