@@ -14,7 +14,11 @@
         flat
         dense
         round
-        @click="toggleLeftDrawer"
+        @click="
+          langugeAndThemeStore.setLeftDrawer(
+            !langugeAndThemeStore.leftDrawerOpen
+          )
+        "
         aria-label="Menu"
         icon="mdi-menu"
       />
@@ -48,7 +52,7 @@
           outlined
           square
           v-model="search"
-          placeholder="Search"
+          :placeholder="t('base.search')"
           class="bg-white col"
         />
         <q-btn
@@ -57,7 +61,9 @@
           text-color="black"
           :icon="biSearch"
           unelevated
-        />
+        >
+          <q-tooltip>{{ t('base.search') }}</q-tooltip>
+        </q-btn>
       </div>
 
       <q-space />
@@ -126,7 +132,10 @@
                 <q-item-section side>
                   <q-icon :name="biChevronRight" />
                 </q-item-section>
-                <q-menu anchor="top end" self="top start">
+                <q-menu
+                  :anchor="!$q.screen.gt.xs ? 'bottom left' : 'top end'"
+                  self="top start"
+                >
                   <q-list style="min-width: 150px">
                     <q-item
                       clickable
@@ -161,7 +170,10 @@
                 <q-item-section side>
                   <q-icon :name="biChevronRight" />
                 </q-item-section>
-                <q-menu anchor="top end" self="top start">
+                <q-menu
+                  :anchor="!$q.screen.gt.xs ? 'bottom left' : 'top end'"
+                  self="top start"
+                >
                   <q-list style="min-width: 150px">
                     <q-item
                       clickable
@@ -235,16 +247,14 @@ import { availableThemes } from 'src/utils/theme';
 import { availableLocales } from 'src/utils/lang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
 import { capitalizeFirstLetter } from 'src/utils/appUtil';
+import { useLang } from '@/composables/useLang';
 export default defineComponent({
   name: 'AppHeader',
   props: {},
   setup() {
+    const { t } = useLang();
     const langugeAndThemeStore = useLangugeAndThemeStore();
-    const leftDrawerOpen = ref(false);
     const search = ref('');
-    function toggleLeftDrawer() {
-      leftDrawerOpen.value = !leftDrawerOpen.value;
-    }
     const currenLocale = computed(() =>
       availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
     );
@@ -268,15 +278,14 @@ export default defineComponent({
       biCheck2,
     };
     return {
-      leftDrawerOpen,
       search,
-      toggleLeftDrawer,
       ...icons,
       availableThemes,
       langugeAndThemeStore,
       availableLocales,
       capitalizeFirstLetter,
       currenLocale,
+      t,
     };
   },
 });

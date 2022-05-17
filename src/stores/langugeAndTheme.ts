@@ -10,6 +10,7 @@ export const useLangugeAndThemeStore = defineStore('langugeAndTheme', {
     locale: '',
     theme: '',
     themeSetting: '',
+    leftDrawerOpen: true,
   }),
   getters: {},
   actions: {
@@ -21,6 +22,9 @@ export const useLangugeAndThemeStore = defineStore('langugeAndTheme', {
     },
     setThemeSetting(themeSetting: string) {
       this.themeSetting = themeSetting;
+    },
+    setLeftDrawer(open: boolean) {
+      this.leftDrawerOpen = open;
     },
   },
 });

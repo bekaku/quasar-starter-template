@@ -75,7 +75,17 @@ export default () => {
       }
     }
     $q.notify(
-      Object.assign({ message, icon, timeout: 5000, progress: true }, options)
+      Object.assign(
+        {
+          message,
+          icon,
+          timeout: 5000,
+          progress: true,
+          position: 'top-right',
+          multiLine: true,
+        },
+        options
+      )
     );
   };
   const WeeConfirm = async (

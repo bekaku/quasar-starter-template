@@ -1,5 +1,10 @@
 <template>
-  <q-drawer v-model="leftDrawerOpen" show-if-above bordered :width="240">
+  <q-drawer
+    v-model="langugeAndThemeStore.leftDrawerOpen"
+    show-if-above
+    bordered
+    :width="240"
+  >
     <q-scroll-area class="fit">
       <q-list padding>
         <q-item
@@ -104,23 +109,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { fabYoutube } from '@quasar/extras/fontawesome-v6';
-
+import { defineComponent } from 'vue';
+import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
 export default defineComponent({
   name: 'AppDrawer',
   props: {},
   setup() {
-    const leftDrawerOpen = ref(false);
-    const search = ref('');
-    function toggleLeftDrawer() {
-      leftDrawerOpen.value = !leftDrawerOpen.value;
-    }
+    const langugeAndThemeStore = useLangugeAndThemeStore();
     return {
-      fabYoutube,
-      leftDrawerOpen,
-      search,
-      toggleLeftDrawer,
+      langugeAndThemeStore,
       links1: [
         // { icon: 'bi-house-door', text: 'Home', link: '/' },
         { icon: 'mdi-fruit-pineapple', text: 'Pinia Store', link: '/pinia' },

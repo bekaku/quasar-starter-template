@@ -16,6 +16,10 @@ export default defineComponent({
     const langugeAndThemeStore = useLangugeAndThemeStore();
     const ssrContext = process.env.SERVER ? useSSRContext() : null;
     AppSetup(ssrContext);
+    if (!$q.screen.gt.xs) {
+      langugeAndThemeStore.setLeftDrawer(false);
+    }
+
     const setDark = (theme: ITheme) => {
       if (theme == 'dark') {
         $q.dark.set(true);
