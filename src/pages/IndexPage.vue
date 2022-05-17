@@ -1,21 +1,50 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <p>{{ t('app.name') }}</p>
+  <q-page padding>
+    <q-card elavated>
+      <q-card-section>
+        <p>{{ t('app.name') }}</p>
 
-    <div>Pinia Counter : {{ counterStore.counter }}</div>
+        <div>Pinia Counter : {{ counterStore.counter }}</div>
 
-    <div class="q-gutter-lg">
-      <q-btn label="show loading" color="primary" @click="loader" />
-      <q-btn label="show toast" color="warning" @click="toaster" />
-      <q-btn label="show confirm" color="negative" @click="confirm" />
-    </div>
+        <div class="q-gutter-lg">
+          <q-btn
+            label="show loading"
+            color="primary"
+            unelevated
+            @click="loader"
+          />
+          <q-btn label="show toast" color="warning" @click="toaster" />
+          <q-btn label="show confirm" color="negative" @click="confirm" />
+        </div>
 
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+        <example-component
+          title="Example component"
+          active
+          :todos="todos"
+          :meta="meta"
+        ></example-component>
+      </q-card-section>
+
+      <q-card-section>
+        <app-result status="empty" :description="t('error.dataNotfound')">
+          <template #extra>
+            <q-btn
+              outline
+              icon="mdi-arrow-left"
+              :label="t('base.back') + t('base.home')"
+            />
+          </template>
+        </app-result>
+
+        <app-alert
+          radius
+          type="is-light"
+          message="This is alert message!!"
+          title="Title"
+        >
+        </app-alert>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
@@ -26,45 +55,21 @@ import { defineComponent, ref, defineAsyncComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useCounterStore } from 'stores/counter';
 import useBase from 'src/composables/useBase';
-const metaData = {
-  // sets document title
-  title: 'Index Page',
-  titleTemplate: (title: string) => `${title} - My Website`,
-  // meta tags
-  meta: {
-    description: { name: 'description', content: 'Page 1' },
-    keywords: { name: 'keywords', content: 'Quasar website' },
-    equiv: {
-      'http-equiv': 'Content-Type',
-      content: 'text/html; charset=UTF-8',
-    },
-    // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
-    ogTitle: {
-      property: 'og:title',
-      // optional; similar to titleTemplate, but allows templating with other meta properties
-      template(ogTitle: string) {
-        return `${ogTitle} - My Website`;
-      },
-    },
-  },
-
-  // CSS tags
-  link: {
-    material: {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-    },
-  },
-};
+import AppResult from 'components/base/AppResult.vue';
+import AppAlert from 'components/base/AppAlert.vue';
 export default defineComponent({
   name: 'IndexPage',
   components: {
     ExampleComponent: defineAsyncComponent(
       () => import('@/components/ExampleComponent.vue')
     ),
+    AppResult,
+    AppAlert,
   },
   setup() {
-    useMeta(metaData);
+    useMeta({
+      title: 'Index Page',
+    });
     const { WeeLoader, WeeToast, WeeConfirm } = useBase();
     const counterStore = useCounterStore();
     const { t } = useLang();

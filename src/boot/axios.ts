@@ -24,7 +24,7 @@ const api = axios.create({
     // Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
     'Accept-Apiclient': DefaultApiCLient,
-    // 'Accept-Language': locale,
+    // 'Accept-Language': DefaultLocale,
   },
 });
 export default boot(({ app }) => {

@@ -1,8 +1,12 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <p>FetchData</p>
-    <q-btn label="Load data" @click="loadData" />
-    <p>Post from prefect {{ post }}</p>
+  <q-page padding>
+    <q-card>
+      <q-card-section>
+        <p>FetchData</p>
+        <q-btn label="Load data" @click="loadData" />
+        <p>Post from prefect {{ post }}</p>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
@@ -26,8 +30,8 @@ interface ITest {
 export default defineComponent({
   components: {},
   // preFetch: preFetch<ITest>(async ({ ssrContext }) => {
-  async preFetch({ ssrContext }) {
-    const { useFetch } = usePreFetch(ssrContext);
+  async preFetch({ ssrContext, redirect }) {
+    const { useFetch } = usePreFetch(ssrContext, redirect);
     const data = await useFetch<ITest>({
       API: '/test',
       method: 'GET',

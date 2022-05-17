@@ -45,8 +45,9 @@ module.exports = configure(function (ctx) {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
-      'mdi-v6', // optional, you are not bound to it
+      // 'roboto-font',
+      'mdi-v6',
+      'bootstrap-icons',
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
@@ -114,7 +115,27 @@ module.exports = configure(function (ctx) {
       // (like functional components as one of the examples),
       // you can manually specify Quasar components/directives to be available everywhere:
       //
-      components: ['QBtn', 'QPage'],
+      components: [
+        'QBtn',
+        'QPage',
+        'QCard',
+        'QCardSection',
+        'QDrawer',
+        'QScrollArea',
+        'QList',
+        'QItem',
+        'QItemSection',
+        'QIcon',
+        'QItemLabel',
+        'QSeparator',
+        'QHeader',
+        'QSpace',
+        'QInput',
+        'QTooltip',
+        'QBadge',
+        'QAvatar',
+        'QMenu',
+      ],
       // directives: [],
 
       // Quasar plugins

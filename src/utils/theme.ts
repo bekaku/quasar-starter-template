@@ -1,17 +1,24 @@
-import { watch, onMounted, onBeforeUnmount } from 'vue';
+import { watch, onMounted, onBeforeUnmount, computed } from 'vue';
 import { IThemeSettingOptions, ITheme } from 'src/interface/common';
 import { Cookies } from 'quasar';
 import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
 import { ThemeKey } from 'src/utils/constant';
 import { addDateByDays } from 'src/utils/dateUtil';
+import {
+  biLaptop,
+  biSun,
+  biMoon,
+  biClock,
+} from '@quasar/extras/bootstrap-icons';
 export const availableThemes: {
   key: IThemeSettingOptions;
   text: string;
+  icon: string;
 }[] = [
-  { key: 'light', text: 'Light' },
-  { key: 'dark', text: 'Dark' },
-  { key: 'system', text: 'System' },
-  { key: 'realtime', text: 'Realtime' },
+  { key: 'light', text: 'Light', icon: biSun },
+  { key: 'dark', text: 'Dark', icon: biMoon },
+  { key: 'system', text: 'System', icon: biLaptop },
+  { key: 'realtime', text: 'Realtime', icon: biClock },
 ];
 
 export function ThemeManager(ssrContext: any) {
@@ -42,6 +49,9 @@ export function ThemeManager(ssrContext: any) {
   };
 
   // state
+  const currentTheme = computed(() =>
+    availableThemes.find((t) => t.key == langugeAndThemeStore.themeSetting)
+  );
 
   // wathcers
   const onThemeSettingChange = (themeSetting: IThemeSettingOptions) => {
@@ -107,5 +117,6 @@ export function ThemeManager(ssrContext: any) {
     getUserSetting,
     getSystemTheme,
     getRealtimeTheme,
+    currentTheme,
   };
 }

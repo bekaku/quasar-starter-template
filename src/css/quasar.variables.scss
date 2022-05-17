@@ -21,6 +21,16 @@ $negative: #ff3860;
 $info: #209cee;
 $warning: #ff9f43;
 // used by dark mode
-$dark-page: #2a303c !default;
-$dark: #2a303c !default;
-$separator-dark-color: rgb(49, 55, 65) !default;
+$dark-page: #171717 !default;
+$dark: #1c1c1d !default;
+
+// $separator-color: #dcdcdc !default;
+$separator-color: #f0f0f0 !default;
+$separator-dark-color: #282829 !default;
+
+$shadow-color: #000 !default;
+$elevation-umbra: rgba($shadow-color, 0.12) !default;
+$elevation-penumbra: rgba($shadow-color, 0.14) !default;
+$elevation-ambient: rgba($shadow-color, 0.12) !default;
+
+$button-font-weight: 400 !default;

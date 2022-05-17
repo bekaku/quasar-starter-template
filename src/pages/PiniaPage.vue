@@ -1,16 +1,28 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <p>Pinia Store</p>
-    <div>Counter : {{ counterStore.counter }}</div>
+  <q-page padding>
+    <q-card>
+      <q-card-section class="q-gutter-md">
+        <p>Pinia Store</p>
+        <div>Counter : {{ counterStore.counter }}</div>
 
-    <q-btn color="primary" label="Increment" @click="counterStore.increment" />
-    <q-btn
-      color="primary"
-      label="Increment x2"
-      @click="counterStore.increment2x"
-    />
-    <q-btn color="primary" label="decrement" @click="counterStore.decrement" />
-    <q-btn color="primary" label="reset" @click="counterStore.reset" />
+        <q-btn
+          color="primary"
+          label="Increment"
+          @click="counterStore.increment"
+        />
+        <q-btn
+          color="primary"
+          label="Increment x2"
+          @click="counterStore.increment2x"
+        />
+        <q-btn
+          color="primary"
+          label="decrement"
+          @click="counterStore.decrement"
+        />
+        <q-btn color="primary" label="reset" @click="counterStore.reset" />
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 

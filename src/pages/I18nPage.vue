@@ -1,7 +1,11 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <p>I18n Page</p>
-    <p>{{ t('base.appCookiepolicy') }}</p>
+  <q-page padding>
+    <q-card>
+      <q-card-section>
+        <p>I18n Page</p>
+        <p>{{ t('base.appCookiepolicy') }}</p>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 

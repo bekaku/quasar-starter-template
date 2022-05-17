@@ -11,14 +11,37 @@ export enum HttpMethod {
 export type IMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export type IThemeSettingOptions = 'dark' | 'light' | 'system' | 'realtime';
 export type ITheme = 'dark' | 'light';
+export type IResult =
+  | '404'
+  | '403'
+  | '500'
+  | '418'
+  | 'info'
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'empty';
+export type IAlert =
+  | 'is-primary'
+  | 'is-link'
+  | 'is-info'
+  | 'is-success'
+  | 'is-warning'
+  | 'is-danger'
+  | 'is-light';
 // interface
 export interface ILocales {
-  [key: string]: {
-    name: string;
-    iso: string;
-    flag: string;
-  };
+  name: string;
+  iso: string;
+  flag: string;
 }
+// export interface ILocales {
+//   [key: string]: {
+//     name: string;
+//     iso: string;
+//     flag: string;
+//   };
+// }
 export interface LocaleOption {
   id: string;
   name: string;

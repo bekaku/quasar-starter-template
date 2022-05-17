@@ -7,18 +7,18 @@ import { ILocales } from 'src/interface/common';
 // import { preFetch } from 'quasar/wrappers';
 import { Cookies } from 'quasar';
 
-export const availableLocales: ILocales = {
-  en: {
+export const availableLocales: ILocales[] = [
+  {
     name: 'English',
     iso: 'en',
     flag: '🇺🇸',
   },
-  id: {
+  {
     name: 'ไทย',
     iso: 'th',
     flag: 'TH',
   },
-};
+];
 
 export const LanguageManager = (ssrContext: any) => {
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client

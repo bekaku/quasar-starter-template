@@ -1,6 +1,21 @@
 <template>
   <div class="fullscreen text-center q-pa-md flex flex-center">
-    <app-result status="404" :description="t('error.pageNotFound')">
+    <!-- <div>
+      <div style="font-size: 30vh">404</div>
+
+      <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
+
+      <q-btn
+        class="q-mt-xl"
+        color="white"
+        text-color="blue"
+        unelevated
+        to="/"
+        label="Go Home"
+        no-caps
+      />
+    </div> -->
+    <app-result status="error" :title="code" :description="message">
       <template #extra>
         <q-btn
           outline
@@ -15,6 +30,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import useBase from 'src/composables/useBase';
 import AppResult from 'components/base/AppResult.vue';
 import { useLang } from 'src/composables/useLang';
 export default defineComponent({
@@ -24,7 +40,10 @@ export default defineComponent({
   },
   setup() {
     const { t } = useLang();
+    const { WeeGetParam } = useBase();
     return {
+      code: WeeGetParam('code'),
+      message: WeeGetParam('message'),
       t,
     };
   },
