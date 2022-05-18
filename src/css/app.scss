@@ -175,3 +175,11 @@ body.body--light {
   background-color: #feecf0;
   color: #cc0f35;
 }
+.wee-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+.wee-link:hover {
+  text-decoration: underline;
+}

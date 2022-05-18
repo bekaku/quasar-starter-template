@@ -235,7 +235,8 @@
     "limitEachFile": "Each file size cannot exceed {0} MB!",
     "permissionNotFound": "Menu privileges not found",
     "validate_url": "Invalid link format",
-    "slugFormat": "English or numbers only"
+    "slugFormat": "English or numbers only",
+    "emailValidate": "E-mail cannot be blank and must have a valid e-mail format."
   },
   "success": {
     "success": "Success",
@@ -365,6 +366,10 @@
     "sort": "Sort order",
     "asc": "Ascending",
     "desc": "Descending"
+  },
+  "page": {
+    "login": "Sign in",
+    "dashboard": "Home"
   },
   "model_created_at": "Created at",
   "model_updated_at": "updated at",

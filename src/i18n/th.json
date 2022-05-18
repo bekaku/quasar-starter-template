@@ -1,8 +1,8 @@
 {
   "app": {
-    "name": "Vue 3 เทมเพลต",
-    "monogram": "Vue 3 Starter",
-    "fullName": "Vue 3 เทมเพลต",
+    "name": "Super Synapse",
+    "monogram": "Super Synapse",
+    "fullName": "Super Synapse",
     "backend.title": "Vue 3 Starter",
     "appVersion": "เวอร์ชั่น {0}",
     "copyright": "Vue 3 เทมเพลต © {0} สงวนลิขสิทธิ์",
@@ -234,7 +234,8 @@
     "limitEachFile": "ขนาดไฟล์แต่ละไฟล์ต้องไม่เกิน {0} MB!",
     "permissionNotFound": "ไม่พบสิทธิ์การใช้งาน",
     "validate_url": "รูปแบบลิงค์ไม่ถูกต้อง",
-    "slugFormat": "ภาษาอังกฤษหรือตัวเลขเท่านั้น"
+    "slugFormat": "ภาษาอังกฤษหรือตัวเลขเท่านั้น",
+    "emailValidate": "อีเมล์ต้องไม่เป็นค่าว่างและต้องมีรูปแบบอีเมล์ที่ถูกต้อง"
   },
   "success": {
     "success": "ดำเนินการสำเร็จ",
@@ -362,6 +363,10 @@
     "sort": "เรียงลำดับ",
     "asc": "จากน้อยไปหามาก",
     "desc": "จากมากไปหาน้อย"
+  },
+  "page": {
+    "login": "เข้าสู่ระบบ",
+    "dashboard": "หน้าหลัก"
   },
   "model_created_at": "สร้างเมื่อ",
   "model_updated_at": "แก้ไขล่าสุด",

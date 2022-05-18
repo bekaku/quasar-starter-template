@@ -19,7 +19,7 @@
       <template #extra>
         <q-btn
           outline
-          icon="mdi-arrow-left"
+          :icon="biArrowLeft"
           :label="t('base.back') + t('base.home')"
           to="/"
         />
@@ -33,6 +33,7 @@ import { defineComponent } from 'vue';
 import useBase from 'src/composables/useBase';
 import AppResult from 'components/base/AppResult.vue';
 import { useLang } from 'src/composables/useLang';
+import { biArrowLeft } from '@quasar/extras/bootstrap-icons';
 export default defineComponent({
   name: 'ErrorPage',
   components: {
@@ -45,6 +46,7 @@ export default defineComponent({
       code: WeeGetParam('code'),
       message: WeeGetParam('message'),
       t,
+      biArrowLeft,
     };
   },
 });

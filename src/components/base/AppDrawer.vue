@@ -25,6 +25,63 @@
           </q-item-section>
         </q-item>
 
+        <q-expansion-item icon="bi-file" label="Pages">
+          <q-list class="q-pl-lg">
+            <q-item to="/Login-1" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="bi-box-arrow-in-right" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Login-1</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item to="/Lock" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="bi-lock" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Lock Screen</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item to="/Lock-2" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="bi-lock" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Lock Screen - 2</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item to="/Pricing" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="bi-list" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Pricing</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item-label header class="text-weight-bold">Generic</q-item-label>
+            <q-item to="/Profile" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="bi-person" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>User Profile</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item
+              to="/Maintenance"
+              active-class="q-item-no-link-highlighting"
+            >
+              <q-item-section avatar>
+                <q-icon name="bi-gear" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Maintenance</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
         <q-separator class="q-my-md" />
 
         <q-item v-for="link in links2" :key="link.text" v-ripple clickable>
@@ -75,7 +132,7 @@
 
         <div
           class="q-px-md"
-          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-9'"
+          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'"
         >
           <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
             <a
@@ -90,7 +147,7 @@
         </div>
         <div
           class="q-py-md q-px-md"
-          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-9'"
+          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'"
         >
           <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
             <a
@@ -103,6 +160,16 @@
             </a>
           </div>
         </div>
+        <div
+          class="q-py-md q-px-md"
+          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'"
+        >
+          <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
+            <a class="YL__drawer-footer-link" href="javascript:void(0)">
+              {{ `@ ${getYearNow()} ${t('app.monogram')}` }}
+            </a>
+          </div>
+        </div>
       </q-list>
     </q-scroll-area>
   </q-drawer>
@@ -111,13 +178,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { getYearNow } from 'src/utils/dateUtil';
+import { useLang } from '@/composables/useLang';
 export default defineComponent({
   name: 'AppDrawer',
   props: {},
   setup() {
+    const { t } = useLang();
     const langugeAndThemeStore = useLangugeAndThemeStore();
     return {
       langugeAndThemeStore,
+      getYearNow,
+      t,
       links1: [
         // { icon: 'bi-house-door', text: 'Home', link: '/' },
         { icon: 'mdi-fruit-pineapple', text: 'Pinia Store', link: '/pinia' },
@@ -182,5 +254,5 @@ export default defineComponent({
     font-weight: 500
     font-size: .75rem
     &:hover
-      text-decoration: none
+      text-decoration: underline
 </style>

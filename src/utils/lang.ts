@@ -49,6 +49,7 @@ export const LanguageManager = (ssrContext: any) => {
     cookies.set(LocaleKey, lang, {
       // maxAge: 60 * 60 * 24 * 365 * 5,
       expires: addDateByDays(365),
+      path: '/',
     });
     locale.value = lang;
     langugeAndThemeStore.setLocale(lang);

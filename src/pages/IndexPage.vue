@@ -30,7 +30,7 @@
           <template #extra>
             <q-btn
               outline
-              icon="mdi-arrow-left"
+              icon="bi-arrow-left"
               :label="t('base.back') + t('base.home')"
             />
           </template>
@@ -55,8 +55,7 @@ import { defineComponent, ref, defineAsyncComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useCounterStore } from 'stores/counter';
 import useBase from 'src/composables/useBase';
-import AppResult from 'components/base/AppResult.vue';
-import AppAlert from 'components/base/AppAlert.vue';
+import AppResult from '@/components/base/AppResult.vue';
 export default defineComponent({
   name: 'IndexPage',
   components: {
@@ -64,7 +63,9 @@ export default defineComponent({
       () => import('@/components/ExampleComponent.vue')
     ),
     AppResult,
-    AppAlert,
+    AppAlert: defineAsyncComponent(
+      () => import('@/components/base/AppAlert.vue')
+    ),
   },
   setup() {
     useMeta({

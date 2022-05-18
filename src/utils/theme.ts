@@ -70,6 +70,7 @@ export function ThemeManager(ssrContext: any) {
     cookies.set(ThemeKey, langugeAndThemeStore.themeSetting, {
       // maxAge: 60 * 60 * 24 * 365 * 5,
       expires: addDateByDays(365),
+      path: '/',
     });
   };
 
