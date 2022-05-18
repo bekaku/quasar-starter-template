@@ -99,6 +99,9 @@ export default defineComponent({
     const meta = ref<Meta>({
       totalCount: 1200,
     });
+
+    console.log('index page setip()');
+
     const confirm = async () => {
       const conf = await WeeConfirm(t('app.monogram'), t('base.deleteConfirm'));
       if (conf) {
