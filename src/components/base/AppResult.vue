@@ -3,11 +3,20 @@
     <div class="col">
       <div class="column items-center">
         <div class="col text-center">
-          <q-avatar v-if="status == 'empty'" :size="iconSize">
+          <q-avatar
+            v-if="status == 'empty'"
+            square
+            :style="`width: ${iconSize} ; height: auto`"
+          >
             <img src="~assets/icons/empty-box.png" />
           </q-avatar>
-          <q-avatar rounded v-else-if="status == 'error'" :size="iconSize">
-            <img src="~assets/icons/error.png" />
+          <q-avatar
+            square
+            style="width: 100%; height: auto"
+            v-else-if="status == 'error'"
+            :size="iconSize"
+          >
+            <img src="~assets/icons/mental-disorder2.png" />
           </q-avatar>
           <q-avatar square v-else-if="status == 'warning'" :size="iconSize">
             <img src="~assets/icons/warning.png" />
@@ -15,9 +24,18 @@
           <q-avatar square v-else-if="status == 'success'" :size="iconSize">
             <img src="~assets/icons/tick.png" />
           </q-avatar>
-          <q-avatar square v-else-if="status == '404'" :size="iconSize">
-            <img src="~assets/icons/error-404.png" />
+          <q-avatar
+            square
+            v-else-if="status == '404'"
+            style="width: 100%; height: auto"
+          >
+            <img src="~assets/icons/mental-disorder.png" />
           </q-avatar>
+          <!-- <img
+            v-else-if="status == '404'"
+            src="~assets/icons/error-404.png"
+            spinner-color="white"
+          /> -->
           <q-avatar
             v-else
             :size="iconSize"

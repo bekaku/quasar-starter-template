@@ -14,6 +14,7 @@
 </template>
 
 <script lang="ts">
+import { useMeta } from 'quasar';
 import { defineComponent } from 'vue';
 import AppResult from 'components/base/AppResult.vue';
 import { useLang } from 'src/composables/useLang';
@@ -24,6 +25,9 @@ export default defineComponent({
   },
   setup() {
     const { t } = useLang();
+    useMeta({
+      title: t('http.404'),
+    });
     return {
       t,
     };

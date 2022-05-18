@@ -34,6 +34,7 @@ import useBase from 'src/composables/useBase';
 import AppResult from 'components/base/AppResult.vue';
 import { useLang } from 'src/composables/useLang';
 import { biArrowLeft } from '@quasar/extras/bootstrap-icons';
+import { useMeta } from 'quasar';
 export default defineComponent({
   name: 'ErrorPage',
   components: {
@@ -42,6 +43,9 @@ export default defineComponent({
   setup() {
     const { t } = useLang();
     const { WeeGetParam } = useBase();
+    useMeta({
+      title: t('error.error'),
+    });
     return {
       code: WeeGetParam('code'),
       message: WeeGetParam('message'),
