@@ -37,10 +37,10 @@
         </q-avatar>
         <q-toolbar-title
           shrink
-          class="text-weight-bold"
+          class="text-weight-bold text-uppercase"
           :class="$q.dark.isActive ? 'text-white' : 'text-black'"
         >
-          SuperSynapse
+          Super Synapse
         </q-toolbar-title>
       </q-btn>
 
