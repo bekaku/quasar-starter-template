@@ -1,12 +1,22 @@
 <template>
-  <q-layout>
+  <q-layout view="hHh LpR fFf">
+    <app-header-alt />
+
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({});
+<script>
+import AppHeaderAlt from 'src/components/base/AppHeaderAlt.vue';
+export default {
+  name: 'MainLayout',
+  components: {
+    AppHeaderAlt,
+  },
+  setup() {
+    return {};
+  },
+};
 </script>

@@ -144,12 +144,14 @@ module.exports = configure(function (ctx) {
         'QExpansionItem',
         'QInput',
         'QImg',
+        'QCarousel',
+        'QCarouselSlide',
       ],
       // directives: [],
 
       // Quasar plugins
       plugins: ['Loading', 'Notify', 'Dialog', 'Meta', 'Cookies', 'LoadingBar'],
-      iconSet: 'mdi-v6', // Quasar icon set
+      iconSet: 'bootstrap-icons', // Quasar icon set
     },
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {

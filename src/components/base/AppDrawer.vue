@@ -27,12 +27,23 @@
 
         <q-expansion-item icon="bi-file" label="Pages">
           <q-list class="q-pl-lg">
-            <q-item to="/Login-1" active-class="q-item-no-link-highlighting">
+            <q-item to="/auth/login" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
                 <q-icon name="bi-box-arrow-in-right" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>Login-1</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item
+              to="/auth/login2"
+              active-class="q-item-no-link-highlighting"
+            >
+              <q-item-section avatar>
+                <q-icon name="bi-box-arrow-in-right" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Login-2</q-item-label>
               </q-item-section>
             </q-item>
             <q-item to="/Lock" active-class="q-item-no-link-highlighting">

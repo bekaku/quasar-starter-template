@@ -1,98 +1,32 @@
 <template>
-  <q-page class="window-height row justify-center items-center">
-    <div class="row">
-      <div class="col-12 col-md-6">
+  <q-page
+    class="window-height row justify-center items-center"
+    :style="`
+     background: #5865f2;
+    background: url(/login-bg.png) no-repeat center center fixed;
+    background: url(/login-bg.png) no-repeat center center fixed, linear-gradient(#5865f2, #0c1aa5);
+  background-size: auto;
+  background-repeat: no-repeat;`"
+  >
+    <div class="column q-pa-lg">
+      <div class="row">
         <q-card
-          square
-          flat
-          class="q-pb-lg bg-primary"
-          v-if="!$q.screen.sm && !$q.screen.xs"
-          style="width: 480px; height: 645px"
-        >
-          <q-card-section>
-            <q-carousel
-              autoplay
-              infinite
-              v-model="slide"
-              transition-prev="scale"
-              transition-next="scale"
-              swipeable
-              animated
-              control-color="white"
-              navigation
-              height="500px"
-              class="bg-primary text-white rounded-borders"
-            >
-              <q-carousel-slide name="style" class="column no-wrap flex-center">
-                <div class="q-mt-md text-center">
-                  <img
-                    src="~assets/images/ss02.png"
-                    style="height: 175px; width: auto"
-                  />
-                  <div class="text-h3 text-weight-bolder text-uppercase">
-                    Super Synapse
-                  </div>
-                  <div class="text-subtitle1 q-mt-lg">
-                    Organization culture building solution
-                  </div>
-                </div>
-              </q-carousel-slide>
-              <q-carousel-slide name="tv" class="column no-wrap flex-center">
-                <img
-                  src="~assets/images/ss01.png"
-                  style="height: 175px; width: auto"
-                />
-                <div class="text-subtitle1 q-mt-md text-center">
-                  Awake hidden potentials by Connecting within.
-                </div>
-              </q-carousel-slide>
-              <q-carousel-slide
-                name="layers"
-                class="column no-wrap flex-center"
-              >
-                <img
-                  src="~assets/images/all-icon.png"
-                  style="height: 205px; width: auto"
-                />
-                <div class="text-subtitle1 q-mt-md text-center">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Itaque voluptatem totam, architecto cupiditate officia rerum,
-                  error dignissimos praesentium libero ab nemo.
-                </div>
-              </q-carousel-slide>
-              <q-carousel-slide name="map" class="column no-wrap flex-center">
-                <img
-                  src="~assets/images/prize01.png"
-                  style="height: 175px; width: auto"
-                />
-                <div class="text-subtitle1 q-mt-md text-center">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Itaque voluptatem totam, architecto cupiditate officia rerum,
-                  error dignissimos praesentium libero ab nemo.
-                </div>
-              </q-carousel-slide>
-            </q-carousel>
-          </q-card-section>
-        </q-card>
-      </div>
-      <div class="col-12 col-md-6">
-        <q-card
-          square
-          flat
-          class="q-pa-lg"
-          :style="$q.screen.gt.xs ? 'min-width: 480px' : ''"
+          class="shadow-24 q-pb-lg"
+          :style="$q.screen.gt.xs ? 'width: 480px' : ''"
         >
           <q-card-section class="text-center">
             <q-img
               src="/logo/logo.png"
               spinner-color="white"
-              style="height: auto; max-width: 45px"
+              style="height: auto; max-width: 55px"
             />
-            <div class="text-h4 text-weight-bolder q-my-md">Hello Again</div>
-            <div class="text-body1 text-grey-6 q-my-md">
+            <div class="text-h5 text-weight-bolder q-my-md text-uppercase">
+              {{ t('app.monogram') }}
+            </div>
+            <div class="text-subtitle1 text-grey-6 q-my-md">
               We're excited to see you again!
             </div>
-            <!-- <q-separator /> -->
+            <q-separator />
           </q-card-section>
 
           <q-form
@@ -146,7 +80,7 @@
                 </template>
               </q-input>
             </q-card-section>
-            <q-card-actions>
+            <q-card-actions class="q-px-lg">
               <q-btn
                 unelevated
                 :loading="loading"
@@ -168,11 +102,6 @@
               {{ t('authen.forgetPassword') }}
             </a>
           </q-card-section>
-          <q-card-section class="q-mt-lg text-center">
-            <div :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'">
-              {{ `@ ${getYearNow()} ${t('app.monogram')}` }}
-            </div>
-          </q-card-section>
         </q-card>
       </div>
     </div>
@@ -182,13 +111,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useMeta } from 'quasar';
-import { getYearNow } from 'src/utils/dateUtil';
 import {
   biEnvelope,
   biLock,
   biEye,
   biEyeSlash,
-  biAward,
 } from '@quasar/extras/bootstrap-icons';
 import { useLang } from '@/composables/useLang';
 import { validateEmail } from 'src/utils/appUtil';
@@ -222,7 +149,6 @@ export default defineComponent({
       biLock,
       biEye,
       biEyeSlash,
-      biAward,
     };
     return {
       ...icons,
@@ -235,8 +161,6 @@ export default defineComponent({
       loading,
       loginForm,
       validateEmail,
-      slide: ref('style'),
-      getYearNow,
     };
   },
 });
