@@ -1,5 +1,5 @@
 <template>
-  <q-page class="window-height row justify-center items-center">
+  <q-page class="window-height row justify-center items-center bg-grey-3">
     <div class="row">
       <div class="col-12 col-md-6">
         <q-card
@@ -7,7 +7,7 @@
           flat
           class="q-pb-lg bg-primary"
           v-if="!$q.screen.sm && !$q.screen.xs"
-          style="width: 480px; height: 645px"
+          :style="`width: 480px; height: ${cardHeight}`"
         >
           <q-card-section>
             <q-carousel
@@ -80,8 +80,45 @@
           square
           flat
           class="q-pa-lg"
-          :style="$q.screen.gt.xs ? 'min-width: 480px' : ''"
+          :style="`width: 480px; height: ${cardHeight}`"
         >
+          <q-toolbar
+            class="q-py-xs"
+            style="background: none"
+            :class="
+              $q.dark.isActive
+                ? 'wee-second-bg-color-theme-dark text-white'
+                : 'text-black'
+            "
+          >
+            <q-space />
+            <q-btn
+              flat
+              no-wrap
+              :icon="biTranslate"
+              :label="currenLocale ? currenLocale.name : ''"
+            >
+              <q-icon class="q-ml-sm" :name="biCaretDown" size="16px" />
+              <q-menu auto-close>
+                <q-list style="min-width: 150px">
+                  <q-item
+                    clickable
+                    v-for="lang in availableLocales"
+                    :key="lang.iso"
+                    @click="langugeAndThemeStore.setLocale(lang.iso)"
+                  >
+                    <q-item-section>{{ lang.name }}</q-item-section>
+                    <q-item-section
+                      v-if="lang.iso == langugeAndThemeStore.locale"
+                      side
+                    >
+                      <q-icon :name="biCheck2" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+          </q-toolbar>
           <q-card-section class="text-center">
             <q-img
               src="/logo/logo.png"
@@ -105,7 +142,6 @@
               <q-input
                 :readonly="loading"
                 outlined
-                clearable
                 v-model="email"
                 type="email"
                 :label="t('base.email')"
@@ -123,7 +159,6 @@
                 class="q-pt-lg"
                 :readonly="loading"
                 outlined
-                clearable
                 v-model="password"
                 :type="showPassword ? 'text' : 'password'"
                 :label="t('authen.password')"
@@ -180,7 +215,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { useMeta } from 'quasar';
 import { getYearNow } from 'src/utils/dateUtil';
 import {
@@ -192,10 +227,18 @@ import {
 } from '@quasar/extras/bootstrap-icons';
 import { useLang } from '@/composables/useLang';
 import { validateEmail } from 'src/utils/appUtil';
+import {
+  biCaretDown,
+  biTranslate,
+  biCheck2,
+} from '@quasar/extras/bootstrap-icons';
+import { availableLocales } from 'src/utils/lang';
+import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
 export default defineComponent({
   components: {},
   setup() {
     const { t } = useLang();
+    const cardHeight = ref('700px');
     const email = ref(undefined);
     const password = ref(undefined);
     const showPassword = ref<boolean>(false);
@@ -217,12 +260,20 @@ export default defineComponent({
       password.value = undefined;
       showPassword.value = false;
     };
+
+    const langugeAndThemeStore = useLangugeAndThemeStore();
+    const currenLocale = computed(() =>
+      availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
+    );
     const icons = {
       biEnvelope,
       biLock,
       biEye,
       biEyeSlash,
       biAward,
+      biCaretDown,
+      biTranslate,
+      biCheck2,
     };
     return {
       ...icons,
@@ -237,6 +288,10 @@ export default defineComponent({
       validateEmail,
       slide: ref('style'),
       getYearNow,
+      langugeAndThemeStore,
+      availableLocales,
+      currenLocale,
+      cardHeight,
     };
   },
 });
