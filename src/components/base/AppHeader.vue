@@ -84,8 +84,8 @@
         </q-btn>
         <!-- <q-btn round flat> -->
         <q-btn dense flat no-wrap>
-          <q-avatar round size="26px">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+          <q-avatar class="shadow-5" round size="36px">
+            <img :src="authenStore.auth?.avatar.thumbnail" />
           </q-avatar>
           <q-icon :name="biCaretDownFill" size="16px" />
 
@@ -94,18 +94,26 @@
               <q-item>
                 <q-item-section avatar>
                   <q-avatar>
-                    <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                    <img :src="authenStore.auth?.avatar.thumbnail" />
                   </q-avatar>
                 </q-item-section>
                 <q-item-section>
-                  <div>Signed in as <strong>Mary</strong></div>
+                  <div>
+                    Signed in as
+                    <strong>{{ authenStore.auth?.username }}</strong>
+                  </div>
                 </q-item-section>
               </q-item>
               <q-separator />
               <q-item clickable>
                 <q-item-section>
                   <div>
-                    <q-icon :name="biEmojiSmile" color="blue-9" size="18px" />
+                    <q-icon
+                      :name="biEmojiSmile"
+                      color="primary"
+                      class="q-mr-sm"
+                      size="18px"
+                    />
                     Set your status
                   </div>
                 </q-item-section>
@@ -205,7 +213,7 @@
                 </q-item-section>
                 <q-item-section>Settings</q-item-section>
               </q-item>
-              <q-item clickable v-close-popup>
+              <q-item clickable v-close-popup @click="signOut">
                 <q-item-section avatar>
                   <q-icon :name="biBoxArrowRight" />
                 </q-item-section>
@@ -245,15 +253,19 @@ import {
 } from '@quasar/extras/bootstrap-icons';
 import { availableThemes } from 'src/utils/theme';
 import { availableLocales } from 'src/utils/lang';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { capitalizeFirstLetter } from 'src/utils/appUtil';
 import { useLang } from '@/composables/useLang';
+import { useAuthenStore } from 'stores/authenStore';
+import useAuth from 'src/composables/useAuth';
 export default defineComponent({
   name: 'AppHeader',
   props: {},
   setup() {
     const { t } = useLang();
+    const authenStore = useAuthenStore();
     const langugeAndThemeStore = useLangugeAndThemeStore();
+    const { signOut } = useAuth();
     const search = ref('');
     const currenLocale = computed(() =>
       availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
@@ -286,6 +298,8 @@ export default defineComponent({
       capitalizeFirstLetter,
       currenLocale,
       t,
+      authenStore,
+      signOut,
     };
   },
 });

@@ -24,6 +24,10 @@
           :meta="meta"
         ></example-component>
       </q-card-section>
+      <q-card-section>
+        {{ authenStore.tokenKey }}
+        {{ authenStore.auth }}
+      </q-card-section>
 
       <q-card-section>
         <app-result status="empty" :description="t('error.dataNotfound')">
@@ -54,6 +58,7 @@ import { Todo, Meta } from 'src/interface/models';
 import { defineComponent, ref, defineAsyncComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useCounterStore } from 'stores/counter';
+import { useAuthenStore } from 'stores/authenStore';
 import useBase from 'src/composables/useBase';
 import AppResult from '@/components/base/AppResult.vue';
 export default defineComponent({
@@ -73,6 +78,7 @@ export default defineComponent({
     });
     const { WeeLoader, WeeToast, WeeConfirm } = useBase();
     const counterStore = useCounterStore();
+    const authenStore = useAuthenStore();
     const { t } = useLang();
     const todos = ref<Todo[]>([
       {
@@ -100,8 +106,6 @@ export default defineComponent({
       totalCount: 1200,
     });
 
-    console.log('index page setip()');
-
     const confirm = async () => {
       const conf = await WeeConfirm(t('app.monogram'), t('base.deleteConfirm'));
       if (conf) {
@@ -119,7 +123,16 @@ export default defineComponent({
     const toaster = () => {
       WeeToast('this is a toast', { type: 'positive' });
     };
-    return { todos, meta, t, counterStore, loader, toaster, confirm };
+    return {
+      todos,
+      meta,
+      t,
+      counterStore,
+      loader,
+      toaster,
+      confirm,
+      authenStore,
+    };
   },
 });
 </script>

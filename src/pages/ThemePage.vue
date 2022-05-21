@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { availableLocales } from 'src/utils/lang';
 import { useMeta } from 'quasar';
 export default defineComponent({

@@ -16,7 +16,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { availableThemes } from 'src/utils/theme';
 export default defineComponent({
   components: {},

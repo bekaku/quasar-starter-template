@@ -88,6 +88,15 @@ export default () => {
       )
     );
   };
+
+  /**
+   * const conf = await WeeConfirm(t('app.monogram'), t('base.deleteConfirm'));
+   * @param title
+   * @param text
+   * @param okBtn
+   * @param cancelBtn
+   * @returns
+   */
   const WeeConfirm = async (
     title: string,
     text: string,

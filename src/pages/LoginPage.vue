@@ -1,5 +1,5 @@
 <template>
-  <q-page class="window-height row justify-center items-center bg-grey-3">
+  <q-page class="window-height row justify-center items-center">
     <div class="row">
       <div class="col-12 col-md-6">
         <q-card
@@ -215,7 +215,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, onMounted } from 'vue';
 import { useMeta } from 'quasar';
 import { getYearNow } from 'src/utils/dateUtil';
 import {
@@ -233,14 +233,20 @@ import {
   biCheck2,
 } from '@quasar/extras/bootstrap-icons';
 import { availableLocales } from 'src/utils/lang';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
+import useBase from '@/composables/useBase';
+import AuthenService from '@/api/AuthenService';
+import useAuth from '@/composables/useAuth';
 export default defineComponent({
   components: {},
   setup() {
+    const { singin } = AuthenService();
+    const { setAuthen, destroyAuthDataAndRedirect } = useAuth();
     const { t } = useLang();
+    const { WeeGoTo } = useBase();
     const cardHeight = ref('700px');
-    const email = ref(undefined);
-    const password = ref(undefined);
+    const email = ref<string | null>('admin@mydomain.com');
+    const password = ref<string | null>('1234');
     const showPassword = ref<boolean>(false);
     const loading = ref<boolean>(false);
     const loginForm = ref(null);
@@ -248,16 +254,31 @@ export default defineComponent({
       title: `${t('page.login')} | ${t('app.monogram')}`,
     });
 
-    const onSubmit = () => {
+    onMounted(() => {
+      destroyAuthDataAndRedirect(false);
+    });
+
+    const onSubmit = async () => {
       console.log('onSubmit');
       loading.value = true;
-      setTimeout(() => {
+      const response = await singin({
+        user: {
+          email: email.value,
+          password: password.value,
+          loginForm: 1,
+        },
+      });
+      loading.value = false;
+      console.log('singin', response);
+      if (response.authenticationToken) {
+        setAuthen(response, true);
         loading.value = false;
-      }, 1000 * 3);
+        WeeGoTo('/');
+      }
     };
     const onReset = () => {
-      email.value = undefined;
-      password.value = undefined;
+      email.value = null;
+      password.value = null;
       showPassword.value = false;
     };
 

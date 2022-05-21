@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n';
-import { watch } from 'vue';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { watch, useSSRContext } from 'vue';
+import { useLangugeAndThemeStore } from '@/stores/langugeAndThemeStore';
 import { LocaleKey, DefaultLocale } from 'src/utils/constant';
 import { addDateByDays } from 'src/utils/dateUtil';
 import { ILocales } from 'src/interface/common';
@@ -20,7 +20,8 @@ export const availableLocales: ILocales[] = [
   },
 ];
 
-export const LanguageManager = (ssrContext: any) => {
+export const LanguageManager = () => {
+  const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   // composable
   const langugeAndThemeStore = useLangugeAndThemeStore();

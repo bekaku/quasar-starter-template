@@ -150,7 +150,15 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Loading', 'Notify', 'Dialog', 'Meta', 'Cookies', 'LoadingBar'],
+      plugins: [
+        'Loading',
+        'Notify',
+        'Dialog',
+        'Meta',
+        'Cookies',
+        'LoadingBar',
+        'LocalStorage',
+      ],
       iconSet: 'bootstrap-icons', // Quasar icon set
     },
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer

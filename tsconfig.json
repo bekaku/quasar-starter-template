@@ -15,6 +15,7 @@
       "interface/*": ["src/interface/*"],
       "composables/*": ["src/composables/*"],
       "utils/*": ["src/utils/*"],
+      "api/*": ["src/api/*"],
       "middleware/*": ["src/middleware/*"]
     }
   },

@@ -44,7 +44,7 @@ import {
   biCheck2,
 } from '@quasar/extras/bootstrap-icons';
 import { availableLocales } from 'src/utils/lang';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { useLang } from '@/composables/useLang';
 export default defineComponent({
   name: 'AppHeaderAlt',

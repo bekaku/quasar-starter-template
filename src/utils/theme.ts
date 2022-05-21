@@ -1,7 +1,13 @@
-import { watch, onMounted, onBeforeUnmount, computed } from 'vue';
+import {
+  watch,
+  onMounted,
+  onBeforeUnmount,
+  computed,
+  useSSRContext,
+} from 'vue';
 import { IThemeSettingOptions, ITheme } from 'src/interface/common';
 import { Cookies } from 'quasar';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { useLangugeAndThemeStore } from '@/stores/langugeAndThemeStore';
 import { ThemeKey } from 'src/utils/constant';
 import { addDateByDays } from 'src/utils/dateUtil';
 import {
@@ -21,7 +27,8 @@ export const availableThemes: {
   { key: 'realtime', text: 'Realtime', icon: biClock },
 ];
 
-export function ThemeManager(ssrContext: any) {
+export function ThemeManager() {
+  const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
   // composable
   const langugeAndThemeStore = useLangugeAndThemeStore();

@@ -1,11 +1,15 @@
 import { api } from 'boot/axios';
-import { RequestType } from 'src/interface/common';
+import { RequestType, AppException } from 'src/interface/common';
+import { date, Cookies } from 'quasar';
 import userBase from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
+import { useSSRContext } from 'vue';
+import { AppAuthTokenKey } from 'src/utils/constant';
 export default () => {
   const { WeeToast, WeeLoader } = userBase();
-  const { locale } = useLang();
-  const token = '0000000009';
+  const { locale, t } = useLang();
+  const ssrContext = process.env.SERVER ? useSSRContext() : null;
+  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   // const reqHeader = () => {
   //   return {
   //     Authorization: `Bearer ${token}`,
@@ -14,12 +18,47 @@ export default () => {
   //     'Accept-Language': locale.value,
   //   };
   // };
+  const isAppException = (obj: any): obj is AppException => {
+    return (
+      obj.status !== undefined &&
+      obj.message !== undefined &&
+      obj.errors !== undefined
+    );
+  };
+  const notifyMessage = (response: AppException): void => {
+    WeeToast(
+      `<strong>${response.message}</strong><br> ${response.errors.join(
+        '<br>'
+      )}`,
+      {
+        multiLine: true,
+        html: true,
+        type: 'negative',
+        timeout: 10 * 1000,
+        position: 'top',
+        caption: date.formatDate(response.timestamp, 'DD MMM YYYY, HH:mm:ss'),
+        actions: [
+          {
+            label: t('base.close'),
+            color: 'white',
+            handler: () => {
+              /* ... */
+            },
+          },
+        ],
+      }
+    );
+  };
   const useFetch = <T>(req: RequestType): Promise<T> => {
     return new Promise((resolve, reject) => {
       // api.defaults.headers = reqHeader();
-      api.defaults.headers['Accept-Language'] = locale.value;
-      api.defaults.headers.Authorization = `Bearer ${token}`;
-      console.log('api', api.defaults);
+      // api.defaults.headers['Accept-Language'] = locale.value;
+      // api.defaults.headers.Authorization = `Bearer ${token}`;
+      api.defaults.headers.common['Accept-Language'] = locale.value;
+      api.defaults.headers.common.Authorization = `Bearer ${cookies.get(
+        AppAuthTokenKey
+      )}`;
+      // console.log('api', api.defaults);
 
       api({
         method: req.method,
@@ -27,15 +66,30 @@ export default () => {
         data: req.body ? req.body : undefined,
       })
         .then((response) => {
+          if (isAppException(response.data)) {
+            notifyMessage(response.data);
+          }
           resolve(response.data);
         })
         .catch((error) => {
+          console.log('catch', error);
           reject(error.message);
           WeeLoader(false);
-          WeeToast(error.message, {
+          WeeToast(`<strong>${error.code}</strong><br> ${error.message}`, {
             multiLine: true,
+            html: true,
             type: 'negative',
             timeout: 10 * 1000,
+            position: 'top',
+            actions: [
+              {
+                label: t('base.close'),
+                color: 'white',
+                handler: () => {
+                  /* ... */
+                },
+              },
+            ],
           });
         });
 

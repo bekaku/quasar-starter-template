@@ -1,14 +1,17 @@
 import { boot } from 'quasar/wrappers';
-
-export default boot(({ router }) => {
+import { Cookies } from 'quasar';
+import { AppAuthTokenKey } from 'src/utils/constant';
+export default boot(({ router, ssrContext }) => {
+  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   router.beforeEach((to, from, next) => {
-    // if (to.matched.some((record) => record.meta.requireAuth)) {
-    //   console.log('requireAuth');
-    //   next('/auth');
-    // } else {
-    //   next();
-    // }
-
-    next();
+    if (to.matched.some((record) => record.meta.requireAuth)) {
+      if (cookies.get(AppAuthTokenKey)) {
+        next();
+      } else {
+        next('/auth');
+      }
+    } else {
+      next();
+    }
   });
 });

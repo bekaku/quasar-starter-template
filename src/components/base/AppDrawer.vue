@@ -188,7 +188,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useLangugeAndThemeStore } from 'stores/langugeAndTheme';
+import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { getYearNow } from 'src/utils/dateUtil';
 import { useLang } from '@/composables/useLang';
 export default defineComponent({

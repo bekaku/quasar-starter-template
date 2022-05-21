@@ -57,6 +57,10 @@ export interface ApiResponse {
   response?: any;
   error?: any;
 }
+export interface ResponseMessage {
+  status: string;
+  message?: string;
+}
 export interface DefaultAxiosInstance {
   Accept: string;
   //   baseURL: string;
@@ -81,4 +85,10 @@ export interface UserCredential {
   picture: UserCredentialPicture;
   userRoles?: string[];
   apiKey: string;
+}
+export interface AppException {
+  status: string;
+  message: string;
+  errors: string[];
+  timestamp: string;
 }

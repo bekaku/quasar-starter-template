@@ -3,24 +3,21 @@
     <div class="col">
       <div class="column items-center">
         <div class="col text-center">
-          <q-avatar
+          <img
             v-if="status == 'empty'"
-            square
+            src="~assets/icons/empty-box.png"
             :style="`width: ${iconSize} ; height: auto`"
-          >
-            <img src="~assets/icons/empty-box.png" />
-          </q-avatar>
-          <q-avatar
-            square
-            style="width: 100%; height: auto"
+          />
+          <img
             v-else-if="status == 'error'"
-            :size="iconSize"
-          >
-            <img src="~assets/icons/mental-disorder2.png" />
-          </q-avatar>
-          <q-avatar square v-else-if="status == 'warning'" :size="iconSize">
-            <img src="~assets/icons/warning.png" />
-          </q-avatar>
+            :style="`width: ${iconSize} ; height: auto`"
+            src="~assets/icons/sad-man.png"
+          />
+          <img
+            v-else-if="status == 'warning'"
+            src="~assets/icons/warning.png"
+            :style="`width: ${iconSize} ; height: auto`"
+          />
           <q-avatar square v-else-if="status == 'success'" :size="iconSize">
             <img src="~assets/icons/tick.png" />
           </q-avatar>
@@ -29,7 +26,7 @@
             v-else-if="status == '404'"
             style="width: 100%; height: auto"
           >
-            <img src="~assets/icons/mental-disorder.png" />
+            <img src="~assets/icons/404.png" />
           </q-avatar>
           <!-- <img
             v-else-if="status == '404'"
@@ -105,7 +102,7 @@ export default defineComponent({
     },
     iconSize: {
       type: String,
-      default: '150px',
+      default: '128px',
     },
     hideBg: {
       type: Boolean,
