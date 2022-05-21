@@ -1,7 +1,6 @@
 import useCallApi from 'src/composables/useCallApi';
 import {
   LoginRequest,
-  AuthenticationResponse,
   RefreshTokenRequest,
   RefreshTokenResponse,
 } from 'src/interface/models';
@@ -10,8 +9,8 @@ export default () => {
   const { useFetch } = useCallApi();
   const singin = async (
     loginRequest: LoginRequest
-  ): Promise<AuthenticationResponse> => {
-    return await useFetch<AuthenticationResponse>({
+  ): Promise<RefreshTokenResponse> => {
+    return await useFetch<RefreshTokenResponse>({
       API: '/api/auth/login',
       method: 'POST',
       body: loginRequest,

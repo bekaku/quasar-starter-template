@@ -3,8 +3,11 @@ import {
   AppAuthDataKey,
   AppAuthTokenKey,
   AppAuthTokenCreatedKey,
+  ExpireCookieDays,
+  AppAuthRefeshTokenKey,
+  AppAuthTokenExpireKey,
 } from 'src/utils/constant';
-import { AuthenticationResponse } from 'src/interface/models';
+import { RefreshTokenResponse, UserDto } from 'src/interface/models';
 import { useAuthenStore } from 'stores/authenStore';
 import { addDateByDays } from 'src/utils/dateUtil';
 import { useSSRContext } from 'vue';
@@ -17,59 +20,41 @@ export default () => {
   const authenStore = useAuthenStore();
   const { WeeConfirm, WeeLoader } = useBase();
   const { t } = useLang();
-  const { singoutToServer } = AuthenService();
+  const { singoutToServer, refreshToken } = AuthenService();
 
   const initAppAuthen = (): void => {
-    setAuthen(currentAuth());
+    // setAuthen(currentAuth());
   };
-  const currentTokenKey = (): string | null => {
+  const getAuthCookieByKey = (key: string): string | null => {
     if (!cookies) {
       return null;
     }
-    return cookies.get(AppAuthTokenKey) || null;
-  };
-  const currentAuth = (): AuthenticationResponse | null => {
-    if (!cookies) {
-      return null;
-    }
-    const auth = LocalStorage.getItem(AppAuthDataKey);
-    const tokenKey = currentTokenKey();
-    if (auth && tokenKey) {
-      const authJson = JSON.parse(auth.toString());
-      authJson.authenticationToken = tokenKey;
-      return authJson;
-    }
-    return null;
+    return cookies.get(key) || null;
   };
 
-  const setAuthen = (
-    auth: AuthenticationResponse | null,
-    fromLogined = false
-  ) => {
-    if (auth != null && cookies && auth.authenticationToken != null) {
-      //set token key to cookie for prefetch on SSR mode
-      if (fromLogined) {
-        setTokenCookies(auth.authenticationToken);
-        //set user data to localStorage
-        setAuthDataLocalStorage(auth);
-      }
-
+  const setAuthen = (auth: UserDto | null) => {
+    if (auth != null) {
       authenStore.setAuthen(auth);
     }
   };
-  const setAuthDataLocalStorage = (auth: AuthenticationResponse) => {
-    auth.authenticationToken = null;
-    LocalStorage.set(AppAuthDataKey, JSON.stringify(auth));
-  };
+  const setAuthCookies = (authResponse: RefreshTokenResponse) => {
+    cookies.set(AppAuthTokenKey, authResponse.authenticationToken, {
+      expires: addDateByDays(ExpireCookieDays),
+      path: '/',
+    });
 
-  const setTokenCookies = (key: string) => {
-    cookies.set(AppAuthTokenKey, key, {
-      expires: addDateByDays(365),
+    cookies.set(AppAuthRefeshTokenKey, authResponse.refreshToken, {
+      expires: addDateByDays(ExpireCookieDays),
+      path: '/',
+    });
+
+    cookies.set(AppAuthTokenExpireKey, authResponse.expiresAt, {
+      expires: addDateByDays(ExpireCookieDays),
       path: '/',
     });
 
     cookies.set(AppAuthTokenCreatedKey, Date.now().toString(), {
-      expires: addDateByDays(365),
+      expires: addDateByDays(ExpireCookieDays),
       path: '/',
     });
   };
@@ -84,7 +69,7 @@ export default () => {
       WeeLoader();
       await singoutToServer({
         refreshToken: {
-          refreshToken: authenStore.auth?.refreshToken,
+          refreshToken: getAuthCookieByKey(AppAuthRefeshTokenKey),
           email: authenStore.auth?.email,
         },
       });
@@ -109,13 +94,27 @@ export default () => {
       // force refesh token if diff greater than 7 days
       if (diff > 7) {
         console.log('Refesh token');
+        WeeLoader();
+        const refreshResponse = await refreshToken({
+          refreshToken: {
+            refreshToken: getAuthCookieByKey(AppAuthRefeshTokenKey),
+            email: authenStore.auth?.email,
+          },
+        });
+        if (refreshResponse.authenticationToken) {
+          setAuthCookies(refreshResponse);
+        }
+        WeeLoader(false);
       }
     }
   };
 
   const destroyAuthDataAndRedirect = (forceRedirectToLoginPage = true) => {
     cookies.remove(AppAuthTokenKey);
+    cookies.remove(AppAuthRefeshTokenKey);
+    cookies.remove(AppAuthTokenExpireKey);
     cookies.remove(AppAuthTokenCreatedKey);
+
     LocalStorage.remove(AppAuthDataKey);
     authenStore.logout();
     if (forceRedirectToLoginPage) {
@@ -129,5 +128,6 @@ export default () => {
     setAuthen,
     destroyAuthDataAndRedirect,
     checkRefreshToken,
+    setAuthCookies,
   };
 };

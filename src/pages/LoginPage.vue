@@ -241,7 +241,7 @@ export default defineComponent({
   components: {},
   setup() {
     const { singin } = AuthenService();
-    const { setAuthen, destroyAuthDataAndRedirect } = useAuth();
+    const { setAuthCookies, destroyAuthDataAndRedirect } = useAuth();
     const { t } = useLang();
     const { WeeGoTo } = useBase();
     const cardHeight = ref('700px');
@@ -271,9 +271,12 @@ export default defineComponent({
       loading.value = false;
       console.log('singin', response);
       if (response.authenticationToken) {
-        setAuthen(response, true);
+        setAuthCookies(response);
         loading.value = false;
-        WeeGoTo('/');
+        // WeeGoTo('/');
+
+        // redirect to index page
+        window.location.replace('/');
       }
     };
     const onReset = () => {

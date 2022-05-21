@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia';
-import { AuthenticationResponse } from 'src/interface/models';
+import { UserDto } from 'src/interface/models';
 export const useAuthenStore = defineStore('authenStore', {
   state: () => {
     return {
-      auth: undefined as AuthenticationResponse | undefined,
+      auth: undefined as UserDto | undefined,
     };
   },
   getters: {
-    tokenKey: (state) => state.auth?.authenticationToken,
+    tokenKey: (state) => state.auth?.token,
   },
   actions: {
-    setAuthen(item: AuthenticationResponse) {
+    setAuthen(item: UserDto) {
       this.auth = item;
     },
     logout() {

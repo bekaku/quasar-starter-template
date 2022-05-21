@@ -47,6 +47,29 @@ export interface AuthenticationResponse {
   avatar: ImageDto;
   company?: CompanyDto;
 }
+export interface UserDataDto {
+  id: number;
+  acumulatePrize: number;
+  employeeId?: string;
+  fullName?: string;
+  onlyReviewOrganization?: boolean;
+  priceQuota?: number;
+  reviewPost: boolean;
+  reviewUser: boolean;
+  specialPriceQuota: number;
+  companySelected?: number;
+}
+export interface UserDto {
+  id: number;
+  email: string;
+  username?: string;
+  token?: string;
+  avatarFileId?: number;
+  avatar?: ImageDto;
+  active: boolean;
+  userData?: UserDataDto;
+  company?: CompanyDto;
+}
 
 // export interface LoginParamRequest {
 //   [key: string]: {
