@@ -2,8 +2,8 @@
   <q-drawer
     v-model="langugeAndThemeStore.leftDrawerOpen"
     show-if-above
-    bordered
     :width="240"
+    :overlay="overlay"
   >
     <q-scroll-area class="fit">
       <q-list padding>
@@ -193,7 +193,12 @@ import { getYearNow } from 'src/utils/dateUtil';
 import { useLang } from '@/composables/useLang';
 export default defineComponent({
   name: 'AppDrawer',
-  props: {},
+  props: {
+    overlay: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     const { t } = useLang();
     const langugeAndThemeStore = useLangugeAndThemeStore();

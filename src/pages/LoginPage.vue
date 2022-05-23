@@ -234,16 +234,14 @@ import {
 } from '@quasar/extras/bootstrap-icons';
 import { availableLocales } from 'src/utils/lang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
-import useBase from '@/composables/useBase';
 import AuthenService from '@/api/AuthenService';
 import useAuth from '@/composables/useAuth';
 export default defineComponent({
   components: {},
   setup() {
     const { singin } = AuthenService();
-    const { setAuthCookies, destroyAuthDataAndRedirect } = useAuth();
+    const { setAuthenticationCookies, destroyAuthDataAndRedirect } = useAuth();
     const { t } = useLang();
-    const { WeeGoTo } = useBase();
     const cardHeight = ref('700px');
     const email = ref<string | null>('admin@mydomain.com');
     const password = ref<string | null>('1234');
@@ -271,10 +269,8 @@ export default defineComponent({
       loading.value = false;
       console.log('singin', response);
       if (response.authenticationToken) {
-        setAuthCookies(response);
+        setAuthenticationCookies(response);
         loading.value = false;
-        // WeeGoTo('/');
-
         // redirect to index page
         window.location.replace('/');
       }

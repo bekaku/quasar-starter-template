@@ -146,6 +146,7 @@ module.exports = configure(function (ctx) {
         'QImg',
         'QCarousel',
         'QCarouselSlide',
+        'QDialog',
       ],
       // directives: [],
 

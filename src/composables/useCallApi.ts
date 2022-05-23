@@ -3,6 +3,7 @@ import { RequestType, AppException } from 'src/interface/common';
 import { date, Cookies } from 'quasar';
 import userBase from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
+import { isAppException } from 'src/utils/appUtil';
 import { useSSRContext } from 'vue';
 import { AppAuthTokenKey } from 'src/utils/constant';
 export default () => {
@@ -18,16 +19,9 @@ export default () => {
   //     'Accept-Language': locale.value,
   //   };
   // };
-  const isAppException = (obj: any): obj is AppException => {
-    return (
-      obj.status !== undefined &&
-      obj.message !== undefined &&
-      obj.errors !== undefined
-    );
-  };
   const notifyMessage = (response: AppException): void => {
     WeeToast(
-      `<strong>${response.message}</strong><br> ${response.errors.join(
+      `<strong>${response.message}</strong><br> ${response.errors?.join(
         '<br>'
       )}`,
       {
@@ -54,6 +48,7 @@ export default () => {
       // api.defaults.headers = reqHeader();
       // api.defaults.headers['Accept-Language'] = locale.value;
       // api.defaults.headers.Authorization = `Bearer ${token}`;
+      api.defaults.headers.common['Content-Type'] = 'application/json';
       api.defaults.headers.common['Accept-Language'] = locale.value;
       api.defaults.headers.common.Authorization = `Bearer ${cookies.get(
         AppAuthTokenKey

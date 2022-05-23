@@ -24,10 +24,7 @@
           :meta="meta"
         ></example-component>
       </q-card-section>
-      <q-card-section>
-        {{ authenStore.tokenKey }}
-        {{ authenStore.auth }}
-      </q-card-section>
+      <q-card-section> auth : {{ authenStore.auth }} </q-card-section>
 
       <q-card-section>
         <app-result status="empty" :description="t('error.dataNotfound')">

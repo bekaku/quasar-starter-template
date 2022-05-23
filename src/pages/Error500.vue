@@ -3,10 +3,11 @@
     <app-result
       status="error"
       icon-size="256px"
-      :title="code || t('error.error')"
+      :title="code"
       :description="message"
     >
       <template #extra>
+        {{ exceptionStore.error }}
         <q-btn
           outline
           :icon="biArrowLeft"
@@ -25,6 +26,7 @@ import AppResult from 'components/base/AppResult.vue';
 import { useLang } from 'src/composables/useLang';
 import { biArrowLeft } from '@quasar/extras/bootstrap-icons';
 import { useMeta } from 'quasar';
+import { useRoute } from 'vue-router';
 import { useExceptionStore } from 'src/stores/exceptionStore';
 export default defineComponent({
   name: 'ErrorPage',
@@ -38,8 +40,10 @@ export default defineComponent({
     useMeta({
       title: t('error.error'),
     });
+    const route = useRoute();
     const code = ref(WeeGetParam('code'));
     const message = ref(WeeGetParam('message'));
+    console.log('route', route.params);
     return {
       code,
       message,

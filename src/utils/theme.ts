@@ -21,10 +21,10 @@ export const availableThemes: {
   text: string;
   icon: string;
 }[] = [
-  { key: 'light', text: 'Light', icon: biSun },
-  { key: 'dark', text: 'Dark', icon: biMoon },
-  { key: 'system', text: 'System', icon: biLaptop },
-  { key: 'realtime', text: 'Realtime', icon: biClock },
+  { key: 'light', text: 'theme.lightTheme', icon: biSun },
+  { key: 'dark', text: 'theme.darkTheme', icon: biMoon },
+  { key: 'system', text: 'theme.systemTheme', icon: biLaptop },
+  { key: 'realtime', text: 'theme.realtimeTheme', icon: biClock },
 ];
 
 export function ThemeManager() {

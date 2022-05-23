@@ -89,6 +89,6 @@ export interface UserCredential {
 export interface AppException {
   status: string;
   message: string;
-  errors: string[];
-  timestamp: string;
+  errors?: string[];
+  timestamp?: string;
 }

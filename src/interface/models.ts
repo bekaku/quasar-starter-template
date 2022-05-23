@@ -96,3 +96,11 @@ export interface RefreshTokenResponse {
   refreshToken: string;
   expiresAt: string;
 }
+export interface FileManagerDto {
+  id: number;
+  fileMime: string;
+  fileName: string;
+  filePath: string;
+  fileThumbnailPath: string;
+  fileSize: string;
+}

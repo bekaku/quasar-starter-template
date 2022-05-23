@@ -147,7 +147,18 @@
     "sendMessage": "Send message",
     "humanVisitor": "Bot",
     "botVisitor": "Visitor",
-    "language": "Languages"
+    "language": "Languages",
+    "help": "Help",
+    "appearance": "Appearance",
+    "yourProfile": "Youre profiile"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "lightTheme": "Light",
+    "darkTheme": "Dark",
+    "systemTheme": "System",
+    "realtimeTheme": "Realtime"
   },
   "paging": {
     "page": "Page",
@@ -236,7 +247,9 @@
     "permissionNotFound": "Menu privileges not found",
     "validate_url": "Invalid link format",
     "slugFormat": "English or numbers only",
-    "emailValidate": "E-mail cannot be blank and must have a valid e-mail format."
+    "emailValidate": "E-mail cannot be blank and must have a valid e-mail format.",
+    "filesValidationSizeAndType": "The file size should be less than {size} MB! and must be the last name {extension}",
+    "filesValidationFmt": "{total} file(s) did not pass validation constraints"
   },
   "success": {
     "success": "Success",
@@ -369,7 +382,11 @@
   },
   "page": {
     "login": "Sign in",
-    "dashboard": "Home"
+    "dashboard": "Home",
+    "settingsPublicProfile": "Publice profile",
+    "settingsNotification": "Notification",
+    "settingsSecurity": "Password and authentication",
+    "settingsEmail": "Email"
   },
   "model_created_at": "Created at",
   "model_updated_at": "updated at",
@@ -462,5 +479,16 @@
   "statisticsByYear": "Statistics by year",
   "statisticsByMonth": "Statistics by month",
   "statisticsByDay": "Statistics by day",
-  "count": "count is: {count}"
+  "count": "count is: {count}",
+  "zoomIn": "Zoom In",
+  "zoomOut": "Zoom Out",
+  "flipHorizontal": "Flip Horizontal",
+  "flipVorizontal": "Flip Vertical",
+  "rotateLeft": "Rotate Left",
+  "rotateRight": "Rotate Right",
+  "currentAvatar": "Current avatar",
+  "cropAvatar": "Crop your new profile picture",
+  "minimize": "Minimize",
+  "maximize": "Maximize",
+  "avatar": "Avatar"
 }

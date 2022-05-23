@@ -146,7 +146,18 @@
     "sendMessage": "ส่งข้อความ",
     "humanVisitor": "ผู้เยี่ยมชมทั่วไป",
     "botVisitor": "บอท",
-    "language": "ภาษา"
+    "language": "ภาษา",
+    "help": "ความช่วยเหลือ",
+    "appearance": "ธีมของแอป",
+    "yourProfile": "หน้าของคุณ"
+  },
+  "theme": {
+    "light": "สว่าง",
+    "dark": "มืด",
+    "lightTheme": "ธีมสว่าง",
+    "darkTheme": "ธีมมืด",
+    "systemTheme": "ใช้ธีมของอุปกรณ์",
+    "realtimeTheme": "ช่วงเวลา"
   },
   "paging": {
     "page": "หน้า",
@@ -235,7 +246,9 @@
     "permissionNotFound": "ไม่พบสิทธิ์การใช้งาน",
     "validate_url": "รูปแบบลิงค์ไม่ถูกต้อง",
     "slugFormat": "ภาษาอังกฤษหรือตัวเลขเท่านั้น",
-    "emailValidate": "อีเมล์ต้องไม่เป็นค่าว่างและต้องมีรูปแบบอีเมล์ที่ถูกต้อง"
+    "emailValidate": "อีเมล์ต้องไม่เป็นค่าว่างและต้องมีรูปแบบอีเมล์ที่ถูกต้อง",
+    "filesValidationSizeAndType": "ขนาดไฟล์ควรน้อยกว่า {size} MB! และต้องเป็น {extension}",
+    "filesValidationFmt": "{total} ไฟล์ไม่ผ่านข้อจำกัดการตรวจสอบ"
   },
   "success": {
     "success": "ดำเนินการสำเร็จ",
@@ -366,7 +379,11 @@
   },
   "page": {
     "login": "เข้าสู่ระบบ",
-    "dashboard": "หน้าหลัก"
+    "dashboard": "หน้าหลัก",
+    "settingsPublicProfile": "โปรไฟล์สาธารณะ",
+    "settingsNotification": "แจ้งเตือน",
+    "settingsSecurity": "รหัสผ่านและการเข้าสู่ระบบ",
+    "settingsEmail": "อีเมล์"
   },
   "model_created_at": "สร้างเมื่อ",
   "model_updated_at": "แก้ไขล่าสุด",
@@ -467,5 +484,17 @@
   "statisticsByYear": "สถิติแยกตามรายปี",
   "statisticsByMonth": "สถิติแยกตามรายเดือน",
   "statisticsByDay": "สถิติแยกตามรายวัน",
-  "count": "นับจำนวน: {count}"
+  "count": "นับจำนวน: {count}",
+  "zoomIn": "ซูมเข้า",
+  "zoomOut": "ซูมออก",
+  "flipHorizontal": "พลิกแนวนอน",
+  "flipVorizontal": "พลิกแนวตั้ง",
+  "rotateLeft": "หมุนซ้าย",
+  "rotateRight": "หมุนขวา",
+  "chooseFileImage": "กรุณาเลือกไฟล์รูปภาพที่ต้องการอัพโหลด",
+  "currentAvatar": "รูปภาพประจำตัวปัจจุบัน",
+  "cropAvatar": "เปลี่ยนรูปภาพประจำตัว",
+  "minimize": "ย่อ",
+  "maximize": "เต็มจอ",
+  "avatar": "รูปประจำตัว"
 }

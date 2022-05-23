@@ -13,6 +13,29 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/settings',
+    component: () => import('layouts/UserSettingLayout.vue'),
+    children: [
+      { path: '', redirect: '/settings/profile' },
+      {
+        path: 'profile',
+        component: () => import('@/pages/settings/ProfilePage.vue'),
+      },
+      {
+        path: 'notifications',
+        component: () => import('@/pages/settings/NotificationPage.vue'),
+      },
+      {
+        path: 'security',
+        component: () => import('@/pages/settings/SecurityPage.vue'),
+      },
+      {
+        path: 'emails',
+        component: () => import('@/pages/settings/EmailPage.vue'),
+      },
+    ],
+  },
+  {
     path: '/auth',
     component: () => import('layouts/BlankLayout.vue'),
     children: [
@@ -32,6 +55,7 @@ const routes: RouteRecordRaw[] = [
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
   },
+  { path: '/error500', component: () => import('pages/Error500.vue') },
 ];
 
 export default routes;

@@ -81,7 +81,7 @@ export default () => {
           icon,
           timeout: 5000,
           progress: true,
-          position: 'top-right',
+          position: 'top',
           multiLine: true,
         },
         options

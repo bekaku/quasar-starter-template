@@ -1,6 +1,5 @@
 <template>
   <q-header
-    bordered
     class="q-py-xs"
     :class="
       $q.dark.isActive
@@ -11,6 +10,7 @@
   >
     <q-toolbar>
       <q-btn
+        v-if="hambergerMenu"
         flat
         dense
         round
@@ -53,17 +53,21 @@
           square
           v-model="search"
           :placeholder="t('base.search')"
-          class="bg-white col"
-        />
-        <q-btn
+          class="col"
+        >
+          <template v-slot:append>
+            <q-btn round dense flat :icon="biSearch" />
+          </template>
+        </q-input>
+        <!-- <q-btn
+          :color="$q.dark.isActive ? 'grey-9' : 'grey-2'"
           class="YL__toolbar-input-btn"
-          color="grey-3"
-          text-color="black"
+          :text-color="$q.dark.isActive ? 'grey-3' : 'grey-9'"
           :icon="biSearch"
           unelevated
         >
           <q-tooltip>{{ t('base.search') }}</q-tooltip>
-        </q-btn>
+        </q-btn> -->
       </div>
 
       <q-space />
@@ -85,7 +89,7 @@
         <!-- <q-btn round flat> -->
         <q-btn dense flat no-wrap>
           <q-avatar class="shadow-5" round size="36px">
-            <img :src="authenStore.auth?.avatar.thumbnail" />
+            <img :src="authenStore.auth?.avatar?.thumbnail" />
           </q-avatar>
           <q-icon :name="biCaretDownFill" size="16px" />
 
@@ -94,7 +98,7 @@
               <q-item>
                 <q-item-section avatar>
                   <q-avatar>
-                    <img :src="authenStore.auth?.avatar.thumbnail" />
+                    <img :src="authenStore.auth?.avatar?.thumbnail" />
                   </q-avatar>
                 </q-item-section>
                 <q-item-section>
@@ -123,7 +127,7 @@
                 <q-item-section avatar>
                   <q-icon :name="biPersonSquare" />
                 </q-item-section>
-                <q-item-section>Your profile</q-item-section>
+                <q-item-section>{{ t('base.yourProfile') }}</q-item-section>
               </q-item>
               <q-item clickable>
                 <q-item-section avatar>
@@ -131,10 +135,8 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label lines="1">
-                    Appearance :
-                    {{
-                      capitalizeFirstLetter(langugeAndThemeStore.themeSetting)
-                    }}
+                    {{ t('base.appearance') }} :
+                    {{ t(`theme.${langugeAndThemeStore.theme}`) }}
                   </q-item-label>
                 </q-item-section>
                 <q-item-section side>
@@ -154,7 +156,7 @@
                       <q-item-section avatar>
                         <q-icon :name="theme.icon" />
                       </q-item-section>
-                      <q-item-section>{{ theme.text }}</q-item-section>
+                      <q-item-section>{{ t(theme.text) }}</q-item-section>
                       <q-item-section
                         v-if="theme.key == langugeAndThemeStore.themeSetting"
                         side
@@ -171,7 +173,7 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label lines="1">
-                    Languge :
+                    {{ t('base.language') }} :
                     {{ currenLocale ? currenLocale.name : '' }}
                   </q-item-label>
                 </q-item-section>
@@ -205,19 +207,19 @@
                 <q-item-section avatar>
                   <q-icon :name="biQuestionCircle" />
                 </q-item-section>
-                <q-item-section>Help</q-item-section>
+                <q-item-section>{{ t('base.help') }}</q-item-section>
               </q-item>
-              <q-item clickable v-close-popup>
+              <q-item clickable v-close-popup to="/settings">
                 <q-item-section avatar>
                   <q-icon :name="biGear" />
                 </q-item-section>
-                <q-item-section>Settings</q-item-section>
+                <q-item-section>{{ t('base.setting') }}</q-item-section>
               </q-item>
               <q-item clickable v-close-popup @click="signOut">
                 <q-item-section avatar>
                   <q-icon :name="biBoxArrowRight" />
                 </q-item-section>
-                <q-item-section>Sign out</q-item-section>
+                <q-item-section>{{ t('base.logout') }}</q-item-section>
               </q-item>
             </q-list>
           </q-menu>
@@ -230,10 +232,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 
-import {
-  mdiBellOutline,
-  mdiChatProcessingOutline,
-} from '@quasar/extras/mdi-v6';
 import {
   biChatDots,
   biBell,
@@ -260,7 +258,12 @@ import { useAuthenStore } from 'stores/authenStore';
 import useAuth from 'src/composables/useAuth';
 export default defineComponent({
   name: 'AppHeader',
-  props: {},
+  props: {
+    hambergerMenu: {
+      type: Boolean,
+      default: true,
+    },
+  },
   setup() {
     const { t } = useLang();
     const authenStore = useAuthenStore();
@@ -271,8 +274,6 @@ export default defineComponent({
       availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
     );
     const icons = {
-      mdiBellOutline,
-      mdiChatProcessingOutline,
       biChatDots,
       biBell,
       biAppIndicator,
@@ -304,4 +305,9 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="sass"></style>
+<style lang="sass">
+.YL
+  &__toolbar-input-container
+    min-width: 100px
+    width: 55%
+</style>
