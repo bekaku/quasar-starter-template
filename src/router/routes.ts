@@ -56,6 +56,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('pages/ErrorNotFound.vue'),
   },
   { path: '/error500', component: () => import('pages/Error500.vue') },
+  { path: '/test', component: () => import('pages/TestPage.vue') },
 ];
 
 export default routes;

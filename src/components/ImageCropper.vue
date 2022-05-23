@@ -285,13 +285,34 @@ export default defineComponent({
         cropper.value.scaleY(horizontalScale.value);
       }
     };
+    const blobToFile = (blob) => {
+      blob.lastModifiedDate = originalimagFile.value.lastModified;
+      blob.type = originalimagFile.value.type;
+      //A Blob() is almost a File() - it's just missing the two properties below which we will add
+
+      return file;
+    };
     const onOkay = () => {
       if (cropper.value && cropper.value.cropped) {
+        console.log('original file ', originalimagFile.value);
+        cropper.value.getCroppedCanvas().toBlob(
+          (blob) => {
+            const file = new File([blob], originalimagFile.value.name, {
+              lastModified: originalimagFile.value.lastModified,
+              type: originalimagFile.value.type,
+            });
+            console.log('blob', file);
+          } /*, 'image/png' */
+        );
+
+        /*
         cropper.value.getCroppedCanvas().toBlob(async (blob) => {
           // await onSubmit(blob);
           // emit('on-okay', blob);
           emit('on-okay', originalimagFile.value);
         }, 'image/jpeg'); // image/png, image/jpeg
+
+*/
       }
     };
     const onRejected = (rejectedEntries) => {
