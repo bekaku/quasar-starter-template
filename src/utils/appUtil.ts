@@ -1,4 +1,4 @@
-import { AppException } from 'src/interface/common';
+import { AppException, ResponseMessage } from 'src/interface/common';
 import { RefreshTokenResponse } from 'src/interface/models';
 import { addDateByDays } from 'src/utils/dateUtil';
 import {
@@ -28,6 +28,9 @@ export const isAppException = (obj: any): obj is AppException => {
     obj.message !== undefined &&
     obj.errors !== undefined
   );
+};
+export const isServerResponseMessage = (obj: any): obj is ResponseMessage => {
+  return obj.status !== undefined && obj.message !== undefined;
 };
 
 export const setAuthCookies = (

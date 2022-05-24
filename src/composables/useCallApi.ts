@@ -1,9 +1,13 @@
 import { api } from 'boot/axios';
-import { RequestType, AppException } from 'src/interface/common';
+import {
+  RequestType,
+  AppException,
+  ResponseMessage,
+} from 'src/interface/common';
 import { date, Cookies } from 'quasar';
 import userBase from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
-import { isAppException } from 'src/utils/appUtil';
+import { isAppException, isServerResponseMessage } from 'src/utils/appUtil';
 import { useSSRContext } from 'vue';
 import { AppAuthTokenKey } from 'src/utils/constant';
 export default () => {
@@ -20,6 +24,7 @@ export default () => {
   //   };
   // };
   const notifyMessage = (response: AppException): void => {
+    WeeLoader(false);
     WeeToast(
       `<strong>${response.message}</strong><br> ${response.errors?.join(
         '<br>'
@@ -43,6 +48,32 @@ export default () => {
       }
     );
   };
+  const notifyServerMessage = (response: ResponseMessage): void => {
+    if (!response.message) {
+      return;
+    }
+    WeeLoader(false);
+    WeeToast(response.message, {
+      multiLine: true,
+      html: true,
+      type:
+        response.status == 'OK' || response.status == 'CREATED'
+          ? 'positive'
+          : 'negative',
+      timeout: 5 * 1000,
+      position: 'top',
+      caption: date.formatDate(response.timestamp, 'DD MMM YYYY, HH:mm:ss'),
+      actions: [
+        {
+          label: t('base.close'),
+          color: 'white',
+          handler: () => {
+            /* ... */
+          },
+        },
+      ],
+    });
+  };
   const useFetch = <T>(req: RequestType): Promise<T> => {
     return new Promise((resolve, reject) => {
       // api.defaults.headers = reqHeader();
@@ -63,6 +94,8 @@ export default () => {
         .then((response) => {
           if (isAppException(response.data)) {
             notifyMessage(response.data);
+          } else if (isServerResponseMessage(response.data)) {
+            notifyServerMessage(response.data);
           }
           resolve(response.data);
         })

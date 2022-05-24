@@ -16,7 +16,10 @@
   --wee-main-border-light-color-theme-dark: #282829;
 
   --wee-color-white: #fff;
+
   --wee-text-muted: #9a9a9c;
+  --v-main-text-muted-theme-dark: #8e8e93;
+
   --wee-default-font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
     'Prompt', sans-serif;
 }
@@ -26,12 +29,28 @@ body {
 }
 body.body--dark {
   color: #fff;
+  --wee-text-muted: #8e8e93 !important;
 }
 
 body.body--light {
   // color: #2d2e30;
   background-color: var(--wee-main-bg-color) !important;
 }
+.wee-bg-white {
+  background-color: #fff;
+}
+.body--dark .wee-bg-white {
+  background-color: var(--wee-second-bg-color-theme-dark) !important;
+}
+
+.wee-text-muted {
+  color: var(--wee-text-muted);
+}
+
+// .body--dark .wee-text-muted {
+//   color: var(--v-main-text-muted-theme-dark) !important;
+// }
+
 .wee-second-bg-color-theme-dark {
   background-color: var(--wee-second-bg-color-theme-dark) !important;
 }

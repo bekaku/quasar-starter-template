@@ -12,25 +12,17 @@
         <div>{{ title || '' }}</div>
 
         <q-space />
+        <q-btn
+          dense
+          flat
+          :icon="!maximizedToggle ? biFullscreen : biFullscreenExit"
+          @click="maximizedToggle = !maximizedToggle"
+        >
+          <q-tooltip>{{
+            !maximizedToggle ? t('maximize') : t('minimize')
+          }}</q-tooltip>
+        </q-btn>
 
-        <q-btn
-          dense
-          flat
-          :icon="biDashLg"
-          @click="maximizedToggle = false"
-          :disable="!maximizedToggle"
-        >
-          <q-tooltip v-if="maximizedToggle">{{ t('minimize') }}</q-tooltip>
-        </q-btn>
-        <q-btn
-          dense
-          flat
-          :icon="biFullscreen"
-          @click="maximizedToggle = true"
-          :disable="maximizedToggle"
-        >
-          <q-tooltip v-if="!maximizedToggle">{{ t('maximize') }}</q-tooltip>
-        </q-btn>
         <q-btn dense flat :icon="biXSquare" @click="onClose">
           <q-tooltip>{{ t('base.close') }}</q-tooltip>
         </q-btn>
@@ -46,7 +38,7 @@
               counter
               max-files="1"
               accept=".jpg, .png, image/*"
-              max-file-size="5242880"
+              :max-file-size="1048576 * 10"
               @rejected="onRejected"
               @update:model-value="onFileAdded"
             >
@@ -56,7 +48,7 @@
               <template v-slot:hint>
                 {{
                   t('error.filesValidationSizeAndType', {
-                    size: 5,
+                    size: 10,
                     extension: '.jpg, .png',
                   })
                 }}
@@ -64,26 +56,28 @@
             </q-file>
           </q-card-section>
           <template v-if="originalimagFile">
-            <q-card-section>
-              <div
-                class="cropper-img-preview"
-                style="overflow: hidden; width: 100%; height: 250px"
-              ></div>
+            <q-card-section class="text-center">
+              <q-avatar rounded size="275px" class="shadow-5">
+                <div
+                  class="cropper-img-preview"
+                  style="overflow: hidden; width: 275px; height: 275px"
+                ></div>
+              </q-avatar>
             </q-card-section>
-            <q-card-section class="q-gutter-sm">
-              <q-avatar size="128px">
+            <q-card-section class="q-gutter-sm text-center">
+              <q-avatar size="128px" class="shadow-5">
                 <div
                   class="cropper-img-preview"
                   style="overflow: hidden; width: 128px; height: 128px"
                 ></div>
               </q-avatar>
-              <q-avatar size="64px">
+              <q-avatar size="64px" class="shadow-5">
                 <div
                   class="cropper-img-preview"
                   style="overflow: hidden; width: 64px; height: 64px"
                 ></div>
               </q-avatar>
-              <q-avatar size="32px">
+              <q-avatar size="32px" class="shadow-5">
                 <div
                   class="cropper-img-preview"
                   style="overflow: hidden; width: 32px; height: 32px"
@@ -98,6 +92,7 @@
                 class="full-width"
                 color="positive"
                 unelevated
+                :loading="loading"
                 @click="onOkay"
               />
             </div>
@@ -175,7 +170,6 @@ import useBase from '@/composables/useBase';
 import {
   biFullscreen,
   biXSquare,
-  biDashLg,
   biCrop,
   biZoomIn,
   biZoomOut,
@@ -185,11 +179,11 @@ import {
   biArrowLeftRight,
   biCheck,
   biFileImage,
+  biFullscreenExit,
 } from '@quasar/extras/bootstrap-icons';
 const icons = {
   biFullscreen,
   biXSquare,
-  biDashLg,
   biCrop,
   biZoomIn,
   biZoomOut,
@@ -199,6 +193,7 @@ const icons = {
   biArrowLeftRight,
   biCheck,
   biFileImage,
+  biFullscreenExit,
 };
 export default defineComponent({
   props: {
@@ -215,13 +210,14 @@ export default defineComponent({
   setup(props, { emit }) {
     const { t } = useLang();
     const { WeeToast } = useBase();
-    const canvasImg = ref(null); // ref to <canvas ref="canvas" width="120" height="100"></canvas>
+    const canvasImg = ref(null); // ref to <canvas ref="canvasImg" width="120" height="100"></canvas>
     const cropper = ref(null);
     const originalimagFile = ref(null);
     const horizontalScale = ref(1);
     const verticalScale = ref(1);
     const show = ref(false);
     const maximizedToggle = ref(false);
+    const loading = ref(false);
 
     const onClose = () => {
       clearCropper();
@@ -285,34 +281,24 @@ export default defineComponent({
         cropper.value.scaleY(horizontalScale.value);
       }
     };
-    const blobToFile = (blob) => {
-      blob.lastModifiedDate = originalimagFile.value.lastModified;
-      blob.type = originalimagFile.value.type;
-      //A Blob() is almost a File() - it's just missing the two properties below which we will add
-
-      return file;
+    const blobToFile = (blob, originalFile) => {
+      return new Promise((resolve) => {
+        const file = new File([blob], originalFile.name, {
+          lastModified: originalFile.lastModified,
+          type: originalFile.type,
+        });
+        resolve(file);
+      });
     };
     const onOkay = () => {
       if (cropper.value && cropper.value.cropped) {
-        console.log('original file ', originalimagFile.value);
-        cropper.value.getCroppedCanvas().toBlob(
-          (blob) => {
-            const file = new File([blob], originalimagFile.value.name, {
-              lastModified: originalimagFile.value.lastModified,
-              type: originalimagFile.value.type,
-            });
-            console.log('blob', file);
-          } /*, 'image/png' */
-        );
-
-        /*
+        loading.value = true;
         cropper.value.getCroppedCanvas().toBlob(async (blob) => {
-          // await onSubmit(blob);
-          // emit('on-okay', blob);
-          emit('on-okay', originalimagFile.value);
+          const f = await blobToFile(blob, originalimagFile.value);
+          loading.value = false;
+          emit('on-okay', f);
+          onClose();
         }, 'image/jpeg'); // image/png, image/jpeg
-
-*/
       }
     };
     const onRejected = (rejectedEntries) => {
@@ -352,6 +338,7 @@ export default defineComponent({
       onClose,
       onRejected,
       maximizedToggle,
+      loading,
     };
   },
 });

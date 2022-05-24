@@ -19,6 +19,20 @@ export default defineComponent({
       if (!$q.screen.gt.xs) {
         langugeAndThemeStore.setLeftDrawer(false);
       }
+      /*
+      window.onpopstate = () => {
+        console.log('App.vue > window.onpopstate', authenStore.auth);
+        // if (
+        //   authenStore.auth !== undefined &&
+        //   this.$route.path == '/login'
+        // ) {
+        //   this.$router.push('/');
+        // }
+        // if (authenStore.auth === undefined) {
+        //   WeeGoTo('/auth/login', true);
+        // }
+      };
+      */
     });
 
     const setDark = (theme: ITheme) => {

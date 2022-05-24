@@ -218,19 +218,17 @@
 import { defineComponent, ref, computed, onMounted } from 'vue';
 import { useMeta } from 'quasar';
 import { getYearNow } from 'src/utils/dateUtil';
-import {
-  biEnvelope,
-  biLock,
-  biEye,
-  biEyeSlash,
-  biAward,
-} from '@quasar/extras/bootstrap-icons';
 import { useLang } from '@/composables/useLang';
 import { validateEmail } from 'src/utils/appUtil';
 import {
   biCaretDown,
   biTranslate,
   biCheck2,
+  biEnvelope,
+  biLock,
+  biEye,
+  biEyeSlash,
+  biAward,
 } from '@quasar/extras/bootstrap-icons';
 import { availableLocales } from 'src/utils/lang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';

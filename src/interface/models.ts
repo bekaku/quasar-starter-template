@@ -91,6 +91,13 @@ export interface RefreshTokenRequest {
     email?: string | null;
   };
 }
+export interface UserChangePasswordRequest {
+  userChangePasswordRequest: {
+    password: string;
+    newPassword: string;
+    logoutAllDevice: boolean;
+  };
+}
 export interface RefreshTokenResponse {
   authenticationToken: string;
   refreshToken: string;
@@ -103,4 +110,14 @@ export interface FileManagerDto {
   filePath: string;
   fileThumbnailPath: string;
   fileSize: string;
+}
+export interface AccessTokenDto {
+  id: number;
+  ipAddredd: string;
+  hostName: string;
+  agent: string;
+  loginPlatform: number;
+  activeNow: boolean;
+  createdDate: string;
+  lastestActive: string;
 }

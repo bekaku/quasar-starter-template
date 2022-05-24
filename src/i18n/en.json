@@ -150,7 +150,8 @@
     "language": "Languages",
     "help": "Help",
     "appearance": "Appearance",
-    "yourProfile": "Youre profiile"
+    "yourProfile": "Youre profiile",
+    "oldPassword": "Old password"
   },
   "theme": {
     "light": "Light",
@@ -249,7 +250,9 @@
     "slugFormat": "English or numbers only",
     "emailValidate": "E-mail cannot be blank and must have a valid e-mail format.",
     "filesValidationSizeAndType": "The file size should be less than {size} MB! and must be the last name {extension}",
-    "filesValidationFmt": "{total} file(s) did not pass validation constraints"
+    "filesValidationFmt": "{total} file(s) did not pass validation constraints",
+    "passwordStrongError": "Make sure it's at least 8 characters including a number.",
+    "passwordNotMatchNew": "Confirm password does not match the new password."
   },
   "success": {
     "success": "Success",
@@ -315,6 +318,7 @@
     "helper2": "For safety in using the system, the new password 'must have a length of 5 characters or more' and 'must be mixed with numbers and letters.",
     "username": "Username",
     "currentPassword": "Current password",
+    "newPassword": "New password",
     "loginPassword": "Password",
     "password": "Password",
     "confirmPassword": "Confirm password",
@@ -490,5 +494,9 @@
   "cropAvatar": "Crop your new profile picture",
   "minimize": "Minimize",
   "maximize": "Maximize",
-  "avatar": "Avatar"
+  "avatar": "Avatar",
+  "updatePassword": "Update password",
+  "authSessions": "Sessions",
+  "authSessionsHelp": "This is a list of devices that have logged into your account. Revoke any sessions that you do not recognize.",
+  "lastestActive": "Last active on"
 }

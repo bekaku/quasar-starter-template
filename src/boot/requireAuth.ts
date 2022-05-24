@@ -8,7 +8,11 @@ export default boot(({ router, ssrContext }) => {
       if (cookies.get(AppAuthTokenKey)) {
         next();
       } else {
-        next('/auth');
+        // next('/auth');
+        next({
+          path: '/auth',
+          replace: true,
+        });
       }
     } else {
       next();

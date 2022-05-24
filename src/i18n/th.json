@@ -149,7 +149,8 @@
     "language": "ภาษา",
     "help": "ความช่วยเหลือ",
     "appearance": "ธีมของแอป",
-    "yourProfile": "หน้าของคุณ"
+    "yourProfile": "หน้าของคุณ",
+    "oldPassword": "รหัสผ่านเดิม"
   },
   "theme": {
     "light": "สว่าง",
@@ -248,7 +249,9 @@
     "slugFormat": "ภาษาอังกฤษหรือตัวเลขเท่านั้น",
     "emailValidate": "อีเมล์ต้องไม่เป็นค่าว่างและต้องมีรูปแบบอีเมล์ที่ถูกต้อง",
     "filesValidationSizeAndType": "ขนาดไฟล์ควรน้อยกว่า {size} MB! และต้องเป็น {extension}",
-    "filesValidationFmt": "{total} ไฟล์ไม่ผ่านข้อจำกัดการตรวจสอบ"
+    "filesValidationFmt": "{total} ไฟล์ไม่ผ่านข้อจำกัดการตรวจสอบ",
+    "passwordStrongError": "ตรวจสอบว่ามีอักขระอย่างน้อย 8 ตัวรวมตัวเลขและตัวอักษร",
+    "passwordNotMatchNew": "ยืนยันรหัสผ่านไม่ตรงกับรหัสผ่านใหม่"
   },
   "success": {
     "success": "ดำเนินการสำเร็จ",
@@ -315,6 +318,7 @@
     "username": "ชื่อผู้ใช้",
     "password": "รหัสผ่าน",
     "currentPassword": "รหัสผ่านปัจจุบัน",
+    "newPassword": "รหัสผ่านใหม่",
     "confirmPassword": "ยืนยันรหัสผ่าน",
     "forgetPassword": "ลืมรหัสผ่าน?",
     "createAccount": "สร้างบัญชีใหม่",
@@ -496,5 +500,9 @@
   "cropAvatar": "เปลี่ยนรูปภาพประจำตัว",
   "minimize": "ย่อ",
   "maximize": "เต็มจอ",
-  "avatar": "รูปประจำตัว"
+  "avatar": "รูปประจำตัว",
+  "updatePassword": "แก้ไขรหัสผ่าน",
+  "authSessions": "เซสชั่น",
+  "authSessionsHelp": "นี่คือรายการอุปกรณ์ที่ลงชื่อเข้าใช้บัญชีของคุณ ลบเซสชันที่คุณไม่รู้จักเพื่อความปลอดภัยต่อบัญชี้ผู้ใช้ของคุณ",
+  "lastestActive": "ใช้งานล่าสุด"
 }

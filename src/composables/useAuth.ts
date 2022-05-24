@@ -17,7 +17,7 @@ export default () => {
   const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   const authenStore = useAuthenStore();
-  const { WeeConfirm, WeeLoader } = useBase();
+  const { WeeConfirm, WeeLoader, WeeGoTo } = useBase();
   const { t } = useLang();
   const { singoutToServer } = AuthenService();
 
@@ -37,21 +37,28 @@ export default () => {
     }
   };
 
-  const signOut = async () => {
+  const signOut = async (logoutFromServerToo = true) => {
     if (!cookies) {
       return;
     }
 
-    const conf = await WeeConfirm(t('app.monogram'), t('helper.logoutConfirm'));
-    if (conf) {
-      WeeLoader();
-      await singoutToServer({
-        refreshToken: {
-          refreshToken: getAuthCookieByKey(AppAuthRefeshTokenKey),
-          email: authenStore.auth?.email,
-        },
-      });
-      WeeLoader(false);
+    if (logoutFromServerToo) {
+      const conf = await WeeConfirm(
+        t('app.monogram'),
+        t('helper.logoutConfirm')
+      );
+      if (conf) {
+        WeeLoader();
+        await singoutToServer({
+          refreshToken: {
+            refreshToken: getAuthCookieByKey(AppAuthRefeshTokenKey),
+            email: authenStore.auth?.email,
+          },
+        });
+        WeeLoader(false);
+        destroyAuthDataAndRedirect();
+      }
+    } else {
       destroyAuthDataAndRedirect();
     }
     return;
@@ -69,7 +76,8 @@ export default () => {
     LocalStorage.remove(AppAuthDataKey);
     authenStore.logout();
     if (forceRedirectToLoginPage) {
-      window.location.replace('');
+      // window.location.replace('/auth/login');
+      WeeGoTo('/auth/login', true);
     }
   };
 

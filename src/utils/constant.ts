@@ -12,3 +12,8 @@ export const autoRefeshTokenDays = 7;
 
 export const FILES_UPLOAD_ATT = '_filesUploadName';
 export const FILES_DIRECTORY_ID_ATT = 'fileDirectoryId';
+export const OS_PLATFORM = {
+  WEB: 1,
+  IOS: 2,
+  ANDROID: 3,
+};

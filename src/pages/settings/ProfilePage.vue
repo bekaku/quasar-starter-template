@@ -1,5 +1,5 @@
 <template>
-  <q-card square flat class="bg-transparent">
+  <q-card square flat class="bg-transparent q-pl-lg">
     <q-card-section>
       <div class="text-h6">{{ t('page.settingsPublicProfile') }}</div>
       <q-separator />
@@ -7,23 +7,20 @@
 
     <q-card-section>
       <q-card>
-        <q-card-section
-          class="text-white"
-          style="
+        <!-- style="
             height: 150px;
-            background: url(https://cdn.pixabay.com/photo/2021/07/11/10/39/fantasy-6403406_960_720.jpg)
-              no-repeat fixed;
+            background: url(/social-cover-01.jpg) no-repeat;
             background-position: center;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-          "
-        >
+          " -->
+        <q-card-section class="text-white bg-primary" style="height: 100px">
           <q-avatar
             size="100px"
             class="shadow-10 absolute-bottom"
-            style="top: 80px; left: 25px"
+            style="top: 20px; left: 25px"
           >
             <q-img
               spinner-color="white"
@@ -48,7 +45,6 @@
   <image-cropper
     :title="t('cropAvatar')"
     :dialog="dialog"
-    :url="imageUrl"
     @on-close="dialog = false"
     @on-okay="onOkay"
   />
@@ -61,6 +57,7 @@ import { useMeta } from 'quasar';
 import { useAuthenStore } from 'stores/authenStore';
 import { biPencilFill } from '@quasar/extras/bootstrap-icons';
 import FileManagerService from 'src/api/FileManagerService';
+import UserService from 'src/api/UserService';
 import useBase from '@/composables/useBase';
 const icons = {
   biPencilFill,
@@ -78,19 +75,27 @@ export default defineComponent({
       title: t('page.settingsPublicProfile'),
     });
     const { uploadApi } = FileManagerService();
+    const { updateUserAvatar } = UserService();
     const authenStore = useAuthenStore();
     const dialog = ref(false);
 
-    const onOkay = async (blobFile: any) => {
+    const onOkay = async (f: any) => {
       WeeLoader();
-      const response = await uploadApi(blobFile);
-      console.log('uploadApi', response);
+      const response = await uploadApi(f);
+
+      if (response && authenStore.auth) {
+        //update avatar id to user
+        await updateUserAvatar(response.id);
+        //update user data in pinia store
+        const authItem = authenStore.auth;
+        if (authItem.avatar) {
+          authItem.avatar.thumbnail = response.fileThumbnailPath;
+          authItem.avatar.image = response.filePath;
+        }
+      }
       WeeLoader(false);
     };
-    const imageUrl = ref<string>('');
     const onOpenCropper = () => {
-      imageUrl.value =
-        'https://cdn.pixabay.com/photo/2022/03/28/14/37/boy-7097685_960_720.jpg';
       dialog.value = true;
     };
     return {
@@ -99,7 +104,6 @@ export default defineComponent({
       dialog,
       onOkay,
       onOpenCropper,
-      imageUrl,
       ...icons,
     };
   },

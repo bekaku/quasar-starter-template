@@ -34,10 +34,19 @@ export default () => {
       body: refreshToken,
     });
   };
+  const removeAccessTokenSession = async (
+    id: number
+  ): Promise<ResponseMessage> => {
+    return await useFetch<ResponseMessage>({
+      API: `/api/auth/removeAccessTokenSession?id=${id}`,
+      method: 'DELETE',
+    });
+  };
 
   return {
     singin,
     singoutToServer,
     refreshToken,
+    removeAccessTokenSession,
   };
 };

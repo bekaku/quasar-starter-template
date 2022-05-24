@@ -1,6 +1,6 @@
 <template>
   <q-card square flat>
-    <q-list>
+    <q-list bordered>
       <template v-for="link in links1" :key="link.text">
         <q-separator v-if="link.separator" spaced />
         <q-item-label v-else-if="link.header" header>{{
@@ -14,7 +14,7 @@
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.text }}</q-item-label>
+            <q-item-label>{{ t(`${link.text}`) }}</q-item-label>
           </q-item-section>
         </q-item>
       </template>
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useLang } from '@/composables/useLang';
 export default defineComponent({
   name: 'UserSettingDrawer',
@@ -35,17 +35,19 @@ export default defineComponent({
   },
   setup() {
     const { t } = useLang();
+    const drawer = ref(true);
     return {
       t,
+      drawer,
       links1: [
         {
           icon: 'bi-person',
-          text: t('page.settingsPublicProfile'),
+          text: 'page.settingsPublicProfile',
           link: '/settings/profile',
         },
         {
           icon: 'bi-bell',
-          text: t('page.settingsNotification'),
+          text: 'page.settingsNotification',
           link: '/settings/notifications',
         },
         {
@@ -56,12 +58,12 @@ export default defineComponent({
         },
         {
           icon: 'bi-shield-lock',
-          text: t('page.settingsSecurity'),
+          text: 'page.settingsSecurity',
           link: '/settings/security',
         },
         {
           icon: 'bi-envelope',
-          text: t('page.settingsEmail'),
+          text: 'page.settingsEmail',
           link: '/settings/emails',
         },
       ],

@@ -1,9 +1,11 @@
 import { RouteRecordRaw } from 'vue-router';
+// import checkAuth from '@/utils/checkAuth';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     meta: { requireAuth: true },
+    // beforeEnter: checkAuth,
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'pinia', component: () => import('@/pages/PiniaPage.vue') },
@@ -14,6 +16,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/settings',
+    // beforeEnter: checkAuth,
     component: () => import('layouts/UserSettingLayout.vue'),
     children: [
       { path: '', redirect: '/settings/profile' },
@@ -40,8 +43,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/BlankLayout.vue'),
     children: [
       { path: '', redirect: '/auth/login' },
-      { path: 'login', component: () => import('@/pages/LoginPage.vue') },
-      { path: 'login2', component: () => import('@/pages/Login2Page.vue') },
+      { path: 'login', component: () => import('@/pages/auth/LoginPage.vue') },
+      {
+        path: 'login2',
+        component: () => import('@/pages/auth/Login2Page.vue'),
+      },
     ],
   },
   {

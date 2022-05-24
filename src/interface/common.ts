@@ -8,6 +8,14 @@ export enum HttpMethod {
   DELETE,
 }
 // type
+export type IHttpStatus =
+  | 'OK'
+  | 'CREATED'
+  | 'NOT_FOUND'
+  | 'UNAUTHORIZED'
+  | 'BAD_REQUEST'
+  | 'FORBIDDEN'
+  | 'INTERNAL_SERVER_ERROR';
 export type IMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export type IThemeSettingOptions = 'dark' | 'light' | 'system' | 'realtime';
 export type ITheme = 'dark' | 'light';
@@ -58,8 +66,9 @@ export interface ApiResponse {
   error?: any;
 }
 export interface ResponseMessage {
-  status: string;
+  status: IHttpStatus;
   message?: string;
+  timestamp: string;
 }
 export interface DefaultAxiosInstance {
   Accept: string;
