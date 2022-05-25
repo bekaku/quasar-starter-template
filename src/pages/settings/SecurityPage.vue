@@ -219,7 +219,7 @@ export default defineComponent({
     });
     const { WeeConfirm, WeeLoader } = useBase();
     const { t } = useLang();
-    const { signOut } = useAuth();
+    const { logoutToServer, destroyAuthDataAndRedirect } = useAuth();
     const { selfUpdatePassword, currentAuthSession } = UserService();
     const { removeAccessTokenSession } = AuthenService();
     const currentPassword = ref<string>('');
@@ -252,7 +252,8 @@ export default defineComponent({
       loading.value = false;
       if (res.status == 'OK') {
         timeout.value = setTimeout(() => {
-          signOut(false);
+          logoutToServer();
+          destroyAuthDataAndRedirect();
         }, 1500);
       }
     };

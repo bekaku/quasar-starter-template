@@ -265,7 +265,6 @@ export default defineComponent({
         },
       });
       loading.value = false;
-      console.log('singin', response);
       if (response.authenticationToken) {
         setAuthenticationCookies(response);
         loading.value = false;

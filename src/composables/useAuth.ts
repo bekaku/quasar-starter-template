@@ -17,7 +17,7 @@ export default () => {
   const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   const authenStore = useAuthenStore();
-  const { WeeConfirm, WeeLoader, WeeGoTo } = useBase();
+  const { WeeConfirm, WeeLoader } = useBase();
   const { t } = useLang();
   const { singoutToServer } = AuthenService();
 
@@ -37,34 +37,30 @@ export default () => {
     }
   };
 
-  const signOut = async (logoutFromServerToo = true) => {
+  const signOut = async () => {
     if (!cookies) {
       return;
     }
 
-    if (logoutFromServerToo) {
-      const conf = await WeeConfirm(
-        t('app.monogram'),
-        t('helper.logoutConfirm')
-      );
-      if (conf) {
-        WeeLoader();
-        await singoutToServer({
-          refreshToken: {
-            refreshToken: getAuthCookieByKey(AppAuthRefeshTokenKey),
-            email: authenStore.auth?.email,
-          },
-        });
-        WeeLoader(false);
-        destroyAuthDataAndRedirect();
-      }
-    } else {
+    const conf = await WeeConfirm(t('app.monogram'), t('helper.logoutConfirm'));
+    if (conf) {
+      WeeLoader();
+      await logoutToServer();
+      WeeLoader(false);
       destroyAuthDataAndRedirect();
     }
     return;
   };
   const setAuthenticationCookies = (authResponse: RefreshTokenResponse) => {
     setAuthCookies(cookies, authResponse);
+  };
+  const logoutToServer = async () => {
+    await singoutToServer({
+      refreshToken: {
+        refreshToken: getAuthCookieByKey(AppAuthRefeshTokenKey),
+        email: authenStore.auth?.email,
+      },
+    });
   };
 
   const destroyAuthDataAndRedirect = (forceRedirectToLoginPage = true) => {
@@ -76,8 +72,8 @@ export default () => {
     LocalStorage.remove(AppAuthDataKey);
     authenStore.logout();
     if (forceRedirectToLoginPage) {
-      // window.location.replace('/auth/login');
-      WeeGoTo('/auth/login', true);
+      window.location.replace('/auth/login');
+      // WeeGoTo('/auth/login', true);
     }
   };
 
@@ -87,5 +83,6 @@ export default () => {
     setAuthen,
     destroyAuthDataAndRedirect,
     setAuthenticationCookies,
+    logoutToServer,
   };
 };

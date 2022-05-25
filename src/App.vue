@@ -7,10 +7,14 @@ import { defineComponent, watch, onMounted } from 'vue';
 import { AppSetup } from './utils/app';
 import { useQuasar } from 'quasar';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
+import { useAuthenStore } from 'stores/authenStore';
 import { ITheme } from 'src/interface/common';
+import { useRouter } from 'vue-router';
 export default defineComponent({
   name: 'App',
   setup() {
+    const router = useRouter();
+    const authenStore = useAuthenStore();
     const $q = useQuasar();
     const langugeAndThemeStore = useLangugeAndThemeStore();
     AppSetup();
@@ -19,9 +23,13 @@ export default defineComponent({
       if (!$q.screen.gt.xs) {
         langugeAndThemeStore.setLeftDrawer(false);
       }
-      /*
       window.onpopstate = () => {
-        console.log('App.vue > window.onpopstate', authenStore.auth);
+        if (
+          router.options.history.state.forward == '/auth/login' &&
+          !authenStore.auth
+        ) {
+          window.history.forward();
+        }
         // if (
         //   authenStore.auth !== undefined &&
         //   this.$route.path == '/login'
@@ -32,7 +40,6 @@ export default defineComponent({
         //   WeeGoTo('/auth/login', true);
         // }
       };
-      */
     });
 
     const setDark = (theme: ITheme) => {
