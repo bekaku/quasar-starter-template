@@ -1,6 +1,20 @@
 # Quasar App (quasar-starter-template)
 
-A Quasar Project
+A Quasar Project SSR mode
+
+![img](https://i.ibb.co/hFNC9wJ/Super-Synapse.png)
+
+![img](https://i.ibb.co/Z1d5Gc7/Super-Synapse2.png)
+
+![img](https://i.ibb.co/C6qQfBL/Index-Page.png)
+
+![img](https://i.ibb.co/CBcNmmY/Index-Page02.png)
+
+![img](https://i.ibb.co/PMdkKFm/02.png)
+
+![img](https://i.ibb.co/PW6KQZY/image.png)
+
+![img](https://i.ibb.co/7j1wgm7/Account-security.png)
 
 ## Install the dependencies
 
