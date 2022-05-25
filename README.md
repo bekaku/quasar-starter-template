@@ -2,19 +2,25 @@
 
 A Quasar Project SSR mode
 
-![img](https://i.ibb.co/hFNC9wJ/Super-Synapse.png)
+![img](https://i.ibb.co/Q6CXwwd/01.png)
 
-![img](https://i.ibb.co/Z1d5Gc7/Super-Synapse2.png)
+![img](https://i.ibb.co/MfvdZ3c/00.png)
 
-![img](https://i.ibb.co/C6qQfBL/Index-Page.png)
+![img](https://i.ibb.co/GFpkcRk/2.png)
 
-![img](https://i.ibb.co/CBcNmmY/Index-Page02.png)
+![img](https://i.ibb.co/FBvTgG1/3.png)
 
-![img](https://i.ibb.co/PMdkKFm/02.png)
+![img](https://i.ibb.co/wwYF4G2/4.png)
 
-![img](https://i.ibb.co/PW6KQZY/image.png)
+![img](https://i.ibb.co/J3fWP2Z/5.png)
 
-![img](https://i.ibb.co/7j1wgm7/Account-security.png)
+![img](https://i.ibb.co/pKrD2cq/6.png)
+
+![img](https://i.ibb.co/phks9XN/7.png)
+
+![img](https://i.ibb.co/pyM6YWg/8.png)
+
+![img](https://i.ibb.co/j3MX50W/9.png)
 
 ## Install the dependencies
 
