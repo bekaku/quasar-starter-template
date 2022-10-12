@@ -16,7 +16,7 @@ declare module '@vue/runtime-core' {
 const api = axios.create({
   baseURL:
     process.env.NODE_ENV == 'development'
-      ? 'http://192.168.7.249:8084' //http://localhost:8084, https://jsonplaceholder.typicode.com
+      ? 'https://jsonplaceholder.typicode.com' //http://localhost:8084, https://jsonplaceholder.typicode.com
       : 'https://api.example.com',
   withCredentials: false,
   timeout: 5 * 60000, // 60000 = 1 minute, 0 = no timeout

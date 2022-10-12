@@ -4,7 +4,14 @@
       <q-card-section>
         <p>FetchData</p>
         <q-btn label="Load data" @click="loadData" />
-        <p>Post from prefect {{ post }}</p>
+        <q-list bordered separator>
+          <q-item clickable v-ripple v-for="(item, index) in data" :key="index">
+            <q-item-section>
+              <q-item-label>{{ item.title }}</q-item-label>
+              <q-item-label caption>{{ item.body }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
       </q-card-section>
     </q-card>
   </q-page>
@@ -18,7 +25,7 @@ import { Post } from 'src/interface/models';
 import { useMeta } from 'quasar';
 // import { preFetch } from 'quasar/wrappers';
 import { useTestPost } from 'stores/testPostStore';
-import usePreFetch from 'src/composables/usePreFetch';
+// import usePreFetch from 'src/composables/usePreFetch';
 interface ITest {
   camelToSnake: string;
   i18nMessage: string;
@@ -30,22 +37,16 @@ interface ITest {
 export default defineComponent({
   components: {},
   // preFetch: preFetch<ITest>(async ({ ssrContext }) => {
-  async preFetch({ ssrContext, redirect }) {
-    const { useFetch } = usePreFetch(ssrContext, redirect);
-    const data = await useFetch<ITest>({
-      API: '/test',
-      method: 'GET',
-    });
-    const testPostStore = useTestPost();
-    testPostStore.setData(data);
-    // const { useFetch } = useCallApi();
-    // const response = await useFetch<ITest>({
-    //   API: '/test',
-    //   method: 'GET',
-    // });
-    // console.log('preFetch', response);
-    console.log('preFetch', data);
-  },
+  // async preFetch({ ssrContext, redirect }) {
+  //   const { useFetch } = usePreFetch(ssrContext, redirect);
+  //   const data = await useFetch<ITest>({
+  //     API: '/test',
+  //     method: 'GET',
+  //   });
+  //   const testPostStore = useTestPost();
+  //   testPostStore.setData(data);
+  //   console.log('preFetch', data);
+  // },
   setup() {
     const { WeeLoader } = useBase();
     const { useFetch } = useCallApi();
@@ -67,10 +68,13 @@ export default defineComponent({
     const loadData = async () => {
       WeeLoader();
       // get
-      const response = await useFetch<unknown[]>({
-        API: '/test',
+      const response = await useFetch<Post[]>({
+        API: '/posts',
         method: 'GET',
       });
+      if (response) {
+        data.value = response;
+      }
 
       // post
       // const response = await useFetch<unknown[]>({
