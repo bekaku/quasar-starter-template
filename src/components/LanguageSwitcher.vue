@@ -13,17 +13,8 @@
     </select>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { useLang } from 'src/composables/useLang';
+<script setup lang="ts">
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { availableLocales } from 'src/utils/lang';
-export default defineComponent({
-  components: {},
-  setup() {
-    const { t } = useLang();
-    const langugeAndThemeStore = useLangugeAndThemeStore();
-    return { t, langugeAndThemeStore, availableLocales };
-  },
-});
+const langugeAndThemeStore = useLangugeAndThemeStore();
 </script>

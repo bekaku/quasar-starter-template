@@ -229,9 +229,8 @@
   </q-header>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
-
+<script setup lang="ts">
+import { ref, computed } from 'vue';
 import {
   biChatDots,
   biBell,
@@ -252,58 +251,23 @@ import {
 import { availableThemes } from 'src/utils/theme';
 import { availableLocales } from 'src/utils/lang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
-import { capitalizeFirstLetter } from 'src/utils/appUtil';
 import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from 'stores/authenStore';
 import useAuth from 'src/composables/useAuth';
-export default defineComponent({
-  name: 'AppHeader',
-  props: {
-    hambergerMenu: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  setup() {
-    const { t } = useLang();
-    const authenStore = useAuthenStore();
-    const langugeAndThemeStore = useLangugeAndThemeStore();
-    const { signOut } = useAuth();
-    const search = ref('');
-    const currenLocale = computed(() =>
-      availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
-    );
-    const icons = {
-      biChatDots,
-      biBell,
-      biAppIndicator,
-      biCameraVideo,
-      biSearch,
-      biCaretDownFill,
-      biEmojiSmile,
-      biPersonSquare,
-      biMoon,
-      biTranslate,
-      biQuestionCircle,
-      biGear,
-      biBoxArrowRight,
-      biChevronRight,
-      biCheck2,
-    };
-    return {
-      search,
-      ...icons,
-      availableThemes,
-      langugeAndThemeStore,
-      availableLocales,
-      capitalizeFirstLetter,
-      currenLocale,
-      t,
-      authenStore,
-      signOut,
-    };
+defineProps({
+  hambergerMenu: {
+    type: Boolean,
+    default: true,
   },
 });
+const { t } = useLang();
+const authenStore = useAuthenStore();
+const langugeAndThemeStore = useLangugeAndThemeStore();
+const { signOut } = useAuth();
+const search = ref('');
+const currenLocale = computed(() =>
+  availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
+);
 </script>
 <style lang="sass">
 .YL

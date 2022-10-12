@@ -66,7 +66,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {
   mdiInboxRemoveOutline,
   mdiAllergy,
@@ -78,129 +78,124 @@ import {
   mdiPackageVariant,
   mdiInformationVariant,
 } from '@quasar/extras/mdi-v6';
-import { defineComponent, PropType } from 'vue';
+import { PropType } from 'vue';
 import { IResult } from 'src/interface/common';
 
-export default defineComponent({
-  name: 'AppResult',
-  props: {
-    status: {
-      type: String as PropType<IResult>,
-      default: 'info',
-    },
-    title: {
-      type: String,
-      default: '', //OH OH! You're lost.
-    },
-    description: {
-      type: String,
-      default: '', //The page you are looking for does not exist.
-    },
-    icon: {
-      type: String,
-      default: '',
-    },
-    iconSize: {
-      type: String,
-      default: '128px',
-    },
-    hideBg: {
-      type: Boolean,
-      default: true,
-    },
+const props = defineProps({
+  status: {
+    type: String as PropType<IResult>,
+    default: 'info',
   },
-  setup(props) {
-    const getIcon = (): string => {
-      let icon = undefined;
-
-      //404, 403, 500, 418, info, success, error, warning
-      switch (props.status) {
-        case '404':
-          icon = mdiInboxRemoveOutline;
-          break;
-        case '403':
-          icon = mdiAllergy;
-          break;
-        case '500':
-          icon = mdiRobotConfused;
-          break;
-        case '418':
-          icon = mdiPaperclip;
-          break;
-        case 'success':
-          icon = mdiCheckBold;
-          break;
-        case 'warning':
-          icon = mdiAlertBoxOutline;
-          break;
-        case 'error':
-          icon = mdiAlert;
-          break;
-        case 'empty':
-          icon = mdiPackageVariant;
-          break;
-        default:
-          icon = mdiInformationVariant;
-          break;
-      }
-
-      return icon;
-    };
-    const getIconColor = () => {
-      let color = '';
-      switch (props.status) {
-        case '404':
-        case '403':
-        case '500':
-        case '418':
-          color = 'text-amber';
-          break;
-        case 'success':
-          color = 'text-green';
-          break;
-        case 'warning':
-          color = 'text-orange';
-          break;
-        case 'error':
-          color = 'text-red';
-          break;
-        case 'empty':
-          color = 'text-blue-grey-2';
-          break;
-        default:
-          color = 'text-blue';
-          break;
-      }
-      return color;
-    };
-    const getBgColor = () => {
-      let color = '';
-      switch (props.status) {
-        case '404':
-        case '403':
-        case '500':
-        case '418':
-          color = 'amber-1';
-          break;
-        case 'success':
-          color = 'green-1';
-          break;
-        case 'warning':
-          color = 'orange-1';
-          break;
-        case 'error':
-          color = 'red-1';
-          break;
-        case 'empty':
-          color = 'grey-1';
-          break;
-        default:
-          color = 'blue-1';
-          break;
-      }
-      return color;
-    };
-    return { getIcon, getIconColor, getBgColor };
+  title: {
+    type: String,
+    default: '', //OH OH! You're lost.
+  },
+  description: {
+    type: String,
+    default: '', //The page you are looking for does not exist.
+  },
+  icon: {
+    type: String,
+    default: '',
+  },
+  iconSize: {
+    type: String,
+    default: '128px',
+  },
+  hideBg: {
+    type: Boolean,
+    default: true,
   },
 });
+
+const getIcon = (): string => {
+  let icon = undefined;
+
+  //404, 403, 500, 418, info, success, error, warning
+  switch (props.status) {
+    case '404':
+      icon = mdiInboxRemoveOutline;
+      break;
+    case '403':
+      icon = mdiAllergy;
+      break;
+    case '500':
+      icon = mdiRobotConfused;
+      break;
+    case '418':
+      icon = mdiPaperclip;
+      break;
+    case 'success':
+      icon = mdiCheckBold;
+      break;
+    case 'warning':
+      icon = mdiAlertBoxOutline;
+      break;
+    case 'error':
+      icon = mdiAlert;
+      break;
+    case 'empty':
+      icon = mdiPackageVariant;
+      break;
+    default:
+      icon = mdiInformationVariant;
+      break;
+  }
+
+  return icon;
+};
+const getIconColor = () => {
+  let color = '';
+  switch (props.status) {
+    case '404':
+    case '403':
+    case '500':
+    case '418':
+      color = 'text-amber';
+      break;
+    case 'success':
+      color = 'text-green';
+      break;
+    case 'warning':
+      color = 'text-orange';
+      break;
+    case 'error':
+      color = 'text-red';
+      break;
+    case 'empty':
+      color = 'text-blue-grey-2';
+      break;
+    default:
+      color = 'text-blue';
+      break;
+  }
+  return color;
+};
+const getBgColor = () => {
+  let color = '';
+  switch (props.status) {
+    case '404':
+    case '403':
+    case '500':
+    case '418':
+      color = 'amber-1';
+      break;
+    case 'success':
+      color = 'green-1';
+      break;
+    case 'warning':
+      color = 'orange-1';
+      break;
+    case 'error':
+      color = 'red-1';
+      break;
+    case 'empty':
+      color = 'grey-1';
+      break;
+    default:
+      color = 'blue-1';
+      break;
+  }
+  return color;
+};
 </script>

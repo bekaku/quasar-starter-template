@@ -15,6 +15,7 @@ export default (ssrContext: any, redirect: any) => {
   const init = async (): Promise<UserDto | null> => {
     if (cookies && cookies.get(AppAuthTokenKey)) {
       const userData = await getAndSetCurrentUserData();
+      console.log('useInitAuth/init/userData', userData);
       // await checkRefreshToken(userData);
       // redirect if require deference path home
       return new Promise((resolve) => {

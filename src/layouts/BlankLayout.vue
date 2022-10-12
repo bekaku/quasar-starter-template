@@ -6,12 +6,4 @@
   </q-layout>
 </template>
 
-<script>
-export default {
-  name: 'MainLayout',
-  components: {},
-  setup() {
-    return {};
-  },
-};
-</script>
+<script setup lang="ts"></script>

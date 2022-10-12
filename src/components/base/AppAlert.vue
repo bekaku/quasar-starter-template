@@ -22,45 +22,39 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+<script setup lang="ts">
+import { PropType, ref } from 'vue';
 import { IAlert } from 'src/interface/common';
 
-export default defineComponent({
-  name: 'AppAlert',
-  props: {
-    message: {
-      type: String,
-      required: false,
-    },
-    title: {
-      type: String,
-      default: null,
-    },
-    type: {
-      type: String as PropType<IAlert>,
-      default: '',
-    },
-    icon: {
-      type: String,
-      default: 'mdi-lightbulb-on-outline',
-    },
-    dense: {
-      type: Boolean,
-      default: false,
-    },
-    radius: {
-      type: Boolean,
-      default: false,
-    },
-    closeable: {
-      type: Boolean,
-      default: false,
-    },
+defineProps({
+  message: {
+    type: String,
+    required: false,
   },
-  setup() {
-    const show = ref(true);
-    return { show };
+  title: {
+    type: String,
+    default: null,
+  },
+  type: {
+    type: String as PropType<IAlert>,
+    default: '',
+  },
+  icon: {
+    type: String,
+    default: 'mdi-lightbulb-on-outline',
+  },
+  dense: {
+    type: Boolean,
+    default: false,
+  },
+  radius: {
+    type: Boolean,
+    default: false,
+  },
+  closeable: {
+    type: Boolean,
+    default: false,
   },
 });
+const show = ref(true);
 </script>

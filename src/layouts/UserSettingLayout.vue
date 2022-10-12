@@ -16,18 +16,10 @@
     </q-page-container>
   </q-layout>
 </template>
-
-<script>
-import AppHeader from 'src/components/base/AppHeader.vue';
-import UserSettingDrawer from 'src/components/base/UserSettingDrawer.vue';
+<script lang="ts">
 import { useAuthenStore } from 'stores/authenStore';
 import useInitAuth from 'src/composables/useInitAuth';
 export default {
-  name: 'UserSettingLayout',
-  components: {
-    AppHeader,
-    UserSettingDrawer,
-  },
   async preFetch({ ssrContext, redirect }) {
     const authenStore = useAuthenStore();
     if (!authenStore.auth) {
@@ -38,8 +30,9 @@ export default {
       }
     }
   },
-  setup() {
-    return {};
-  },
 };
+</script>
+<script setup lang="ts">
+import AppHeader from 'src/components/base/AppHeader.vue';
+import UserSettingDrawer from 'src/components/base/UserSettingDrawer.vue';
 </script>

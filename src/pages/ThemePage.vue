@@ -4,21 +4,15 @@
   </q-page>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { availableLocales } from 'src/utils/lang';
 import { useMeta } from 'quasar';
-export default defineComponent({
-  components: {},
-  setup() {
-    useMeta({
-      title: 'I18n Page',
-    });
-    const { t } = useLang();
-    const langugeAndThemeStore = useLangugeAndThemeStore();
-    return { t, langugeAndThemeStore, availableLocales };
-  },
+useMeta({
+  title: 'I18n Page',
 });
+const { t } = useLang();
+const langugeAndThemeStore = useLangugeAndThemeStore();
 </script>

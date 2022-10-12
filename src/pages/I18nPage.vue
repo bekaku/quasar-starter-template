@@ -9,32 +9,25 @@
   </q-page>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { useLang } from 'src/composables/useLang';
 import { useMeta } from 'quasar';
-export default defineComponent({
-  components: {},
-  setup() {
-    useMeta({
-      title: 'I18n Page',
-      meta: {
-        description: { name: 'description', content: 'I18n Page' },
-        keywords: { name: 'keywords', content: 'Quasar website' },
-        equiv: {
-          'http-equiv': 'Content-Type',
-          content: 'text/html; charset=UTF-8',
-        },
-        ogTitle: {
-          property: 'og:title',
-          template() {
-            return 'I18n Page';
-          },
-        },
+useMeta({
+  title: 'I18n Page',
+  meta: {
+    description: { name: 'description', content: 'I18n Page' },
+    keywords: { name: 'keywords', content: 'Quasar website' },
+    equiv: {
+      'http-equiv': 'Content-Type',
+      content: 'text/html; charset=UTF-8',
+    },
+    ogTitle: {
+      property: 'og:title',
+      template() {
+        return 'I18n Page';
       },
-    });
-    const { t } = useLang();
-    return { t };
+    },
   },
 });
+const { t } = useLang();
 </script>

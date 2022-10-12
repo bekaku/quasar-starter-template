@@ -2,7 +2,7 @@
   <q-page padding>
     <q-card>
       <q-card-section class="q-gutter-md">
-        <p>Pinia Store</p>
+        <p>Pinia Store {{ t('base.welcomeText') }}</p>
         <div>Counter : {{ counterStore.counter }}</div>
 
         <q-btn
@@ -26,36 +26,29 @@
   </q-page>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { useLang } from 'src/composables/useLang';
 import { useCounterStore } from 'stores/counter';
 import { useMeta } from 'quasar';
-export default defineComponent({
-  components: {},
-  setup() {
-    useMeta({
-      title: 'Penia Page',
-      meta: {
-        description: { name: 'description', content: 'Penia Page' },
-        keywords: { name: 'keywords', content: 'Quasar website' },
-        equiv: {
-          'http-equiv': 'Content-Type',
-          content: 'text/html; charset=UTF-8',
-        },
-        // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
-        ogTitle: {
-          property: 'og:title',
-          // optional; similar to titleTemplate, but allows templating with other meta properties
-          template() {
-            return 'Penia Page';
-          },
-        },
+useMeta({
+  title: 'Penia Page',
+  meta: {
+    description: { name: 'description', content: 'Penia Page' },
+    keywords: { name: 'keywords', content: 'Quasar website' },
+    equiv: {
+      'http-equiv': 'Content-Type',
+      content: 'text/html; charset=UTF-8',
+    },
+    // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+    ogTitle: {
+      property: 'og:title',
+      // optional; similar to titleTemplate, but allows templating with other meta properties
+      template() {
+        return 'Penia Page';
       },
-    });
-    const counterStore = useCounterStore();
-    const { t } = useLang();
-    return { t, counterStore };
+    },
   },
 });
+const counterStore = useCounterStore();
+const { t } = useLang();
 </script>

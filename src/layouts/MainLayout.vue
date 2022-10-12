@@ -8,18 +8,10 @@
     </q-page-container>
   </q-layout>
 </template>
-
-<script>
-import AppDrawer from 'src/components/base/AppDrawer.vue';
-import AppHeader from 'src/components/base/AppHeader.vue';
+<script lang="ts">
 import { useAuthenStore } from 'stores/authenStore';
 import useInitAuth from 'src/composables/useInitAuth';
 export default {
-  name: 'MainLayout',
-  components: {
-    AppDrawer,
-    AppHeader,
-  },
   async preFetch({ ssrContext, redirect }) {
     const authenStore = useAuthenStore();
     if (!authenStore.auth) {
@@ -30,8 +22,10 @@ export default {
       }
     }
   },
-  setup() {
-    return {};
-  },
 };
+</script>
+
+<script lang="ts" setup>
+import AppDrawer from 'src/components/base/AppDrawer.vue';
+import AppHeader from 'src/components/base/AppHeader.vue';
 </script>

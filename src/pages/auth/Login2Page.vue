@@ -108,8 +108,8 @@
   </q-page>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import { useMeta } from 'quasar';
 import {
   biEnvelope,
@@ -119,49 +119,26 @@ import {
 } from '@quasar/extras/bootstrap-icons';
 import { useLang } from '@/composables/useLang';
 import { validateEmail } from 'src/utils/appUtil';
-export default defineComponent({
-  components: {},
-  setup() {
-    const { t } = useLang();
-    const email = ref(undefined);
-    const password = ref(undefined);
-    const showPassword = ref<boolean>(false);
-    const loading = ref<boolean>(false);
-    const loginForm = ref(null);
-    useMeta({
-      title: `${t('page.login')} | ${t('app.monogram')}`,
-    });
-
-    const onSubmit = () => {
-      console.log('onSubmit');
-      loading.value = true;
-      setTimeout(() => {
-        loading.value = false;
-      }, 1000 * 3);
-    };
-    const onReset = () => {
-      email.value = undefined;
-      password.value = undefined;
-      showPassword.value = false;
-    };
-    const icons = {
-      biEnvelope,
-      biLock,
-      biEye,
-      biEyeSlash,
-    };
-    return {
-      ...icons,
-      email,
-      password,
-      showPassword,
-      onSubmit,
-      onReset,
-      t,
-      loading,
-      loginForm,
-      validateEmail,
-    };
-  },
+const { t } = useLang();
+const email = ref(undefined);
+const password = ref(undefined);
+const showPassword = ref<boolean>(false);
+const loading = ref<boolean>(false);
+const loginForm = ref(null);
+useMeta({
+  title: `${t('page.login')} | ${t('app.monogram')}`,
 });
+
+const onSubmit = () => {
+  console.log('onSubmit');
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 1000 * 3);
+};
+const onReset = () => {
+  email.value = undefined;
+  password.value = undefined;
+  showPassword.value = false;
+};
 </script>

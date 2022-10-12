@@ -19,31 +19,19 @@
   </q-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { useMeta } from 'quasar';
 import ImageCropper from 'src/components/ImageCropper.vue';
-export default defineComponent({
-  components: {
-    ImageCropper,
-  },
-  setup() {
-    useMeta({
-      title: 'Test Page',
-    });
-    const dialog = ref(false);
-
-    const onOkay = async (blobFile: any) => {
-      console.log('onOkay', blobFile);
-    };
-    const onOpenCropper = () => {
-      dialog.value = true;
-    };
-    return {
-      dialog,
-      onOkay,
-      onOpenCropper,
-    };
-  },
+useMeta({
+  title: 'Test Page',
 });
+const dialog = ref(false);
+
+const onOkay = async (blobFile: any) => {
+  console.log('onOkay', blobFile);
+};
+const onOpenCropper = () => {
+  dialog.value = true;
+};
 </script>

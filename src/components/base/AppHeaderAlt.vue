@@ -35,8 +35,8 @@
   </q-toolbar>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 
 import {
   biCaretDown,
@@ -45,29 +45,9 @@ import {
 } from '@quasar/extras/bootstrap-icons';
 import { availableLocales } from 'src/utils/lang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
-import { useLang } from '@/composables/useLang';
-export default defineComponent({
-  name: 'AppHeaderAlt',
-  props: {},
-  setup() {
-    const { t } = useLang();
-    const langugeAndThemeStore = useLangugeAndThemeStore();
-    const currenLocale = computed(() =>
-      availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
-    );
-    const icons = {
-      biCaretDown,
-      biTranslate,
-      biCheck2,
-    };
-    return {
-      ...icons,
-      langugeAndThemeStore,
-      availableLocales,
-      currenLocale,
-      t,
-    };
-  },
-});
+const langugeAndThemeStore = useLangugeAndThemeStore();
+const currenLocale = computed(() =>
+  availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
+);
 </script>
 <style lang="sass"></style>

@@ -22,52 +22,43 @@
   </q-card>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import { useLang } from '@/composables/useLang';
-export default defineComponent({
-  name: 'UserSettingDrawer',
-  props: {
-    overlay: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  setup() {
-    const { t } = useLang();
-    const drawer = ref(true);
-    return {
-      t,
-      drawer,
-      links1: [
-        {
-          icon: 'bi-person',
-          text: 'page.settingsPublicProfile',
-          link: '/settings/profile',
-        },
-        {
-          icon: 'bi-bell',
-          text: 'page.settingsNotification',
-          link: '/settings/notifications',
-        },
-        {
-          separator: true,
-        },
-        {
-          header: 'Access',
-        },
-        {
-          icon: 'bi-shield-lock',
-          text: 'page.settingsSecurity',
-          link: '/settings/security',
-        },
-        {
-          icon: 'bi-envelope',
-          text: 'page.settingsEmail',
-          link: '/settings/emails',
-        },
-      ],
-    };
+defineProps({
+  overlay: {
+    type: Boolean,
+    default: false,
   },
 });
+
+const { t } = useLang();
+const links1 = ref([
+  {
+    icon: 'bi-person',
+    text: 'page.settingsPublicProfile',
+    link: '/settings/profile',
+  },
+  {
+    icon: 'bi-bell',
+    text: 'page.settingsNotification',
+    link: '/settings/notifications',
+  },
+  {
+    separator: true,
+  },
+  {
+    header: 'Access',
+  },
+  {
+    icon: 'bi-shield-lock',
+    text: 'page.settingsSecurity',
+    link: '/settings/security',
+  },
+  {
+    icon: 'bi-envelope',
+    text: 'page.settingsEmail',
+    link: '/settings/emails',
+  },
+]);
 </script>
