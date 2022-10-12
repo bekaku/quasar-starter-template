@@ -6,6 +6,7 @@
   "author": "bekaku <33171470+bekaku@users.noreply.github.com>",
   "private": true,
   "scripts": {
+    "devSsr": "quasar dev -m ssr",
     "dev": "quasar dev",
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
