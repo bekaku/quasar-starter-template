@@ -6,9 +6,10 @@
   "author": "bekaku <33171470+bekaku@users.noreply.github.com>",
   "private": true,
   "scripts": {
-    "dev:ssr": "quasar dev -m ssr",
     "dev": "quasar dev",
+    "dev:ssr": "quasar dev -m ssr",
     "build": "quasar build",
+    "build:ssr": "quasar build -m ssr",
     "build:pwa": "quasar build -m pwa",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
