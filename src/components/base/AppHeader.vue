@@ -20,7 +20,7 @@
           )
         "
         aria-label="Menu"
-        icon="mdi-menu"
+        :icon="biList"
       />
 
       <q-btn
@@ -247,6 +247,7 @@ import {
   biBoxArrowRight,
   biChevronRight,
   biCheck2,
+  biList,
 } from '@quasar/extras/bootstrap-icons';
 import { availableThemes } from 'src/utils/theme';
 import { availableLocales } from 'src/utils/lang';

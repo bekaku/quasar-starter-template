@@ -12,6 +12,7 @@ const routes: RouteRecordRaw[] = [
       { path: 'i18n', component: () => import('@/pages/I18nPage.vue') },
       { path: 'theme', component: () => import('@/pages/ThemePage.vue') },
       { path: 'fetch-data', component: () => import('@/pages/FetchData.vue') },
+      { path: 'tutor1', component: () => import('@/pages/TutorPage1.vue') },
     ],
   },
   {

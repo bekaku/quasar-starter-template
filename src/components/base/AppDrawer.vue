@@ -208,14 +208,15 @@ export default defineComponent({
       t,
       links1: [
         // { icon: 'bi-house-door', text: 'Home', link: '/' },
-        { icon: 'mdi-card-heading', text: 'Feed', link: '/feed' },
-        { icon: 'mdi-fruit-pineapple', text: 'Pinia Store', link: '/pinia' },
+        { icon: 'bi-card-heading', text: 'Feed', link: '/feed' },
+        { icon: 'bi-123', text: 'Pinia Store', link: '/pinia' },
         { icon: 'bi-translate', text: 'I18n', link: '/i18n' },
         {
           icon: 'bi-file-arrow-down',
           text: 'Fetch data',
           link: '/fetch-data',
         },
+        { icon: 'bi-file', text: 'Tutor1', link: '/tutor1' },
       ],
       links2: [
         { icon: 'bi-folder2', text: 'Library' },
