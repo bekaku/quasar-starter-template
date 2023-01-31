@@ -79,7 +79,7 @@ import {
   mdiInformationVariant,
 } from '@quasar/extras/mdi-v6';
 import { PropType } from 'vue';
-import { IResult } from 'src/interface/common';
+import { IResult } from '@/types/common';
 
 const props = defineProps({
   status: {

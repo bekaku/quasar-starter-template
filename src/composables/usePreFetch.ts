@@ -1,13 +1,13 @@
 import { api } from 'boot/axios';
 import { Cookies } from 'quasar';
 import { LocaleKey, AppAuthTokenKey } from 'src/utils/constant';
-import { RequestType } from 'src/interface/common';
+import { RequestType } from '@/types/common';
 import { isAppException } from 'src/utils/appUtil';
 import { useExceptionStore } from 'src/stores/exceptionStore';
 export default (ssrContext: any, redirect: any) => {
   const ck = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
   const exceptionStore = useExceptionStore();
-  const useFetch = <T>(req: RequestType): Promise<T> => {
+  const callAxios = <T>(req: RequestType): Promise<T> => {
     return new Promise((resolve, reject) => {
       if (api.defaults.headers != null) {
         api.defaults.headers.common['Accept-Language'] = ck.get(LocaleKey);
@@ -16,6 +16,14 @@ export default (ssrContext: any, redirect: any) => {
         )}`;
       }
       // api.defaults.headers['Accept-Language'] = ck.get(LocaleKey);
+      if (req.baseURL) {
+        api.defaults.baseURL = req.baseURL;
+      } else {
+        api.defaults.baseURL = process.env.API;
+      }
+      if (process.env.NODE_ENV == 'development') {
+        console.log(`usePrefecth > api ${api.defaults.baseURL}${req.API}`);
+      }
       api({
         method: req.method,
         url: req.API,
@@ -53,6 +61,6 @@ export default (ssrContext: any, redirect: any) => {
   };
 
   return {
-    useFetch,
+    callAxios,
   };
 };

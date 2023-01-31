@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import { useMeta } from 'quasar';
-import { Todo, Meta } from 'src/interface/models';
+import { Todo, Meta } from '@/types/models';
 import { ref, defineAsyncComponent } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useCounterStore } from 'stores/counter';

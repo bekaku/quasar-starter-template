@@ -208,6 +208,7 @@ export default defineComponent({
       t,
       links1: [
         // { icon: 'bi-house-door', text: 'Home', link: '/' },
+        { icon: 'mdi-card-heading', text: 'Feed', link: '/feed' },
         { icon: 'mdi-fruit-pineapple', text: 'Pinia Store', link: '/pinia' },
         { icon: 'bi-translate', text: 'I18n', link: '/i18n' },
         {

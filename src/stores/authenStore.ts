@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { UserDto } from 'src/interface/models';
+import { UserDto } from '@/types/models';
 export const useAuthenStore = defineStore('authenStore', {
   state: () => {
     return {
@@ -8,6 +8,15 @@ export const useAuthenStore = defineStore('authenStore', {
   },
   getters: {
     tokenKey: (state) => state.auth?.token,
+    loginedCover: (state) =>
+      state.auth && state.auth.cover?.image ? state.auth.cover?.image : '',
+    loginedAvatar: (state) => state.auth?.avatar?.image,
+    loginedDisplay: (state) =>
+      state.auth?.userData
+        ? state.auth.userData.fullName
+        : state.auth?.username
+        ? state.auth?.username
+        : state.auth?.email,
   },
   actions: {
     setAuthen(item: UserDto) {

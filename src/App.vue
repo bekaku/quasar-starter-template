@@ -8,7 +8,7 @@ import { AppSetup } from './utils/app';
 import { useQuasar } from 'quasar';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { useAuthenStore } from 'stores/authenStore';
-import { ITheme } from 'src/interface/common';
+import { ITheme } from '@/types/common';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const authenStore = useAuthenStore();
@@ -17,9 +17,9 @@ const langugeAndThemeStore = useLangugeAndThemeStore();
 AppSetup();
 
 onMounted(() => {
-  if (!$q.screen.gt.xs) {
-    langugeAndThemeStore.setLeftDrawer(false);
-  }
+  // if (!$q.screen.gt.xs) {
+  //   langugeAndThemeStore.setLeftDrawer(false);
+  // }
   window.onpopstate = () => {
     if (
       router.options.history.state.forward == '/auth/login' &&

@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
-import { IAlert } from 'src/interface/common';
+import { IAlert } from '@/types/common';
 
 defineProps({
   message: {

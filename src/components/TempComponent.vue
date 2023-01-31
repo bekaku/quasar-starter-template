@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { PropType, computed } from 'vue';
 import { useLang } from '@/composables/useLang';
-import { IAlert } from '@/interface/common';
+import { IAlert } from '@/types/common';
 import { biFile } from '@quasar/extras/bootstrap-icons';
 const props = defineProps({
   modelValue: {

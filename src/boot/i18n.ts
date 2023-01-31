@@ -15,6 +15,7 @@ export default boot(({ app, ssrContext }) => {
       en,
       th,
     },
+    legacy: false,
   });
 
   // Set i18n instance on app

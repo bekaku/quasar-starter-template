@@ -1,16 +1,16 @@
-// import useCallApi from 'src/composables/useCallApi';
+// import useAxios from 'src/composables/useAxios';
 import {
   LoginRequest,
   RefreshTokenRequest,
   RefreshTokenResponse,
-} from 'src/interface/models';
-import { ResponseMessage } from 'src/interface/common';
+} from '@/types/models';
+import { ResponseMessage } from '@/types/common';
 export default () => {
-  // const { useFetch } = useCallApi();
+  // const { callAxios } = useAxios();
   const singin = async (
     loginRequest: LoginRequest
   ): Promise<RefreshTokenResponse> => {
-    // return await useFetch<RefreshTokenResponse>({
+    // return await callAxios<RefreshTokenResponse>({
     //   API: '/api/auth/login',
     //   method: 'POST',
     //   body: loginRequest,

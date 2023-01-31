@@ -1,4 +1,4 @@
-import { UserDto, RefreshTokenResponse } from 'src/interface/models';
+import { UserDto, RefreshTokenResponse } from '@/types/models';
 import usePreFetch from 'src/composables/usePreFetch';
 import {
   AppAuthTokenKey,
@@ -10,7 +10,7 @@ import { Cookies, date } from 'quasar';
 import { setAuthCookies } from 'src/utils/appUtil';
 export default (ssrContext: any, redirect: any) => {
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
-  const { useFetch } = usePreFetch(ssrContext, redirect);
+  const { callAxios } = usePreFetch(ssrContext, redirect);
 
   const init = async (): Promise<UserDto | null> => {
     if (cookies && cookies.get(AppAuthTokenKey)) {
@@ -66,7 +66,7 @@ export default (ssrContext: any, redirect: any) => {
 
       // force refesh token if diff greater than 7 days
       if (diff >= autoRefeshTokenDays) {
-        const refreshResponse = await useFetch<RefreshTokenResponse>({
+        const refreshResponse = await callAxios<RefreshTokenResponse>({
           API: '/api/auth/refreshToken',
           method: 'POST',
           body: {

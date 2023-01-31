@@ -15,6 +15,13 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/feed',
+    component: () => import('@/layouts/FeedLayout.vue'),
+    meta: { requireAuth: true },
+    // beforeEnter: checkAuth,
+    children: [{ path: '', component: () => import('pages/FeedPage.vue') }],
+  },
+  {
     path: '/settings',
     // beforeEnter: checkAuth,
     component: () => import('layouts/UserSettingLayout.vue'),

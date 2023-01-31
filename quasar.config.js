@@ -34,7 +34,7 @@ module.exports = configure(function (ctx) {
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
-    css: ['app.scss'],
+    css: ['app.scss', 'typography.sass'],
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       // 'ionicons-v4',
@@ -44,9 +44,7 @@ module.exports = configure(function (ctx) {
       // 'themify',
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-
       // 'roboto-font',
-      'mdi-v6',
       'bootstrap-icons',
     ],
 
@@ -90,6 +88,14 @@ module.exports = configure(function (ctx) {
           },
         ],
       ],
+      env: {
+        // API: 'http://192.168.7.230:8080',
+        // cdnBaseUrl: 'http://192.168.7.230:8080',
+
+        API: 'http://localhost:8080',
+        TIME_OUT: 5 * 60000, // 60000 = 1 minute, 0 = no timeout
+        API_CLIENT: 'default',
+      },
     },
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
@@ -148,6 +154,20 @@ module.exports = configure(function (ctx) {
         'QCarouselSlide',
         'QDialog',
         'QSpinner',
+        'QMarkupTable',
+        'QSkeleton',
+        'QPagination',
+        'QToggle',
+        'QSelect',
+        'QPopupProxy',
+        'QDate',
+        'QField',
+        'QTabs',
+        'QRouteTab',
+        'QPageSticky',
+        'QSpinnerDots',
+        'QLinearProgress',
+        'QNoSsr',
       ],
       // directives: [],
 

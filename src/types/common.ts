@@ -7,7 +7,33 @@ export enum HttpMethod {
   PUT,
   DELETE,
 }
+export type IHrefTarget = '_blank' | '_parent' | '_self' | '_top';
 // type
+export interface NotifyOptions {
+  icon?: string;
+  caption?: string;
+  avatar?: string;
+  color?: string;
+  textColor?: string;
+  type?: 'positive' | 'negative' | 'warning' | 'info';
+  timeout?: number;
+  progress?: boolean;
+  multiLine?: boolean;
+  spinner?: boolean;
+  html?: boolean;
+  hideClose?: boolean;
+  position?:
+    | 'bottom'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-right'
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'center';
+  actions?: any[];
+}
 export type IHttpStatus =
   | 'OK'
   | 'CREATED'
@@ -60,6 +86,7 @@ export interface RequestType {
   baseURL?: string;
   method: IMethod;
   body?: any;
+  contentType?: string;
 }
 export interface ApiResponse {
   response?: any;
@@ -100,4 +127,15 @@ export interface AppException {
   message: string;
   errors?: string[];
   timestamp?: string;
+}
+export interface ServerException {
+  status: number | string;
+  message: string;
+  error: string;
+  timestamp: string;
+  path: string;
+}
+export interface UseMetaOptions {
+  additionalTitle?: string;
+  manualSet?: boolean;
 }

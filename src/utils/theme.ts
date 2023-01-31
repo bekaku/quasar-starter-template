@@ -5,7 +5,7 @@ import {
   computed,
   useSSRContext,
 } from 'vue';
-import { IThemeSettingOptions, ITheme } from 'src/interface/common';
+import { IThemeSettingOptions, ITheme } from '@/types/common';
 import { Cookies } from 'quasar';
 import { useLangugeAndThemeStore } from '@/stores/langugeAndThemeStore';
 import { ThemeKey } from 'src/utils/constant';

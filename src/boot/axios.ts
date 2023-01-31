@@ -14,18 +14,17 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({
-  baseURL:
-    process.env.NODE_ENV == 'development'
-      ? 'https://jsonplaceholder.typicode.com' //http://localhost:8084, https://jsonplaceholder.typicode.com
-      : 'https://api.example.com',
+  // baseURL: process.env.NODE_ENV == 'development' ? 'http://192.168.7.249:8080' : 'https://api.example.com',
+  baseURL: process.env.API,
   withCredentials: false,
-  timeout: 5 * 60000, // 60000 = 1 minute, 0 = no timeout
+  timeout: process.env.TIME_OUT ? +process.env.TIME_OUT : 3 * 60000, // 60000 = 1 minute, 0 = no timeout
   headers: {
     // Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
-    'Accept-Apiclient': DefaultApiCLient,
+    'Accept-Apiclient': process.env.API_CLIENT || DefaultApiCLient,
     // 'Accept-Language': DefaultLocale,
   },
+  validateStatus: (status) => status <= 500,
 });
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { PropType, computed, ref } from 'vue';
-import { Todo, Meta } from 'src/interface/models';
+import { Todo, Meta } from '@/types/models';
 
 const props = defineProps({
   title: {

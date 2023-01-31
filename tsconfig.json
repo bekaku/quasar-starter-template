@@ -12,7 +12,7 @@
       "assets/*": ["src/assets/*"],
       "boot/*": ["src/boot/*"],
       "stores/*": ["src/stores/*"],
-      "interface/*": ["src/interface/*"],
+      "types/*": ["src/types/*"],
       "composables/*": ["src/composables/*"],
       "utils/*": ["src/utils/*"],
       "api/*": ["src/api/*"],

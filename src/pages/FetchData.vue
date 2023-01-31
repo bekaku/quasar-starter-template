@@ -18,10 +18,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount, computed } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import useBase from 'src/composables/useBase';
-import useCallApi from 'src/composables/useCallApi';
-import { Post } from 'src/interface/models';
+import useAxios from 'src/composables/useAxios';
+import { Post } from '@/types/models';
 import { useMeta } from 'quasar';
 // import { preFetch } from 'quasar/wrappers';
 import { useTestPost } from 'stores/testPostStore';
@@ -46,7 +46,7 @@ interface ITest {
 //   console.log('preFetch', data);
 // },
 const { WeeLoader } = useBase();
-const { useFetch } = useCallApi();
+const { callAxios } = useAxios();
 const data = ref<Post[]>([]);
 
 const dataTest = ref<ITest>();
@@ -65,7 +65,7 @@ onBeforeMount(async () => {
 const loadData = async () => {
   WeeLoader();
   // get
-  const response = await useFetch<Post[]>({
+  const response = await callAxios<Post[]>({
     API: '/posts',
     method: 'GET',
   });

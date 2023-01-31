@@ -2,17 +2,32 @@
 import { useRouter, useRoute } from 'vue-router';
 import { useQuasar } from 'quasar';
 import { useLang } from './useLang';
+import { computed } from 'vue';
 import {
-  mdiInformation,
-  mdiCheckCircle,
-  mdiAlert,
-  mdiAlertCircle,
-} from '@quasar/extras/mdi-v6';
+  formatDateTime,
+  formatDate,
+  formatDistanceFromNow,
+} from '@/utils/dateUtil';
+import {
+  biInfoCircle,
+  biCheckCircle,
+  biExclamationTriangle,
+  biExclamationCircle,
+  biX,
+} from '@quasar/extras/bootstrap-icons';
+import { NotifyOptions } from '@/types/common';
 export default () => {
-  const { t } = useLang();
   const $q = useQuasar();
   const route = useRoute();
   const router = useRouter();
+  const { t, locale } = useLang();
+  const isDark = computed(() => $q.dark.isActive);
+  const getCurrentPath = (fullPath = true) => {
+    return fullPath ? route.fullPath : route.path;
+  };
+  const getPreviousPath = () => {
+    return router.options.history.state.back;
+  };
   const WeeGetParam = (field: string): string | undefined => {
     if (!field) {
       return undefined;
@@ -24,6 +39,14 @@ export default () => {
       return;
     }
     return route.query ? (route.query[field] as string) : undefined;
+  };
+  const getParamNumber = (att: string): number => {
+    const val = WeeGetParam(att);
+    return val != undefined ? +val : 0;
+  };
+  const getQueryNumber = (att: string): number => {
+    const val = WeeGetQuery(att);
+    return val != undefined ? +val : 0;
   };
   const WeeGoTo = (link: string, replace?: boolean): void => {
     if (!link) {
@@ -57,7 +80,7 @@ export default () => {
     WeeToast('Quasar Framework Template',{type:'positive', position:'right', color:''});
     WeeToast('Quasar Framework Template',{caption:'5 Minutes ago', avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'});
      */
-  const WeeToast = (message: string, options: any | undefined) => {
+  const WeeToast = (message: string, options: NotifyOptions | undefined) => {
     if (!message) {
       return;
     }
@@ -65,13 +88,13 @@ export default () => {
     if (options && options.type) {
       const t = options.type;
       if (t === 'positive') {
-        icon = mdiCheckCircle;
+        icon = biCheckCircle;
       } else if (t === 'negative') {
-        icon = mdiAlert;
+        icon = biExclamationTriangle;
       } else if (t === 'warning') {
-        icon = mdiAlertCircle;
+        icon = biExclamationCircle;
       } else if (t === 'info') {
-        icon = mdiInformation;
+        icon = biInfoCircle;
       }
     }
     $q.notify(
@@ -81,8 +104,11 @@ export default () => {
           icon,
           timeout: 5000,
           progress: true,
-          position: 'top',
+          position: 'bottom',
           multiLine: true,
+          actions: !options?.hideClose
+            ? [{ icon: biX, color: 'white' }]
+            : undefined,
         },
         options
       )
@@ -132,6 +158,50 @@ export default () => {
         });
     });
   };
+  const isDevMode = () => {
+    return process.env.NODE_ENV == 'development';
+  };
+  const AppFormatDate = (d: string, fmt: string) => {
+    return formatDate(d, fmt, locale.value);
+  };
+  const AppFormatDateTime = (d: string, fmt: string) => {
+    return formatDateTime(d, fmt, locale.value);
+  };
+  const AppFormatDateDistance = (d: string) => {
+    return formatDistanceFromNow(d, locale.value);
+  };
+  /**
+   * <div ref="bottomSection"></div>
+   * scrollToTop(bottomSection.value);
+   * @param el
+   */
+  const scrollToTop = (el: Element) => {
+    // window.scrollTo(0, 0);
+    if (el) {
+      // el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    }
+  };
+  const readableNumber = (num: number, digits: number) => {
+    if (num < 1000) {
+      return num;
+    }
+    const lookup = [
+      { value: 1, symbol: '' },
+      { value: 1e3, symbol: 'k' },
+    ];
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    const item = lookup
+      .slice()
+      .reverse()
+      .find(function (item) {
+        return num >= item.value;
+      });
+    return item
+      ? (num / item.value).toFixed(digits).replace(rx, '$1') +
+          (item.symbol ? t('readableNum.' + item.symbol) : '')
+      : '0';
+  };
   return {
     WeeGetParam,
     WeeGetQuery,
@@ -139,5 +209,16 @@ export default () => {
     WeeLoader,
     WeeToast,
     WeeConfirm,
+    getCurrentPath,
+    getParamNumber,
+    getQueryNumber,
+    getPreviousPath,
+    AppFormatDate,
+    scrollToTop,
+    isDevMode,
+    AppFormatDateTime,
+    AppFormatDateDistance,
+    readableNumber,
+    isDark,
   };
 };

@@ -183,7 +183,7 @@ import {
 } from 'vue';
 import { useLang } from 'src/composables/useLang';
 import { useMeta } from 'quasar';
-import { AccessTokenDto } from 'src/interface/models';
+import { AccessTokenDto } from '@/types/models';
 import useAuth from '@/composables/useAuth';
 import UserService from 'src/api/UserService';
 import AuthenService from 'src/api/AuthenService';

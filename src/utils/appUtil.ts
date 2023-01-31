@@ -1,5 +1,5 @@
-import { AppException, ResponseMessage } from 'src/interface/common';
-import { RefreshTokenResponse } from 'src/interface/models';
+import { AppException, ResponseMessage, ServerException } from '@/types/common';
+import { RefreshTokenResponse } from '@/types/models';
 import { addDateByDays } from 'src/utils/dateUtil';
 import {
   AppAuthTokenKey,
@@ -27,6 +27,15 @@ export const isAppException = (obj: any): obj is AppException => {
     obj.status !== undefined &&
     obj.message !== undefined &&
     obj.errors !== undefined
+  );
+};
+export const isServerException = (obj: any): obj is ServerException => {
+  return (
+    obj.status !== undefined &&
+    obj.message !== undefined &&
+    obj.error !== undefined &&
+    obj.timestamp !== undefined &&
+    obj.path !== undefined
   );
 };
 export const isServerResponseMessage = (obj: any): obj is ResponseMessage => {
@@ -58,4 +67,24 @@ export const setAuthCookies = (
       path: '/',
     });
   }
+};
+export const catchUrlFromText = (inputText: string) => {
+  return inputText.match(/\bhttps?:\/\/\S+/gi);
+};
+export const urlify = (inputText: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return inputText.replace(urlRegex, (url) => {
+    return (
+      '<a class="app-text-link text-primary" href="' +
+      url +
+      '" target="_blank">' +
+      url +
+      '</a>'
+    );
+  });
+};
+
+export const roundDecimal = (value: number, precision: number) => {
+  const multiplier = Math.pow(10, precision);
+  return Math.round(value * multiplier) / multiplier;
 };

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { AppException } from 'src/interface/common';
+import { AppException } from '@/types/common';
 export const useExceptionStore = defineStore('exceptionStore', {
   state: () => {
     return {

@@ -6,7 +6,7 @@ import {
   AppAuthRefeshTokenKey,
   AppAuthTokenExpireKey,
 } from 'src/utils/constant';
-import { UserDto, RefreshTokenResponse } from 'src/interface/models';
+import { UserDto, RefreshTokenResponse } from '@/types/models';
 import { useAuthenStore } from 'stores/authenStore';
 import { useSSRContext } from 'vue';
 import useBase from './useBase';

@@ -40,7 +40,7 @@
           class="text-weight-bold text-uppercase"
           :class="$q.dark.isActive ? 'text-white' : 'text-black'"
         >
-          Super Synapse
+          Vue Social
         </q-toolbar-title>
       </q-btn>
 

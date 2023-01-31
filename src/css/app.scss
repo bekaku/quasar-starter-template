@@ -1,76 +1,147 @@
 // @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;400;600&family=Fugaz+One&display=swap');
+
+@font-face {
+  font-family: "TwemojiMozilla", ;
+  src: local("TwemojiMozilla"), url("/src/assets/font/TwemojiMozilla.ttf") format("truetype");
+  font-weight: normal;
+}
+
+/* Your Input Div*/
+.input-emoji {
+  // font-family: "TwemojiMozilla";
+  // font-family: Helvetica Neue, apple color emoji, "TwemojiMozilla", sans-serif;
+  // font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Open-Sans', "Apple Color Emoji", "TwemojiMozilla", "Noto Color Emoji", "Android Emoji", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Prompt', Arial, "TwemojiMozilla";
+}
+
 // app global css in SCSS form
 :root {
   // --wee-main-bg-color: #fafbfc;
-  --wee-main-bg-color: #f9f9f9;
+  // --wee-main-bg-color: #f9f9f9;
   // --wee-main-bg-color: #f0f2f5;
+  // --wee-main-bg-color: #f8f9fc;
+  // --wee-main-bg-color: #f6f7f9;
+  --wee-main-bg-color: #f3f2ef;
+
+
   --wee-main-bg-color-theme-dark: #171717;
   --wee-second-bg-color-theme-dark: #1c1c1d;
+  --main-bg-color: var(--wee-main-bg-color);
+  --second-bg-color: #fff;
 
   --wee-main-border-color: #dcdcdc;
   --wee-main-border-color-theme-dark: #282829;
 
-  --wee-main-border-light-color: #f0f0f0;
+  --wee-main-border-light-color: #ededed;
   --wee-main-border-lighter-color: #f8f8f8;
+  --border-lighter-color: #f8f8f8;
   --wee-main-border-light-color-theme-dark: #282829;
 
   --wee-color-white: #fff;
 
-  --wee-text-muted: #9a9a9c;
+  --wee-text-muted: #848d92;
+  --wee-text-muted2: #6b7982;
   --v-main-text-muted-theme-dark: #8e8e93;
 
-  --wee-default-font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-    'Prompt', sans-serif;
+  --v-main-text-icon: #797f8f;
+  --v-main-text-icon-theme-dark: #8e8e93;
+
+  --v-main-text-head: #1a2d39;
+  --v-main-text-head-theme-dark: #fff;
+
+  --v-main-text-title: #62738d;
+  --v-main-text-title-theme-dark: #8e8e93;
+
+  // --v-main-text-body: #303336;
+  --v-main-text-body: #000000;
+  --v-main-text-body-theme-dark: #fff;
+
+  --v-text-black: #000;
+  --wee-default-font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Prompt', sans-serif;
 }
+
+.font-open-sans {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+.ss-logo {
+  font-family: 'Fugaz One', sans-serif !important;
+}
+
+// .input-emoji {
+//   font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Open-Sans', "Apple Color Emoji", "TwemojiMozilla", "Noto Color Emoji", "Android Emoji", sans-serif;
+// }
+
 body {
   font-family: var(--wee-default-font) !important;
   font-weight: normal !important;
+  color: var(--v-main-text-body);
+  --v-main-text-head: #1a2d39;
 }
+
 body.body--dark {
   color: #fff;
-  --wee-text-muted: #8e8e93 !important;
+  --v-main-text-head: #fff;
+  --main-bg-color: var(--wee-main-bg-color-theme-dark);
+  --second-bg-color: var(--wee-second-bg-color-theme-dark);
+  --wee-text-black: #fff;
+  --wee-text-muted: #8e8e93;
+  --wee-text-muted2: #6b7982;
+  --wee-main-border-color: var(--wee-main-border-color-theme-dark);
+  --wee-main-border-light-color: var(--wee-main-border-light-color-theme-dark);
+  --border-lighter-color: var(--wee-main-border-light-color-theme-dark);
 }
 
 body.body--light {
   // color: #2d2e30;
   background-color: var(--wee-main-bg-color) !important;
 }
+
+// .body--dark {
+// background-color: var(--wee-second-bg-color-theme-dark) !important
+// }
+
 .wee-bg-white {
   background-color: #fff;
 }
+
 .body--dark .wee-bg-white {
   background-color: var(--wee-second-bg-color-theme-dark) !important;
 }
 
-.wee-text-muted {
-  color: var(--wee-text-muted);
-}
 
 // .body--dark .wee-text-muted {
 //   color: var(--v-main-text-muted-theme-dark) !important;
 // }
+.app-main-bg {
+  background-color: var(--main-bg-color) !important;
+}
+
+.app-second-bg {
+  background-color: var(--second-bg-color) !important;
+}
+
+.wee-main-bg-color-theme-dark {
+  background-color: var(--wee-main-bg-color-theme-dark) !important;
+}
 
 .wee-second-bg-color-theme-dark {
   background-color: var(--wee-second-bg-color-theme-dark) !important;
 }
+
 .defaultFontFamily {
   font-family: var(--wee-default-font) !important;
 }
-.wee-container-responsive-center {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.cropper-crop-box,
-.cropper-view-box {
-  border-radius: 50%;
-}
 
-.cropper-view-box {
-  box-shadow: 0 0 0 1px #39f;
-  outline: 0;
-}
+// .cropper-crop-box,
+// .cropper-view-box {
+//   border-radius: 50%;
+// }
+// .cropper-view-box {
+//   box-shadow: 0 0 0 1px #39f;
+//   outline: 0;
+// }
 
 .wee-auto-newline {
   word-wrap: break-word;
@@ -104,7 +175,7 @@ body.body--light {
   background: transparent;
 }
 
-.wee-notification > .delete {
+.wee-notification>.delete {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
@@ -195,11 +266,137 @@ body.body--light {
   background-color: #feecf0;
   color: #cc0f35;
 }
-.wee-link {
+
+.wee-container-responsive-center,
+.content-limit {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-feed-container {
+  max-width: 1380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-feed-page {
+  max-width: 600px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// .q-btn .q-focus-helper {
+//   display: none;
+// }
+.q-btn.btn--no-hover .q-focus-helper {
+  display: none;
+}
+
+.test-border {
+  border: 1px solid red;
+}
+
+.app-border {
+  border: 1px solid var(--wee-main-border-color) !important;
+}
+
+.q-app-border {
+  border: 1px solid var(--wee-main-border-color) !important;
+}
+
+.app-border-top {
+  border-top: 1px solid var(--wee-main-border-color) !important;
+}
+
+.app-border-bottom {
+  border-bottom: 1px solid var(--wee-main-border-color) !important;
+}
+
+.app-border-top-bottom {
+  border-top: 1px solid var(--wee-main-border-color) !important;
+  border-bottom: 1px solid var(--wee-main-border-color) !important;
+}
+
+.app-border-light {
+  border: 1px solid var(--wee-main-border-light-color) !important;
+}
+
+.app-border-light-top {
+  border-top: 1px solid var(--wee-main-border-light-color) !important;
+}
+
+.app-border-light-bottom {
+  border-bottom: 1px solid var(--wee-main-border-light-color) !important;
+}
+
+.app-border-light-top-bottom {
+  border-bottom: 1px solid var(--wee-main-border-light-color) !important;
+  border-top: 1px solid var(--wee-main-border-light-color) !important;
+}
+
+.app-border-lighter {
+  border: 1px solid var(--border-lighter-color) !important;
+}
+
+.app-border-lighter-top {
+  border-top: 1px solid var(--border-lighter-color) !important;
+}
+
+.app-border-lighter-bottom {
+  border-bottom: 1px solid var(--border-lighter-color) !important;
+}
+
+.app-border-lighter-top-bottom {
+  border-bottom: 1px solid var(--border-lighter-color) !important;
+  border-top: 1px solid var(--border-lighter-color) !important;
+}
+
+// emoji-mart
+body.body--dark .emoji-mart {
+  background: none;
+
+}
+
+body.body--dark .emoji-mart-category-label {
+  background: none;
+  color: #fff;
+}
+
+body.body--dark .emoji-mart-bar {
+  background: none;
+  color: #fff;
+}
+
+body.body--dark .emoji-mart-anchor {
+  color: $grey-5;
+}
+
+.wee-link,
+.app-text-link {
   color: inherit;
   text-decoration: none;
   font-weight: 500;
 }
-.wee-link:hover {
+
+.wee-link:hover,
+.app-text-link:hover {
   text-decoration: underline;
+  background: none !important;
+}
+
+.theme-name {
+  padding: 5px;
+  border-radius: 10px;
+  // background-color: $blue-1;
+  border: 1px solid $blue;
+  width: fit-content;
+  color: $blue;
+  display: inline-block;
+  font-size: 0.95em;
+}
+
+.border-radius-bottom-no {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }

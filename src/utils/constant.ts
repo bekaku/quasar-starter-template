@@ -17,3 +17,5 @@ export const OS_PLATFORM = {
   IOS: 2,
   ANDROID: 3,
 };
+export const AvatarPlaceHolder128 = 'https://i.pravatar.cc/128';
+export const FeedSectionWidth = 300;
