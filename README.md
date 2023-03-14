@@ -2,13 +2,13 @@
 
 A Quasar Project SSR mode
 
-![img](https://i.ibb.co/qyRN0VN/Vue-3-Starter-1.jpg)
+![img](https://i.ibb.co/0fwCZKv/Vue-3-Starter-3.jpg)
 
 ![img](https://i.ibb.co/sRnf1zh/Vue-3-Starter-2.jpg)
 
-![img](https://i.ibb.co/N9HWCGS/Untitled.png)
+![img](https://i.ibb.co/D9SwWjp/Untitled.png)
 
-![img](https://i.ibb.co/NL49prb/Vue-3-Starter-3.jpg)
+![img](https://i.ibb.co/GxVWsNW/Vue-3-Starter-1.jpg)
 
 ![img](https://i.ibb.co/Q6CXwwd/01.png)
 
