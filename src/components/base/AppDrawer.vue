@@ -233,7 +233,7 @@ export default defineComponent({
         {
           icon: 'bi-file-arrow-down',
           text: 'nav.fetchData',
-          link: '/fetch-data',
+          link: '/admin/fetch-data',
           i18n: true,
         },
         { icon: 'bi-file', text: 'Tutor1', link: '/tutor1', i18n: false },
