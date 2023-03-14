@@ -1,6 +1,7 @@
 # Quasar App (quasar-starter-template)
 
 A Quasar Project SSR mode
+
 ![img](https://i.ibb.co/qyRN0VN/Vue-3-Starter-1.jpg)
 
 ![img](https://i.ibb.co/sRnf1zh/Vue-3-Starter-2.jpg)
