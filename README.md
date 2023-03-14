@@ -42,12 +42,16 @@ npm install
 
 ```bash
 quasar dev
+
+http://localhost:3000
 ```
 
 ### Start the app in development SSR mode (hot-code reloading, error reporting, etc.)
 
 ```bash
 quasar dev -m ssr
+
+http://localhost:9100
 ```
 
 ### Lint the files
