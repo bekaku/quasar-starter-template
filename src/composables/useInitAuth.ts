@@ -45,6 +45,11 @@ export default (ssrContext: any, redirect: any) => {
           image: 'https://i.pravatar.cc/960',
           thumbnail: 'https://i.pravatar.cc/175',
         },
+        cover: {
+          image: 'https://images.unsplash.com/photo-1678664755731-5c893669ea3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+          thumbnail: 'https://images.unsplash.com/photo-1678664755731-5c893669ea3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+        },
+        userData: null,
         active: true,
       });
     });

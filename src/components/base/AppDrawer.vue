@@ -191,6 +191,7 @@ import { defineComponent } from 'vue';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { getYearNow } from 'src/utils/dateUtil';
 import { useLang } from '@/composables/useLang';
+import { biHouseDoor } from '@quasar/extras/bootstrap-icons';
 export default defineComponent({
   name: 'AppDrawer',
   props: {
@@ -207,10 +208,10 @@ export default defineComponent({
       getYearNow,
       t,
       links1: [
-        // { icon: 'bi-house-door', text: 'Home', link: '/' },
+        { icon: biHouseDoor, text: 'Home', link: '/admin' },
         { icon: 'bi-card-heading', text: 'Feed', link: '/feed' },
-        { icon: 'bi-123', text: 'Pinia Store', link: '/pinia' },
-        { icon: 'bi-translate', text: 'I18n', link: '/i18n' },
+        { icon: 'bi-123', text: 'Pinia Store', link: '/admin/pinia' },
+        { icon: 'bi-translate', text: 'I18n', link: '/admin/i18n' },
         {
           icon: 'bi-file-arrow-down',
           text: 'Fetch data',

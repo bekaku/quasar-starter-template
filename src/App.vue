@@ -1,13 +1,27 @@
 <template>
   <router-view />
 </template>
-
+<script lang="ts">
+import { useAuthenStore } from 'stores/authenStore';
+import useInitAuth from 'src/composables/useInitAuth';
+export default {
+  async preFetch({ ssrContext, redirect }) {
+    const authenStore = useAuthenStore();
+    if (!authenStore.auth) {
+      const { init } = useInitAuth(ssrContext, redirect);
+      const userData = await init();
+      if (userData) {
+        authenStore.setAuthen(userData);
+      }
+    }
+  },
+};
+</script>
 <script setup lang="ts">
 import { watch, onMounted } from 'vue';
 import { AppSetup } from './utils/app';
 import { useQuasar } from 'quasar';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
-import { useAuthenStore } from 'stores/authenStore';
 import { ITheme } from '@/types/common';
 import { useRouter } from 'vue-router';
 const router = useRouter();

@@ -3,6 +3,13 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    component: () => import('@/layouts/FeedLayout.vue'),
+    meta: { requireAuth: true },
+    // beforeEnter: checkAuth,
+    children: [{ path: '', component: () => import('pages/FeedPage.vue') }],
+  },
+  {
+    path: '/admin',
     component: () => import('layouts/MainLayout.vue'),
     meta: { requireAuth: true },
     // beforeEnter: checkAuth,
@@ -14,13 +21,6 @@ const routes: RouteRecordRaw[] = [
       { path: 'fetch-data', component: () => import('@/pages/FetchData.vue') },
       { path: 'tutor1', component: () => import('@/pages/TutorPage1.vue') },
     ],
-  },
-  {
-    path: '/feed',
-    component: () => import('@/layouts/FeedLayout.vue'),
-    meta: { requireAuth: true },
-    // beforeEnter: checkAuth,
-    children: [{ path: '', component: () => import('pages/FeedPage.vue') }],
   },
   {
     path: '/settings',
