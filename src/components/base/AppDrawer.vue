@@ -21,7 +21,9 @@
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.text }}</q-item-label>
+            <q-item-label>{{
+              link.i18n ? t(link.text) : link.text
+            }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -103,7 +105,9 @@
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.text }}</q-item-label>
+            <q-item-label>{{
+              link.i18n ? t(link.text) : link.text
+            }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -121,7 +125,9 @@
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.text }}</q-item-label>
+            <q-item-label>{{
+              link.i18n ? t(link.text) : link.text
+            }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -135,7 +141,9 @@
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.text }}</q-item-label>
+            <q-item-label>{{
+              link.i18n ? t(link.text) : link.text
+            }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -191,7 +199,12 @@ import { defineComponent } from 'vue';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { getYearNow } from 'src/utils/dateUtil';
 import { useLang } from '@/composables/useLang';
-import { biHouseDoor } from '@quasar/extras/bootstrap-icons';
+import {
+  biHouseDoor,
+  biCardHeading,
+  bi123,
+  biTranslate,
+} from '@quasar/extras/bootstrap-icons';
 export default defineComponent({
   name: 'AppDrawer',
   props: {
@@ -208,48 +221,54 @@ export default defineComponent({
       getYearNow,
       t,
       links1: [
-        { icon: biHouseDoor, text: 'Home', link: '/admin' },
-        { icon: 'bi-card-heading', text: 'Feed', link: '/feed' },
-        { icon: 'bi-123', text: 'Pinia Store', link: '/admin/pinia' },
-        { icon: 'bi-translate', text: 'I18n', link: '/admin/i18n' },
+        { icon: biHouseDoor, text: 'nav.forAdmin', link: '/admin', i18n: true },
+        { icon: biCardHeading, text: 'nav.social', link: '/', i18n: true },
+        { icon: bi123, text: 'nav.pinia', link: '/admin/pinia', i18n: true },
+        {
+          icon: biTranslate,
+          text: 'nav.i18n',
+          link: '/admin/i18n',
+          i18n: true,
+        },
         {
           icon: 'bi-file-arrow-down',
-          text: 'Fetch data',
+          text: 'nav.fetchData',
           link: '/fetch-data',
+          i18n: true,
         },
-        { icon: 'bi-file', text: 'Tutor1', link: '/tutor1' },
+        { icon: 'bi-file', text: 'Tutor1', link: '/tutor1', i18n: false },
       ],
       links2: [
-        { icon: 'bi-folder2', text: 'Library' },
-        { icon: 'bi-clock-history', text: 'History' },
-        { icon: 'bi-clock', text: 'Watch later' },
-        { icon: 'bi-hand-thumbs-up', text: 'Liked videos' },
+        { icon: 'bi-folder2', text: 'Library', i18n: false },
+        { icon: 'bi-clock-history', text: 'History', i18n: false },
+        { icon: 'bi-clock', text: 'Watch later', i18n: false },
+        { icon: 'bi-hand-thumbs-up', text: 'Liked videos', i18n: false },
       ],
       links3: [
-        { icon: 'bi-play-btn', text: 'Movies & Shows' },
-        { icon: 'bi-cast', text: 'Gaming' },
-        { icon: 'bi-tv', text: 'Live' },
+        { icon: 'bi-play-btn', text: 'Movies & Shows', i18n: false },
+        { icon: 'bi-cast', text: 'Gaming', i18n: false },
+        { icon: 'bi-tv', text: 'Live', i18n: false },
       ],
       links4: [
-        { icon: 'bi-gear', text: 'Settings' },
-        { icon: 'bi-flag', text: 'Report history' },
-        { icon: 'bi-question-circle', text: 'Help' },
-        { icon: 'bi-info-square', text: 'Send feedback' },
+        { icon: 'bi-gear', text: 'Settings', i18n: false },
+        { icon: 'bi-flag', text: 'Report history', i18n: false },
+        { icon: 'bi-question-circle', text: 'Help', i18n: false },
+        { icon: 'bi-info-square', text: 'Send feedback', i18n: false },
       ],
       buttons1: [
-        { text: 'About' },
-        { text: 'Press' },
-        { text: 'Copyright' },
-        { text: 'Contact us' },
-        { text: 'Creators' },
-        { text: 'Advertise' },
-        { text: 'Developers' },
+        { text: 'About', i18n: false },
+        { text: 'Press', i18n: false },
+        { text: 'Copyright', i18n: false },
+        { text: 'Contact us', i18n: false },
+        { text: 'Creators', i18n: false },
+        { text: 'Advertise', i18n: false },
+        { text: 'Developers', i18n: false },
       ],
       buttons2: [
-        { text: 'Terms' },
-        { text: 'Privacy' },
-        { text: 'Policy & Safety' },
-        { text: 'Test new features' },
+        { text: 'Terms', i18n: false },
+        { text: 'Privacy', i18n: false },
+        { text: 'Policy & Safety', i18n: false },
+        { text: 'Test new features', i18n: false },
       ],
     };
   },
