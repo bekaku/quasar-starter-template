@@ -24,7 +24,7 @@ import useAxios from 'src/composables/useAxios';
 import { Post } from '@/types/models';
 import { useMeta } from 'quasar';
 // import { preFetch } from 'quasar/wrappers';
-import { useTestPost } from 'stores/testPostStore';
+// import { useTestPost } from 'stores/testPostStore';
 // import usePreFetch from 'src/composables/usePreFetch';
 interface ITest {
   camelToSnake: string;
@@ -50,10 +50,10 @@ const { callAxios } = useAxios();
 const data = ref<Post[]>([]);
 
 const dataTest = ref<ITest>();
-const testPostStore = useTestPost();
+// const testPostStore = useTestPost();
 
 useMeta({
-  title: testPostStore.item ? testPostStore.item.i18nMessage : 'No Data',
+  title: 'Fetch Data',
 });
 
 // const post = computed(() => testPostStore.item);
