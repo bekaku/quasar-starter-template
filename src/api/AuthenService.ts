@@ -1,4 +1,4 @@
-// import useAxios from 'src/composables/useAxios';
+import useAxios from 'src/composables/useAxios';
 import {
   LoginRequest,
   RefreshTokenRequest,
@@ -6,7 +6,7 @@ import {
 } from '@/types/models';
 import { ResponseMessage } from '@/types/common';
 export default () => {
-  // const { callAxios } = useAxios();
+  const { callAxios } = useAxios();
   const singin = async (
     loginRequest: LoginRequest
   ): Promise<RefreshTokenResponse> => {

@@ -40,6 +40,7 @@ import FeedPost from 'src/components/feed/FeedPost.vue';
 import ProfileCard from '@/components/feed/ProfileCard.vue';
 import { PostData } from '@/types/models';
 import { useAuthenStore } from 'stores/authenStore';
+
 const authenStore = useAuthenStore();
 useAppMeta();
 const initialPost: PostData[] = [

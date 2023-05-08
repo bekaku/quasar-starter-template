@@ -129,6 +129,11 @@
             <div class="text-body1 text-grey-6 q-my-md">
               We're excited to see you again!
             </div>
+            <q-icon :name="biAirplaneEngines"></q-icon>
+            <q-icon name="bi-airplane-engines"></q-icon>
+            <p>
+              <q-icon :name="laAccessibleIcon"></q-icon>
+            </p>
             <!-- <q-separator /> -->
           </q-card-section>
 
@@ -190,6 +195,7 @@
                 class="full-width text-white"
                 :label="t('authen.login')"
                 type="submit"
+                :icon="biCheck2All"
               />
             </q-card-actions>
           </q-form>
@@ -228,7 +234,10 @@ import {
   biLock,
   biEye,
   biEyeSlash,
+  biAirplaneEngines,
+  biCheck2All,
 } from '@quasar/extras/bootstrap-icons';
+import { laAccessibleIcon } from '@quasar/extras/line-awesome';
 import { availableLocales } from 'src/utils/lang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import AuthenService from '@/api/AuthenService';
@@ -261,6 +270,7 @@ const onSubmit = async () => {
       loginForm: 1,
     },
   });
+  console.log('singin', response);
   loading.value = false;
   if (response.authenticationToken) {
     setAuthenticationCookies(response);

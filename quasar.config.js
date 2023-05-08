@@ -89,9 +89,8 @@ module.exports = configure(function (ctx) {
         ],
       ],
       env: {
-        // API: 'http://192.168.7.230:8080',
         // cdnBaseUrl: 'http://192.168.7.230:8080',
-
+        // API: 'http://192.168.7.230:8080',
         API: 'https://jsonplaceholder.typicode.com',
         TIME_OUT: 5 * 60000, // 60000 = 1 minute, 0 = no timeout
         API_CLIENT: 'default',

@@ -46,6 +46,26 @@
         </app-alert>
       </q-card-section>
     </q-card>
+
+    <btn-componebt
+      :model-value="testProp"
+      :overlay="true"
+      :meta="{
+        id: 2,
+        name: 'nnnn',
+      }"
+      @on-custom-click="onComponentClick"
+    >
+      <template #extra>
+        <q-ccard-section>
+          <div class="text-h6">Extra section from page</div>
+        </q-ccard-section>
+      </template>
+
+      <!-- <template #closeBtn>
+        <q-btn :icon="biX" color="negative"></q-btn>
+      </template> -->
+    </btn-componebt>
   </q-page>
 </template>
 
@@ -58,6 +78,8 @@ import { useCounterStore } from 'stores/counter';
 import { useAuthenStore } from 'stores/authenStore';
 import useBase from 'src/composables/useBase';
 import AppResult from '@/components/base/AppResult.vue';
+import BtnComponebt from '@/components/BtnComponent.vue';
+import { biX } from '@quasar/extras/bootstrap-icons';
 const ExampleComponent = defineAsyncComponent(
   () => import('@/components/ExampleComponent.vue')
 );
@@ -71,6 +93,7 @@ const { WeeLoader, WeeToast, WeeConfirm } = useBase();
 const counterStore = useCounterStore();
 const authenStore = useAuthenStore();
 const { t } = useLang();
+const testProp = ref('Hello worl!!');
 const todos = ref<Todo[]>([
   {
     id: 1,
@@ -113,5 +136,9 @@ const loader = () => {
 };
 const toaster = () => {
   WeeToast('this is a toast', { type: 'positive' });
+};
+
+const onComponentClick = (param: string) => {
+  console.log('click from component', param);
 };
 </script>

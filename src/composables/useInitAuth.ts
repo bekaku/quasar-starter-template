@@ -27,7 +27,7 @@ export default (ssrContext: any, redirect: any) => {
     });
   };
   const getAndSetCurrentUserData = async (): Promise<UserDto> => {
-    // const data = await useFetch<UserDto>({
+    // const data = await callAxios<UserDto>({
     //   API: '/api/user/currentUserData',
     //   method: 'GET',
     // });

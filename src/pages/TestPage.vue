@@ -20,18 +20,35 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useMeta } from 'quasar';
 import ImageCropper from 'src/components/ImageCropper.vue';
+import PatientService from '@/api/PatientService';
+import { UserDto } from '@/types/models';
 useMeta({
   title: 'Test Page',
 });
-const dialog = ref(false);
+const { findAllPatien } = PatientService();
 
+const dialog = ref(false);
+const items = ref<UserDto[]>([]);
+const currentPage = ref(1);
+const perpage = ref(10);
 const onOkay = async (blobFile: any) => {
   console.log('onOkay', blobFile);
 };
 const onOpenCropper = () => {
   dialog.value = true;
+};
+onMounted(() => {
+  fetchAll();
+});
+
+const fetchAll = async () => {
+  const response = await findAllPatien(currentPage.value, perpage.value);
+  console.log('findAllPatien', response);
+  if (response) {
+    items.value = response;
+  }
 };
 </script>
