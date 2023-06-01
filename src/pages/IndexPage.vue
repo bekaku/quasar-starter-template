@@ -79,7 +79,6 @@ import { useAuthenStore } from 'stores/authenStore';
 import useBase from 'src/composables/useBase';
 import AppResult from '@/components/base/AppResult.vue';
 import BtnComponebt from '@/components/BtnComponent.vue';
-import { biX } from '@quasar/extras/bootstrap-icons';
 const ExampleComponent = defineAsyncComponent(
   () => import('@/components/ExampleComponent.vue')
 );
