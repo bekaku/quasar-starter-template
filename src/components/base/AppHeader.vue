@@ -16,7 +16,7 @@
         round
         @click="
           langugeAndThemeStore.setLeftDrawer(
-            !langugeAndThemeStore.leftDrawerOpen
+            !langugeAndThemeStore.leftDrawerOpen,
           )
         "
         aria-label="Menu"
@@ -32,8 +32,8 @@
         to="/"
         v-if="$q.screen.gt.xs"
       >
-        <q-avatar class="q-ml-xs" size="36px">
-          <img src="/logo/logo-36.png" />
+        <q-avatar square class="q-ml-xs" size="36px">
+          <img src="/logo/logo.png" />
         </q-avatar>
         <q-toolbar-title
           shrink
@@ -267,7 +267,7 @@ const langugeAndThemeStore = useLangugeAndThemeStore();
 const { signOut } = useAuth();
 const search = ref('');
 const currenLocale = computed(() =>
-  availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
+  availableLocales.find((t) => t.iso == langugeAndThemeStore.locale),
 );
 </script>
 <style lang="sass">

@@ -4,6 +4,9 @@
     show-if-above
     :width="240"
     :overlay="overlay"
+    :mini="miniState"
+    @mouseover="miniState = false"
+    @mouseout="miniState = true"
   >
     <q-scroll-area class="fit">
       <q-list padding>
@@ -148,54 +151,13 @@
         </q-item>
 
         <q-separator class="q-mt-md q-mb-lg" />
-
-        <div
-          class="q-px-md"
-          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'"
-        >
-          <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-            <a
-              v-for="button in buttons1"
-              :key="button.text"
-              class="YL__drawer-footer-link"
-              href="javascript:void(0)"
-            >
-              {{ button.text }}
-            </a>
-          </div>
-        </div>
-        <div
-          class="q-py-md q-px-md"
-          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'"
-        >
-          <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-            <a
-              v-for="button in buttons2"
-              :key="button.text"
-              class="YL__drawer-footer-link"
-              href="javascript:void(0)"
-            >
-              {{ button.text }}
-            </a>
-          </div>
-        </div>
-        <div
-          class="q-py-md q-px-md"
-          :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'"
-        >
-          <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-            <a class="YL__drawer-footer-link" href="javascript:void(0)">
-              {{ `@ ${getYearNow()} ${t('app.monogram')}` }}
-            </a>
-          </div>
-        </div>
       </q-list>
     </q-scroll-area>
   </q-drawer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import { getYearNow } from 'src/utils/dateUtil';
 import { useLang } from '@/composables/useLang';
@@ -220,6 +182,7 @@ export default defineComponent({
       langugeAndThemeStore,
       getYearNow,
       t,
+      miniState: ref(true),
       links1: [
         { icon: biHouseDoor, text: 'nav.forAdmin', link: '/admin', i18n: true },
         { icon: biCardHeading, text: 'nav.social', link: '/', i18n: true },
