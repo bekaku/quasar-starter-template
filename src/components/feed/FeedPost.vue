@@ -4,9 +4,9 @@
       <q-item v-if="post.reference">
         <q-item-section avatar>
           <q-avatar size="30px">
-            <q-img
+            <img
               class="bg-gray-8"
-              src="https://placeimg.com/120/120/people"
+              src="https://loremflickr.com/320/240?random=1"
               spinner-color="white"
               no-native-menu
             />

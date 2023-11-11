@@ -1,8 +1,8 @@
 {
   "app": {
-    "name": "Super Synapse",
-    "monogram": "Super Synapse",
-    "fullName": "Super Synapse",
+    "name": "Vue Quasar",
+    "monogram": "Vue Quasar",
+    "fullName": "Vue Quasar",
     "backend.title": "Vue 3 Starter",
     "appVersion": "เวอร์ชั่น {0}",
     "copyright": "Vue 3 เทมเพลต © {0} สงวนลิขสิทธิ์",

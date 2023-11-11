@@ -26,24 +26,27 @@
               <q-carousel-slide name="style" class="column no-wrap flex-center">
                 <div class="q-mt-md text-center">
                   <img
-                    src="~assets/images/ss02.png"
+                    src="/logo/logo-white.png"
                     style="height: 175px; width: auto"
                   />
                   <div class="text-h3 text-weight-bolder text-uppercase">
-                    Super Synapse
+                    Vue Quasar
                   </div>
                   <div class="text-subtitle1 q-mt-lg">
-                    Organization culture building solution
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
                   </div>
                 </div>
               </q-carousel-slide>
               <q-carousel-slide name="tv" class="column no-wrap flex-center">
                 <img
-                  src="~assets/images/ss01.png"
+                  src="/logo/logo-white.png"
                   style="height: 175px; width: auto"
                 />
                 <div class="text-subtitle1 q-mt-md text-center">
-                  Awake hidden potentials by Connecting within.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
               </q-carousel-slide>
               <q-carousel-slide
@@ -51,24 +54,22 @@
                 class="column no-wrap flex-center"
               >
                 <img
-                  src="~assets/images/all-icon.png"
+                  src="/logo/logo-white.png"
                   style="height: 205px; width: auto"
                 />
                 <div class="text-subtitle1 q-mt-md text-center">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Itaque voluptatem totam, architecto cupiditate officia rerum,
-                  error dignissimos praesentium libero ab nemo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
               </q-carousel-slide>
               <q-carousel-slide name="map" class="column no-wrap flex-center">
                 <img
-                  src="~assets/images/prize01.png"
+                  src="/logo/logo-white.png"
                   style="height: 175px; width: auto"
                 />
                 <div class="text-subtitle1 q-mt-md text-center">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Itaque voluptatem totam, architecto cupiditate officia rerum,
-                  error dignissimos praesentium libero ab nemo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
               </q-carousel-slide>
             </q-carousel>
@@ -121,7 +122,7 @@
           </q-toolbar>
           <q-card-section class="text-center">
             <q-img
-              src="/logo/logo.png"
+              src="/logo/logo-black.png"
               spinner-color="white"
               style="height: auto; max-width: 45px"
             />
@@ -129,11 +130,6 @@
             <div class="text-body1 text-grey-6 q-my-md">
               We're excited to see you again!
             </div>
-            <q-icon :name="biAirplaneEngines"></q-icon>
-            <q-icon name="bi-airplane-engines"></q-icon>
-            <p>
-              <q-icon :name="laAccessibleIcon"></q-icon>
-            </p>
             <!-- <q-separator /> -->
           </q-card-section>
 
@@ -234,10 +230,8 @@ import {
   biLock,
   biEye,
   biEyeSlash,
-  biAirplaneEngines,
   biCheck2All,
 } from '@quasar/extras/bootstrap-icons';
-import { laAccessibleIcon } from '@quasar/extras/line-awesome';
 import { availableLocales } from 'src/utils/lang';
 import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 import AuthenService from '@/api/AuthenService';
@@ -287,6 +281,6 @@ const onReset = () => {
 
 const langugeAndThemeStore = useLangugeAndThemeStore();
 const currenLocale = computed(() =>
-  availableLocales.find((t) => t.iso == langugeAndThemeStore.locale)
+  availableLocales.find((t) => t.iso == langugeAndThemeStore.locale),
 );
 </script>

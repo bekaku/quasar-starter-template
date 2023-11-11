@@ -6,6 +6,8 @@ import {
 } from '@/types/models';
 import { ResponseMessage } from '@/types/common';
 export default () => {
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { callAxios } = useAxios();
   const singin = async (
     loginRequest: LoginRequest
