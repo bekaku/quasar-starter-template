@@ -37,8 +37,8 @@
       :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-7'"
     >
       <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-        <q-avatar size="28px" class="q-mr-xs">
-          <img src="/logo/logo-36.png" />
+        <q-avatar size="28px" square class="q-mr-xs">
+          <img src="/logo/logo.png" />
         </q-avatar>
         <a class="YL__drawer-footer-link" href="javascript:void(0)">
           {{ `${t('app.monogram')} @ ${getYearNow()}` }}
