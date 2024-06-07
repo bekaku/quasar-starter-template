@@ -33,7 +33,7 @@
         v-if="$q.screen.gt.xs"
       >
         <q-avatar square class="q-ml-xs" size="36px">
-          <img src="/logo/logo.png" />
+          <img src="/quasar-starter-template/logo/logo.png" />
         </q-avatar>
         <q-toolbar-title
           shrink

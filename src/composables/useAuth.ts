@@ -5,6 +5,7 @@ import {
   AppAuthTokenCreatedKey,
   AppAuthRefeshTokenKey,
   AppAuthTokenExpireKey,
+  APP_PATH
 } from 'src/utils/constant';
 import { UserDto, RefreshTokenResponse } from '@/types/models';
 import { useAuthenStore } from 'stores/authenStore';
@@ -17,7 +18,7 @@ export default () => {
   const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   const authenStore = useAuthenStore();
-  const { WeeConfirm, WeeLoader } = useBase();
+  const { WeeConfirm, WeeLoader, WeeGoTo } = useBase();
   const { t } = useLang();
   const { singoutToServer } = AuthenService();
 
@@ -72,8 +73,9 @@ export default () => {
     LocalStorage.remove(AppAuthDataKey);
     authenStore.logout();
     if (forceRedirectToLoginPage) {
-      window.location.replace('/auth/login');
-      // WeeGoTo('/auth/login', true);
+      // window.location.replace('/auth/login');
+      // window.location.replace(`${APP_PATH != '/' ? APP_PATH : ''}/auth/login`);
+      WeeGoTo('/auth/login', true);
     }
   };
 

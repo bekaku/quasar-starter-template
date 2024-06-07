@@ -9,7 +9,7 @@
       <q-card>
         <!-- style="
             height: 150px;
-            background: url(/social-cover-01.jpg) no-repeat;
+            background: url(/quasar-starter-template/social-cover-01.jpg) no-repeat;
             background-position: center;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -65,7 +65,7 @@ const icons = {
 export default defineComponent({
   components: {
     ImageCropper: defineAsyncComponent(
-      () => import('@/components/ImageCropper.vue')
+      () => import('@/components/ImageCropper.vue'),
     ),
   },
   setup() {

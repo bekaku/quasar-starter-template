@@ -5,32 +5,32 @@
         <div class="col text-center">
           <img
             v-if="status == 'empty'"
-            src="~assets/icons/empty-box.png"
+            src="/quasar-starter-template/icons/empty-box.png"
             :style="`width: ${iconSize} ; height: auto`"
           />
           <img
             v-else-if="status == 'error'"
             :style="`width: ${iconSize} ; height: auto`"
-            src="~assets/icons/sad-man.png"
+            src="/quasar-starter-template/icons/sad-man.png"
           />
           <img
             v-else-if="status == 'warning'"
-            src="~assets/icons/warning.png"
+            src="/quasar-starter-template/icons/warning.png"
             :style="`width: ${iconSize} ; height: auto`"
           />
           <q-avatar square v-else-if="status == 'success'" :size="iconSize">
-            <img src="~assets/icons/tick.png" />
+            <img src="/quasar-starter-template/icons/tick.png" />
           </q-avatar>
           <q-avatar
             square
             v-else-if="status == '404'"
             style="width: 100%; height: auto"
           >
-            <img src="~assets/icons/404.png" />
+            <img src="/quasar-starter-template/icons/404.png" />
           </q-avatar>
           <!-- <img
             v-else-if="status == '404'"
-            src="~assets/icons/error-404.png"
+            src="/quasar-starter-template/icons/error-404.png"
             spinner-color="white"
           /> -->
           <q-avatar

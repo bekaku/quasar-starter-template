@@ -26,7 +26,7 @@
               <q-carousel-slide name="style" class="column no-wrap flex-center">
                 <div class="q-mt-md text-center">
                   <img
-                    src="/logo/logo-white.png"
+                    src="/quasar-starter-template/logo/logo-white.png"
                     style="height: 175px; width: auto"
                   />
                   <div class="text-h3 text-weight-bolder text-uppercase">
@@ -41,7 +41,7 @@
               </q-carousel-slide>
               <q-carousel-slide name="tv" class="column no-wrap flex-center">
                 <img
-                  src="/logo/logo-white.png"
+                  src="/quasar-starter-template/logo/logo-white.png"
                   style="height: 175px; width: auto"
                 />
                 <div class="text-subtitle1 q-mt-md text-center">
@@ -54,7 +54,7 @@
                 class="column no-wrap flex-center"
               >
                 <img
-                  src="/logo/logo-white.png"
+                  src="/quasar-starter-template/logo/logo-white.png"
                   style="height: 205px; width: auto"
                 />
                 <div class="text-subtitle1 q-mt-md text-center">
@@ -64,7 +64,7 @@
               </q-carousel-slide>
               <q-carousel-slide name="map" class="column no-wrap flex-center">
                 <img
-                  src="/logo/logo-white.png"
+                  src="/quasar-starter-template/logo/logo-white.png"
                   style="height: 175px; width: auto"
                 />
                 <div class="text-subtitle1 q-mt-md text-center">
@@ -122,7 +122,7 @@
           </q-toolbar>
           <q-card-section class="text-center">
             <q-img
-              src="/logo/logo-black.png"
+              src="/quasar-starter-template/logo/logo-black.png"
               spinner-color="white"
               style="height: auto; max-width: 45px"
             />
@@ -222,6 +222,7 @@ import { useMeta } from 'quasar';
 import { getYearNow } from 'src/utils/dateUtil';
 import { useLang } from '@/composables/useLang';
 import { validateEmail } from 'src/utils/appUtil';
+import { APP_PATH } from 'src/utils/constant';
 import {
   biCaretDown,
   biTranslate,
@@ -270,7 +271,7 @@ const onSubmit = async () => {
     setAuthenticationCookies(response);
     loading.value = false;
     // redirect to index page
-    window.location.replace('/');
+    window.location.replace(APP_PATH);
   }
 };
 const onReset = () => {

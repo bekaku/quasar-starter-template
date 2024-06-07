@@ -3,8 +3,8 @@
     class="window-height row justify-center items-center"
     :style="`
      background: #5865f2;
-    background: url(/login-bg.png) no-repeat center center fixed;
-    background: url(/login-bg.png) no-repeat center center fixed, linear-gradient(#5865f2, #0c1aa5);
+    background: url(/quasar-starter-template/login-bg.png) no-repeat center center fixed;
+    background: url(/quasar-starter-template/login-bg.png) no-repeat center center fixed, linear-gradient(#5865f2, #0c1aa5);
   background-size: auto;
   background-repeat: no-repeat;`"
   >
@@ -16,7 +16,7 @@
         >
           <q-card-section class="text-center">
             <q-img
-              src="/logo/logo.png"
+              src="/quasar-starter-template/logo/logo.png"
               spinner-color="white"
               style="height: auto; max-width: 55px"
             />

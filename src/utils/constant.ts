@@ -19,3 +19,5 @@ export const OS_PLATFORM = {
 };
 export const AvatarPlaceHolder128 = 'https://i.pravatar.cc/128';
 export const FeedSectionWidth = 300;
+// export const APP_PATH = '/quasar-demo';
+export const APP_PATH = '/';
