@@ -57,9 +57,9 @@
       @on-custom-click="onComponentClick"
     >
       <template #extra>
-        <q-ccard-section>
+        <q-card-section>
           <div class="text-h6">Extra section from page</div>
-        </q-ccard-section>
+        </q-card-section>
       </template>
 
       <!-- <template #closeBtn>
