@@ -56,15 +56,16 @@ module.exports = configure(function (ctx) {
       alias: {
         '@': path.join(__dirname, './src'),
       },
-      vueRouterMode: 'history', // available values: 'hash', 'history'
+      // vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'hash', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/quasar-demo',
-      publicPath: '/',
+      publicPath: '/quasar-demo',
+      // publicPath: '/',
       // analyze: true,
       // env: {},
       // rawDefine: {}

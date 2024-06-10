@@ -21,5 +21,5 @@ exports.OS_PLATFORM = {
 };
 exports.AvatarPlaceHolder128 = 'https://i.pravatar.cc/128';
 exports.FeedSectionWidth = 300;
-// export const APP_PATH = '/quasar-demo';
-exports.APP_PATH = '/';
+exports.APP_PATH = '/quasar-demo';
+// export const APP_PATH = '/';
