@@ -12,26 +12,37 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary: #5865f2;
-$secondary: #3273dc;
+$primary: #2e86de;
+$secondary: #1dd1a1;
 $accent: #00d1b2;
-
 $positive: #23d160;
 $negative: #ff3860;
-$info: #209cee;
+$info: #00a0dc;
 $warning: #ff9f43;
+
 // used by dark mode
-// $dark-page: #171717 !default;
-// $dark: #1c1c1d !default;
+// $dark: #272a32 !default;
+$dark: var(--color-zinc-900) !default;
+$dark-page: $dark !default;
+// $dark-page: #1d1e22 !default;
 
-// $separator-color: #dcdcdc !default;
-// $separator-color: #f0f0f0 !default;
-// $separator-dark-color: #282829 !default;
 
-$shadow-color: #000 !default;
+// $separator-color: #e9e9ec !default;
+// $separator-dark-color: #45464b !default; //#394552
+$separator-color: var(--color-zinc-200) !default;
+$separator-dark-color: var(--color-zinc-700) !default;
+
+$shadow-color: #1d1e22 !default;
 $elevation-umbra: rgba($shadow-color, 0.12) !default;
 $elevation-penumbra: rgba($shadow-color, 0.14) !default;
 $elevation-ambient: rgba($shadow-color, 0.12) !default;
 
+// $dark-shadow-color         : #fff !default;
+$dark-shadow-color : #bac4d0 !default;
+$elevation-dark-umbra : rgba($dark-shadow-color, 0.12) !default;
+$elevation-dark-penumbra : rgba($dark-shadow-color, 0.14) !default;
+$elevation-dark-ambient : rgba($dark-shadow-color, 0.12) !default;
+
+$generic-border-radius: 11px !default;
 $button-font-weight: 400 !default;
-$generic-border-radius: 10px !default;
+$button-border-radius : 11px !default;

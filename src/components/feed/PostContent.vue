@@ -4,11 +4,12 @@
       :id="'feed-post-content-' + postId"
       :class="showMoreBtn && !showMoreText ? 'word-limit' : ''"
       v-html="urlify(content)"
-    ></div>
-    <app-link
+    />
+    <base-link
       v-if="showMoreBtn && !showMoreText"
       :label="'...' + t('base.seeMore')"
       color="text-primary"
+      to="#"
       @click="showMoreText = true"
     />
   </q-card-section>
@@ -16,7 +17,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import AppLink from 'src/components/base/AppLink.vue';
+import BaseLink from 'src/components/base/BaseLink.vue';
 import { urlify, roundDecimal } from 'src/utils/appUtil';
 import { useLang } from '@/composables/useLang';
 const props = defineProps({
@@ -38,9 +39,9 @@ onMounted(() => {
   setDescHeight();
 });
 const setDescHeight = () => {
-  var el = document.getElementById('feed-post-content-' + props.postId);
+  const el = document.getElementById('feed-post-content-' + props.postId);
   if (el) {
-    var divHeight = el.offsetHeight;
+    const divHeight = el.offsetHeight;
     const lineHeigth = divHeight / 17;
     lineHeight.value = roundDecimal(lineHeigth, 0);
     if (lineHeight.value > limitLines.value) {

@@ -1,19 +1,12 @@
 <template>
-  <q-card flat bordered :style="{ width: `${FeedSectionWidth}px` }">
+  <BaseCard :style="{ width: `${FeedSectionWidth}px` }">
     <q-list>
       <q-item-label header
-        ><q-icon :name="biBookmark" class="q-mr-sm" />{{
-          t('savedPost')
-        }}</q-item-label
+        ><q-icon :name="biBookmark" class="q-mr-sm" />{{ t('savedPost') }}</q-item-label
       >
       <q-item v-for="(item, index) in savedList" :key="index" clickable>
         <q-item-section avatar>
-          <q-img
-            :src="item.image"
-            class="bg-gray-1"
-            spinner-color="primary"
-            no-native-menu
-          />
+          <q-img :src="item.image" class="bg-gray-1" spinner-color="primary" no-native-menu />
         </q-item-section>
         <q-item-section>
           <q-item-label lines="1">{{ item.title }}</q-item-label>
@@ -25,31 +18,28 @@
         <q-item-section side>
           <q-icon color="primary" :name="biChevronDown" />
         </q-item-section>
-        <q-item-section class="text-primary">{{
-          t('base.seeMore')
-        }}</q-item-section>
+        <q-item-section class="text-primary">{{ t('base.seeMore') }}</q-item-section>
       </q-item>
     </q-list>
-  </q-card>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { biChevronDown, biBookmark } from '@quasar/extras/bootstrap-icons';
 import { useLang } from '@/composables/useLang';
-import { FeedSectionWidth } from 'src/utils/constant';
+import { FeedSectionWidth } from '@/libs/constant';
+import BaseCard from '../base/BaseCard.vue';
 const { t } = useLang();
 const savedList = ref([
   {
     image: 'https://picsum.photos/160',
-    title:
-      'Sobering up has had a negative affect on relationship with [25f] gf. How to handle?',
+    title: 'Sobering up has had a negative affect on relationship with [25f] gf. How to handle?',
     author: 'BigGumbyLover',
   },
   {
     image: 'https://picsum.photos/160',
-    title:
-      'Worker disappears after he was accidentally paid more than 300 times his salary',
+    title: 'Worker disappears after he was accidentally paid more than 300 times his salary',
     author: 'Flair_Helper',
   },
   {

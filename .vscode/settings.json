@@ -1,12 +1,12 @@
 {
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "[sass]": {
-    "editor.defaultFormatter": "syler.sass-indented"
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "compile-hero.disable-compile-files-on-did-save-code": false
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

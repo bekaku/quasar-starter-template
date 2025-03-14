@@ -1,5 +1,5 @@
 <template>
-  <q-card flat bordered class="q-mb-md">
+  <BaseCard>
     <q-list dense class="q-pb-md">
       <q-item-label header>Recent activity</q-item-label>
       <q-item>
@@ -46,9 +46,7 @@
               />
             </q-avatar>
           </q-item-label>
-          <q-item-label caption lines="1">
-            Chanavee gives love to Lisa
-          </q-item-label>
+          <q-item-label caption lines="1"> Chanavee gives love to Lisa </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon :name="biHeart" />
@@ -72,9 +70,7 @@
               />
             </q-avatar>
           </q-item-label>
-          <q-item-label caption lines="1">
-            Chanavee comment to Lisa post
-          </q-item-label>
+          <q-item-label caption lines="1"> Chanavee comment to Lisa post </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon :name="biChatSquareDots" />
@@ -98,16 +94,14 @@
               />
             </q-avatar>
           </q-item-label>
-          <q-item-label caption lines="1">
-            Chanavee adopted Lisa post
-          </q-item-label>
+          <q-item-label caption lines="1"> Chanavee adopted Lisa post </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon :name="biHandbag" />
         </q-item-section>
       </q-item>
     </q-list>
-  </q-card>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">
@@ -118,5 +112,6 @@ import {
   biChatSquareDots,
   biHandbag,
 } from '@quasar/extras/bootstrap-icons';
-import { AvatarPlaceHolder128 } from 'src/utils/constant';
+import { AvatarPlaceHolder128 } from '@/libs/constant';
+import BaseCard from '../base/BaseCard.vue';
 </script>

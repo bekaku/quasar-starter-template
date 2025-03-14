@@ -1,0 +1,148 @@
+$positive: #23d160;
+$negative: #ff3860;
+
+//$h1: (size: 6rem, line-height: 6rem, letter-spacing: -.01562em, weight: 300) !default
+//$h2: (size: 3.75rem, line-height: 3.75rem, letter-spacing: -.00833em, weight: 300) !default
+//$h3: (size: 3rem, line-height: 3.125rem, letter-spacing: normal, weight: 400) !default
+//$h4: (size: 2.125rem, line-height: 2.5rem, letter-spacing: .00735em, weight: 400) !default
+//$h5: (size: 1.5rem, line-height: 2rem, letter-spacing: normal, weight: 400) !default
+//$h6: (size: 1.25rem, line-height: 2rem, letter-spacing: .0125em, weight: 500) !default
+//$subtitle1: (size: 1rem, line-height: 1.75rem, letter-spacing: .00937em, weight: 400) !default
+//$subtitle2: (size: .875rem, line-height: 1.375rem, letter-spacing: .00714em, weight: 500) !default
+//$body1: (size: 1rem, line-height: 1.5rem, letter-spacing: .03125em, weight: 400) !default
+//$body2: (size: .875rem, line-height: 1.25rem, letter-spacing: .01786em, weight: 400) !default
+//$overline: (size: .75rem, line-height: 2rem, letter-spacing: .16667em, weight: 500) !default
+//$caption: (size: .75rem, line-height: 1.25rem, letter-spacing: .03333em, weight: 400) !default
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.5;
+}
+
+
+.q-text-caption {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+
+.text-caption-smaller {
+    font-size: 0.75em
+}
+
+
+.text-muted {
+    color: var(--app-text-muted) !important
+}
+
+
+.q-text-muted2 {
+    color: var(--app-text-muted2) !important
+}
+
+
+.q-text-white {
+    color: #fff !important
+}
+
+
+.q-text-black {
+    color: var(--v-text-black) !important
+}
+
+
+.q-text-small {
+    font-size: 0.85em !important
+}
+
+
+.q-text-smaller {
+    font-size: 0.75em !important
+}
+
+
+.q-text-extra-small {
+    font-size: 0.6em !important
+}
+
+
+.wee-bg-white {
+    background-color: #fff
+}
+
+
+.wee-text-head {
+    color: var(--v-main-text-head) !important
+}
+
+
+.wee-text-weight-bold {
+    font-weight: 600 !important
+}
+
+
+.wee-text-weight-normal {
+    font-weight: 400 !important
+}
+
+a,
+.app-text-link,
+.link-no-style,
+.app-text-link-primary {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+.app-text-link:hover {
+
+    text-decoration: underline !important;
+    cursor: pointer;
+    background: none !important;
+}
+
+.app-text-link-primary:hover {
+    color: $primary !important;
+}
+
+
+.text-success {
+    color: $positive
+}
+
+
+.text-danger {
+    color: $negative
+}
+
+
+.app-auto-newline {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.dont-break-out {
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+
+.long-text-break {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

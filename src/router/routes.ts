@@ -1,76 +1,293 @@
-import { RouteRecordRaw } from 'vue-router';
-// import checkAuth from '@/utils/checkAuth';
+import {
+  ExampleBtnBreadcrumb,
+  ExampleSelectBreadcrumb
+} from '@/libs/breadcrumbs';
+import {
+  BackendLogin
+} from '@/libs/permissions';
+import {
+  TabTest
+} from '@/libs/tabs';
+import type { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    component: () => import('@/layouts/DefultLayout.vue'),
+    meta: {
+      requireAuth: true,
+      permission: [BackendLogin]
+    },
+    children: [
+      {
+        path: '',
+        component: () => import('@/pages/index.vue'),
+      },
+      {
+        path: '/settings',
+        meta: { requireAuth: true },
+        children: [
+          {
+            path: '',
+            meta: { pageName: 'page.settingsPublicProfile' },
+            component: () => import('@/pages/settings/index.vue'),
+          },
+          {
+            path: 'notifications',
+            meta: { pageName: 'page.settingsNotification' },
+            component: () => import('@/pages/settings/notifications.vue'),
+          },
+          {
+            path: 'security',
+            meta: { pageName: 'page.settingsSecurity' },
+            component: () => import('@/pages/settings/security.vue'),
+          },
+          {
+            path: 'emails',
+            meta: { pageName: 'page.settingsEmail' },
+            component: () => import('@/pages/settings/emails.vue'),
+          },
+        ],
+      },
+      {
+        path: '/blank-page',
+        meta: {
+          pageName: 'page.dashboard',
+          breadcrumbs: ExampleBtnBreadcrumb,
+          tabs: TabTest
+        },
+        component: () => import('@/pages/blank-page.vue')
+      },
+      {
+        path: '/example',
+        children: [
+          {
+            path: 'charts',
+            meta: {
+              name: 'ExampleCharts',
+            },
+            component: () => import('@/pages/example/charts.vue'),
+          },
+          {
+            path: 'content-text',
+            meta: {
+              name: 'ExampleContentText',
+            },
+            component: () => import('@/pages/example/content-text.vue'),
+          },
+          {
+            path: 'crud-table',
+            meta: {
+              name: 'ExampleCrudTable',
+            },
+            component: () => import('@/pages/example/crud-table.vue'),
+          },
+          {
+            path: 'drag-drop',
+            meta: {
+              name: 'ExampleDargdrop',
+            },
+            component: () => import('@/pages/example/drag-drop.vue'),
+          },
+          {
+            path: 'emoji-picker',
+            meta: {
+              name: 'ExampleEmojiPicker',
+            },
+            component: () => import('@/pages/example/emoji-picker.vue'),
+          },
+          {
+            path: 'image-cropper',
+            meta: {
+              name: 'ExampleImageCropper',
+            },
+            component: () => import('@/pages/example/image-cropper.vue'),
+          },
+          {
+            path: 'image-view',
+            meta: {
+              name: 'ExampleImageView',
+            },
+            component: () => import('@/pages/example/image-view.vue'),
+          },
+          {
+            path: 'infinite-scroll',
+            meta: {
+              name: 'ExampleInfiniteScroll',
+            },
+            component: () => import('@/pages/example/infinite-scroll.vue'),
+          },
+          {
+            path: 'markdown-editor',
+            meta: {
+              name: 'ExampleMarkdownEditor',
+            },
+            component: () => import('@/pages/example/markdown-editor.vue'),
+          },
+          {
+            path: 'result',
+            meta: {
+              name: 'ExampleResult',
+            },
+            component: () => import('@/pages/example/result.vue'),
+          },
+          {
+            path: 'swiper',
+            meta: {
+              name: 'ExampleSwipper',
+            },
+            component: () => import('@/pages/example/swipper.vue'),
+          },
+          {
+            path: 'virtual-scroller',
+            meta: {
+              name: 'ExampleVirtualScroller',
+            },
+            component: () => import('@/pages/example/virtual-scroller.vue'),
+          },
+          {
+            path: 'composables',
+            children: [
+              {
+                path: 'use-axios',
+                meta: {
+                  name: 'ExampleComposablesUseAxios',
+                },
+                component: () => import('@/pages/example/composables/use-axios.vue'),
+              },
+              {
+                path: 'use-base',
+                meta: {
+                  name: 'ExampleComposablesUseBase',
+                },
+                component: () => import('@/pages/example/composables/use-base.vue'),
+              },
+              {
+                path: 'use-pagefecth',
+                meta: {
+                  name: 'ExampleComposablesUsePagefecth',
+                },
+                component: () => import('@/pages/example/composables/use-pagefecth.vue'),
+              },
+            ]
+          },
+          {
+            path: 'ui',
+            children: [
+              {
+                path: 'avatar',
+                meta: {
+                  name: 'ExampleUiAvatar',
+                  breadcrumbs: ExampleBtnBreadcrumb,
+                },
+                component: () => import('@/pages/example/ui/avatar.vue'),
+              },
+              {
+                path: 'button',
+                meta: {
+                  name: 'ExampleUiButton',
+                  breadcrumbs: ExampleBtnBreadcrumb,
+                },
+                component: () => import('@/pages/example/ui/button.vue'),
+              },
+              {
+                path: 'dialog',
+                meta: {
+                  name: 'ExampleUiDialog',
+                },
+                component: () => import('@/pages/example/ui/dialog.vue'),
+              },
+              {
+                path: 'menu',
+                meta: {
+                  name: 'ExampleUiMenu',
+                },
+                component: () => import('@/pages/example/ui/menu.vue'),
+              },
+              {
+                path: 'select',
+                meta: {
+                  name: 'ExampleUiSelect',
+                  breadcrumbs: ExampleSelectBreadcrumb,
+                },
+                component: () => import('@/pages/example/ui/select.vue'),
+              },
+              {
+                path: 'date-picker',
+                meta: {
+                  name: 'ExampleUiDatePicker',
+                },
+                component: () => import('@/pages/example/ui/date-picker.vue'),
+              },
+              {
+                path: 'toggle',
+                meta: {
+                  name: 'ExampleUitoggle',
+                },
+                component: () => import('@/pages/example/ui/toggle.vue'),
+              },
+              {
+                path: 'file-picker',
+                meta: {
+                  name: 'ExampleUiFilePicker',
+                },
+                component: () => import('@/pages/example/ui/file-picker.vue'),
+              },
+              {
+                path: 'input-text',
+                meta: {
+                  name: 'ExampleUiInputText',
+                },
+                component: () => import('@/pages/example/ui/input-text.vue'),
+              },
+              {
+                path: 'tabs',
+                meta: {
+                  name: 'ExampleUiTabs',
+                },
+                component: () => import('@/pages/example/ui/tabs.vue'),
+              },
+            ],
+          },
+        ]
+      },
+    ],
+  },
+  {
+    path: '/example/feed',
     component: () => import('@/layouts/FeedLayout.vue'),
     meta: { requireAuth: true },
-    // beforeEnter: checkAuth,
-    children: [{ path: '', component: () => import('pages/FeedPage.vue') }],
+    children: [{ path: '', component: () => import('@/pages/example/feed/index.vue') }],
   },
   {
-    path: '/admin',
-    component: () => import('layouts/MainLayout.vue'),
+    path: '/example/chats',
     meta: { requireAuth: true },
-    // beforeEnter: checkAuth,
+    component: () => import('layouts/ChatsLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: 'pinia', component: () => import('@/pages/PiniaPage.vue') },
-      { path: 'i18n', component: () => import('@/pages/I18nPage.vue') },
-      { path: 'theme', component: () => import('@/pages/ThemePage.vue') },
-      { path: 'fetch-data', component: () => import('@/pages/FetchData.vue') },
-      { path: 'tutor1', component: () => import('@/pages/TutorPage1.vue') },
-    ],
-  },
-  {
-    path: '/settings',
-    // beforeEnter: checkAuth,
-    component: () => import('layouts/UserSettingLayout.vue'),
-    children: [
-      { path: '', redirect: '/settings/profile' },
       {
-        path: 'profile',
-        component: () => import('@/pages/settings/ProfilePage.vue'),
+        path: '',
+        component: () => import('@/pages/chats/index.vue')
       },
-      {
-        path: 'notifications',
-        component: () => import('@/pages/settings/NotificationPage.vue'),
-      },
-      {
-        path: 'security',
-        component: () => import('@/pages/settings/SecurityPage.vue'),
-      },
-      {
-        path: 'emails',
-        component: () => import('@/pages/settings/EmailPage.vue'),
-      },
-    ],
+    ]
   },
   {
     path: '/auth',
     component: () => import('layouts/BlankLayout.vue'),
     children: [
       { path: '', redirect: '/auth/login' },
-      { path: 'login', component: () => import('@/pages/auth/LoginPage.vue') },
-      {
-        path: 'login2',
-        component: () => import('@/pages/auth/Login2Page.vue'),
-      },
+      { path: 'login', component: () => import('@/pages/auth/login.vue') },
     ],
   },
   {
     path: '/error',
     name: 'ErrorPage',
-    component: () => import('pages/ErrorPage.vue'),
+    component: () => import('@/pages/error.vue'),
   },
-  // Always leave this as last one,
-  // but you can also remove it
+  { path: '/error500', component: () => import('@/pages/error-500.vue') },
+  { path: '/test', component: () => import('@/pages/test.vue') },
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('@/pages/error-404.vue'),
   },
-  { path: '/error500', component: () => import('pages/Error500.vue') },
-  { path: '/test', component: () => import('pages/TestPage.vue') },
 ];
 
 export default routes;

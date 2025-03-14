@@ -20,28 +20,25 @@
       cover
       anchor="center left"
     >
-      <q-card>
-        <profile-card
-          avatar-image="http://192.168.7.249:8080/cdn/images/202206/9_1656492735469_83bd2a0841514c4fbb81c8f674026519.jpg"
-          cover-image="http://192.168.7.249:8080/cdn/images/202207/9_1656661445570_8ded7c66943c4f69ac5db376236a7e09.jpg"
+      <q-card flat>
+        <UserCard
+          avatar-image="https://i.pravatar.cc/450"
+          cover-image="https://images.unsplash.com/photo-1741568032886-18d3f2a694c2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           :name="label"
           description="Software Engineer"
           height="85px"
           avatar-top="35px"
           avatar-size="48px"
           descriptionStyle="margin-top:5px"
-          show-medal
         />
       </q-card>
     </q-menu>
   </q-btn>
-  <medal-badge label="Silver medal" />
 </template>
 
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount } from 'vue';
-import ProfileCard from '@/components/feed/ProfileCard.vue';
-import MedalBadge from '@/components/feed/MedalBadge.vue';
+import UserCard from '../user/UserCard.vue';
 defineProps({
   label: {
     type: String,

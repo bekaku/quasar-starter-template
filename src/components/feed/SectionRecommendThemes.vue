@@ -1,10 +1,5 @@
 <template>
-  <q-card
-    flat
-    bordered
-    class="q-mt-md"
-    :style="{ width: `${FeedSectionWidth}px` }"
-  >
+  <BaseCard :style="{ width: `${FeedSectionWidth}px` }">
     <q-list>
       <q-item-label header>{{ t('recommendationsThemes') }}</q-item-label>
       <q-item v-for="(item, index) in items" :key="index">
@@ -18,8 +13,8 @@
           <q-item-label caption>By {{ item.author }}</q-item-label>
         </q-item-section>
         <q-item-section side>
-          <q-btn flat round dense :icon="biPencilSquare">
-            <q-tooltip>{{ t('ssAction.postIt') }}</q-tooltip>
+          <q-btn flat round dense :icon="biPencil">
+            <q-tooltip>Post it</q-tooltip>
           </q-btn>
         </q-item-section>
       </q-item>
@@ -28,21 +23,19 @@
         <q-item-section side>
           <q-icon color="primary" :name="biChevronDown" />
         </q-item-section>
-        <q-item-section class="text-primary">{{
-          t('base.seeMore')
-        }}</q-item-section>
+        <q-item-section class="text-primary">{{ t('base.seeMore') }}</q-item-section>
       </q-item>
-      <q-separator />
     </q-list>
-  </q-card>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useLang } from '@/composables/useLang';
-import { AvatarPlaceHolder128 } from 'src/utils/constant';
-import { biChevronDown, biPencilSquare } from '@quasar/extras/bootstrap-icons';
-import { FeedSectionWidth } from 'src/utils/constant';
+import { AvatarPlaceHolder128, FeedSectionWidth } from '@/libs/constant';
+import { biChevronDown, biPencil } from '@quasar/extras/bootstrap-icons';
+import { ref } from 'vue';
+import BaseCard from '../base/BaseCard.vue';
+
 const { t } = useLang();
 const items = ref([
   {

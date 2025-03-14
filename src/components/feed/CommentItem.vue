@@ -12,24 +12,18 @@
       </q-item-label>
       <q-item-label>
         <div
-          :class="
-            $q.dark.isActive
-              ? 'text-grey-1 bg-grey-10'
-              : 'text-grey-9 bg-grey-2'
-          "
-          class="q-pa-md"
+          class="bg-app-content-item q-pa-md"
           style="border-radius: 15px"
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-          ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing
+          elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </div>
       </q-item-label>
       <q-item-label lines="1">
         <div class="row q-my-sm">
           <div class="q-pr-sm">
-            <app-link label="Love it" class="text-caption" />
+            <base-link label="Love it" to="#" class="text-caption" />
             <span class="q-mx-sm">
               <q-icon :name="biHeart" />
               <span class="text-caption text-muted q-ml-xs">1.9k</span>
@@ -37,7 +31,7 @@
           </div>
           <q-separator vertical />
           <div class="q-pl-sm">
-            <app-link label="Reply it" class="text-caption" />
+            <base-link label="Reply it" to="#" class="text-caption" />
             <span class="q-mx-sm">
               <span class="text-caption text-muted q-ml-xs">1.9k</span>
             </span>
@@ -52,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { AvatarPlaceHolder128 } from 'src/utils/constant';
+import BaseLink from '@/components/base/BaseLink.vue';
+import { AvatarPlaceHolder128 } from '@/libs/constant';
 import { biHeart, biThreeDots } from '@quasar/extras/bootstrap-icons';
-import AppLink from 'src/components/base/AppLink.vue';
 </script>

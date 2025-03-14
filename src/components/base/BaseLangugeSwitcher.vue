@@ -1,0 +1,36 @@
+<script setup lang="ts">
+import { availableLocales } from '@/utils/lang';
+import { biCheck2 } from '@quasar/extras/bootstrap-icons';
+import { useLang } from 'src/composables/useLang';
+import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
+const {
+  closeOnClick = false,
+  anchor = 'bottom left',
+  self = 'top start',
+} = defineProps<{
+  closeOnClick?: boolean;
+  anchor?: any;
+  self?: any;
+}>();
+
+const { locale } = useLang();
+const langugeAndThemeStore = useLangugeAndThemeStore();
+</script>
+<template>
+  <!-- :anchor="!screen.gt.xs ? 'bottom left' : 'top end'" self="top start" -->
+  <q-menu :anchor="anchor" :self="self" v-bind="$attrs" :auto-close="closeOnClick">
+    <q-list style="min-width: 150px">
+      <q-item
+        v-for="lang in availableLocales"
+        :key="lang.iso"
+        clickable
+        @click="langugeAndThemeStore.setLocale(lang.iso)"
+      >
+        <q-item-section>{{ lang.name }}</q-item-section>
+        <q-item-section v-if="lang.iso == locale" side>
+          <q-icon :name="biCheck2" />
+        </q-item-section>
+      </q-item>
+    </q-list>
+  </q-menu>
+</template>

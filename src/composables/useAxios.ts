@@ -1,19 +1,19 @@
-import { api } from 'boot/axios';
-import { RequestType, AppException, ResponseMessage } from '@/types/common';
+import { useBase } from '@/composables/useBase';
+import { useDevice } from '@/composables/useDevice';
+import { useLang } from '@/composables/useLang';
+import type { AppException, RequestType, ResponseMessage } from '@/types/common';
+import { isAppException, isServerException, isServerResponseMessage } from '@/utils/appUtil';
+import { AppAuthTokenKey } from '@/libs/constant';
+import { formatRelativeFromNow } from '@/utils/dateUtil';
 import { biX } from '@quasar/extras/bootstrap-icons';
+import type { AxiosResponse } from 'axios';
+import { api } from 'boot/axios';
 import { Cookies } from 'quasar';
-import useBase from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
-import {
-  isAppException,
-  isServerResponseMessage,
-  isServerException,
-} from 'src/utils/appUtil';
 import { useSSRContext } from 'vue';
-import { AppAuthTokenKey } from 'src/utils/constant';
-import { formatRelativeFromNow } from 'src/utils/dateUtil';
-export default () => {
-  const { WeeToast, WeeLoader, isDevMode } = useBase();
+
+export const useAxios = () => {
+  const { canSyncActiveStatusToServer } = useDevice();
+  const { appToast, appLoading, isDevMode } = useBase();
   const { locale } = useLang();
   const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
@@ -41,8 +41,8 @@ export default () => {
     });
   };
   const notifyMessage = (response: AppException): void => {
-    WeeLoader(false);
-    WeeToast(
+    appLoading(false);
+    appToast(
       `<strong>${response.message}</strong><br> ${response.errors?.join(
         '<br>'
       )}`,
@@ -51,12 +51,12 @@ export default () => {
         html: true,
         type: 'negative',
         timeout: 0,
-        position: 'bottom',
+        position: 'bottom-left',
         caption: formatRelativeFromNow(
           response.timestamp,
           locale.value as string
-        ),
-        actions: [{ icon: biX, color: 'white' }],
+        ) || '',
+        actions: [{ icon: biX, color: 'white' }]
       }
     );
   };
@@ -64,8 +64,8 @@ export default () => {
     if (!response.message) {
       return;
     }
-    WeeLoader(false);
-    WeeToast(response.message, {
+    appLoading(false);
+    appToast(response.message, {
       multiLine: true,
       html: true,
       type:
@@ -76,88 +76,125 @@ export default () => {
         response.status == 'OK' || response.status == 'CREATED'
           ? 3 * 1000
           : 10 * 1000,
-      position: 'bottom',
+      position: 'bottom-left',
       caption: formatRelativeFromNow(
         response.timestamp,
         locale.value as string
-      ),
-      actions: [{ icon: biX, color: 'white' }],
+      ) || '',
+      actions: [{ icon: biX, color: 'white' }]
     });
   };
-  const callAxios = <T>(req: RequestType): Promise<T> => {
+  // const callAxiosV2 = async <T>(req: RequestType): Promise<T | null> => {
+  //   return new Promise(async (resolve, reject) => {
+  //     callAxios<T>(req)
+  //       .then(async (response) => {
+  //         const finalResponse = await validateServerResponse<T>(response);
+  //         resolve(finalResponse);
+  //       })
+  //       .catch((error) => {
+  //         reject(error);
+  //       });
+  //   });
+  // };
+  const callAxios = async <T>(req: RequestType): Promise<T | null> => {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
+      callAxiosProcess<T>(req)
+        .then(async (response) => {
+          if (response.status != 401 && response.status != 403) {
+            exeptionNotify(response);
+          }
+          const finalResponse = await validateServerResponse<T>(response.data);
+          resolve(finalResponse);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+  // const callAxios = async <T>(req: RequestType): Promise<any> => {
+  //   return new Promise(async (resolve, reject) => {
+  //     callAxiosProcess<T>(req)
+  //       .then((response) => {
+  //         if (response.status != 401 && response.status != 403) {
+  //           exeptionNotify(response);
+  //         }
+  //         resolve(response.data as T);
+  //       })
+  //       .catch((error) => {
+  //         reject(error);
+  //       });
+  //   });
+  // };
+  const exeptionNotify = <T>(response: AxiosResponse<T>) => {
+    if (response && response.data) {
+      if (isAppException(response.data)) {
+        notifyMessage(response.data);
+      } else if (isServerResponseMessage(response.data)) {
+        notifyServerMessage(response.data);
+      }
+    }
+  };
+  const callAxiosFile = async <T>(req: RequestType): Promise<any> => {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
+      callAxiosProcess<T>(req, false)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+  const callAxiosProcess = async <T>(req: RequestType, devLog: boolean = true): Promise<AxiosResponse<T>> => {
+    const canSyncOnlineStatus = await canSyncActiveStatusToServer();
     return new Promise((resolve, reject) => {
-      // api.defaults.headers = reqHeader();
-      // api.defaults.headers['Accept-Language'] = locale.value;
-      // api.defaults.headers.Authorization = `Bearer ${token}`;
-      // api.defaults.headers.common['Content-Type'] = 'application/json';
-      // api.defaults.headers.common['Accept-Language'] = locale.value as string;
-      // api.defaults.headers.common.Authorization = `Bearer ${cookies.get(
-      //   AppAuthTokenKey
-      // )}`;
-      api.defaults.headers['Accept-Language'] = locale.value as string;
-      api.defaults.headers.Authorization = `Bearer ${cookies.get(
-        AppAuthTokenKey
-      )}`;
-
+      api.defaults.headers.Authorization = `Bearer ${cookies.get(AppAuthTokenKey)}`;
       // console.log('useAxios > callAxios :', req);
-      if (req.baseURL) {
+      if (req.baseURL != undefined) {
         api.defaults.baseURL = req.baseURL;
       } else {
-        api.defaults.baseURL = process.env.API;
+        api.defaults.baseURL = process.env.APP_BASE_API || '';
       }
+
       if (req.contentType) {
         api.defaults.headers['Content-Type'] = req.contentType;
       } else {
         api.defaults.headers['Content-Type'] = 'application/json';
       }
-      if (isDevMode()) {
-        console.log(`api ${api.defaults.baseURL}${req.API}`);
+      if (req.responseType) {
+        api.defaults.responseType = req.responseType;
+      } else {
+        api.defaults.responseType = 'json';
       }
+
+      api.defaults.headers['X-Sync-Active'] = canSyncOnlineStatus ? '1' : '0';
       api({
         method: req.method,
         url: req.API,
-        data: req.body ? req.body : undefined,
-      })
-        .then((response) => {
-          if (response.data) {
-            if (isAppException(response.data)) {
-              notifyMessage(response.data);
-            } else if (isServerResponseMessage(response.data)) {
-              notifyServerMessage(response.data);
+        data: req.body ? req.body : undefined
+      }).then((response) => {
+        if (isDevMode() && devLog) {
+          console.log(`api ${api.defaults.baseURL}${req.API}`, response);
+        }
+        resolve(response as AxiosResponse<T>);
+      }).catch((error) => {
+        // if (isDevMode()) {
+        //   console.error(`api ${api.defaults.baseURL}${req.API}`, error);
+        // }
+        appLoading(false);
+        if (error?.response) {
+          if (error.response.status != 401 && error.response.status != 403) {
+            const responseData = error?.response?.data;
+            if (responseData) {
+              exeptionNotify(error?.response);
             }
           }
-          resolve(response.data);
-        })
-        .catch((error) => {
-          reject(error.message);
-          WeeLoader(false);
-          WeeToast(`<strong>${error.code}</strong><br> ${error.message}`, {
-            multiLine: true,
-            html: true,
-            type: 'negative',
-            color: 'white',
-            textColor: 'negative',
-            timeout: 10 * 1000,
-            position: 'bottom',
-            actions: [{ icon: biX, color: 'negative' }],
-          });
-        });
-
-      // api
-      //   .get(req.API)
-      //   .then((response) => {
-      //     resolve(response.data);
-      //   })
-      //   .catch((error) => {
-      //     reject(error.message);
-      //     WeeLoader(false);
-      //     WeeToast(error.message, {
-      //       multiLine: true,
-      //       type: 'negative',
-      //       timeout: 10 * 1000,
-      //     });
-      //   });
+        }
+        reject(error);
+      });
     });
   };
-  return { callAxios, validateServerResponse };
+  return { callAxios, validateServerResponse, callAxiosFile, callAxiosProcess };
 };

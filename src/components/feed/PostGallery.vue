@@ -53,9 +53,7 @@
         :ratio="4 / 3"
         no-native-menu
       >
-        <div
-          class="absolute-bottom text-subtitle1 full-height row items-center justify-center"
-        >
+        <div class="absolute-bottom text-subtitle1 full-height row items-center justify-center">
           <div>+99</div>
         </div>
       </q-img>

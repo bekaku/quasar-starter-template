@@ -1,7 +1,7 @@
 <template>
   <q-btn dense :icon="biThreeDots" flat round>
     <q-menu cover anchor="top middle">
-      <q-list style="min-width: 100px">
+      <q-list dense style="min-width: 100px" class="q-py-xs">
         <q-item clickable v-close-popup>
           <q-item-section side top>
             <q-icon :name="biBookmark" />
@@ -33,11 +33,6 @@
 
 <script setup lang="ts">
 import { useLang } from '@/composables/useLang';
-import {
-  biThreeDots,
-  biBookmark,
-  biLink45deg,
-  biFlag,
-} from '@quasar/extras/bootstrap-icons';
+import { biThreeDots, biBookmark, biLink45deg, biFlag } from '@quasar/extras/bootstrap-icons';
 const { t } = useLang();
 </script>

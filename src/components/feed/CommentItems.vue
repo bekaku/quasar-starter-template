@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import CommentItem from 'src/components/feed/CommentItem.vue';
+import CommentItem from '@/components/feed/CommentItem.vue';
 </script>

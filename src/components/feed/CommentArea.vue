@@ -8,7 +8,7 @@
     <q-item-section>
       <q-input
         dense
-        filled
+        outlined
         v-model="comments"
         type="textarea"
         autogrow
@@ -16,7 +16,7 @@
         counter
         maxlength="255"
       >
-        <template v-slot:append>
+        <template #append>
           <q-btn flat round :icon="biEmojiSmile" />
           <q-btn flat round :icon="biImage" />
         </template>
@@ -26,8 +26,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { AvatarPlaceHolder128 } from 'src/utils/constant';
+import { AvatarPlaceHolder128 } from '@/libs/constant';
 import { biEmojiSmile, biImage } from '@quasar/extras/bootstrap-icons';
+import { ref } from 'vue';
 const comments = ref(null);
 </script>

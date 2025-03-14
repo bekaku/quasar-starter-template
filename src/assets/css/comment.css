@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+}
+.comment-thread {
+  width: 1280px;
+  max-width: 100%;
+  margin: auto;
+  /* padding: 0 16px; */
+  padding-left: 10px;
+  /* background-color: var(--v-color-white); */
+  background-color: var(--v-color-white);
+  /* border: 1px solid transparent;  */
+}
+.m-0 {
+  margin: 0;
+}
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Comment */
+
+.comment {
+  position: relative;
+  margin: 6px auto;
+}
+.comment-heading {
+  display: flex;
+  align-items: center;
+  /* height: 50px; */
+  font-size: 14px;
+}
+.comment-info {
+  margin-left: 10px;
+}
+.comment-author {
+  color: var(--v-text-black);
+  font-weight: bold;
+  text-decoration: none;
+}
+.comment-author:hover {
+  text-decoration: underline;
+}
+.replies {
+  margin-left: 20px;
+}
+
+/* Adjustments for the comment border links */
+
+.comment-border-link {
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  width: 3px;
+  height: calc(100% - 50px);
+  /* border-left: 4px solid transparent; */
+  /* border-right: 4px solid transparent; */
+  background-color: var(--wee-main-border-light-color);
+  background-clip: padding-box;
+  z-index: 99;
+}
+
+.comment-border-link:hover {
+  background-color: var(--wee-main-border-color);
+}
+.comment-body {
+  /* padding-left: 28px; */
+  padding: 8px 0px 0px 42px;
+}
+.replies {
+  margin-left: 10px;
+}
+
+.reply-form textarea {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 16px;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.d-none {
+  display: none;
+}

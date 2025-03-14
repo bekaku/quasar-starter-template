@@ -1,0 +1,12 @@
+services:
+  quasar-webapp:
+    #restart: always
+    restart: on-failure:3
+    container_name: quasar-webapp
+    # build: .
+    image: "quasar-webapp:latest"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '3000:3000'
+

@@ -1,97 +1,134 @@
-import useAxios from 'src/composables/useAxios';
-import {
+import { useAxios } from '@/composables/useAxios';
+import type {
   LoginRequest,
   RefreshTokenRequest,
   RefreshTokenResponse,
 } from '@/types/models';
-import { ResponseMessage } from '@/types/common';
+import type { AppException, ForgotPasswordRequest, ResponseMessage, } from '@/types/common';
+import type { AxiosResponse } from 'axios';
+import { authenResponse } from 'src/libs/data';
 export default () => {
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { callAxios } = useAxios();
+  const { callAxios, callAxiosProcess } = useAxios();
   const singin = async (
     loginRequest: LoginRequest
-  ): Promise<RefreshTokenResponse> => {
+  ): Promise<RefreshTokenResponse | null> => {
     // return await callAxios<RefreshTokenResponse>({
     //   API: '/api/auth/login',
     //   method: 'POST',
     //   body: loginRequest,
     // });
-    console.log('singin', loginRequest);
-    return new Promise((resolve) => {
+    console.log('AuthenService.ts > singin', loginRequest);
+
+    return new Promise((resovle) => {
       setTimeout(() => {
-        resolve({
-          authenticationToken:
-            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhNWFhNDEzZS05Mzc0LTRmZTktOTM0Yi1mYmRiYTQ5OWVlNWUiLCJpYXQiOjE2NTM0NDY3MzksImV4cCI6MTY4NDk4MjczOX0.mGosG2ZZrlj7qZQaZAAQ788r11WbVYZvZ4sI7L0G4wA',
-          expiresAt: '2023-05-25T02:45:39.725+00:00',
-          refreshToken: 'a5aa413e-9374-4fe9-934b-fbdba499ee5e',
-        });
-      }, 1500);
-    });
+        resovle(authenResponse)
+      }, 500);
+    })
   };
   const singoutToServer = async (
     refreshToken: RefreshTokenRequest
-  ): Promise<ResponseMessage> => {
-    console.log('singoutToServer', refreshToken);
-    // return await useFetch<ResponseMessage>({
+  ): Promise<ResponseMessage | null> => {
+    // return await callAxios<ResponseMessage>({
     //   API: '/api/auth/logout',
     //   method: 'POST',
     //   body: refreshToken,
     // });
-    return new Promise((resolve) => {
+    console.log('AuthenService.ts > singoutToServer', refreshToken);
+    return new Promise((resovle) => {
       setTimeout(() => {
-        resolve({
+        resovle({
           status: 'OK',
-          message: 'Logout successful',
-          timestamp: '2022-05-25 10:30:45',
-        });
-      }, 1500);
-    });
+          timestamp: '2025-03-14 13:30'
+        })
+      }, 500);
+    })
   };
   const refreshToken = async (
     refreshToken: RefreshTokenRequest
-  ): Promise<RefreshTokenResponse> => {
-    // return await useFetch<RefreshTokenResponse>({
+  ): Promise<RefreshTokenResponse | null> => {
+    // return await callAxios<RefreshTokenResponse>({
     //   API: '/api/auth/refreshToken',
     //   method: 'POST',
     //   body: refreshToken,
     // });
-
-    console.log('refreshToken', refreshToken);
-    return new Promise((resolve) => {
+    return new Promise((resovle) => {
       setTimeout(() => {
-        resolve({
-          authenticationToken:
-            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhNWFhNDEzZS05Mzc0LTRmZTktOTM0Yi1mYmRiYTQ5OWVlNWUiLCJpYXQiOjE2NTM0NDY3MzksImV4cCI6MTY4NDk4MjczOX0.mGosG2ZZrlj7qZQaZAAQ788r11WbVYZvZ4sI7L0G4wA',
-          expiresAt: '2023-05-25T02:45:39.725+00:00',
-          refreshToken: 'a5aa413e-9374-4fe9-934b-fbdba499ee5e',
-        });
-      }, 1500);
-    });
+        resovle(null)
+      }, 500);
+    })
   };
   const removeAccessTokenSession = async (
     id: number
-  ): Promise<ResponseMessage> => {
-    // return await useFetch<ResponseMessage>({
+  ): Promise<ResponseMessage | null> => {
+    // return await callAxios<ResponseMessage>({
     //   API: `/api/auth/removeAccessTokenSession?id=${id}`,
     //   method: 'DELETE',
     // });
-    console.log('removeAccessTokenSession', id);
-    return new Promise((resolve) => {
+    return new Promise((resovle) => {
       setTimeout(() => {
-        resolve({
+        resovle({
           status: 'OK',
-          message: 'removeAccessTokenSession successful',
-          timestamp: '2022-05-25 10:30:45',
-        });
-      }, 1500);
-    });
+          timestamp: '2025-03-14 13:30'
+        })
+      }, 500);
+    })
   };
-
+  // Forgot password
+  const requestVerifyCodeToResetPwd = async (
+    req: ForgotPasswordRequest
+  ): Promise<AxiosResponse<ResponseMessage | AppException> | null> => {
+    // return await callAxiosProcess<ResponseMessage | AppException>({
+    //   API: '/api/auth/requestVerifyCodeToResetPwd',
+    //   method: 'POST',
+    //   body: {
+    //     forgotPasswordRequest: req
+    //   },
+    // });
+    return new Promise((resovle) => {
+      setTimeout(() => {
+        resovle(null)
+      }, 500);
+    })
+  };
+  const sendVerifyCodeToResetPwd = async (
+    req: ForgotPasswordRequest
+  ): Promise<AxiosResponse<ResponseMessage | AppException> | null> => {
+    // return await callAxiosProcess<ResponseMessage | AppException>({
+    //   API: '/api/auth/sendVerifyCodeToResetPwd',
+    //   method: 'POST',
+    //   body: {
+    //     forgotPasswordRequest: req
+    //   },
+    // });
+    return new Promise((resovle) => {
+      setTimeout(() => {
+        resovle(null)
+      }, 500);
+    })
+  };
+  const resetPassword = async (
+    req: ForgotPasswordRequest
+  ): Promise<AxiosResponse<ResponseMessage | AppException> | null> => {
+    // return await callAxiosProcess<ResponseMessage | AppException>({
+    //   API: '/api/auth/resetPassword',
+    //   method: 'POST',
+    //   body: {
+    //     forgotPasswordRequest: req
+    //   },
+    // });
+    return new Promise((resovle) => {
+      setTimeout(() => {
+        resovle(null)
+      }, 500);
+    })
+  };
   return {
     singin,
     singoutToServer,
     refreshToken,
     removeAccessTokenSession,
+    requestVerifyCodeToResetPwd,
+    sendVerifyCodeToResetPwd,
+    resetPassword
   };
 };

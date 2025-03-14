@@ -1,17 +1,14 @@
 <template>
-  <q-card square flat>
+  <q-card flat class="full-height">
     <q-list bordered>
       <template v-for="link in links1" :key="link.text">
         <q-separator v-if="link.separator" spaced />
-        <q-item-label v-else-if="link.header" header>{{
-          link.header
-        }}</q-item-label>
+        <q-item-label v-else-if="link.header" header>
+          {{ link.header }}
+        </q-item-label>
         <q-item v-else :to="link.link" v-ripple clickable>
           <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'black'"
-              :name="link.icon"
-            />
+            <q-icon :color="dark.isActive ? 'white' : 'black'" :name="link.icon" />
           </q-item-section>
           <q-item-section>
             <q-item-label>{{ t(`${link.text}`) }}</q-item-label>
@@ -22,28 +19,24 @@
   </q-card>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
+<script lang="ts" setup>
 import { useLang } from '@/composables/useLang';
-defineProps({
-  overlay: {
-    type: Boolean,
-    default: false,
-  },
-});
-
+import { biEnvelope, biPerson, biShieldLock } from '@quasar/extras/bootstrap-icons';
+import { useQuasar } from 'quasar';
+import { ref } from 'vue';
 const { t } = useLang();
+const { dark } = useQuasar();
 const links1 = ref([
   {
-    icon: 'bi-person',
+    icon: biPerson,
     text: 'page.settingsPublicProfile',
     link: '/settings/profile',
   },
-  {
-    icon: 'bi-bell',
-    text: 'page.settingsNotification',
-    link: '/settings/notifications',
-  },
+  // {
+  //   icon: biBell,
+  //   text: 'page.settingsNotification',
+  //   link: '/settings/notifications',
+  // },
   {
     separator: true,
   },
@@ -51,13 +44,13 @@ const links1 = ref([
     header: 'Access',
   },
   {
-    icon: 'bi-shield-lock',
+    icon: biShieldLock,
     text: 'page.settingsSecurity',
     link: '/settings/security',
   },
   {
-    icon: 'bi-envelope',
-    text: 'page.settingsEmail',
+    icon: biEnvelope,
+    text: 'contactInfo',
     link: '/settings/emails',
   },
 ]);

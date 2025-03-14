@@ -1,54 +1,57 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { computed } from 'vue';
 import { useQuasar } from 'quasar';
 import { useLang } from './useLang';
-import { computed } from 'vue';
+import type { ITextValue, NotifyOptions } from '@/types/common';
+import { SearchOperation } from '@/libs/constant';
+import { formatDate, formatDateTime, formatDistanceFromNow } from '@/utils/dateUtil';
 import {
-  formatDateTime,
-  formatDate,
-  formatDistanceFromNow,
-} from '@/utils/dateUtil';
-import {
-  biInfoCircle,
   biCheckCircle,
-  biExclamationTriangle,
   biExclamationCircle,
-  biX,
+  biExclamationTriangle,
+  biInfoCircle,
+  biX
 } from '@quasar/extras/bootstrap-icons';
-import { NotifyOptions } from '@/types/common';
-export default () => {
-  const $q = useQuasar();
+import { DOMPurify } from 'boot/dompurify';
+import { Clipboard } from '@capacitor/clipboard';
+
+export const useBase = () => {
+  const { t, locale } = useLang();
+  const { dark, loading, notify, dialog } = useQuasar();
   const route = useRoute();
   const router = useRouter();
-  const { t, locale } = useLang();
-  const isDark = computed(() => $q.dark.isActive);
+
+  const isDark = computed(() => dark.isActive);
   const getCurrentPath = (fullPath = true) => {
     return fullPath ? route.fullPath : route.path;
   };
   const getPreviousPath = () => {
     return router.options.history.state.back;
   };
-  const WeeGetParam = (field: string): string | undefined => {
+  const getParam = (field: string): string | undefined => {
     if (!field) {
       return undefined;
     }
     return route.params ? (route.params[field] as string) : undefined;
   };
-  const WeeGetQuery = (field: string): string | undefined => {
+  const getParamNumber = (att: string): number => {
+    const val = getParam(att);
+    return val != undefined ? +val : 0;
+  };
+  const getQuery = (field: string): string | undefined => {
     if (!field) {
       return;
     }
     return route.query ? (route.query[field] as string) : undefined;
   };
-  const getParamNumber = (att: string): number => {
-    const val = WeeGetParam(att);
-    return val != undefined ? +val : 0;
-  };
   const getQueryNumber = (att: string): number => {
-    const val = WeeGetQuery(att);
+    const val = getQuery(att);
     return val != undefined ? +val : 0;
   };
-  const WeeGoTo = (link: string, replace?: boolean): void => {
+  const onReplaceUrl = (url: string) => {
+    history.pushState({}, '', url);
+  };
+  const appGoto = (link: string | undefined, replace?: boolean): void => {
     if (!link) {
       return;
     }
@@ -56,59 +59,79 @@ export default () => {
       router.push(link);
     } else {
       // window.location.replace(link);
-      router.replace({ path: link });
+      router.replace(link);
+      // router.replace({ path: link });
     }
   };
-  const WeeLoaderClose = () => {
-    if ($q.loading.isActive) {
-      $q.loading.hide();
+
+  const appLoaderClose = () => {
+    if (loading.isActive) {
+      loading.hide();
     }
   };
-  const WeeLoader = (open = true, message = undefined, delay = 0): void => {
+  const appLoading = (open = true, message = undefined, delay = 0): void => {
     if (open) {
-      WeeLoaderClose();
-      $q.loading.show({
-        delay: delay, // ms
-        message: message === undefined ? t('base.pleaseWait') : message,
+      appLoaderClose();
+      loading.show({
+        delay, // ms
+        message: message || t('base.pleaseWait'),
       });
     } else {
-      WeeLoaderClose();
+      appLoaderClose();
     }
   };
   /* https://quasar.dev/quasar-plugins/notify
         position > top-left top-right bottom-left bottom-right top bottom left right center
-    WeeToast('Quasar Framework Template',{type:'positive', position:'right', color:''});
-    WeeToast('Quasar Framework Template',{caption:'5 Minutes ago', avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'});
+    appToast('Quasar Framework Template',{type:'positive', position:'right', color:''});
+    appToast('Quasar Framework Template',{caption:'5 Minutes ago', avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'});
      */
-  const WeeToast = (message: string, options: NotifyOptions | undefined) => {
+  const appToast = (message: string, options: NotifyOptions | undefined = undefined) => {
     if (!message) {
       return;
     }
-    let icon = undefined;
+
+
+    let color;
+    let textColor
+    if (options?.color == undefined && options?.type == undefined) {
+      color = !dark.isActive ? 'white' : 'black';
+      textColor = !dark.isActive ? 'black' : 'white';
+    }
+    let icon: string | undefined = '';
     if (options && options.type) {
       const t = options.type;
       if (t === 'positive') {
         icon = biCheckCircle;
+        textColor = 'white';
+        color = 'positive';
       } else if (t === 'negative') {
         icon = biExclamationTriangle;
+        textColor = 'white';
+        color = 'negative';
       } else if (t === 'warning') {
         icon = biExclamationCircle;
+        textColor = 'white';
+        color = 'warning';
       } else if (t === 'info') {
         icon = biInfoCircle;
+        textColor = 'white';
+        color = 'info';
       }
     }
-    $q.notify(
+    notify(
       Object.assign(
         {
           message,
           icon,
           timeout: 5000,
           progress: true,
-          position: 'bottom',
-          multiLine: true,
+          position: 'bottom-left',
+          multiLine: false,
+          color: color || '',
+          textColor: textColor || '',
           actions: !options?.hideClose
-            ? [{ icon: biX, color: 'white' }]
-            : undefined,
+            ? [{ icon: biX, round: true, dense: false, color: textColor || 'white' }]
+            : [],
         },
         options
       )
@@ -116,22 +139,17 @@ export default () => {
   };
 
   /**
-   * const conf = await WeeConfirm(t('app.monogram'), t('base.deleteConfirm'));
-   * @param title
-   * @param text
-   * @param okBtn
-   * @param cancelBtn
-   * @returns
+   * const conf = await appConfirm(t('app.monogram'), t('base.deleteConfirm'));
    */
-  const WeeConfirm = async (
+  const appConfirm = async (
     title: string,
     text: string,
-    okBtn = {},
-    cancelBtn = {}
+    okBtn = {}, // btn component
+    cancelBtn = {} // btn component
   ) => {
     return new Promise((resolve) => {
-      $q.dialog({
-        title: title,
+      dialog({
+        title,
         message: text,
         ok: Object.assign(
           { textColor: 'primary', flat: true, label: t('base.okay') },
@@ -158,18 +176,49 @@ export default () => {
         });
     });
   };
-  const isDevMode = () => {
-    return process.env.NODE_ENV == 'development';
-  };
-  const AppFormatDate = (d: string, fmt: string) => {
+  const searchOperations: ITextValue[] = [
+    { text: t('base.match'), value: SearchOperation.MATCH },
+    { text: t('base.equa'), value: SearchOperation.EQUA },
+    { text: t('base.notEqua'), value: SearchOperation.NOT_EQUA },
+    { text: t('base.greaterThan'), value: SearchOperation.GREATER_THAN },
+    {
+      text: t('base.greaterThanEqua'),
+      value: SearchOperation.GREATER_THAN_EQUA,
+    },
+    { text: t('base.lessThan'), value: SearchOperation.LESS_THAN },
+    { text: t('base.lessThanEqua'), value: SearchOperation.LESS_THAN_EQUA },
+  ];
+
+  // const datePickerLocale = {
+  //   /* starting with Sunday */
+  //   days: t('date.days').split('_'),
+  //   daysShort: t('date.dayShorts').split('_'),
+  //   months: t('date.months').split('_'),
+  //   monthsShort: t('date.monthShorts').split('_'),
+  //   firstDayOfWeek: 1,
+  // };
+  const datePickerLocale = computed(() =>
+    locale.value
+      ? {
+        days: t('date.days').split('_'),
+        daysShort: t('date.dayShorts').split('_'),
+        months: t('date.months').split('_'),
+        monthsShort: t('date.monthShorts').split('_'),
+        firstDayOfWeek: 1,
+      }
+      : undefined
+  );
+
+  const appFormatDate = (d: string, fmt: string) => {
     return formatDate(d, fmt, locale.value);
   };
-  const AppFormatDateTime = (d: string, fmt: string) => {
+  const appFormatDateTime = (d: string, fmt: string) => {
     return formatDateTime(d, fmt, locale.value);
   };
-  const AppFormatDateDistance = (d: string) => {
+  const appFormatDateDistance = (d: string) => {
     return formatDistanceFromNow(d, locale.value);
   };
+
   /**
    * <div ref="bottomSection"></div>
    * scrollToTop(bottomSection.value);
@@ -179,8 +228,23 @@ export default () => {
     // window.scrollTo(0, 0);
     if (el) {
       // el.scrollIntoView({ behavior: 'smooth' });
-      el.scrollIntoView({ block: 'end', behavior: 'smooth' });
+      // el.scrollIntoView({ block: 'end', behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+  const isDevMode = () => {
+    return process.env.NODE_ENV == 'development';
+  };
+  const inputSanitizeHtml = (str: string) => {
+    if (!str) {
+      return '';
+    }
+    return DOMPurify.sanitize(str,
+      {
+        ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a'],
+        ALLOWED_ATTR: ['href', 'class']
+      }
+    );
   };
   const readableNumber = (num: number, digits: number) => {
     if (num < 1000) {
@@ -190,35 +254,49 @@ export default () => {
       { value: 1, symbol: '' },
       { value: 1e3, symbol: 'k' },
     ];
-    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    const rx = /\.0+$|(\.\d*[1-9])0+$/;
     const item = lookup
       .slice()
       .reverse()
-      .find(function (item) {
+      .find((item) => {
         return num >= item.value;
       });
     return item
       ? (num / item.value).toFixed(digits).replace(rx, '$1') +
-          (item.symbol ? t('readableNum.' + item.symbol) : '')
+      (item.symbol ? t('readableNum.' + item.symbol) : '')
       : '0';
   };
+  const writeToClipboard = async (text: string) => {
+    await Clipboard.write({
+      string: text,
+    });
+    appToast(t('success.copy'), { multiLine: false })
+    return new Promise((resolve) => {
+      resolve(true);
+    });
+  };
   return {
-    WeeGetParam,
-    WeeGetQuery,
-    WeeGoTo,
-    WeeLoader,
-    WeeToast,
-    WeeConfirm,
+    getParam,
+    getQuery,
+    appGoto,
+    appLoading,
+    appToast,
+    appConfirm,
     getCurrentPath,
+    searchOperations,
+    datePickerLocale,
     getParamNumber,
     getQueryNumber,
     getPreviousPath,
-    AppFormatDate,
+    appFormatDate,
     scrollToTop,
+    onReplaceUrl,
     isDevMode,
-    AppFormatDateTime,
-    AppFormatDateDistance,
+    inputSanitizeHtml,
+    appFormatDateTime,
+    appFormatDateDistance,
     readableNumber,
     isDark,
+    writeToClipboard,
   };
 };
