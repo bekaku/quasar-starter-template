@@ -58,6 +58,7 @@ export default defineConfig((ctx) => {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
       // publicPath: '/quasar-starter', // for github static deploy
+      
       publicPath: '/',
       // analyze: true,
       // env: {},
