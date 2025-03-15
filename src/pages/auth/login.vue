@@ -114,7 +114,8 @@ const onSubmit = async () => {
     setAuthenticationCookies(response);
     loading.value = false;
     // redirect to index page
-    window.location.replace('/');
+    // window.location.replace('/');
+    window.location.replace(process.env.APP_PUBLIC_PATH);
   }
 };
 const onReset = () => {

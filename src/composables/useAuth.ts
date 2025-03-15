@@ -134,9 +134,9 @@ export const useAuth = () => {
     await destroyAuthData();
     authenStore.logout();
     if (forceRedirectToLoginPage) {
-      window.location.replace('/auth/login');
-      window.location.replace('/');
-      // appGoto('/auth/login', true);
+      // window.location.replace('/auth/login');
+      // window.location.replace('/');
+      appGoto('/auth/login', true);
     }
   };
 
