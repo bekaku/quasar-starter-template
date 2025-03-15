@@ -21,7 +21,6 @@ import BaseLink from 'src/components/base/BaseLink.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
 import Ellipsis from 'src/components/base/Ellipsis.vue';
-import { useAppConfig } from 'src/composables/useAppConfig';
 import { useBase } from 'src/composables/useBase';
 import { AppAuthTokenKey } from 'src/libs/constant';
 import { defineAsyncComponent, onMounted, ref } from 'vue';
@@ -32,7 +31,6 @@ const { setAuthenticationCookies } = useAuth();
 const { t, currenLocale } = useLang();
 const { required } = useValidation();
 const { isDark } = useBase();
-const { getConfig } = useAppConfig();
 const email = ref<string | null>('admin@mydomain.com');
 const password = ref<string | null>('P@ssw0rd');
 const showPassword = ref<boolean>(false);
@@ -41,7 +39,7 @@ const loginForm = ref(null);
 const deviceId = ref();
 const rememberMe = ref(false);
 const dialogForgotPassword = ref<boolean>(false);
-const appVersion = ref<string | undefined>(getConfig('APP_VERSION'));
+const appVersion = process.env.APP_VERSION;
 // useMeta({
 //   title: `${t('page.login')} | ${t('app.monogram')}`,
 // });
