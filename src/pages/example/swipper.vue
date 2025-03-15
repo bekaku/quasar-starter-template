@@ -8,10 +8,12 @@ import type { SlideOptions } from '@/types/common';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseImage from 'src/components/base/BaseImage.vue';
 import BasePage from 'src/components/base/BasePage.vue';
+import { useDevice } from 'src/composables/useDevice';
 import { useTemplateRef } from 'vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Swipper | ${t('app.name')}`);
+const { isSmallScreen } = useDevice();
 const testSwiperRef = useTemplateRef<InstanceType<typeof BaseSwiperSlides>>('testSwiperRef');
 const items = [
   {
@@ -21,7 +23,7 @@ const items = [
     new: 9,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg',
-    message: "Hey there! I've heard about PrimeVue. Any cool tips for getting started?",
+    message: 'Hey there! I\'ve heard about PrimeVue. Any cool tips for getting started?',
   },
   {
     id: 2,
@@ -30,7 +32,7 @@ const items = [
     new: 0,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar2.png',
-    message: "Let's implement PrimeVue. Elevating our UI game! 🚀",
+    message: 'Let\'s implement PrimeVue. Elevating our UI game! 🚀',
   },
   {
     id: 3,
@@ -39,7 +41,7 @@ const items = [
     new: 8,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar12.jpg',
-    message: "Interesting! PrimeVue sounds amazing. What's your favorite feature?\n",
+    message: 'Interesting! PrimeVue sounds amazing. What\'s your favorite feature?\n',
   },
   {
     id: 4,
@@ -57,7 +59,7 @@ const items = [
     new: 0,
     online: false,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar9.jpg',
-    message: "ust explored PrimeVue's themes",
+    message: 'ust explored PrimeVue\'s themes',
   },
   {
     id: 6,
@@ -75,7 +77,7 @@ const items = [
     new: 0,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar7.png',
-    message: "Reflecting on PrimeVue's impact o",
+    message: 'Reflecting on PrimeVue\'s impact o',
   },
   {
     id: 8,
@@ -84,7 +86,7 @@ const items = [
     new: 0,
     online: false,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar-primetek.png',
-    message: "Let's implement PrimeVue",
+    message: 'Let\'s implement PrimeVue',
   },
   {
     id: 9,
@@ -93,7 +95,7 @@ const items = [
     new: 9,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg',
-    message: "Hey there! I've heard about PrimeVue. Any cool tips for getting started?",
+    message: 'Hey there! I\'ve heard about PrimeVue. Any cool tips for getting started?',
   },
   {
     id: 10,
@@ -102,7 +104,7 @@ const items = [
     new: 0,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar2.png',
-    message: "Let's implement PrimeVue. Elevating our UI game! 🚀",
+    message: 'Let\'s implement PrimeVue. Elevating our UI game! 🚀',
   },
   {
     id: 11,
@@ -111,7 +113,7 @@ const items = [
     new: 8,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar12.jpg',
-    message: "Interesting! PrimeVue sounds amazing. What's your favorite feature?\n",
+    message: 'Interesting! PrimeVue sounds amazing. What\'s your favorite feature?\n',
   },
   {
     id: 12,
@@ -129,7 +131,7 @@ const items = [
     new: 0,
     online: false,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar9.jpg',
-    message: "ust explored PrimeVue's themes",
+    message: 'ust explored PrimeVue\'s themes',
   },
   {
     id: 14,
@@ -147,7 +149,7 @@ const items = [
     new: 0,
     online: true,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar7.png',
-    message: "Reflecting on PrimeVue's impact o",
+    message: 'Reflecting on PrimeVue\'s impact o',
   },
   {
     id: 16,
@@ -156,7 +158,7 @@ const items = [
     new: 0,
     online: false,
     image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar-primetek.png',
-    message: "Let's implement PrimeVue",
+    message: 'Let\'s implement PrimeVue',
   },
 ];
 const defualtStyle = {
@@ -184,7 +186,7 @@ const slideOpts: SlideOptions = {
 const slideOptsVertical: SlideOptions = {
   initialSlide: 0,
   speed: 400,
-  slidesPerView: 3.7,
+  slidesPerView: 2.7,
   spaceBetween: 5,
   centeredSlides: false,
   navigation: false,
@@ -201,7 +203,7 @@ const slideOptsVertical: SlideOptions = {
 <template>
   <BasePage>
     <div class="row">
-      <div class="col col-md-6 q-pa-sm">
+      <div class="col-12 col-md-6 q-pa-sm">
         <BaseCard title="Horizontal">
           <q-card-section>
             <base-swiper-slides ref="testSwiperRef" :params="slideOpts">
@@ -234,10 +236,10 @@ const slideOptsVertical: SlideOptions = {
           </q-card-section>
         </BaseCard>
       </div>
-      <div class="col col-md-6 q-pa-sm">
+      <div class="col-12 col-md-6 q-pa-sm">
         <BaseCard title="Virtical">
           <q-card-section>
-            <base-swiper-slides :params="slideOptsVertical" style="height: 450px">
+            <base-swiper-slides :params="slideOptsVertical" style="height: 350px">
               <swiper-slide v-for="(item, i) in items" :key="`virtical-${i}`">
                 <q-card flat class="text-center" style="height: 150px">
                   <base-ripple-item>
@@ -259,9 +261,9 @@ const slideOptsVertical: SlideOptions = {
           </q-card-section>
         </BaseCard>
       </div>
-      <div class="col col-md-6 q-pa-sm">
+      <div class="col-12 col-md-6 q-pa-sm">
         <BaseCard title="Card">
-          <q-card-section>
+          <div class="row justify-center q-pa-md">
             <base-swiper-slides
               :params="{
                 slidesPerView: 1,
@@ -291,7 +293,7 @@ const slideOptsVertical: SlideOptions = {
                 </q-card>
               </swiper-slide>
             </base-swiper-slides>
-          </q-card-section>
+          </div>
         </BaseCard>
       </div>
       <div class="col-12 q-pa-sm">
@@ -302,7 +304,7 @@ const slideOptsVertical: SlideOptions = {
                 :params="{
                   initialSlide: 0,
                   speed: 400,
-                  slidesPerView: 5,
+                  slidesPerView: !isSmallScreen ? 5 : 2.5,
                   spaceBetween: 30,
                   pagination: true,
                   gridRows: 2,

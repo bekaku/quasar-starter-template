@@ -12,6 +12,7 @@ import { useQuasar } from 'quasar';
 import { watch } from 'vue';
 import { numberFormat } from 'src/utils/appUtil';
 import SeparatorDot from './SeparatorDot.vue';
+import { useDevice } from 'src/composables/useDevice';
 const {
   maxPages = 7,
   boundaryNumbers = false,
@@ -30,6 +31,7 @@ const {
 }>();
 const { t } = useLang();
 const { dark } = useQuasar();
+const { isSmallScreen } = useDevice();
 const modelValue = defineModel<IPagination>();
 const emit = defineEmits<{
   (e: 'update:modelValue', page: IPagination | undefined): void;
@@ -50,10 +52,7 @@ watch(
 );
 </script>
 <template>
-  <div
-    v-if="modelValue"
-    class="row justify-between items-center bg-app-content-item"
-  >
+  <div v-if="modelValue" class="row justify-between items-center bg-app-content-item">
     <div class="flex q-pa-md text-muted">
       {{ t('paging.totalRecord', { total: numberFormat(modelValue.totalElements) }) }}
       <SeparatorDot class="q-mx-sm" />
@@ -73,18 +72,18 @@ watch(
         dense
         outlined
         :label="t('paging.rowsPerPage')"
-        class="q-mx-lg"
         :options="modelValue.perPageList"
         option-value="value"
         option-label="text"
         emit-value
         map-options
-        style="min-width: 155px; max-width: 200px"
+        :style=" !isSmallScreen ? 'min-width: 155px; max-width: 200px' : 'width:100%'"
+
         :dropdown-icon="biChevronExpand"
       />
-
       <q-pagination
         v-model="modelValue.current"
+        :class="{ 'q-mt-md': isSmallScreen }"
         :direction-links="directionLink"
         :boundary-links="boundaryLink"
         :outline="outline"

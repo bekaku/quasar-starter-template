@@ -1,7 +1,7 @@
 # Vue JS 3 + Typescript + Quasar 2 SSR mode + Docker
 
 A Quasar Project\
-[Demo VDO](https://www.linkedin.com/posts/bekaku_full-stack-application-example-starter-github-activity-7129650875781808128-mYg6/?utm_source=share&utm_medium=member_desktop)
+[Demo Link](https://bekaku.github.io/quasar-starter/)
 
 # Backend Rest Api
 

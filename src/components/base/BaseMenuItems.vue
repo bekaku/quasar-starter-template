@@ -11,6 +11,7 @@ const {
   items,
   iconSize = '20px',
   dense = true,
+  expanAll = false
 } = defineProps<{
   items: LabelValue<T>[];
   darkText?: string;
@@ -18,6 +19,7 @@ const {
   dark?: boolean;
   iconSize?: string;
   dense?: boolean;
+  expanAll?: boolean
 }>();
 const { t } = useLang();
 const { getCurrentPath } = useBase();
@@ -50,7 +52,7 @@ const currentUrlPath = computed(() => getCurrentPath(false));
               <q-expansion-item
                 :icon="page.icon"
                 :label="page?.translateLabel !== false ? t(`${page.label}`) : page.label"
-                :default-opened="checkExpansionChildActiveAlt(currentUrlPath, page.children)"
+                :default-opened="expanAll || checkExpansionChildActiveAlt(currentUrlPath, page.children)"
                 :expand-icon="mdiChevronRight"
                 :expanded-icon="mdiChevronDown"
                 expand-icon-class="text-muted"

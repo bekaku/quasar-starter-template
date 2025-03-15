@@ -7,6 +7,7 @@ export const useAppStore = defineStore('appStore', () => {
     const drawers = ref<LabelValue<any>[]>([]);
     const drawerOpen = ref<boolean>(false);
     const expandDrawer = ref<boolean>(true);
+    const isMobileOrTablet = ref<boolean>(false);
 
     const setPermissions = (items: string[]) => {
         permissions.value = items;
@@ -140,6 +141,9 @@ export const useAppStore = defineStore('appStore', () => {
             resolve(menuHaveChild)
         });
     }
+    const setMobileOrTablet = (state: boolean) => {
+        isMobileOrTablet.value = state;
+    }
     return {
         permissions,
         setPermissions,
@@ -151,6 +155,8 @@ export const useAppStore = defineStore('appStore', () => {
         setDrawerOpen,
         expandDrawer,
         setExpandDrawer,
-        initialAppNav
+        initialAppNav,
+        isMobileOrTablet,
+        setMobileOrTablet
     }
 });

@@ -20,6 +20,7 @@ import { onBeforeUnmount, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { AppSetup } from './utils/app';
 import { userData } from './libs/data';
+import { useDevice } from 'src/composables/useDevice';
 defineOptions({
   async preFetch({ currentRoute, ssrContext, redirect }) {
     const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
@@ -81,8 +82,11 @@ const $q = useQuasar();
 const langugeAndThemeStore = useLangugeAndThemeStore();
 useRequiredAuth();
 AppSetup();
+const { initialDevice } = useDevice();
 
 onMounted(() => {
+  initialDevice();
+
   if (exceptionStore.error && exceptionStore.error.status && exceptionStore.error.message) {
     appGoto('/error', true);
   }

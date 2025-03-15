@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { biHouseDoor } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
+import { useDevice } from 'src/composables/useDevice';
 import type { PropType } from 'vue';
 import { ref } from 'vue';
 type ISideType = 'left' | 'right' | undefined;
@@ -16,8 +16,9 @@ defineProps({
   },
 });
 const { dark } = useQuasar();
+const { isSmallScreen } = useDevice();
 const miniState = ref(true);
-const langugeAndThemeStore = useLangugeAndThemeStore();
+const modelValue = ref<boolean>(!isSmallScreen.value);
 const links1 = [{ icon: biHouseDoor, text: 'Home', link: '/' }];
 const links2 = [
   { icon: 'bi-folder2', text: 'Library' },
@@ -39,7 +40,7 @@ const links4 = [
 </script>
 <template>
   <q-drawer
-    v-model="langugeAndThemeStore.leftDrawerOpen"
+    v-model="modelValue"
     show-if-above
     :width="240"
     :overlay="overlay"

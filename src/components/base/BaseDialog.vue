@@ -21,6 +21,7 @@ import {
 import { useBase } from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
 import { ref } from 'vue';
+import Ellipsis from './Ellipsis.vue';
 
 const {
   persistent = false,
@@ -96,7 +97,9 @@ const onCloseModel = () => {
 
           <div>
             <slot name="title">
+              <Ellipsis v-if="title" :lines="1">
               {{ title }}
+              </Ellipsis>
             </slot>
           </div>
           <q-space />

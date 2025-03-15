@@ -41,19 +41,12 @@ const {
   showUserSetting?: boolean;
 }>();
 
-const { isMobileOrTablet: checkMobileOrTablet } = useDevice();
 const { dark, screen } = useQuasar();
-const isMobileOrTablet = ref<boolean>(false);
 const { appGoto } = useBase();
 const { notify, resetBadgeCount } = useNotification();
 const { t } = useLang();
 // const search = ref('');
 const showSearch = ref(false);
-onMounted(() => {
-  checkMobileOrTablet().then((result) => {
-    isMobileOrTablet.value = result;
-  });
-});
 const onOpenSearch = () => {
   showSearch.value = true;
 };
@@ -86,14 +79,16 @@ const onSearchMenuClick = (to: string) => {
         flat
         round
         :icon="
-          appStore.expandDrawer
-            ? hambergerIcon
+          !appStore.isMobileOrTablet
+            ? appStore.expandDrawer
+              ? hambergerIcon
+              : hambergerIconOff
+                ? hambergerIconOff
+                : hambergerIcon
             : hambergerIconOff
-              ? hambergerIconOff
-              : hambergerIcon
         "
         @click="
-          !isMobileOrTablet
+          !appStore.isMobileOrTablet
             ? appStore.setExpandDrawer(!appStore.expandDrawer)
             : appStore.setDrawerOpen(!appStore.drawerOpen)
         "

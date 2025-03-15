@@ -1,10 +1,19 @@
-import { Device, DeviceInfo } from '@capacitor/device';
-import { ref } from 'vue';
+import type { DeviceInfo } from '@capacitor/device';
+import { Device } from '@capacitor/device';
+import { computed, ref } from 'vue';
 import { useCache } from './useCache';
 import { getCurrentTimestamp, getDateDiffMinutes } from '@/utils/dateUtil';
+import { useAppStore } from '@/stores/appStore';
+import { useQuasar } from 'quasar';
 export const useDevice = () => {
   const deviceId = ref();
   const { latestSyncActiveStatus } = useCache();
+  const appStore = useAppStore();
+  const { screen } = useQuasar();
+
+  const isSmallScreen = computed(() => {
+    return screen.sm || screen.xs;
+  })
   const getDeviceInfo = async (): Promise<DeviceInfo> => {
     const info = await Device.getInfo();
     return new Promise((resolve) => {
@@ -54,6 +63,13 @@ export const useDevice = () => {
   const setSysncActiveStatus = () => {
     latestSyncActiveStatus.value = getCurrentTimestamp();
   };
+
+  const initialDevice = () => {
+    isMobileOrTablet().then((result) => {
+      appStore.setMobileOrTablet(result);
+    });
+  }
+
   return {
     getDeviceInfo,
     isWeb,
@@ -61,6 +77,8 @@ export const useDevice = () => {
     deviceId,
     canSyncActiveStatusToServer,
     setSysncActiveStatus,
-    isMobileOrTablet
+    isMobileOrTablet,
+    initialDevice,
+    isSmallScreen
   };
 };

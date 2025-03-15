@@ -52,10 +52,10 @@ const onInputUpdate = (val: string | number | undefined | null) => {
   <BasePage>
     <BaseTextHeader title="Input Text" />
     <div class="row">
-      <div class="col-12 col-md-6 q-pa-md q-gutter-md">
-        <q-form class="q-gutter-md" @submit="onSubmit">
+      <div class="col-12 col-md-6 q-pa-md">
+        <q-form @submit="onSubmit">
           <BaseCard>
-            <q-card-section class="q-gutter-sm">
+            <q-card-section class="q-gutter-y-sm">
               <div class="text-h6">
                 <q-icon :name="editMode ? biPencil : biEye" />
                 {{ editMode ? 'Edit mode' : 'Viewmode' }}
@@ -178,7 +178,7 @@ const onInputUpdate = (val: string | number | undefined | null) => {
 
       <div class="col-12 col-md-6 q-pa-md">
         <BaseCard>
-          <q-card-section class="q-gutter-sm">
+          <q-card-section class="q-gutter-y-sm">
             <div class="text-h6">View mode</div>
             <BaseInput
               v-model="name"

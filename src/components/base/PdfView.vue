@@ -42,7 +42,7 @@
       <q-card-section>
         <q-linear-progress v-if="downloadLoading" query color="primary" class="q-my-sm" />
         <template v-if="loading">
-          <skeleton-item v-if="loading" :height="100" :text-number="3" flat show />
+          <skeleton-item v-if="loading" :text-number="3" flat show />
         </template>
         <template v-else-if="pdfSrc">
           <q-scroll-area style="height: 80vh">

@@ -17,12 +17,14 @@ const {
   miniToOverlay = true,
   width = 270,
   tranparent = false,
+  expanAll = false,
 } = defineProps<{
   overlay?: boolean;
   miniToOverlay?: boolean;
   bordered?: boolean;
   width?: number;
   tranparent?: boolean;
+  expanAll?: boolean
 }>();
 
 const { version: quasarVersion } = useQuasar();
@@ -111,8 +113,8 @@ onBeforeUnmount(() => {
           </q-item-section>
         </q-item>
       </div>
-      <BaseMenuItems :items="appStore.drawers" />
-      <BaseMenuItems :items="additionalMenu">
+      <BaseMenuItems :items="appStore.drawers" :expan-all />
+      <BaseMenuItems :items="additionalMenu" :expan-all>
         <template #after>
           <q-separator />
           <q-item clickable>

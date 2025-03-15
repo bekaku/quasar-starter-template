@@ -24,7 +24,7 @@ const appStore = useAppStore();
       :show-logo="true"
       bordered
     />
-    <BaseSidebar v-model="appStore.drawerOpen" bordered />
+    <BaseSidebar v-model="appStore.drawerOpen" bordered expan-all />
 
     <q-page-container>
       <layout-breadcrumb-tab />
