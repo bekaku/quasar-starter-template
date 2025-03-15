@@ -129,6 +129,7 @@ const onReset = () => {
   <BasePage
     :padding="false"
     :class="{ 'bg-white': !isDark, 'app-second-bg-color-theme-dark': isDark }"
+    :full="false"
   >
     <div class="row items-center " :class="{ 'q-pa-md': !isSmallScreen }" style="height: 100vh">
       <!-- Left Column - Fantasy Background -->
@@ -146,7 +147,7 @@ const onReset = () => {
       </div>
       <!-- Right Column - Login Form -->
       <div class="col-12 col-md-6 flex flex-center">
-        <div class="q-pa-md" :style="{ width: !isSmallScreen ? '70%' : '100%', maxWidth: !isSmallScreen ? '80%' : '100%' }">
+        <div class="q-pa-md" :style="{ width: !isSmallScreen ? '70%' : '90%', maxWidth: !isSmallScreen ? '80%' : '90%' }">
           <div class="text-center q-mb-xl">
             <q-avatar size="100px" class="q-mb-md" square>
               <q-img
@@ -285,6 +286,15 @@ const onReset = () => {
 
   .overlay {
     /* border-radius: 20px 20px 0 0; */
+    border-radius: 0 0 0 0;
+  }
+}
+@media (max-width: 1180px) {
+  .fantasy-bg {
+    min-height: 40vh;
+    border-radius: 0 0 0 0;
+  }
+  .overlay {
     border-radius: 0 0 0 0;
   }
 }
