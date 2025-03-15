@@ -1,14 +1,16 @@
 <template>
   <q-card-section>
-    <div class="q-gutter-md">
-      <base-link
-        v-for="(item, index) in items"
-        :key="index"
-        :label="`#${item.name}`"
-        to="#"
-        color="text-primary"
-      />
-    </div>
+      <q-scroll-area style="height: 40px; max-width: 100%">
+        <div class="row no-wrap q-gutter-md">
+          <base-link
+            v-for="(item, index) in items"
+            :key="index"
+            :label="`#${item.name}`"
+            to="#"
+            color="text-primary"
+          />
+        </div>
+      </q-scroll-area>
   </q-card-section>
 </template>
 

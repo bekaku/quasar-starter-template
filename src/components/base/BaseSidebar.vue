@@ -113,7 +113,7 @@ onBeforeUnmount(() => {
           </q-item-section>
         </q-item>
       </div>
-      <BaseMenuItems :items="appStore.drawers" :expan-all />
+      <!-- <BaseMenuItems :items="appStore.drawers" :expan-all /> -->
       <BaseMenuItems :items="additionalMenu" :expan-all>
         <template #after>
           <q-separator />

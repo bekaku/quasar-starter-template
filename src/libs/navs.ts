@@ -113,6 +113,12 @@ export const additionalMenu: LabelValue<any>[] = [
     label: 'Example',
     children: [
       {
+        icon: biWindowSidebar,
+        label: 'Social feed',
+        translateLabel: false,
+        to: '/example/feed',
+      },
+      {
         icon: biList,
         label: 'Composables',
         translateLabel: false,
@@ -283,12 +289,6 @@ export const additionalMenu: LabelValue<any>[] = [
         label: 'Swiper',
         translateLabel: false,
         to: '/example/swiper'
-      },
-      {
-        icon: biWindowSidebar,
-        label: 'Social feed',
-        translateLabel: false,
-        to: '/example/feed',
       },
       {
         icon: biArrowDownUp,

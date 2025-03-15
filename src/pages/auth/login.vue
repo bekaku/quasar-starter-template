@@ -20,12 +20,13 @@ import BaseLangugeSwitcher from 'src/components/base/BaseLangugeSwitcher.vue';
 import BaseLink from 'src/components/base/BaseLink.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
+import Ellipsis from 'src/components/base/Ellipsis.vue';
 import { useAppConfig } from 'src/composables/useAppConfig';
 import { useBase } from 'src/composables/useBase';
 import { AppAuthTokenKey } from 'src/libs/constant';
 import { defineAsyncComponent, onMounted, ref } from 'vue';
 const ForgotPassword = defineAsyncComponent(() => import('@/components/app/ForgotPassword.vue'));
-const { getDeviceId } = useDevice();
+const { getDeviceId, isSmallScreen } = useDevice();
 const { singin } = AuthenService();
 const { setAuthenticationCookies } = useAuth();
 const { t, currenLocale } = useLang();
@@ -115,7 +116,7 @@ const onSubmit = async () => {
     loading.value = false;
     // redirect to index page
     // window.location.replace('/');
-    window.location.replace(process.env.APP_PUBLIC_PATH);
+    window.location.replace(process.env.APP_PUBLIC_PATH || '/');
   }
 };
 const onReset = () => {
@@ -129,19 +130,23 @@ const onReset = () => {
     :padding="false"
     :class="{ 'bg-white': !isDark, 'app-second-bg-color-theme-dark': isDark }"
   >
-    <div class="row items-center q-pa-md" style="height: 100vh">
+    <div class="row items-center " :class="{ 'q-pa-md': !isSmallScreen }" style="height: 100vh">
       <!-- Left Column - Fantasy Background -->
       <div class="col-12 col-md-6 fantasy-bg">
         <div class="overlay flex flex-center text-white">
           <div class="q-pa-xl text-center">
-            <h2 class="text-h2 text-weight-bold q-mb-md">Welcome to Our {{ t('app.monogram') }}</h2>
-            <p class="text-h5">Embark on your next adventure</p>
+            <h2 class="text-h3 text-weight-bold q-mb-md">
+              <Ellipsis :lines="2"> Welcome to Our {{ t('app.monogram') }} </Ellipsis>
+            </h2>
+            <div class="text-h5">
+              <Ellipsis :lines="1"> Embark on your next adventure sadasd </Ellipsis>
+            </div>
           </div>
         </div>
       </div>
       <!-- Right Column - Login Form -->
       <div class="col-12 col-md-6 flex flex-center">
-        <div class="q-pa-md" style="width: 70%; max-width: 80%">
+        <div class="q-pa-md" :style="{ width: !isSmallScreen ? '70%' : '100%', maxWidth: !isSmallScreen ? '80%' : '100%' }">
           <div class="text-center q-mb-xl">
             <q-avatar size="100px" class="q-mb-md" square>
               <q-img
@@ -274,11 +279,13 @@ const onReset = () => {
 @media (max-width: 768px) {
   .fantasy-bg {
     min-height: 40vh;
-    border-radius: 20px 20px 0 0;
+    /* border-radius: 20px 20px 0 0; */
+    border-radius: 0 0 0 0;
   }
 
   .overlay {
-    border-radius: 20px 20px 0 0;
+    /* border-radius: 20px 20px 0 0; */
+    border-radius: 0 0 0 0;
   }
 }
 </style>

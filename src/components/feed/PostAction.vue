@@ -95,15 +95,15 @@
     </transition>
 
     <q-separator vertical />
-    <q-btn class="text-capitalize" flat :icon="biChatSquareDots" label="Comment it">
+    <q-btn class="text-capitalize" flat :icon="biChatSquareDots" :label="!isSmallScreen ?'Comment' :''">
       <q-tooltip>Comment it</q-tooltip></q-btn
     >
     <q-separator vertical />
-    <q-btn class="text-capitalize" flat :icon="biBookmark" label="Save it">
+    <q-btn class="text-capitalize" flat :icon="biBookmark" :label="!isSmallScreen ?'Save' :''">
       <q-tooltip>Save it</q-tooltip></q-btn
     >
     <q-separator vertical />
-    <q-btn class="text-capitalize" flat :icon="biShare" label="Share it">
+    <q-btn class="text-capitalize" flat :icon="biShare" :label="!isSmallScreen ?'Share' :''">
       <q-tooltip>Share it</q-tooltip></q-btn
     >
   </q-card-actions>
@@ -124,10 +124,11 @@ import {
   biHandIndexThumbFill,
   biHeart,
   biHeartFill,
-  biShare
+  biShare,
 } from '@quasar/extras/bootstrap-icons';
 import type { PropType } from 'vue';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useDevice } from 'src/composables/useDevice';
 const { appToast } = useBase();
 const props = defineProps({
   action: {
@@ -143,6 +144,7 @@ const prizeHover = ref(false);
 const adoptHover = ref(false);
 const actionHover = ref(false);
 const actionType = ref<PostActionType>();
+const { isSmallScreen } = useDevice();
 onMounted(() => {
   actionType.value = props.action;
 });
