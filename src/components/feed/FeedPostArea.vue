@@ -15,7 +15,7 @@
             >{{ t('dSologan') }}</q-item-label
           >
         </q-item-section>
-        <q-item-section side>
+        <q-item-section v-if="!isSmallScreen" side>
           <q-btn
             class="text-capitalize"
             :icon="biPencil"
@@ -48,6 +48,8 @@ import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from '@/stores/authenStore';
 import { biCardImage, biPencil, biPencilSquare, biPlayBtn } from '@quasar/extras/bootstrap-icons';
 import BaseCard from '../base/BaseCard.vue';
+import { useDevice } from 'src/composables/useDevice';
 const { t } = useLang();
 const authenStore = useAuthenStore();
+const { isSmallScreen } = useDevice();
 </script>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { availableLocales } from '@/utils/lang';
 import { biCheck2 } from '@quasar/extras/bootstrap-icons';
 import { useLang } from 'src/composables/useLang';
-import { useLangugeAndThemeStore } from 'stores/langugeAndThemeStore';
 const {
   closeOnClick = false,
   anchor = 'bottom left',
@@ -13,8 +11,7 @@ const {
   self?: any;
 }>();
 
-const { locale } = useLang();
-const langugeAndThemeStore = useLangugeAndThemeStore();
+const { locale, onSetLocale, availableLocales } = useLang();
 </script>
 <template>
   <!-- :anchor="!screen.gt.xs ? 'bottom left' : 'top end'" self="top start" -->
@@ -24,7 +21,7 @@ const langugeAndThemeStore = useLangugeAndThemeStore();
         v-for="lang in availableLocales"
         :key="lang.iso"
         clickable
-        @click="langugeAndThemeStore.setLocale(lang.iso)"
+        @click="onSetLocale(lang.iso)"
       >
         <q-item-section>{{ lang.name }}</q-item-section>
         <q-item-section v-if="lang.iso == locale" side>

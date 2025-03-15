@@ -3,8 +3,6 @@ import BaseAvatar from '@/components/base/BaseAvatar.vue';
 import { useAuth } from '@/composables/useAuth';
 import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from '@/stores/authenStore';
-import { useLangugeAndThemeStore } from '@/stores/langugeAndThemeStore';
-import { availableLocales } from '@/utils/lang';
 import {
   biBoxArrowRight,
   biChevronExpand,
@@ -19,15 +17,12 @@ import {
 import { useQuasar } from 'quasar';
 import BaseLangugeSwitcher from 'src/components/base/BaseLangugeSwitcher.vue';
 import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
-import { computed } from 'vue';
+import { useTheme } from 'src/composables/useTheme';
 const { screen } = useQuasar();
-const { t } = useLang();
+const { t, currenLocale } = useLang();
+const { isDark } = useTheme()
 const authenStore = useAuthenStore();
-const langugeAndThemeStore = useLangugeAndThemeStore();
 const { signOut } = useAuth();
-const currenLocale = computed(() =>
-  availableLocales.find((t) => t.iso == langugeAndThemeStore.locale),
-);
 </script>
 <template>
   <q-item v-bind="$attrs" clickable>
@@ -67,12 +62,12 @@ const currenLocale = computed(() =>
         <q-separator />
         <q-item clickable>
           <q-item-section avatar>
-            <q-icon :name="langugeAndThemeStore.theme == 'dark' ? biMoon : biSun" />
+            <q-icon :name="isDark ? biMoon : biSun" />
           </q-item-section>
           <q-item-section>
             <q-item-label lines="1">
               {{ t('base.appearance') }} :
-              {{ t(`theme.${langugeAndThemeStore.theme}`) }}
+              {{ isDark ? t('theme.dark') : t('theme.light') }}
             </q-item-label>
           </q-item-section>
           <q-item-section side>

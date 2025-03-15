@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { biCheck2, biMoon, biSun } from '@quasar/extras/bootstrap-icons';
 import { useLang } from 'src/composables/useLang';
-import { useLangugeAndThemeStore } from '@/stores/langugeAndThemeStore';
-import { availableThemes } from '@/utils/theme';
-import { useBase } from 'src/composables/useBase';
 import BaseButton from './BaseButton.vue';
+import { useTheme } from 'src/composables/useTheme';
 const {
   closeOnClick = false,
   anchor = 'bottom left',
@@ -18,9 +16,8 @@ const {
   self?: any;
   width?: string;
 }>();
-const langugeAndThemeStore = useLangugeAndThemeStore();
 const { t } = useLang();
-const { isDark } = useBase();
+const { isDark, onSetTheme, availableThemes } = useTheme();
 </script>
 <template>
   <BaseButton
@@ -29,11 +26,7 @@ const { isDark } = useBase();
     :icon="isDark ? biSun : biMoon"
     round
     dense
-    @click="
-      !isDark
-        ? langugeAndThemeStore.setThemeSetting('dark')
-        : langugeAndThemeStore.setThemeSetting('light')
-    "
+    @click="!isDark ? onSetTheme('dark') : onSetTheme('light')"
   >
     <q-tooltip>
       {{ !isDark ? t('theme.dark') : t('theme.light') }}
@@ -45,13 +38,13 @@ const { isDark } = useBase();
         v-for="theme in availableThemes"
         :key="theme.key"
         clickable
-        @click="langugeAndThemeStore.setThemeSetting(theme.key)"
+        @click="onSetTheme(theme.key)"
       >
         <q-item-section avatar>
           <q-icon :name="theme.icon" />
         </q-item-section>
         <q-item-section>{{ t(theme.text) }}</q-item-section>
-        <q-item-section v-if="theme.key == langugeAndThemeStore.themeSetting" side>
+        <q-item-section v-if="(theme.key == 'dark' && isDark) || (theme.key == 'light' && !isDark)" side>
           <q-icon :name="biCheck2" />
         </q-item-section>
       </q-item>

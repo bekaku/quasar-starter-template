@@ -57,8 +57,8 @@ export default defineConfig((ctx) => {
       // vueOptionsAPI: false,
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
-      publicPath: '/quasar-starter', // for github static deploy
-      // publicPath: '/',
+      // publicPath: '/quasar-starter', // for github static deploy
+      publicPath: '/',
       // analyze: true,
       // env: {},
       // rawDefine: {}

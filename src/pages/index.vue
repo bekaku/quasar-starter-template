@@ -225,7 +225,6 @@ const sparkLineItems = [
                 { label: 'Overview', value: 'overview' },
                 { label: 'Analytics', value: 'analytics' },
                 { label: 'Reports', value: 'reports' },
-                { label: 'Notifications', value: 'notifications' },
               ]"
               align="left"
             />
@@ -324,7 +323,7 @@ const sparkLineItems = [
                     :series="chartData.series.slice(3, 6)"
                     :categories="chartData.categories"
                     strokestyle="smooth"
-                    :label-rotate="-45"
+                    :label-rotate="!isSmallScreen ? 0 : -45"
                     :xaxis-tickamount="4"
                   />
                 </q-no-ssr>

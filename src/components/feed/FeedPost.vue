@@ -7,7 +7,7 @@
             <q-avatar size="30px">
               <img
                 class="bg-gray-8"
-                src="https://loremflickr.com/320/240?random=1"
+                src="https://i.pravatar.cc/450"
                 spinner-color="white"
                 no-native-menu
               />
