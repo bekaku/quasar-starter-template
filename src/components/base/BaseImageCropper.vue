@@ -6,7 +6,7 @@
 import { biFileImage, biCheck, biArrowClockwise, biArrowCounterclockwise, biArrowLeftRight, biArrowsCollapse, biZoomIn, biZoomOut } from '@quasar/extras/bootstrap-icons';
 import { useBase } from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
-import { blobToFile } from 'src/utils/fileUtils';
+import { blobToFile } from 'src/utils/fileUtil';
 import { onUnmounted, ref, useTemplateRef, watchEffect } from 'vue';
 import BaseFilePicker from './BaseFilePicker.vue';
 import BaseScrollArea from './BaseScrollArea.vue';

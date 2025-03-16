@@ -2,7 +2,7 @@
 import BaseImage from '@/components/base/BaseImage.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { getImgUrlFromFile } from '@/utils/fileUtils';
+import { getImgUrlFromFile } from '@/utils/fileUtil';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseImageCropper from 'src/components/base/BaseImageCropper.vue';

@@ -9,7 +9,7 @@ import {
   LimitFileSizeMB,
   MaxSelectFiles,
 } from '@/libs/constant';
-import { getImgUrlFromFile, isImageFile, zipFile } from '@/utils/fileUtils';
+import { getImgUrlFromFile, isImageFile, zipFile } from '@/utils/fileUtil';
 import { biPlus } from '@quasar/extras/bootstrap-icons';
 import { onBeforeUnmount, ref } from 'vue';
 import BaseButton from './BaseButton.vue';

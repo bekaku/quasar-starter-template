@@ -18,7 +18,6 @@ export default defineConfig((ctx) => {
       'requireAuth',
       { path: 'dompurify', server: false },
       { path: 'pdfVue', server: false },
-      { path: 'vueZoomer', server: false },
       { path: 'vueApexcharts', server: false },
       { path: 'swiper', server: false },
       { path: 'cropperjs', server: false },

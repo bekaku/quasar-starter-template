@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseAvatar from '@/components/base/BaseAvatar.vue';
 import BaseRippleItem from '@/components/base/RippleItem.vue';
-import BaseSwiperSlides from '@/components/base/SwiperSlides.vue';
+import BaseSwiperSlides from '@/components/base/BaseSwiperSlides.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import type { SlideOptions } from '@/types/common';

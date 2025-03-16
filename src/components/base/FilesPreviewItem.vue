@@ -97,7 +97,7 @@
 import BaseImage from '@/components/base/BaseImage.vue';
 import type { FileManagerDto } from '@/types/models';
 import { formatBytes } from '@/utils/appUtil';
-import { getFileTypeIcon } from '@/utils/fileUtils';
+import { getFileTypeIcon } from '@/utils/fileUtil';
 import { biX } from '@quasar/extras/bootstrap-icons';
 import { computed } from 'vue';
 

@@ -424,7 +424,10 @@ export interface SlidePaginationy {
   enabled?: boolean;
   dynamicBullets?: boolean;
 }
-
+export interface SwiperSlideChange {
+  activeIndex: number
+  realIndex: number
+}
 export type SlidePaginationType = 'progressbar' | 'bullets' | 'fraction' | 'custom';
 export type SlideDirectionType = 'horizontal' | 'vertical';
 export type SlideEffectType = 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip' | 'creative' | 'cards';
@@ -442,14 +445,14 @@ export interface SlideOptions {
   loop?: boolean;
   modules?: SlideModule[];
   navigation?: boolean;
-  paginationClickable?: boolean;
   navigationType?: boolean;
   navigationCustom?: boolean;
   pagination?: boolean | SlidePaginationy;
+  paginationClickable?: boolean;
   paginationType?: SlidePaginationType;
   paginationDynamic?: boolean;
   scrollbar?: boolean;
-  style?: object;
+  style?: any | object;
   speed?: number;
   slidesPerView?: number | 'auto';
   spaceBetween?: number;
@@ -458,6 +461,7 @@ export interface SlideOptions {
   updateOnWindowResize?: boolean;
   zoom?: boolean | SlideZoom;
   gridRows?: number;
+  grabCursor?: boolean;
 }
 export type SlideModule =
   | 'Autoplay'

@@ -9,7 +9,7 @@ import {
   getFileNameFromAxiosResponse,
   getFileExtension,
   getFileNameFromResponse
-} from '@/utils/fileUtils';
+} from '@/utils/fileUtil';
 
 export default () => {
   const cdnBaseApi = process.env.APP_BASE_CDN_API || ''

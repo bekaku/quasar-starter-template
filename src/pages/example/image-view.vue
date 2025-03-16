@@ -6,15 +6,20 @@ import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import type { FileManagerDto } from '@/types/models';
 import { computed, defineAsyncComponent, ref } from 'vue';
-import FileView from '@/components/base/FileView.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
-const PhotoView = defineAsyncComponent(() => import('@/components/base/PhotoView.vue'));
-const PdfView = defineAsyncComponent(() => import('@/components/base/PdfView.vue'));
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
+import BaseImageView from 'src/components/base/BaseImageView.vue';
+import { useTheme } from 'src/composables/useTheme';
+import BasePdfView from '@/components/base/BasePdfView.vue';
+const BaseImageViewDialog = defineAsyncComponent(() => import('@/components/base/BaseImageViewDialog.vue'));
+const BasePdfViewDialog = defineAsyncComponent(() => import('@/components/base/BasePdfViewDialog.vue'));
+const BaseFileViewDialog = defineAsyncComponent(() => import('@/components/base/BaseFileViewDialog.vue'));
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Image View | ${t('app.name')}`);
 
+const { isDark } = useTheme();
 const imageSelectIndex = ref<number>(0);
 const showImageView = ref(false);
 const imageItems = ref<FileManagerDto[]>([
@@ -174,6 +179,13 @@ const onPdfPreviewClick = async (index: number) => {
     showPdfView.value = true;
   }
 };
+const onImgPreviewClose = () => {
+  imageSelectIndex.value = 0
+  showImageView.value = false
+}
+const onDeleteImage = (index: number) => {
+  console.log('onDeleteImage', index)
+}
 const onClosePefView = () => {
   pdfSrc.value = undefined;
   pdfName.value = undefined;
@@ -263,6 +275,23 @@ const setImagesFileView = (file: FileManagerDto) => {
       </q-card-section>
     </BaseCard>
 
+    <BaseTextHeader title="Image Slide" />
+    <BaseCard>
+      <q-card-section>
+        <q-no-ssr>
+          <base-image-view
+            :files="imageItems"
+            :selected-index="imageSelectIndex"
+            :dark="isDark"
+            :show-delete-image="false"
+            show-arrow
+            height="350px"
+            :closeable="false"
+          />
+        </q-no-ssr>
+      </q-card-section>
+    </BaseCard>
+
     <BaseCard title="Pdf View">
       <q-card-section>
         <div class="text-h6 q-mb-md">Pdf View</div>
@@ -285,6 +314,14 @@ const setImagesFileView = (file: FileManagerDto) => {
             </files-preview-item>
           </div>
         </div>
+        <BaseTextHeader title="Pdf inline display" />
+        <q-card flat bordered>
+          <base-pdf-view
+            src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
+            :closeable="false"
+            title="compressed.tracemonkey-pldi-09.pdf"
+          />
+        </q-card>
       </q-card-section>
     </BaseCard>
 
@@ -313,27 +350,28 @@ const setImagesFileView = (file: FileManagerDto) => {
         </div>
       </q-card-section>
     </BaseCard>
-    <photo-view
+    <base-image-view-dialog
       v-if="showImageView"
-      :show-dialog="showImageView"
+      v-model="showImageView"
       :files="imageItems"
       :selected-index="imageSelectIndex"
-      :show-delete-image="false"
+      :show-delete-image="true"
       :maximized="false"
       show-arrow
-      @on-close="() => (showImageView = false)"
-    >
-    </photo-view>
+      @on-delete="onDeleteImage"
+      @on-close="onImgPreviewClose"
+    />
 
-    <pdf-view
+
+    <base-pdf-view-dialog
       v-if="showPdfView && pdfSrc"
+      v-model="showPdfView"
       :src="pdfSrc"
-      v-model:show="showPdfView"
       :title="pdfName"
       @on-close="() => onClosePefView"
-    ></pdf-view>
+    />
 
-    <file-view
+    <BaseFileViewDialog
       v-if="showMixFiles && fileMixForView"
       :item="fileMixForView"
       :image-list="fileImageItemsForView"
