@@ -164,7 +164,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
         </div>
       </q-card-section>
     </BaseCard>
-    <BaseCard class="q-my-md" title="Sparklines">
+
+     <BaseCard class="q-my-md" title="Sparklines">
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-3 q-pa-sm">
@@ -222,7 +223,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
         </div>
       </q-card-section>
     </BaseCard>
-    <BaseCard class="q-my-md" title="Radar">
+   <BaseCard class="q-my-md" title="Radar">
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-6">
@@ -254,7 +255,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
         </div>
       </q-card-section>
     </BaseCard>
-    <BaseCard title="Area">
+     <BaseCard title="Area">
       <div class="row">
         <div class="col-12 col-md-6 q-pa-sm">
           <q-no-ssr>
@@ -375,7 +376,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
       </q-no-ssr>
     </BaseCard>
 
-    <BaseCard class="q-my-md" title="Pie/Donuts">
+  <BaseCard class="q-my-md" title="Pie/Donuts">
       <div class="row">
         <div class="col-12 col-md-6">
           <q-no-ssr>
@@ -413,6 +414,6 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
           </q-no-ssr>
         </div>
       </div>
-    </BaseCard>
+    </BaseCard> 
   </BasePage>
 </template>

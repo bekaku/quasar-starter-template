@@ -2,6 +2,7 @@
 import { useBase } from 'src/composables/useBase';
 import { onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffect } from 'vue';
 import type { ChartMode, ChartThemePalete, IChartSeries, Strokestyle } from '@/types/chart';
+import { useQuasar } from 'quasar';
 interface GridPadding {
   top: number;
   right: number;
@@ -47,15 +48,16 @@ const {
 }>();
 const chartSeries = ref(series);
 const options = ref<any>();
-const { isDark } = useBase();
+// const { isDark } = useBase();
+const { dark } = useQuasar();
 
 const chartSparkLinesRef = useTemplateRef<any>('chartSparkLinesRef');
 
-watchEffect(() => {
-  if (series && series.length > 0) {
-    chartSeries.value = series;
-  }
-});
+// watchEffect(() => {
+//   if (series && series.length > 0) {
+//     chartSeries.value = series;
+//   }
+// });
 onUnmounted(() => {
   options.value = undefined;
   chartSeries.value = [];
@@ -73,9 +75,9 @@ const updateTheme = (dark: boolean) => {
     });
   }
 };
-watch(isDark, (state) => {
-  updateTheme(state);
-});
+// watch(() => dark.isActive, (state) => {
+//   updateTheme(state);
+// });
 const getCateByIndex = (index: number) => (categories?.length > 0 ? categories[index] : '-');
 const chartSetup = () => {
   if (series && series.length > 0) {
@@ -101,7 +103,7 @@ const chartSetup = () => {
         },
       },
       theme: {
-        mode: isDark.value ? 'dark' : mode,
+        mode: dark.isActive ? 'dark' : mode,
         palette,
       },
       plotOptions: {},

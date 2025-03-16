@@ -8,6 +8,7 @@ import type {
   IChartSeries,
   Strokestyle,
 } from '@/types/chart';
+import { useQuasar } from 'quasar';
 
 const {
   chartId = 'chartId',
@@ -75,15 +76,16 @@ const {
   horizontal?: boolean;
   opacity?: number;
 }>();
-const { isDark } = useBase();
+// const { isDark } = useBase();
+const { dark: isDark } = useQuasar();
 const chartSeries = ref(series);
 const options = ref<any>();
 const chartAreaRef = useTemplateRef<any>('chartAreaRef');
-watchEffect(() => {
-  if (series && series.length > 0) {
-    chartSeries.value = series;
-  }
-});
+// watchEffect(() => {
+//   if (series && series.length > 0) {
+//     chartSeries.value = series;
+//   }
+// });
 onUnmounted(() => {
   options.value = undefined;
   chartSeries.value = [];
@@ -101,6 +103,12 @@ const updateTheme = (dark: boolean) => {
     });
   }
 };
+// watch(
+//   () => isDark.isActive,
+//   (state) => {
+//     updateTheme(state);
+//   },
+// );
 const chartSetup = () => {
   if (series.length > 0) {
     options.value = {
@@ -135,7 +143,7 @@ const chartSetup = () => {
         },
       },
       theme: {
-        mode: isDark.value ? 'dark' : mode,
+        mode: isDark.isActive ? 'dark' : mode,
         palette,
       },
       plotOptions: {
@@ -230,9 +238,6 @@ const chartSetup = () => {
     // chart.value.render();
   }
 };
-watch(isDark, (state) => {
-  updateTheme(state);
-});
 </script>
 <template>
   <q-no-ssr>

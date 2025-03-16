@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { ChartMode, ChartPosition, ChartThemePalete, Strokestyle } from '@/types/chart';
+import { useQuasar } from 'quasar';
 import { useBase } from 'src/composables/useBase';
 import { onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffect } from 'vue';
 const {
@@ -39,15 +40,15 @@ const {
   strokeWidth?: number;
 }>();
 
-const { isDark } = useBase();
+const { dark: isDark } = useQuasar();
 const chartSeries = ref(series);
 const options = ref<any>();
 const chartPieRef = useTemplateRef<any>('chartPieRef');
-watchEffect(() => {
-  if (series && series.length > 0) {
-    chartSeries.value = series;
-  }
-});
+// watchEffect(() => {
+//   if (series && series.length > 0) {
+//     chartSeries.value = series;
+//   }
+// });
 onUnmounted(() => {
   options.value = undefined;
   chartSeries.value = [];
@@ -65,7 +66,9 @@ const updateTheme = (dark: boolean) => {
     });
   }
 };
-
+// watch(() => isDark.isActive, (state) => {
+//   updateTheme(state);
+// });
 const chartSetup = () => {
   if (series.length > 0) {
     options.value = {
@@ -87,7 +90,7 @@ const chartSetup = () => {
         },
       },
       theme: {
-        mode: isDark.value ? 'dark' : mode,
+        mode: isDark.isActive ? 'dark' : mode,
         palette,
       },
       plotOptions: {},
@@ -121,9 +124,6 @@ const chartSetup = () => {
     };
   }
 };
-watch(isDark, (state) => {
-  updateTheme(state);
-});
 </script>
 <template>
   <q-no-ssr>
