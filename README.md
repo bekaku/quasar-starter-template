@@ -1,4 +1,4 @@
-# Vue JS 3 + Typescript + Quasar 2 SSR mode + Docker
+# Vue JS 3 + Typescript + Quasar 2 (SSR SPA mode) + Docker
 
 A Quasar Project\
 [Demo Link](https://bekaku.github.io/quasar-starter/)
