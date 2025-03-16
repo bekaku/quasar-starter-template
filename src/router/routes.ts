@@ -1,9 +1,15 @@
 import {
   ExampleBtnBreadcrumb,
-  ExampleSelectBreadcrumb
+  ExampleSelectBreadcrumb,
+  PermissionFormBreadcrumb,
+  RoleFormBreadcrumb,
+  UserFormBreadcrumb
 } from '@/libs/breadcrumbs';
 import {
-  BackendLogin
+  BackendLogin,
+  PermissionPermission,
+  RolePermission,
+  UserPermission
 } from '@/libs/permissions';
 import {
   TabTest
@@ -21,6 +27,73 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         component: () => import('@/pages/index.vue'),
+      },
+      {
+        path: 'permission',
+        children: [
+          {
+            path: '',
+            meta: {
+              pageName: 'model_permission',
+              permission: [PermissionPermission.list]
+            },
+            component: () => import('@/pages/permission/index.vue'),
+          },
+          {
+            path: ':crud/:id/',
+            meta: {
+              pageName: 'model_permission',
+              permission: [PermissionPermission.view],
+              breadcrumbs: PermissionFormBreadcrumb,
+              tabs: TabTest
+            },
+            component: () => import('@/pages/permission/view.vue'),
+          },
+        ]
+      },
+      {
+        path: 'role',
+        children: [
+          {
+            path: '',
+            meta: {
+              pageName: 'model_role',
+              permission: [RolePermission.list]
+            },
+            component: () => import('@/pages/role/index.vue'),
+          },
+          {
+            path: ':crud/:id/',
+            meta: {
+              pageName: 'model_role',
+              permission: [RolePermission.view],
+              breadcrumbs: RoleFormBreadcrumb,
+            },
+            component: () => import('@/pages/role/view.vue'),
+          },
+        ]
+      },
+      {
+        path: 'user',
+        children: [
+          {
+            path: '',
+            meta: {
+              pageName: 'model_user',
+              permission: [UserPermission.list],
+            },
+            component: () => import('@/pages/user/index.vue'),
+          },
+          {
+            path: ':crud/:id/',
+            meta: {
+              pageName: 'model_user',
+              permission: [UserPermission.view],
+              breadcrumbs: UserFormBreadcrumb,
+            },
+            component: () => import('@/pages/user/view.vue'),
+          },
+        ]
       },
       {
         path: '/settings',

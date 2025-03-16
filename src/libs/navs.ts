@@ -304,7 +304,7 @@ export const additionalMenu: LabelValue<any>[] = [
       },
       {
         icon: biFile,
-        label: 'Blang page',
+        label: 'Blank page',
         translateLabel: false,
         to: '/blank-page'
       },

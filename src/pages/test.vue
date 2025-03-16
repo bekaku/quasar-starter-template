@@ -5,7 +5,9 @@ import { AppAuthTokenKey } from '@/libs/constant';
 import { getTokenStatus } from '@/utils/jwtUtil';
 import { Cookies } from 'quasar';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-
+import BaseCard from 'src/components/base/BaseCard.vue';
+import BaseDatePicker from 'src/components/base/BaseDatePicker.vue';
+import BasePage from 'src/components/base/BasePage.vue';
 useAppMeta({
   additionalTitle: 'Test Page',
 });
@@ -70,8 +72,8 @@ const testJwt = async () => {
 };
 </script>
 <template>
-  <div class="q-pa-md">
-    <q-card flat bordered class="wee-container-responsive-center">
+  <BasePage>
+    <BaseCard>
       <q-card-section>
         <q-btn @click="fetchData()"> Fetch</q-btn>
 
@@ -80,6 +82,6 @@ const testJwt = async () => {
 
         <q-btn @click="testJwt()" color="blue"> JWT TEST</q-btn>
       </q-card-section>
-    </q-card>
-  </div>
+    </BaseCard>
+  </BasePage>
 </template>
