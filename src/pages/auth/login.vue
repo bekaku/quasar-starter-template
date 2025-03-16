@@ -230,9 +230,6 @@ const onReset = () => {
 
             <q-separator class="q-my-md" />
             <div class="row items-center q-gutter-x-md justify-center">
-              <div :class="isDark ? 'text-grey-5' : 'text-grey-7'">
-                {{ `@ ${getYearNow()} ${t('app.monogram')} ${appVersion}` }}
-              </div>
               <q-btn
                 size="13px"
                 flat
@@ -246,6 +243,9 @@ const onReset = () => {
                 <BaseLangugeSwitcher anchor="top left" self="bottom left" close-on-click />
               </q-btn>
               <BaseThemeSwitcher />
+              <div :class="isDark ? 'text-grey-5' : 'text-grey-7'">
+                {{ `@ ${getYearNow()} ${t('app.monogram')} ${appVersion}` }}
+              </div>
             </div>
           </div>
         </div>

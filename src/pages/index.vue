@@ -220,7 +220,7 @@ const sparkLineItems = [
           <div class="col-12 col-md-8" :class="{ 'q-pr-md': !isSmallScreen }">
             <BaseTabs
               v-model="toggleModel"
-              :full-width="false"
+              :full-width="isSmallScreen"
               :items="[
                 { label: 'Overview', value: 'overview' },
                 { label: 'Analytics', value: 'analytics' },
@@ -246,8 +246,8 @@ const sparkLineItems = [
         </div>
       </q-card-section>
 
-      <div class="row">
-        <div v-for="(item, index) in statisticItems" :key="index" class="col-12 col-md-3 " :class="{ 'q-pa-md': !isSmallScreen, 'q-px-md q-py-xs': isSmallScreen }">
+      <div class="row" :class="{ 'q-mb-md': isSmallScreen }">
+        <div v-for="(item, index) in statisticItems" :key="index" class="col-12 col-md-3 " :class="{ 'q-pa-md': !isSmallScreen, 'q-px-md q-py-sm': isSmallScreen }">
           <BaseCard :flat="false" :margin="false">
             <q-item>
               <q-item-section>

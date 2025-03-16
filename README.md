@@ -36,16 +36,16 @@ devServer
 ### Start the app in development SPA mode (hot-code reloading, error reporting, etc.)
 
 ```bash
-npm run dev or
 pnpm dev or
+npm run dev or
 quasar dev
 ```
 Starting webserver at port 9000
 ### Start the app in development SSR mode (hot-code reloading, error reporting, etc.)
 
 ```bash
-npm run dev:ssr or
 pnpm dev:ssr or
+npm run dev:ssr or
 quasar dev -m ssr
 ```
 Starting webserver at port 9100
@@ -68,7 +68,7 @@ npm run format
 ### Build the SPA app for production
 
 ```bash
-pnpm run build or
+pnpm build or
 yarn build or
 quasar build
 ```
@@ -76,8 +76,8 @@ quasar build
 ### Build the SSR app for production
 
 ```bash
+pnpm build:ssr or
 npm run build:ssr or
-yarn build:ssr or
 quasar build -m ssr
 ```
 
