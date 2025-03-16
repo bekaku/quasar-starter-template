@@ -6,24 +6,7 @@ A Quasar Project\
 # Backend Rest Api
 
 1 Java Springboot [java-spring-boot-starter](https://github.com/bekaku/java-spring-boot-starter)
-```
-Comment out /src/api/AuthenService.ts
 
-  const singin = async (
-    loginRequest: LoginRequest
-  ): Promise<RefreshTokenResponse | null> => {
-     return await callAxios<RefreshTokenResponse>({
-       API: '/api/auth/login',
-       method: 'POST',
-       body: loginRequest,
-     });
-    //return new Promise((resovle) => {
-    //  setTimeout(() => {
-    //    resovle(authenResponse)
-    //  }, 500);
-    //})
-  };
-```
 
 ## Install the dependencies
 
@@ -33,12 +16,309 @@ yarn
 npm install
 ```
 
+# In case you want to use my API, edit the following file.
 
 API endpoint at `my-app/env/.env.dev` or `my-app/env/.env.prod`
 
 ```js
 APP_BASE_API= 'http://localhost:8080'
 APP_BASE_CDN_API= 'http://localhost:8080'
+```
+
+modify /src/api/AuthenService.ts
+```js
+  const singin = async (
+    loginRequest: LoginRequest
+  ): Promise<RefreshTokenResponse | null> => {
+     return await callAxios<RefreshTokenResponse>({
+       API: '/api/auth/login',
+       method: 'POST',
+       body: loginRequest,
+     });
+  };
+
+
+  const singoutToServer = async (
+    refreshToken: RefreshTokenRequest
+  ): Promise<ResponseMessage | null> => {
+     return await callAxios<ResponseMessage>({
+       API: '/api/auth/logout',
+       method: 'POST',
+       body: refreshToken,
+     });
+  };
+
+  const refreshToken = async (
+    refreshToken: RefreshTokenRequest
+  ): Promise<RefreshTokenResponse | null> => {
+     return await callAxios<RefreshTokenResponse>({
+       API: '/api/auth/refreshToken',
+       method: 'POST',
+      body: refreshToken,
+    });
+  };
+
+  const removeAccessTokenSession = async (
+    id: number
+  ): Promise<ResponseMessage | null> => {
+     return await callAxios<ResponseMessage>({
+       API: `/api/auth/removeAccessTokenSession?id=${id}`,
+      method: 'DELETE',
+     });
+  };
+
+  const requestVerifyCodeToResetPwd = async (
+    req: ForgotPasswordRequest
+  ): Promise<AxiosResponse<ResponseMessage | AppException> | null> => {
+     return await callAxiosProcess<ResponseMessage | AppException>({
+       API: '/api/auth/requestVerifyCodeToResetPwd',
+       method: 'POST',
+       body: {
+         forgotPasswordRequest: req
+       },
+     });
+  };
+  const sendVerifyCodeToResetPwd = async (
+    req: ForgotPasswordRequest
+  ): Promise<AxiosResponse<ResponseMessage | AppException> | null> => {
+    return await callAxiosProcess<ResponseMessage | AppException>({
+       API: '/api/auth/sendVerifyCodeToResetPwd',
+       method: 'POST',
+       body: {
+         forgotPasswordRequest: req
+       },
+     });
+  };
+  const resetPassword = async (
+    req: ForgotPasswordRequest
+  ): Promise<AxiosResponse<ResponseMessage | AppException> | null> => {
+     return await callAxiosProcess<ResponseMessage | AppException>({
+       API: '/api/auth/resetPassword',
+       method: 'POST',
+       body: {
+         forgotPasswordRequest: req
+       },
+     });
+  };
+```
+
+modify /src/api/FileManagerService.ts
+```js
+const uploadApi = async (
+    file: any,
+    fileDirectoryId = 0,
+    resizeImage = true
+  ): Promise<FileManagerDto | null> => {
+    const postData = new FormData();
+    postData.append(FILES_UPLOAD_ATT, file);
+    postData.append(FILES_DIRECTORY_ID_ATT, fileDirectoryId.toString());
+    postData.append('resizeImage', resizeImage ? '1' : '0');
+    return await callAxios<FileManagerDto>({
+      API: '/api/fileManager/uploadApi',
+      method: 'POST',
+      body: postData,
+      baseURL: cdnBaseApi || '',
+      contentType: 'multipart/form-data'
+    });
+  };
+
+  const deleteFileApi = async (fileId: number): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: `/api/fileManager/deleteFileApi/${fileId}`,
+      method: 'DELETE',
+      baseURL: cdnBaseApi
+    });
+  };
+
+  const updateUserAvatar = async (
+    fileManagerId: number
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: `/api/fileManager/updateUserAvatar?fileManagerId=${fileManagerId}`,
+      method: 'PUT',
+      baseURL: cdnBaseApi
+    });
+  };
+
+  const updateUserCover = async (
+    fileManagerId: number
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: `/api/fileManager/updateUserCover?fileManagerId=${fileManagerId}`,
+      method: 'PUT',
+      baseURL: cdnBaseApi
+    });
+  };
+```
+modify /src/api/PermissionService.ts
+```js
+const userAcl = async (getMenuList = 0): Promise<IAcl | null> => {
+    return await callAxios<IAcl | null>({
+      API: `/api/permission/userAcl?getMenuList=${getMenuList}`,
+      method: 'GET',
+    });
+  };
+
+  const findAll = async (q: string): Promise<IApiListResponse<Permission> | null> => {
+    return await callAxios<IApiListResponse<Permission>>({
+      API: `/api/permission${q}`,
+      method: 'GET',
+    });
+  };
+  const findAllBackendPermission = async (): Promise<Permission[] | null> => {
+    return await callAxios<Permission[]>({
+      API: '/api/permission/findAllBackendPermission',
+      method: 'GET',
+    });
+  };
+  const findAllFrontendPermission = async (): Promise<Permission[] | null> => {
+    return await callAxios<Permission[]>({
+      API: '/api/permission/findAllFrontendPermission',
+      method: 'GET',
+    });
+  };
+```
+modify /src/api/RoleService.ts
+```js
+const findAllBackendRole = async (): Promise<Role[] | null> => {
+    return await callAxios<Role[]>({
+      API: '/api/role/findAllBackend',
+      method: 'GET',
+    });
+  };
+
+  const findAllSystemFrontend = async (): Promise<Role[] | null> => {
+    return await callAxios<Role[]>({
+      API: '/api/role/findAllSystemFrontend',
+      method: 'GET',
+    });
+  };
+  const findAllByCompanyAndFrontend = async (
+    companyId: number
+  ): Promise<Role[] | null> => {
+    return await callAxios<Role[]>({
+      API: `/api/role/findAllByCompanyAndFrontend?companyId=${companyId}`,
+      method: 'GET',
+    });
+  };
+  const findAllRoleByCompany = async (): Promise<Role[] | null> => {
+    return await callAxios<Role[] | null>({
+      API: '/api/role/findAllByCompany',
+      method: 'GET',
+    });
+  };
+  const findAllByAuthAndFrontend = async (): Promise<Role[] | null> => {
+    return await callAxios<Role[]>({
+      API: '/api/role/findAllByAuthAndFrontend',
+      method: 'GET',
+    });
+  };
+```
+modify /src/api/UserService.ts
+```js
+const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => {
+      console.log('UserService.ts > findAll > ', `/api/user${q}`);
+      return await callAxios<IApiListResponse<UserDto>>({
+        API: `/api/user${q}`,
+        method: 'GET',
+      });
+    };
+  const findCurrentUserData = async (): Promise<UserDto | null> => {
+    return await callAxios<UserDto>({
+      API: '/api/user/currentUserData',
+      method: 'GET',
+    });
+  };
+  const updateUserAvatar = async (
+    fileManagerId: number
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: `/api/user/updateUserAvatar?fileManagerId=${fileManagerId}`,
+      method: 'PUT',
+    });
+  };
+  const updateUserCover = async (
+    fileManagerId: number
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: `/api/user/updateUserCover?fileManagerId=${fileManagerId}`,
+      method: 'PUT',
+    });
+  };
+  const updateDefaultLocale = async (locale: AppLocale): Promise<UserDto | null> => {
+    return await callAxios<UserDto>({
+      API: `/api/user/updateDefaultLocale/?locale=${locale}`,
+      method: 'PUT',
+    });
+  };
+  const selfUpdatePassword = async (
+    req: UserChangePasswordRequest
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: '/api/user/selfUpdatePassword',
+      method: 'PUT',
+      body: req,
+    });
+  };
+  const updateUserPassword = async (
+    req: UserChangePasswordRequest,
+    userId: number
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: `/api/user/updateUserPassword/${userId}`,
+      method: 'PUT',
+      body: req,
+    });
+  };
+  const updateUserPasswordByAdmin = async (
+    req: UserChangePasswordRequest,
+    userId: number
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: `/api/user/updateUserPasswordByAdmin/${userId}`,
+      method: 'PUT',
+      body: req,
+    });
+  };
+  const currentAuthSession = async (q: string): Promise<AccessTokenDto[] | null> => {
+    return await callAxios<AccessTokenDto[]>({
+      API: `/api/user/currentAuthSession${q}`,
+      method: 'GET',
+    });
+  };
+
+  const updatePersonalData = async (
+    req: UserPersonalEditRequest
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: '/api/user/updatePersonalData',
+      method: 'PUT',
+      body: {
+        user: req,
+      },
+    });
+  };
+
+  const updateEmail = async (
+    req: UserPersonalEditRequest
+  ): Promise<ResponseMessage | null> => {
+    return await callAxios<ResponseMessage>({
+      API: '/api/user/updateEmail',
+      method: 'PUT',
+      body: {
+        user: req,
+      },
+    });
+  };
+```
+modify /src/api/UtilService.ts
+```js
+const getOgMeta = async (link: string): Promise<OgMeta | null> => {
+    return await callAxios<OgMeta>({
+      API: `/api/public/getOgMeta?url=${link}`,
+      method: 'GET',
+    });
+  };
 ```
 
 Config your Project at `my-app`/quasar.config.ts
