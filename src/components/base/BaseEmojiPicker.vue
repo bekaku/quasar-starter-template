@@ -1,5 +1,6 @@
 <template>
   <q-card flat>
+    <BaseSpinner v-if="loading"></BaseSpinner>
     <q-no-ssr>
       <div :id="pickerId" />
     </q-no-ssr>
@@ -11,12 +12,14 @@ import { ref, onMounted } from 'vue';
 import data from '@emoji-mart/data';
 // import { Picker } from 'emoji-mart';
 import type { EmojiSet } from '@/types/common';
+import BaseSpinner from './BaseSpinner.vue';
 const { theme = 'light', pickerId = 'emoji-id' } = defineProps<{
   pickerId?: string;
   theme?: 'light' | 'dark';
 }>();
 const pickerEmoji = ref();
 const iconSet = ref<EmojiSet>('native'); // native, apple, facebook, google, twitter
+const loading =ref(true);
 onMounted(() => {
   init();
 });
@@ -24,6 +27,7 @@ const init = async () => {
   if (process.env.SERVER) {
     return;
   }
+  console.log('init Emoji')
   const EmojiMart = await import('emoji-mart');
   pickerEmoji.value = new EmojiMart.Picker({
     // data: data,
@@ -70,6 +74,7 @@ const init = async () => {
       },
     ],
   });
+  loading.value = false;
 };
 const emit = defineEmits(['on-close', 'on:emojiClick']);
 const onSelectEmoji = (event: any) => {

@@ -265,7 +265,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        component: () => import('@/pages/chats/index.vue')
+        component: () => import('@/pages/example/chats/index.vue')
       },
     ]
   },

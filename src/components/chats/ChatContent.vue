@@ -62,7 +62,7 @@ onMounted(async () => {});
 </template>
 <style lang="scss" scoped>
 .card-bg {
-  background-color: var(--gray-50);
+  background-color: var(--color-zinc-50);
 }
 
 .card-top-bg {
@@ -71,11 +71,11 @@ onMounted(async () => {});
 
 body.body--dark {
   .card-bg {
-    background-color: var(--color-dark-800);
+    background-color: var(--color-zinc-600);
   }
 
   .card-top-bg {
-    background-color: var(--color-dark-900);
+    background-color: var(--color-zinc-800);
   }
 }
 </style>
