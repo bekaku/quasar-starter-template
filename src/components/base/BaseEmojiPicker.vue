@@ -1,5 +1,5 @@
 <template>
-  <q-card flat>
+  <q-card flat style="min-width: 250px;">
     <BaseSpinner v-if="loading"></BaseSpinner>
     <q-no-ssr>
       <div :id="pickerId" />

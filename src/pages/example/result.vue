@@ -23,7 +23,7 @@ setTitle(`Result | ${t('app.name')}`);
     <BaseCard title="Alert">
       <q-card-section>
         <div class="row">
-          <div class="col-6 q-pa-md">
+          <div class="col-12 col-md-6 q-pa-md">
             <div class="q-gutter-md">
               <BaseAlert
                 type="is-primary"
@@ -53,7 +53,7 @@ setTitle(`Result | ${t('app.name')}`);
               />
             </div>
           </div>
-          <div class="col-6 q-pa-md">
+          <div class="col-12 col-md-6 q-pa-md">
             <div class="q-gutter-md">
               <BaseAlert
                 type="is-primary"
