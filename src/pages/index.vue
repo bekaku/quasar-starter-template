@@ -16,7 +16,7 @@ import BaseTabs from 'src/components/base/BaseTabs.vue';
 import ChartArea from 'src/components/chart/ChartArea.vue';
 import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
 import SkeletonCard from 'src/components/skeleton/SkeletonCard.vue';
-import { useBase } from 'src/composables/useBase';
+import { useTheme } from 'src/composables/useTheme';
 import { useDevice } from 'src/composables/useDevice';
 import type { ISeriresCategories } from 'src/types/chart';
 import type { LabelValue } from 'src/types/common';
@@ -28,7 +28,7 @@ const { isSmallScreen } = useDevice();
 const dateRangeStart = ref<string>('2025-01-01');
 const dateRangeEnd = ref<string>('2025-02-15');
 const toggleModel = ref<string>('overview');
-const { isDark } = useBase();
+const { isDark } = useTheme();
 const showChart = ref<boolean>(false);
 onMounted(() => {
   setTimeout(() => {
@@ -298,6 +298,7 @@ const sparkLineItems = [
                       :colors="[item.color]"
                       :series="item.series"
                       :categories="item.categories"
+                      :dark="isDark"
                     />
                   </q-no-ssr>
                 </q-item-section>
@@ -325,6 +326,7 @@ const sparkLineItems = [
                     strokestyle="smooth"
                     :label-rotate="!isSmallScreen ? 0 : -45"
                     :xaxis-tickamount="4"
+                    :dark="isDark"
                   />
                 </q-no-ssr>
               </Transition>
