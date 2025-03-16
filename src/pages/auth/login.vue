@@ -138,7 +138,7 @@ const onReset = () => {
               <Ellipsis :lines="2"> Welcome to Our {{ t('app.monogram') }} </Ellipsis>
             </h2>
             <div class="text-h5">
-              <Ellipsis :lines="1"> Embark on your next adventure sadasd </Ellipsis>
+              <Ellipsis :lines="1"> Embark on your next adventure </Ellipsis>
             </div>
           </div>
         </div>
