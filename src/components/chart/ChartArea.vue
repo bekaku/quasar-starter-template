@@ -77,22 +77,24 @@ const {
   opacity?: number;
 }>();
 // const { isDark } = useBase();
-const { dark: isDark } = useQuasar();
+// const { dark: isDark } = useQuasar();
 const chartSeries = ref(series);
 const options = ref<any>();
 const chartAreaRef = useTemplateRef<any>('chartAreaRef');
+const initial = ref(false);
 // watchEffect(() => {
-//   if (series && series.length > 0) {
-//     chartSeries.value = series;
-//   }
+  // if (series && series.length > 0) {
+  //   chartSeries.value = series;
+  // }
 // });
 onUnmounted(() => {
   options.value = undefined;
   chartSeries.value = [];
 });
 
-onMounted(() => {
-  chartSetup();
+onMounted(async () => {
+ await chartSetup();
+ initial.value = true;
 });
 const updateTheme = (dark: boolean) => {
   if (chartAreaRef.value) {
@@ -143,7 +145,7 @@ const chartSetup = () => {
         },
       },
       theme: {
-        mode: isDark.isActive ? 'dark' : mode,
+        mode: dark ? 'dark' : mode,
         palette,
       },
       plotOptions: {
@@ -237,6 +239,9 @@ const chartSetup = () => {
     // );
     // chart.value.render();
   }
+  return new Promise((resolve) => {
+    resolve(true);
+  });
 };
 </script>
 <template>

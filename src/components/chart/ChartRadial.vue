@@ -46,6 +46,7 @@ const {
   trackBackgroudDark = '#383a42',
   fillType = 'gradient',
   valUnit,
+  dark = false 
 } = defineProps<{
   chartId?: string;
   height?: string;
@@ -79,10 +80,11 @@ const {
   valUnit?: string;
   trackBackgroud?: string;
   trackBackgroudDark?: string;
+  dark?: boolean;
 }>();
 const chartSeries = ref(series);
 const options = ref<any>();
-const { dark: isDark } = useQuasar();
+// const { dark: isDark } = useQuasar();
 const chartRadialRef = useTemplateRef<any>('chartRadialRef');
 // watchEffect(() => {
 //   if (series && series.length > 0) {
@@ -97,26 +99,26 @@ onUnmounted(() => {
 onMounted(() => {
   chartSetup();
 });
-const updateTheme = (dark: boolean) => {
+const updateTheme = (darkMode: boolean) => {
   if (chartRadialRef.value) {
     chartRadialRef.value.updateOptions({
       theme: {
-        mode: dark ? 'dark' : 'light',
+        mode: darkMode ? 'dark' : 'light',
       },
       plotOptions: {
         radialBar: {
           hollow: {
-            background: dark ? 'transparent' : '#fff',
+            background: darkMode ? 'transparent' : '#fff',
             dropShadow: {
-              enabled: !semi && !dark,
+              enabled: !semi && !darkMode,
             },
           },
           track: {
-            background: !dark ? trackBackgroud : trackBackgroudDark,
+            background: !darkMode ? trackBackgroud : trackBackgroudDark,
           },
           dataLabels: {
             value: {
-              color: dark ? '#fff' : '#000',
+              color: darkMode ? '#fff' : '#000',
             },
           },
         },
@@ -151,7 +153,7 @@ const chartSetup = () => {
         // offsetY: semi ? -20 : 0,
       },
       theme: {
-        mode: isDark.isActive ? 'dark' : mode,
+        mode: dark ? 'dark' : mode,
         palette,
       },
       plotOptions: {
@@ -173,7 +175,7 @@ const chartSetup = () => {
             },
           },
           track: {
-            background: isDark.isActive ? trackBackgroudDark : trackBackgroud,
+            background: dark ? trackBackgroudDark : trackBackgroud,
             strokeWidth: '100%',
             margin: 2, // margin is in pixels
             dropShadow: {

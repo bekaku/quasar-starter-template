@@ -19,6 +19,7 @@ const {
   categories,
   strokestyle = 'smooth',
   strokeWidth = 1,
+  dark=false,
 } = defineProps<{
   chartId?: string;
   height?: string;
@@ -40,7 +41,7 @@ const {
   strokeWidth?: number;
 }>();
 
-const { dark: isDark } = useQuasar();
+// const { dark: isDark } = useQuasar();
 const chartSeries = ref(series);
 const options = ref<any>();
 const chartPieRef = useTemplateRef<any>('chartPieRef');
@@ -57,11 +58,11 @@ onUnmounted(() => {
 onMounted(() => {
   chartSetup();
 });
-const updateTheme = (dark: boolean) => {
+const updateTheme = (darkMode: boolean) => {
   if (chartPieRef.value) {
     chartPieRef.value.updateOptions({
       theme: {
-        mode: dark ? 'dark' : 'light',
+        mode: darkMode ? 'dark' : 'light',
       },
     });
   }
@@ -90,7 +91,7 @@ const chartSetup = () => {
         },
       },
       theme: {
-        mode: isDark.isActive ? 'dark' : mode,
+        mode: dark ? 'dark' : mode,
         palette,
       },
       plotOptions: {},

@@ -8,12 +8,13 @@ import ChartPie from 'src/components/chart/ChartPie.vue';
 import ChartRadar from 'src/components/chart/ChartRadar.vue';
 import ChartRadial from 'src/components/chart/ChartRadial.vue';
 import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
-import { useBase } from 'src/composables/useBase';
+import { useTheme } from 'src/composables/useTheme';
 import type { ISeriresCategories } from 'src/types/chart';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Charts | ${t('app.name')}`);
-const { isDark } = useBase();
+
+const { isDark } = useTheme();
 const chartData: ISeriresCategories = {
   categories: [
     'January',
@@ -114,6 +115,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :series="simpleSeries.slice(0, 3)"
                 :categories="simpleCategories.slice(0, 3)"
                 legend-position="right"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -126,6 +128,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :colors="['#8D6E63']"
                 :series="simpleSeries.slice(0, 1)"
                 :categories="simpleCategories.slice(0, 1)"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -158,6 +161,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 }"
                 :series="simpleSeries.slice(2, 3)"
                 :categories="simpleCategories.slice(2, 3)"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -178,6 +182,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :colors="['#9E9E9E']"
                 :series="appleStockPrices.series"
                 :categories="appleStockPrices.categories"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -191,6 +196,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :colors="['#607D8B']"
                 :series="appleStockPrices.series"
                 :categories="appleStockPrices.categories"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -204,6 +210,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :colors="['#607D8B']"
                 :series="appleStockPrices.series"
                 :categories="appleStockPrices.categories"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -217,6 +224,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :colors="['#8D6E63']"
                 :series="appleStockPrices.series"
                 :categories="appleStockPrices.categories"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -249,6 +257,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :grid-colors="!isDark ? ['#f8f8f8', '#fff'] : ['#383a42', '#717886']"
                 :series="chartData2.series.slice(0, 1)"
                 :categories="chartData2.categories"
+                :dark="isDark"
               />
             </q-no-ssr>
           </div>
@@ -273,6 +282,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :label-rotate="-45"
               show-toolbar
               zoom
+              :dark="isDark"
             />
           </q-no-ssr>
         </div>
@@ -289,6 +299,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :categories="chartData.categories"
               strokestyle="straight"
               :xaxis-tickamount="3"
+              :dark="isDark"
             />
           </q-no-ssr>
         </div>
@@ -309,6 +320,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               strokestyle="straight"
               :label-rotate="-45"
               :stroke-width="3"
+              :dark="isDark"
             />
           </q-no-ssr>
         </div>
@@ -325,6 +337,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               strokestyle="smooth"
               :xaxis-tickamount="3"
               :stroke-width="3"
+              :dark="isDark"
             />
           </q-no-ssr>
         </div>
@@ -343,6 +356,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
           :categories="chartData.categories"
           strokestyle="smooth"
           :label-rotate="-45"
+          :dark="isDark"
         />
         <div class="row">
           <div class="col-12 col-md-6">
@@ -357,6 +371,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :categories="chartData.categories"
               strokestyle="smooth"
               :label-rotate="-90"
+              :dark="isDark"
             />
           </div>
           <div class="col-12 col-md-6">
@@ -370,6 +385,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :series="chartData.series.slice(0, 1)"
               :categories="chartData.categories"
               strokestyle="smooth"
+              :dark="isDark"
             />
           </div>
         </div>
@@ -388,6 +404,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               type="pie"
               :series="simpleSeries"
               :categories="simpleCategories"
+              :dark="isDark"
             />
           </q-no-ssr>
         </div>
@@ -410,6 +427,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               ]"
               :series="simpleSeries"
               :categories="simpleCategories"
+              :dark="isDark"
             />
           </q-no-ssr>
         </div>

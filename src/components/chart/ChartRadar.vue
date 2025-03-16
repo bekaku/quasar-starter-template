@@ -36,6 +36,7 @@ const {
   markers = 0,
   strokeWidth = 2,
   opacity = 0.2,
+  dark = false,
 } = defineProps<{
   chartId?: string;
   height?: string;
@@ -61,10 +62,11 @@ const {
   strokeWidth?: number;
   gridColors?: string[];
   opacity?: number;
+  dark?: boolean;
 }>();
 const chartSeries = ref(series);
 const options = ref<any>();
-  const { dark: isDark } = useQuasar();
+// const { dark: isDark } = useQuasar();
 
 const chartRadarRef = useTemplateRef<any>('chartRadarRef');
 // watchEffect(() => {
@@ -80,12 +82,12 @@ onUnmounted(() => {
 onMounted(() => {
   chartSetup();
 });
-const updateTheme = (dark: boolean) => {
+const updateTheme = (darkMode: boolean) => {
   if (options.value) {
     if (chartRadarRef.value) {
       chartRadarRef.value.updateOptions({
         theme: {
-          mode: dark ? 'dark' : 'light',
+          mode: darkMode ? 'dark' : 'light',
         },
         plotOptions: {
           radar: {
@@ -120,7 +122,7 @@ const chartSetup = () => {
         },
       },
       theme: {
-        mode: isDark.isActive ? 'dark' : mode,
+        mode: dark ? 'dark' : mode,
         palette,
       },
       plotOptions: {

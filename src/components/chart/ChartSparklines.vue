@@ -29,6 +29,7 @@ const {
   tooltipEnable = true,
   type = 'area',
   strokestyle = 'straight',
+  dark= false
 } = defineProps<{
   chartId?: string;
   height?: string;
@@ -44,12 +45,13 @@ const {
   strokeWidth?: number;
   strokestyle?: Strokestyle;
   opacity?: number;
+  dark?: boolean;
   type?: 'area' | 'line' | 'bar';
 }>();
 const chartSeries = ref(series);
 const options = ref<any>();
 // const { isDark } = useBase();
-const { dark } = useQuasar();
+// const { dark } = useQuasar();
 
 const chartSparkLinesRef = useTemplateRef<any>('chartSparkLinesRef');
 
@@ -66,11 +68,12 @@ onUnmounted(() => {
 onMounted(() => {
   chartSetup();
 });
-const updateTheme = (dark: boolean) => {
+
+const updateTheme = (darkMode: boolean) => {
   if (chartSparkLinesRef.value) {
     chartSparkLinesRef.value.updateOptions({
       theme: {
-        mode: dark ? 'dark' : 'light',
+        mode: darkMode ? 'dark' : 'light',
       },
     });
   }
@@ -103,7 +106,7 @@ const chartSetup = () => {
         },
       },
       theme: {
-        mode: dark.isActive ? 'dark' : mode,
+        mode: dark ? 'dark' : mode,
         palette,
       },
       plotOptions: {},
