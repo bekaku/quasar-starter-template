@@ -24,6 +24,28 @@ API endpoint at `my-app/env/.env.dev` or `my-app/env/.env.prod`
 APP_BASE_API= 'http://localhost:8080'
 APP_BASE_CDN_API= 'http://localhost:8080'
 ```
+modify /src/App.vue
+```js
+defineOptions({
+  async preFetch({ currentRoute, ssrContext, redirect }) {
+        const refreshTokenReponse = await authenStore.refreshToken(ssrContext);
+      if (refreshTokenReponse && !refreshTokenReponse.status && refreshTokenReponse.fourceLogout) {
+        redirect({ path: '/auth/login' });
+      }
+      const userDataResponse = await callAxiosProcess<UserDto>({
+        API: '/api/user/currentUserData',
+        method: 'GET',
+      });
+    /*
+     const userDataResponse: any = {
+        status: 200,
+        statusText: 'OK',
+        data: userData,
+      };
+      */
+  },
+});
+```
 
 modify /src/api/AuthenService.ts
 ```js
