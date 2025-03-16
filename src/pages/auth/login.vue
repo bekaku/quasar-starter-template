@@ -60,7 +60,7 @@ const metaData = {
 
   // meta tags
   meta: {
-    description: { name: 'description', content: t('ssDescription') },
+    description: { name: 'description', content: 'Vue Quasar Example, Vue Quasar Example' },
     keywords: {
       name: 'keywords',
       content: 'Vue Quasar Example, Vue Quasar Example',
