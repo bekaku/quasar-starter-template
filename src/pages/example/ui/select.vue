@@ -4,10 +4,15 @@ import { useLang } from '@/composables/useLang';
 import type { LabelValue } from '@/types/common';
 import {
   biAirplane,
+  biApple,
+  biFacebook,
   biGear,
+  biGoogle,
   biLightbulb,
+  biMicrosoft,
   biPerson,
   biPhone,
+  biTwitter,
   biX,
 } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
@@ -43,27 +48,27 @@ const simpleItems: LabelValue<number>[] = [
     label: 'Google',
     value: 1,
     description: 'Fox',
-    icon: biAirplane,
+    icon: biGoogle,
   },
   {
     label: 'Facebook',
     value: 2,
-    icon: biGear,
+    icon: biFacebook,
   },
   {
     label: 'Twitter',
     value: 3,
-    icon: biLightbulb,
+    icon: biTwitter,
   },
   {
     label: 'Apple',
     value: 4,
-    icon: biPerson,
+    icon: biApple,
   },
   {
-    label: 'Oracle',
+    label: 'Microsoft',
     value: 5,
-    icon: biPhone,
+    icon: biMicrosoft,
   },
 ];
 const simpleItems2: LabelValue<number>[] = [
@@ -197,7 +202,7 @@ const onLazyScroll = (to: number, ref: any) => {
               :items="simpleItems2"
               dense
               :multiple="false"
-              label="Select Multiple"
+              label="Select user"
             />
             <p>singleModel2 : {{ singleModel2 }}</p>
           </div>
