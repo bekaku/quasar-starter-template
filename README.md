@@ -6,6 +6,24 @@ A Quasar Project\
 # Backend Rest Api
 
 1 Java Springboot [java-spring-boot-starter](https://github.com/bekaku/java-spring-boot-starter)
+```
+Comment out /src/api/AuthenService.ts
+
+  const singin = async (
+    loginRequest: LoginRequest
+  ): Promise<RefreshTokenResponse | null> => {
+     return await callAxios<RefreshTokenResponse>({
+       API: '/api/auth/login',
+       method: 'POST',
+       body: loginRequest,
+     });
+    //return new Promise((resovle) => {
+    //  setTimeout(() => {
+    //    resovle(authenResponse)
+    //  }, 500);
+    //})
+  };
+```
 
 ## Install the dependencies
 
