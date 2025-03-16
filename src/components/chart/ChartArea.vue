@@ -86,6 +86,9 @@ const initial = ref(false);
   // if (series && series.length > 0) {
   //   chartSeries.value = series;
   // }
+  // if (initial.value && options.value !=undefined && chartSeries.value.length>0) {
+  //   updateTheme(dark)
+  // }
 // });
 onUnmounted(() => {
   options.value = undefined;
@@ -96,14 +99,19 @@ onMounted(async () => {
  await chartSetup();
  initial.value = true;
 });
-const updateTheme = (dark: boolean) => {
-  if (chartAreaRef.value) {
-    chartAreaRef.value.updateOptions({
+const updateTheme = (darkMode: boolean) => {
+  options.value={
       theme: {
-        mode: dark ? 'dark' : 'light',
+        mode: darkMode ? 'dark' : 'light',
       },
-    });
-  }
+    }
+  // if (chartAreaRef.value) {
+  //   chartAreaRef.value.updateOptions({
+  //     theme: {
+  //       mode: darkMode ? 'dark' : 'light',
+  //     },
+  //   });
+  // }
 };
 // watch(
 //   () => isDark.isActive,
