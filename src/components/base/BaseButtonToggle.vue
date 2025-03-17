@@ -14,7 +14,7 @@ const mapOptions = (model: any) => {
   return (option: any) => {
     return {
       ...option,
-      class: model === option.value ? 'btn-toggle-on-class' : 'btn-toggle-off-class',
+      class: model === option.value ? 'btn-group-toggle btn-toggle-on-class' : 'btn-group-toggle btn-toggle-off-class',
     };
   };
 };
@@ -23,6 +23,7 @@ const filterOptions = computed(() => options.map(mapOptions(modelValue.value)));
 <template>
   <q-btn-toggle
     v-bind="$attrs"
+    dense
     class="shadow-0 q-gutter-x-xs default"
     v-model="modelValue"
     no-caps

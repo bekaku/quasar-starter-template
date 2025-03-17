@@ -46,11 +46,11 @@ const navs: LabelValue<any>[] = [
 <template>
     <BasePage v-bind="$attrs">
         <div class="row">
-            <div class="col-12 col-md-4 q-px-md">
+            <div class="col-12 col-md-3 q-px-md">
                 <BaseMenuItems :items="navs" />
             </div>
 
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-9">
                 <slot name="content" />
             </div>
         </div>

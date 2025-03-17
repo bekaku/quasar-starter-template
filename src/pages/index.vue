@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import {
+  biBarChart,
+  biChatDots,
   biCreditCard,
   biCurrencyDollar,
   biGraphUp,
   biMusicNote,
-  biPeople,
+  biNewspaper,
+  biPeople
 } from '@quasar/extras/bootstrap-icons';
 import { useMeta } from 'quasar';
 import BaseAvatar from 'src/components/base/BaseAvatar.vue';
@@ -13,11 +16,12 @@ import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseDatePicker from 'src/components/base/BaseDatePicker.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseTabs from 'src/components/base/BaseTabs.vue';
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
 import ChartArea from 'src/components/chart/ChartArea.vue';
 import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
 import SkeletonCard from 'src/components/skeleton/SkeletonCard.vue';
-import { useTheme } from 'src/composables/useTheme';
 import { useDevice } from 'src/composables/useDevice';
+import { useTheme } from 'src/composables/useTheme';
 import type { ISeriresCategories } from 'src/types/chart';
 import type { LabelValue } from 'src/types/common';
 import { onMounted, ref } from 'vue';
@@ -152,7 +156,7 @@ const sparkLineItems = [
     label: 'Revenue Status',
     description: '12.030',
     value: '27%',
-    color: '#23d160',
+    color: '#15803d',
     bg: 'green-1',
     series: [
       {
@@ -166,7 +170,7 @@ const sparkLineItems = [
     label: 'Page View',
     description: '5592',
     value: '12%',
-    color: '#fb923c',
+    color: '#f97316',
     bg: 'orange-1',
     series: [
       {
@@ -180,7 +184,7 @@ const sparkLineItems = [
     label: 'Bounce Rate',
     description: '55.56%',
     value: '22%',
-    color: '#f87171',
+    color: '#ef4444',
     bg: 'red-1',
     series: [
       {
@@ -195,7 +199,7 @@ const sparkLineItems = [
     description: '12.56%',
     value: '17%',
     color: '#8b5cf6',
-    bg: 'purple-2',
+    bg: 'purple-1',
     series: [
       {
         name: 'sale',
@@ -203,6 +207,27 @@ const sparkLineItems = [
       },
     ],
     categories: ['sale'],
+  },
+];
+
+const heroItems: LabelValue<string>[] = [
+  {
+    label: 'Social Feed',
+    description: 'Example Facebook feed clone',
+    to: '/example/feed',
+    icon: biNewspaper,
+  },
+  {
+    label: 'Chats',
+    description: 'Chat layout example',
+    to: '/example/chats',
+    icon: biChatDots,
+  },
+  {
+    label: 'Charts',
+    description: 'Chart components Area, Bar, Line, Pie...',
+    to: '/example/charts',
+    icon: biBarChart,
   },
 ];
 </script>
@@ -246,8 +271,30 @@ const sparkLineItems = [
         </div>
       </q-card-section>
 
+      <div class="row">
+        <div v-for="(item, index) in heroItems" :key="index" class="col-12 col-md-4 q-px-md">
+          <BaseCard flat :bordered="false" class="bg-app-content-item">
+            <q-card-section>
+              <BaseTextHeader :icon="item.icon" :title="item.label">
+                <template #end>
+                  <q-item-section side>
+                    <BaseButton dense flat label="Explore" :to="item.to || ''" />
+                  </q-item-section>
+                </template>
+              </BaseTextHeader>
+              {{ item.description }}
+            </q-card-section>
+          </BaseCard>
+        </div>
+      </div>
+
       <div class="row" :class="{ 'q-mb-md': isSmallScreen }">
-        <div v-for="(item, index) in statisticItems" :key="index" class="col-12 col-md-3 " :class="{ 'q-pa-md': !isSmallScreen, 'q-px-md q-py-sm': isSmallScreen }">
+        <div
+          v-for="(item, index) in statisticItems"
+          :key="index"
+          class="col-12 col-md-3"
+          :class="{ 'q-pa-md': !isSmallScreen, 'q-px-md q-py-sm': isSmallScreen }"
+        >
           <BaseCard :flat="false" :margin="false">
             <q-item>
               <q-item-section>
@@ -267,14 +314,15 @@ const sparkLineItems = [
       <div class="q-px-md">
         <BaseCard>
           <div class="row">
-            <!-- index < sparkLineItems.length - 1 ? '1px solid var(--color-zinc-200)' : 'none', -->
             <div
               v-for="(item, index) in sparkLineItems"
               :key="index"
               class="col-12 col-md-3"
               :style="{
                 borderRight:
-                  !isSmallScreen && (index < sparkLineItems.length - 1) ? '1px solid var(--color-zinc-200)' : 'none',
+                  !isSmallScreen && index < sparkLineItems.length - 1
+                    ? `1px solid ${!isDark ? 'var(--color-zinc-200)' : 'var(--color-zinc-700)'}`
+                    : 'none',
               }"
             >
               <q-item>

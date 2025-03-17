@@ -102,10 +102,10 @@ const emit = defineEmits<{
 // <comp-use-model v-model="testModel" v-model:count="count"></comp-use-model>
 // const count = defineModel('count', { type: Number, default: 0 });
 // const count = defineModel('count', { type: Object as PropType<ISortMode>, default: {} });
-//const count = defineModel('count',{default: 0});
+// const count = defineModel('count',{default: 0});
 // const modelValue = defineModel<number>();
 // const modelValue = defineModel<number[]>({ default: [] });
-//const count = defineModel<number>('count',{default: 0});
+// const count = defineModel<number>('count',{default: 0});
 
 const emit = defineEmits<{
   'update:modelValue': [val: string | undefined];

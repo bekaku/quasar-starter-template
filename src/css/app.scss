@@ -330,7 +330,9 @@ body.body--dark .emoji-mart-anchor {
 .border-radius-inherit {
   border-radius: inherit;
 }
-
+.btn-group-toggle {
+  padding: 3px 8px !important;
+}
 .btn-toggle-off-class {
   border-radius: 10px !important;
   color: var(--color-zinc-800) !important;

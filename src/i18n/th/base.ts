@@ -294,7 +294,9 @@ export default {
         'lightTheme': 'โหมดกลางวัน',
         'darkTheme': 'โหมดกลางคืน',
         'systemTheme': 'ใช้โหมดของอุปกรณ์',
-        'realtimeTheme': 'ช่วงเวลา'
+        'realtimeTheme': 'ช่วงเวลา',
+        switchThemeDark: 'สลับไปใช้ธีมกลางคืน',
+        switchThemeLight: 'สลับไปใช้ธีมกลางวัน',
     },
     'paging': {
         'page': 'หน้า',

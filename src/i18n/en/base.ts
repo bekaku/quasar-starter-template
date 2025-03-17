@@ -293,7 +293,9 @@ export default {
         'lightTheme': 'Light',
         'darkTheme': 'Dark',
         'systemTheme': 'System',
-        'realtimeTheme': 'Realtime'
+        'realtimeTheme': 'Realtime',
+        switchThemeDark: 'Switch to dark theme',
+        switchThemeLight: 'Switch to light theme',
     },
     'paging': {
         'page': 'Page',

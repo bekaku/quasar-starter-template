@@ -22,6 +22,7 @@ import { useBase } from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
 import { ref } from 'vue';
 import Ellipsis from './Ellipsis.vue';
+import { useDevice } from 'src/composables/useDevice';
 
 const {
   persistent = false,
@@ -57,6 +58,7 @@ const modelValue = defineModel<boolean>({ default: false });
 const emit = defineEmits(['on-close', 'on-hide', 'on-before-hide']);
 const { t } = useLang();
 const { isDark } = useBase();
+const { isSmallScreen } = useDevice();
 const maximizeModel = ref(maximized);
 const onClose = () => {
   emit('on-close');
@@ -76,7 +78,7 @@ const onCloseModel = () => {
   <q-dialog
     :model-value="modelValue"
     :persistent="persistent"
-    :maximized="maximizeModel"
+    :maximized="maximizeModel || (isSmallScreen && fullHeight && fullHeight)"
     :transition-show="transitionShow"
     :transition-hide="transitionHide"
     :full-width="fullWidth"
@@ -88,7 +90,7 @@ const onCloseModel = () => {
       <slot name="toolBar">
         <q-bar
           v-if="showToolbar"
-          class="q-py-md"
+          class="q-py-lg"
           :class="{ 'bg-grey-2': !isDark, 'bg-dark-900': isDark }"
         >
           <slot name="icon">
@@ -98,7 +100,7 @@ const onCloseModel = () => {
           <div>
             <slot name="title">
               <Ellipsis v-if="title" :lines="1">
-              {{ title }}
+                {{ title }}
               </Ellipsis>
             </slot>
           </div>

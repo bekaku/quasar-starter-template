@@ -16,7 +16,7 @@ import {
 import { Cookies, useMeta } from 'quasar';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseInput from 'src/components/base/BaseInput.vue';
-import BaseLangugeSwitcher from 'src/components/base/BaseLangugeSwitcher.vue';
+import BaseLangugeSwitcherButton from 'src/components/base/BaseLangugeSwitcherButton.vue';
 import BaseLink from 'src/components/base/BaseLink.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
@@ -129,7 +129,7 @@ const onReset = () => {
     :class="{ 'bg-white': !isDark, 'app-second-bg-color-theme-dark': isDark }"
     :full="false"
   >
-    <div class="row items-center " :class="{ 'q-pa-md': !isSmallScreen }" style="height: 100vh">
+    <div class="row items-center" :class="{ 'q-pa-md': !isSmallScreen }" style="height: 100vh">
       <!-- Left Column - Fantasy Background -->
       <div class="col-12 col-md-6 fantasy-bg">
         <div class="overlay flex flex-center text-white">
@@ -145,7 +145,13 @@ const onReset = () => {
       </div>
       <!-- Right Column - Login Form -->
       <div class="col-12 col-md-6 flex flex-center">
-        <div class="q-pa-md" :style="{ width: !isSmallScreen ? '70%' : '90%', maxWidth: !isSmallScreen ? '80%' : '90%' }">
+        <div
+          class="q-pa-md"
+          :style="{
+            width: !isSmallScreen ? '70%' : '90%',
+            maxWidth: !isSmallScreen ? '80%' : '90%',
+          }"
+        >
           <div class="text-center q-mb-xl">
             <q-avatar size="100px" class="q-mb-md" square>
               <q-img
@@ -230,7 +236,7 @@ const onReset = () => {
 
             <q-separator class="q-my-md" />
             <div class="row items-center q-gutter-x-md justify-center">
-              <q-btn
+              <!-- <q-btn
                 size="13px"
                 flat
                 dense
@@ -241,7 +247,8 @@ const onReset = () => {
               >
                 <q-icon class="q-ml-sm" :name="biChevronExpand" size="14px" />
                 <BaseLangugeSwitcher anchor="top left" self="bottom left" close-on-click />
-              </q-btn>
+              </q-btn> -->
+              <BaseLangugeSwitcherButton anchor="top left" self="bottom left" close-on-click />
               <BaseThemeSwitcher />
               <div :class="isDark ? 'text-grey-5' : 'text-grey-7'">
                 {{ `@ ${getYearNow()} ${t('app.monogram')} ${appVersion}` }}

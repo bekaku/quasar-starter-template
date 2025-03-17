@@ -17,15 +17,17 @@ import {
 import { useQuasar } from 'quasar';
 import BaseLangugeSwitcher from 'src/components/base/BaseLangugeSwitcher.vue';
 import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
+import { useDevice } from 'src/composables/useDevice';
 import { useTheme } from 'src/composables/useTheme';
 const { screen } = useQuasar();
 const { t, currenLocale } = useLang();
-const { isDark } = useTheme()
+const { isDark } = useTheme();
 const authenStore = useAuthenStore();
 const { signOut } = useAuth();
+const { isSmallScreen } = useDevice();
 </script>
 <template>
-  <q-item v-bind="$attrs" clickable>
+  <q-item v-bind="$attrs" dense clickable class="rounded">
     <q-item-section avatar top>
       <base-avatar
         v-if="authenStore.loginedAvatar"
@@ -34,7 +36,7 @@ const { signOut } = useAuth();
         size="36px"
       />
     </q-item-section>
-    <q-item-section v-if="screen.gt.xs">
+    <q-item-section v-if="!isSmallScreen">
       <q-item-label lines="1">
         <span class="cursor-pointer text-weight-bold">
           {{ authenStore.loginedDisplay }}
@@ -42,12 +44,12 @@ const { signOut } = useAuth();
       </q-item-label>
       <q-item-label caption :lines="1"> Sofware Engineer </q-item-label>
     </q-item-section>
-    <q-item-section side>
+    <q-item-section v-if="!isSmallScreen" side>
       <q-icon :name="biChevronExpand" size="16px" />
     </q-item-section>
     <q-menu>
       <q-list style="min-width: 260px">
-        <q-item clickable v-close-popup :to="`/user/${authenStore.auth?.id}`">
+        <q-item clickable v-close-popup to="/example/feed">
           <q-item-section avatar>
             <base-avatar
               v-if="authenStore.loginedAvatar"

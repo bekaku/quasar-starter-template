@@ -1,17 +1,14 @@
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    height?: string;
-  }>(),
-  {
-    height: '420px',
-  },
-);
+const { height = '420px', maxWidth = '100vw' } = defineProps<{
+  height?: string;
+  maxWidth?: string;
+}>();
 </script>
 
 <template>
   <q-scroll-area
-    :style="{ height }"
+    v-bind="$attrs"
+    :style="{ height, maxWidth }"
     content-active-style="width: 100%;"
     content-style="width: 100%;"
   >

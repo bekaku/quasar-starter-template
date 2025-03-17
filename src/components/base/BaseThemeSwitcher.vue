@@ -34,7 +34,11 @@ const setTheme = (theme: ITheme) => {
     round
     dense
     @click="!dark.isActive ? setTheme('dark') : setTheme('light')"
-  />
+  >
+  <q-tooltip>
+      {{ dark.isActive ? t('theme.switchThemeLight') : t('theme.switchThemeDark') }}
+    </q-tooltip>
+  </BaseButton>
   <q-menu v-else :anchor="anchor" :self="self" v-bind="$attrs" :auto-close="closeOnClick">
     <q-list :style="{ minWidth: width }">
       <q-item
