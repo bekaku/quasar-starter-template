@@ -11,7 +11,7 @@ A Quasar Project\
 ## Install the dependencies
 
 ```bash
-yarn
+pnpm install
 # or
 npm install
 ```
@@ -389,7 +389,7 @@ npm run format
 
 ```bash
 pnpm build or
-yarn build or
+npm run build or
 quasar build
 ```
 
