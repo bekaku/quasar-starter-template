@@ -30,7 +30,6 @@ const {
 const { version: quasarVersion } = useQuasar();
 const { t } = useLang();
 const { appGoto } = useBase();
-const { isDark } = useBase();
 const { isMobileOrTablet: checkMobileOrTablet } = useDevice();
 const appStore = useAppStore();
 const modelValue = defineModel<boolean>({ default: true });

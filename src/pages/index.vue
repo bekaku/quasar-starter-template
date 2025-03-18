@@ -7,7 +7,7 @@ import {
   biGraphUp,
   biMusicNote,
   biNewspaper,
-  biPeople
+  biPeople,
 } from '@quasar/extras/bootstrap-icons';
 import { useMeta } from 'quasar';
 import BaseAvatar from 'src/components/base/BaseAvatar.vue';
@@ -273,7 +273,7 @@ const heroItems: LabelValue<string>[] = [
 
       <div class="row">
         <div v-for="(item, index) in heroItems" :key="index" class="col-12 col-md-4 q-px-md">
-          <BaseCard flat :bordered="false" class="bg-app-content-item">
+          <BaseCard flat class="card-shade">
             <q-card-section>
               <BaseTextHeader :icon="item.icon" :title="item.label">
                 <template #end>
@@ -419,5 +419,24 @@ const heroItems: LabelValue<string>[] = [
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.card-shade {
+  background: var(--color-zinc-50); /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    var(--color-zinc-50),
+    #fff
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    var(--color-zinc-50),
+    #fff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+body.body--dark {
+  .card-shade {
+    background: var(--color-zinc-800); /* fallback for old browsers */
+  }
 }
 </style>

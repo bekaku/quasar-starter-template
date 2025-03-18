@@ -10,11 +10,60 @@ import ChartRadial from 'src/components/chart/ChartRadial.vue';
 import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
 import { useTheme } from 'src/composables/useTheme';
 import type { ISeriresCategories } from 'src/types/chart';
+import { onMounted, reactive } from 'vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Charts | ${t('app.name')}`);
 
 const { isDark } = useTheme();
+
+const showChart = reactive({
+  radial: false,
+  sparkline: false,
+  radar: false,
+  area: false,
+  line: false,
+  bar: false,
+  pine: false,
+});
+onMounted(async () => {
+  await setShowChart(1);
+  await setShowChart(2);
+  await setShowChart(3);
+  await setShowChart(4);
+  await setShowChart(5);
+  await setShowChart(6);
+  await setShowChart(7);
+});
+const setShowChart = (no: number) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      switch (no) {
+        case 1:
+          showChart.radial = !showChart.radial;
+          break;
+        case 2:
+          showChart.sparkline = !showChart.sparkline;
+          break;
+        case 3:
+          showChart.radar = !showChart.radar;
+          break;
+        case 4:
+          showChart.area = !showChart.area;
+          break;
+        case 5:
+          showChart.line = !showChart.line;
+          break;
+        case 6:
+          showChart.bar = !showChart.bar;
+          break;
+        case 7:
+          showChart.pine = !showChart.pine;
+      }
+      resolve(true);
+    }, 100);
+  });
+};
 const chartData: ISeriresCategories = {
   categories: [
     'January',
@@ -105,11 +154,11 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
 </script>
 <template>
   <BasePage>
-    <BaseCard class="q-my-md" title="Radial">
-      <q-card-section>
-        <div class="row">
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+    <Transition>
+      <BaseCard v-if="showChart.radial" class="q-my-md" title="Radial">
+        <q-card-section>
+          <div class="row">
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartRadial
                 chart-id="radial-1"
                 :series="simpleSeries.slice(0, 3)"
@@ -117,10 +166,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 legend-position="right"
                 :dark="isDark"
               />
-            </q-no-ssr>
-          </div>
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+            </div>
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartRadial
                 chart-id="radial-2"
                 height="250"
@@ -130,10 +177,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="simpleCategories.slice(0, 1)"
                 :dark="isDark"
               />
-            </q-no-ssr>
-          </div>
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+            </div>
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartRadial
                 chart-id="radial-3"
                 semi
@@ -145,10 +190,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="simpleCategories.slice(1, 2)"
                 :show-legend="false"
               />
-            </q-no-ssr>
-          </div>
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+            </div>
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartRadial
                 chart-id="radial-4"
                 val-unit="%"
@@ -163,17 +206,16 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="simpleCategories.slice(2, 3)"
                 :dark="isDark"
               />
-            </q-no-ssr>
+            </div>
           </div>
-        </div>
-      </q-card-section>
-    </BaseCard>
-
-     <BaseCard class="q-my-md" title="Sparklines">
-      <q-card-section>
-        <div class="row">
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+        </q-card-section>
+      </BaseCard>
+    </Transition>
+    <Transition>
+      <BaseCard v-if="showChart.sparkline" class="q-my-md" title="Sparklines">
+        <q-card-section>
+          <div class="row">
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartSparklines
                 height="100"
                 chart-id="sparkline-area"
@@ -184,10 +226,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="appleStockPrices.categories"
                 :dark="isDark"
               />
-            </q-no-ssr>
-          </div>
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+            </div>
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartSparklines
                 height="100"
                 chart-id="sparkline-area-2"
@@ -198,10 +238,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="appleStockPrices.categories"
                 :dark="isDark"
               />
-            </q-no-ssr>
-          </div>
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+            </div>
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartSparklines
                 height="100"
                 chart-id="sparkline-line"
@@ -212,10 +250,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="appleStockPrices.categories"
                 :dark="isDark"
               />
-            </q-no-ssr>
-          </div>
-          <div class="col-12 col-md-3 q-pa-sm">
-            <q-no-ssr>
+            </div>
+            <div class="col-12 col-md-3 q-pa-sm">
               <ChartSparklines
                 height="100"
                 chart-id="sparkline-bar"
@@ -226,16 +262,16 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="appleStockPrices.categories"
                 :dark="isDark"
               />
-            </q-no-ssr>
+            </div>
           </div>
-        </div>
-      </q-card-section>
-    </BaseCard>
-   <BaseCard class="q-my-md" title="Radar">
-      <q-card-section>
-        <div class="row">
-          <div class="col-12 col-md-6">
-            <q-no-ssr>
+        </q-card-section>
+      </BaseCard>
+    </Transition>
+    <Transition>
+      <BaseCard v-if="showChart.radar" class="q-my-md" title="Radar">
+        <q-card-section>
+          <div class="row">
+            <div class="col-12 col-md-6">
               <ChartRadar
                 chart-id="chart-radar"
                 height="350"
@@ -244,10 +280,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :series="chartData2.series"
                 :categories="chartData2.categories"
               />
-            </q-no-ssr>
-          </div>
-          <div class="col-12 col-md-6">
-            <q-no-ssr>
+            </div>
+            <div class="col-12 col-md-6">
               <ChartRadar
                 chart-id="chart-radar-2"
                 height="350"
@@ -259,15 +293,16 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :categories="chartData2.categories"
                 :dark="isDark"
               />
-            </q-no-ssr>
+            </div>
           </div>
-        </div>
-      </q-card-section>
-    </BaseCard>
-     <BaseCard title="Area">
-      <div class="row">
-        <div class="col-12 col-md-6 q-pa-sm">
-          <q-no-ssr>
+        </q-card-section>
+      </BaseCard>
+    </Transition>
+
+    <Transition>
+      <BaseCard v-if="showChart.area" title="Area">
+        <div class="row">
+          <div class="col-12 col-md-6 q-pa-sm">
             <ChartArea
               class="q-my-sm"
               chart-id="chart-area"
@@ -284,10 +319,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               zoom
               :dark="isDark"
             />
-          </q-no-ssr>
-        </div>
-        <div class="col-12 col-md-6 q-pa-sm">
-          <q-no-ssr>
+          </div>
+          <div class="col-12 col-md-6 q-pa-sm">
             <ChartArea
               class="q-my-sm"
               chart-id="chart-area-2"
@@ -301,14 +334,15 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :xaxis-tickamount="3"
               :dark="isDark"
             />
-          </q-no-ssr>
+          </div>
         </div>
-      </div>
-    </BaseCard>
-    <BaseCard class="q-my-md" title="Line">
-      <div class="row">
-        <div class="col-12 col-md-6 q-pa-sm">
-          <q-no-ssr>
+      </BaseCard>
+    </Transition>
+
+    <Transition>
+      <BaseCard v-if="showChart.line" class="q-my-md" title="Line">
+        <div class="row">
+          <div class="col-12 col-md-6 q-pa-sm">
             <ChartArea
               class="q-my-sm"
               chart-id="chart-line"
@@ -322,10 +356,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :stroke-width="3"
               :dark="isDark"
             />
-          </q-no-ssr>
-        </div>
-        <div class="col-12 col-md-6 q-pa-sm">
-          <q-no-ssr>
+          </div>
+          <div class="col-12 col-md-6 q-pa-sm">
             <ChartArea
               class="q-my-sm"
               chart-id="chart-line-2"
@@ -339,12 +371,12 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :stroke-width="3"
               :dark="isDark"
             />
-          </q-no-ssr>
+          </div>
         </div>
-      </div>
-    </BaseCard>
-    <BaseCard class="q-my-md" title="Bar">
-      <q-no-ssr>
+      </BaseCard>
+    </Transition>
+    <Transition>
+      <BaseCard v-if="showChart.bar" class="q-my-md" title="Bar">
         <ChartArea
           class="q-my-sm"
           chart-id="chart-bar"
@@ -389,13 +421,13 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
             />
           </div>
         </div>
-      </q-no-ssr>
-    </BaseCard>
+      </BaseCard>
+    </Transition>
 
-  <BaseCard class="q-my-md" title="Pie/Donuts">
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <q-no-ssr>
+    <Transition>
+      <BaseCard v-if="showChart.pine" class="q-my-md" title="Pie/Donuts">
+        <div class="row">
+          <div class="col-12 col-md-6">
             <ChartPie
               class="q-my-sm"
               chart-id="chart-pine"
@@ -406,10 +438,8 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :categories="simpleCategories"
               :dark="isDark"
             />
-          </q-no-ssr>
-        </div>
-        <div class="col-12 col-md-6">
-          <q-no-ssr>
+          </div>
+          <div class="col-12 col-md-6">
             <ChartPie
               class="q-my-sm"
               chart-id="chart-donut"
@@ -429,9 +459,19 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               :categories="simpleCategories"
               :dark="isDark"
             />
-          </q-no-ssr>
+          </div>
         </div>
-      </div>
-    </BaseCard> 
+      </BaseCard>
+    </Transition>
   </BasePage>
 </template>
+<style lang="css" scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.7s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>

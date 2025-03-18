@@ -18,14 +18,13 @@ const appStore = useAppStore();
 <template>
   <!-- <q-layout view="hHh LpR fFf"> -->
   <q-layout view="lHh Lpr lff">
+    <BaseSidebar v-model="appStore.drawerOpen" bordered expan-all />
     <base-header
       :frontend="false"
       :show-togle-drawer="true"
       :show-logo="true"
       bordered
     />
-    <BaseSidebar v-model="appStore.drawerOpen" bordered expan-all />
-
     <q-page-container>
       <layout-breadcrumb-tab />
       <router-view />

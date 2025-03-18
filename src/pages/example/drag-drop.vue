@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biBug, biCheck2, biClock, biFileEarmark } from '@quasar/extras/bootstrap-icons';
+import {
+  biArrowsMove,
+  biBug,
+  biCheck2,
+  biClock,
+  biFileEarmark,
+} from '@quasar/extras/bootstrap-icons';
 import BaseAvatar from 'src/components/base/BaseAvatar.vue';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseScrollArea from 'src/components/base/BaseScrollArea.vue';
 import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
+import { useDevice } from 'src/composables/useDevice';
 import { computed, ref } from 'vue';
 import draggable from 'vuedraggable';
 // https://github.com/SortableJS/vue.draggable.next
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Drag drop | ${t('app.name')}`);
+const { isSmallScreen } = useDevice();
 // const drgaGroup = 'people';
 const listHeight = '65vh';
 const dragingTodo = ref(false);
@@ -199,6 +208,7 @@ const onEndDrag = () => {
                       v-model="todoItems"
                       item-key="id"
                       class="drag-area"
+                      :handle="!isSmallScreen ? '' : '.handle'"
                       v-bind="dragOptions"
                       :component-data="{ name: 'flip-list', type: 'transition' }"
                       @change="log"
@@ -208,7 +218,16 @@ const onEndDrag = () => {
                       <template #item="{ element, index }">
                         <BaseCard class="holder-card todo" :margin="false">
                           <q-card-section>
-                            <div class="text-subtitle1 text-weight-bold">{{ element.task }}</div>
+                            <q-item class="q-pl-none" dense>
+                              <q-item-section>
+                                <q-item-label class="text-subtitle1 text-weight-bold">
+                                  {{ element.task }}
+                                </q-item-label>
+                              </q-item-section>
+                              <q-item-section v-if="isSmallScreen" side>
+                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                              </q-item-section>
+                            </q-item>
                             <div class="text-body2">{{ element.description }}</div>
                             <div class="q-gutter-sm q-pt-sm">
                               <q-chip
@@ -256,6 +275,7 @@ const onEndDrag = () => {
                       v-model="inProgressItems"
                       item-key="id"
                       class="drag-area"
+                       :handle="!isSmallScreen ? '' : '.handle'"
                       v-bind="dragOptions"
                       :component-data="{ name: 'flip-list', type: 'transition' }"
                       @change="log"
@@ -265,7 +285,16 @@ const onEndDrag = () => {
                       <template #item="{ element, index }">
                         <BaseCard class="holder-card inprogress" :margin="false">
                           <q-card-section>
-                            <div class="text-subtitle1 text-weight-bold">{{ element.task }}</div>
+                            <q-item class="q-pl-none" dense>
+                              <q-item-section>
+                                <q-item-label class="text-subtitle1 text-weight-bold">
+                                  {{ element.task }}
+                                </q-item-label>
+                              </q-item-section>
+                              <q-item-section v-if="isSmallScreen" side>
+                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                              </q-item-section>
+                            </q-item>
                             <div class="text-body2">{{ element.description }}</div>
                             <div class="q-gutter-sm q-pt-sm">
                               <q-chip
@@ -311,6 +340,7 @@ const onEndDrag = () => {
                       v-model="testingItems"
                       item-key="id"
                       class="drag-area"
+                       :handle="!isSmallScreen ? '' : '.handle'"
                       v-bind="dragOptions"
                       :component-data="{ name: 'flip-list', type: 'transition' }"
                       @change="log"
@@ -320,7 +350,16 @@ const onEndDrag = () => {
                       <template #item="{ element, index }">
                         <BaseCard class="holder-card testing" :margin="false">
                           <q-card-section>
-                            <div class="text-subtitle1 text-weight-bold">{{ element.task }}</div>
+                            <q-item class="q-pl-none" dense>
+                              <q-item-section>
+                                <q-item-label class="text-subtitle1 text-weight-bold">
+                                  {{ element.task }}
+                                </q-item-label>
+                              </q-item-section>
+                              <q-item-section v-if="isSmallScreen" side>
+                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                              </q-item-section>
+                            </q-item>
                             <div class="text-body2">{{ element.description }}</div>
                             <div class="q-gutter-sm q-pt-sm">
                               <q-chip
@@ -366,6 +405,7 @@ const onEndDrag = () => {
                       v-model="doneItems"
                       item-key="id"
                       class="drag-area"
+                       :handle="!isSmallScreen ? '' : '.handle'"
                       v-bind="dragOptions"
                       :component-data="{ name: 'flip-list', type: 'transition' }"
                       @change="log"
@@ -376,7 +416,16 @@ const onEndDrag = () => {
                         <BaseCard class="holder-card done" :margin="false">
                           <!-- <div class="q-mx-sm" style="border: 4px solid var(--color-success-500);" /> -->
                           <q-card-section>
-                            <div class="text-subtitle1 text-weight-bold">{{ element.task }}</div>
+                            <q-item class="q-pl-none" dense>
+                              <q-item-section>
+                                <q-item-label class="text-subtitle1 text-weight-bold">
+                                  {{ element.task }}
+                                </q-item-label>
+                              </q-item-section>
+                              <q-item-section v-if="isSmallScreen" side>
+                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                              </q-item-section>
+                            </q-item>
                             <div class="text-body2">{{ element.description }}</div>
                             <div class="q-gutter-sm q-pt-sm">
                               <q-chip
@@ -452,7 +501,7 @@ const onEndDrag = () => {
   min-height: 70vh;
 }
 .holder-draging {
-  border: 2px dashed var(--color-primary-500) !important;
+  border: 1px dashed var(--color-primary-500) !important;
 }
 
 .holder-header {
@@ -469,16 +518,16 @@ const onEndDrag = () => {
   background-color: var(--color-zinc-200);
 }
 
-.holder-card.todo{
+.holder-card.todo {
   border-left: 2px solid var(--color-warning-400);
 }
-.holder-card.inprogress{
+.holder-card.inprogress {
   border-left: 2px solid var(--color-primary-400);
 }
-.holder-card.testing{
+.holder-card.testing {
   border-left: 2px solid var(--color-danger-400);
 }
-.holder-card.done{
+.holder-card.done {
   border-left: 2px solid var(--color-success-400);
 }
 

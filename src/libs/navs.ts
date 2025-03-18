@@ -113,6 +113,11 @@ export const additionalMenu: LabelValue<any>[] = [
     label: 'Example',
     children: [
       {
+        icon: biHouseDoor,
+        label: 'nav.dashboard',
+        to: '/',
+      },
+      {
         icon: biList,
         label: 'Composables',
         translateLabel: false,

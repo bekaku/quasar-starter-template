@@ -18,7 +18,7 @@ import type { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('@/layouts/DefultLayout.vue'),
+    component: () => import('@/layouts/defult.vue'),
     meta: {
       requireAuth: true,
       permission: [BackendLogin]
@@ -327,14 +327,14 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/example/feed',
-    component: () => import('@/layouts/FeedLayout.vue'),
+    component: () => import('@/layouts/feed.vue'),
     meta: { requireAuth: true },
     children: [{ path: '', component: () => import('@/pages/example/feed/index.vue') }],
   },
   {
     path: '/example/chats',
     meta: { requireAuth: true },
-    component: () => import('layouts/ChatsLayout.vue'),
+    component: () => import('layouts/chat.vue'),
     children: [
       {
         path: '',
@@ -344,7 +344,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/auth',
-    component: () => import('layouts/BlankLayout.vue'),
+    component: () => import('layouts/blank.vue'),
     children: [
       { path: '', redirect: '/auth/login' },
       { path: 'login', component: () => import('@/pages/auth/login.vue') },
@@ -356,7 +356,13 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/error.vue'),
   },
   { path: '/error500', component: () => import('@/pages/error-500.vue') },
-  { path: '/test', component: () => import('@/pages/test.vue') },
+  {
+    path: '/test',
+    component: () => import('layouts/blank.vue'),
+    children: [
+      { path: '', component: () => import('@/pages/test.vue') },
+    ],
+  },
   {
     path: '/:catchAll(.*)*',
     component: () => import('@/pages/error-404.vue'),
