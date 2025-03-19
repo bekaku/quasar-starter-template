@@ -71,11 +71,11 @@ onMounted(async () => {});
 
 body.body--dark {
   .card-bg {
-    background-color: var(--color-zinc-600);
+    background-color: var(--color-zinc-800);
   }
 
   .card-top-bg {
-    background-color: var(--color-zinc-800);
+    background-color: var(--color-zinc-900);
   }
 }
 </style>

@@ -228,7 +228,7 @@ const onShowMoreText = async () => {
 
 .text-holder-fitcontent {
   width: fit-content;
-  background-color: var(--color-gray-100);
+  background-color: var(--color-zinc-100);
   padding: 10px;
   border-radius: 8px;
   margin-top: 5px;

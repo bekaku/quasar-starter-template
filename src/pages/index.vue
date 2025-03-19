@@ -265,7 +265,7 @@ const heroItems: LabelValue<string>[] = [
               range
             >
               <template #after>
-                <BaseButton label="Download" :color="isDark ? 'grey-9' : 'dark'" />
+                <BaseButton label="Download" dark />
               </template>
             </BaseDatePicker>
           </div>

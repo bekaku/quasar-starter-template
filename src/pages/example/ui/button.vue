@@ -28,6 +28,8 @@ const progress = ref(false);
     <BaseCard title="Button">
       <q-card-section>
         <div class="q-pa-md q-gutter-sm">
+          <BaseButton label="Light" light />
+          <BaseButton label="Dark" dark />
           <BaseButton round flat :icon="biWrench" />
           <BaseButton label="Standard" />
           <BaseButton label="Elevated" :unelevated="false" />

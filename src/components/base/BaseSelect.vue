@@ -1,13 +1,12 @@
 <script setup lang="ts" generic="T">
+import type { LabelValue } from '@/types/common';
 import { biCheck, biChevronExpand, biX } from '@quasar/extras/bootstrap-icons';
-import { useBase } from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
+import { useTheme } from 'src/composables/useTheme';
 import { useValidation } from 'src/composables/useValidation';
 import { computed, ref, watchEffect } from 'vue';
-import type { LabelValue } from '@/types/common';
-import BaseAvatar from './BaseAvatar.vue';
 import SkeletonItem from '../skeleton/SkeletonItem.vue';
-const { isDark } = useBase();
+import BaseAvatar from './BaseAvatar.vue';
 const { requiredSelect } = useValidation();
 const {
   optionValue = 'value',
@@ -53,6 +52,7 @@ const emit = defineEmits<{
   'on-scroll': [to: number, ref: any];
 }>();
 const { t } = useLang();
+const { isDark } = useTheme();
 const modelValue = defineModel<T | T[] | null>();
 
 const options = ref<LabelValue<T>[]>([...items]);
@@ -151,13 +151,14 @@ const onScroll = ({ to, ref }: any) => {
 
     <!--    <template v-slot:option="scope">-->
     <!--    <template v-slot:option="{ itemProps, opt, selected, toggleOption }">-->
+    <!-- :color="isDark ? 'grey-9' : 'grey-3'" -->
     <template v-if="multiple" #selected-item="scope">
       <q-chip
         square
         :icon-remove="biX"
         :removable="clearable"
+        :style="{ backgroundColor: !isDark ? 'var(--color-zinc-100)' : 'var(--color-zinc-700)' }"
         @remove="scope.removeAtIndex(scope.index)"
-        :color="isDark ? 'grey-9' : 'grey-3'"
       >
         <base-avatar
           v-if="scope.opt?.avatar"

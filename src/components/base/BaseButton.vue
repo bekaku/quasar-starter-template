@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useBase } from 'src/composables/useBase';
 import type { AppColor, IHrefTarget } from '@/types/common';
+import { useTheme } from 'src/composables/useTheme';
 
 const {
   outline = false,
@@ -19,6 +19,7 @@ const {
   color = 'primary',
   light = false,
   textCapitalize = true,
+  dark = false,
 } = defineProps<{
   align?: 'left' | 'right' | 'center' | 'around' | 'between' | 'evenly';
   color?: AppColor;
@@ -49,15 +50,12 @@ const {
   type?: 'button' | 'a' | 'submit' | 'reset';
   unelevated?: boolean;
   textCapitalize?: boolean;
+  dark?: boolean;
 }>();
-const { isDark } = useBase();
+const { isDark } = useTheme();
 </script>
 <template>
-  <q-btn
-    v-bind="$attrs"
-    :outline
-    :label="!outline ? label : undefined"
-    :color="
+  <!-- :color="
       light
         ? isDark
           ? 'grey-9'
@@ -67,8 +65,21 @@ const { isDark } = useBase();
           : outline && outlineColor == undefined
             ? undefined
             : outlineColor || color
+    " -->
+  <q-btn
+    v-bind="$attrs"
+    :outline
+    :label="!outline ? label : undefined"
+    :color="
+      light && dark
+        ? undefined
+        : flat && label == undefined
+          ? undefined
+          : outline && outlineColor == undefined
+            ? undefined
+            : outlineColor || color
     "
-    :text-color="light ? (isDark ? 'white' : 'black') : textColor"
+    :text-color="light ? (isDark ? 'white' : 'black') : dark ? 'white' : textColor"
     :no-caps="noCaps"
     :unelevated
     :glossy
@@ -93,6 +104,8 @@ const { isDark } = useBase();
       'defult-outline': label && !outlineColor && outline,
       'full-width': full,
       'text-capitalize': textCapitalize,
+      'btn-dark': dark,
+      'btn-light': light,
     }"
   >
     <!-- 'default-button': !outline && !unelevated && !flat && !glossy && !stack && !push -->
@@ -118,5 +131,19 @@ const { isDark } = useBase();
     0 0 #0000,
     0 1px 1px 0 rgb(0 0 0 / 0.05) !important;
   // border-radius: 1rem;
+}
+.btn-dark {
+  background-color: var(--color-zinc-900) !important;
+}
+.btn-light {
+  background-color: var(--color-zinc-100) !important;
+}
+body.body--dark {
+  .btn-dark {
+    background-color: var(--color-zinc-950) !important;
+  }
+  .btn-light {
+    background-color: var(--color-zinc-600) !important;
+  }
 }
 </style>
