@@ -30,17 +30,17 @@ $dark-page: $dark !default;
 // $separator-color: #e9e9ec !default;
 // $separator-dark-color: #45464b !default; //#394552
 $separator-color: var(--color-zinc-200) !default;
-$separator-dark-color: var(--color-zinc-600) !default;
+$separator-dark-color: var(--color-zinc-700) !default;
 
-$shadow-color: #1d1e22 !default;
-$elevation-umbra: rgba($shadow-color, 0.12) !default;
-$elevation-penumbra: rgba($shadow-color, 0.14) !default;
-$elevation-ambient: rgba($shadow-color, 0.12) !default;
+// $shadow-color: #1d1e22 !default;
+// $elevation-umbra: rgba($shadow-color, 0.12) !default;
+// $elevation-penumbra: rgba($shadow-color, 0.14) !default;
+// $elevation-ambient: rgba($shadow-color, 0.12) !default;
 
-$dark-shadow-color : #bac4d0 !default;
-$elevation-dark-umbra : rgba($dark-shadow-color, 0.12) !default;
-$elevation-dark-penumbra : rgba($dark-shadow-color, 0.14) !default;
-$elevation-dark-ambient : rgba($dark-shadow-color, 0.12) !default;
+// $dark-shadow-color : #bac4d0 !default;
+// $elevation-dark-umbra : rgba($dark-shadow-color, 0.12) !default;
+// $elevation-dark-penumbra : rgba($dark-shadow-color, 0.14) !default;
+// $elevation-dark-ambient : rgba($dark-shadow-color, 0.12) !default;
 
 $generic-border-radius: 11px !default;
 $button-font-weight: 400 !default;

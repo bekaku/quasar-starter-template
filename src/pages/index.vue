@@ -402,7 +402,7 @@ const heroItems: LabelValue<string>[] = [
                     {{ item.description }}
                   </q-item-label>
                 </q-item-section>
-                <q-item-section side top class="text-h6 q-text-black text-weight-bold">
+                <q-item-section side top class="text-subtitle1 q-text-black text-weight-bold">
                   {{ item.value }}
                 </q-item-section>
               </q-item>
