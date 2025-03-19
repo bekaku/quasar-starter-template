@@ -227,7 +227,7 @@ const onLoadRef = (index: number, done: any) => {
     }
 
     done(); // done(true) Stops QInfiniteScroll if it's Boolean 'true'; Specify it in case there's nothing more to load
-  }, 2000);
+  }, 1000);
 };
 </script>
 <template>
