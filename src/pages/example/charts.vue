@@ -189,6 +189,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :series="simpleSeries.slice(1, 2)"
                 :categories="simpleCategories.slice(1, 2)"
                 :show-legend="false"
+                :dark="isDark"
               />
             </div>
             <div class="col-12 col-md-3 q-pa-sm">
@@ -279,6 +280,7 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
                 :colors="['#8D6E63', '#9E9E9E', '#607D8B']"
                 :series="chartData2.series"
                 :categories="chartData2.categories"
+                :dark="isDark"
               />
             </div>
             <div class="col-12 col-md-6">

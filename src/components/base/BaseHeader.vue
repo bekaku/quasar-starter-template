@@ -7,6 +7,7 @@ import {
   biChatDots,
   biChevronLeft,
   biChevronRight,
+  biGithub,
   biSearch
 } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
@@ -117,7 +118,7 @@ const onSearchMenuClick = (to: string) => {
         <q-btn v-if="!screen.gt.xs" round dense flat @click="onOpenSearch">
           <q-icon :name="biSearch" />
         </q-btn>
-        <q-btn round dense flat @click="resetBadgeCount" :icon="biBell">
+        <!-- <q-btn round dense flat @click="resetBadgeCount" :icon="biBell">
           <q-badge
             v-if="notify && notify.totalNotify"
             color="negative"
@@ -131,7 +132,8 @@ const onSearchMenuClick = (to: string) => {
           <q-menu anchor="bottom left" self="top left" :style="{ width: '360px' }">
             <notification-bar-menu />
           </q-menu>
-        </q-btn>
+        </q-btn> -->
+        <q-btn :icon="biGithub" flat round dense href="https://github.com/bekaku/quasar-starter-template" target="_blank" />
         <q-btn round dense flat :icon="biChatDots" to="/example/chats">
           <q-tooltip>Messages</q-tooltip>
         </q-btn>

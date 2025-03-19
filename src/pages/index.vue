@@ -14,6 +14,7 @@ import BaseAvatar from 'src/components/base/BaseAvatar.vue';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseDatePicker from 'src/components/base/BaseDatePicker.vue';
+import BaseLink from 'src/components/base/BaseLink.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseTabs from 'src/components/base/BaseTabs.vue';
 import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
@@ -278,7 +279,9 @@ const heroItems: LabelValue<string>[] = [
               <BaseTextHeader :icon="item.icon" :title="item.label">
                 <template #end>
                   <q-item-section side>
-                    <BaseButton dense flat label="Explore" :to="item.to || ''" />
+                    <BaseLink :to="item.to || ''" color="primary">
+                      Explore
+                    </BaseLink>
                   </q-item-section>
                 </template>
               </BaseTextHeader>

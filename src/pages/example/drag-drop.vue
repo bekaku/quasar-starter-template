@@ -518,18 +518,18 @@ const onEndDrag = () => {
   background-color: var(--color-zinc-200);
 }
 
-.holder-card.todo {
-  border-left: 2px solid var(--color-warning-400);
-}
-.holder-card.inprogress {
-  border-left: 2px solid var(--color-primary-400);
-}
-.holder-card.testing {
-  border-left: 2px solid var(--color-danger-400);
-}
-.holder-card.done {
-  border-left: 2px solid var(--color-success-400);
-}
+// .holder-card.todo {
+//   border-left: 2px solid var(--color-warning-400);
+// }
+// .holder-card.inprogress {
+//   border-left: 2px solid var(--color-primary-400);
+// }
+// .holder-card.testing {
+//   border-left: 2px solid var(--color-danger-400);
+// }
+// .holder-card.done {
+//   border-left: 2px solid var(--color-success-400);
+// }
 
 body.body--dark {
   .holder {
