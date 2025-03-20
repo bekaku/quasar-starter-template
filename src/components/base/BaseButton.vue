@@ -32,12 +32,12 @@ const {
   href?: string;
   icon?: string;
   iconRight?: string;
-  label?: string;
+  label?: string | undefined;
   light?: boolean;
   loading?: boolean;
   noCaps?: boolean;
   outline?: boolean;
-  outlineColor?: AppColor;
+  outlineColor?: AppColor | undefined;
   push?: boolean;
   round?: boolean;
   rounded?: boolean;

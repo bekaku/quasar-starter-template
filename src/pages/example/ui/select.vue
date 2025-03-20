@@ -33,7 +33,6 @@ const multipleModel = ref<number[]>([]);
 const singleModel2 = ref<number>();
 const multipleAnyModel = ref<any[]>([]);
 const lazyLoading = ref(false);
-const cascadeLoading = ref(false);
 const commandPaletteModel = ref<number[]>([]);
 const showCommandPaletteDialog = ref<boolean>(false);
 const lazyItems = ref<LabelValue<number>[]>([

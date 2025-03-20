@@ -220,20 +220,20 @@ const posts = ref<PostData[]>(initialPost);
 const onLoadRef = (index: number, done: any) => {
   console.log('onLoadRef', index);
   setTimeout(() => {
-    const item = initialPost[0];
-    if (item) {
+    const items = initialPost.slice(0, 3);
+    if (items.length > 0) {
       // posts.value.push(item);
-      posts.value = [...posts.value, item];
+      posts.value = [...posts.value, ...items];
     }
 
     done(); // done(true) Stops QInfiniteScroll if it's Boolean 'true'; Specify it in case there's nothing more to load
-  }, 1000);
+  }, 500);
 };
 </script>
 <template>
   <BasePage :padding="false" class="q-px-md" scroll-event show-to-top>
     <!-- <q-infinite-scroll @load="onLoadRef" :offset="250"> -->
-    <BaseInfiniteScroll @on-infinite="onLoadRef">
+    <BaseInfiniteScroll :offset="500" @on-infinite="onLoadRef">
       <q-card v-if="!screen.gt.sm" flat bordered class="q-mb-md">
         <UserCard
           v-if="authenStore.auth"

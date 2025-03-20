@@ -127,6 +127,7 @@ const onScroll = ({ to, ref }: any) => {
     :input-debounce="inputDebounce"
     :rules="[required ? requiredSelect : ({} as any)]"
     :dropdown-icon="biChevronExpand"
+    behavior="menu"
     @filter="filterFn"
     @virtual-scroll="onScroll"
   >

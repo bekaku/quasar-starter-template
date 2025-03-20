@@ -465,3 +465,10 @@ export const getValFromObjectByPath = (obj: any, path: any) => {
     }
   }
 };
+export const appPreventDefult = async (event: any) => {
+  if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+      event.stopImmediatePropagation();
+  }
+};

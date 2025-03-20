@@ -30,8 +30,8 @@ useMeta({
   title: 'Index Page',
 });
 const { isSmallScreen } = useDevice();
-const dateRangeStart = ref<string>('2025-01-01');
-const dateRangeEnd = ref<string>('2025-02-15');
+const dateRangeStart = ref<string>();
+const dateRangeEnd = ref<string>();
 const toggleModel = ref<string>('overview');
 const { isDark } = useTheme();
 const showChart = ref<boolean>(false);
@@ -436,6 +436,10 @@ const heroItems: LabelValue<string>[] = [
     var(--color-zinc-50),
     #fff
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 body.body--dark {
   .card-shade {

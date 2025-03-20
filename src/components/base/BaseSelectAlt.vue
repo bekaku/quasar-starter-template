@@ -38,6 +38,7 @@ const modelValue = defineModel<T>();
     map-options
     :dropdown-icon="biChevronExpand"
     :multiple
+    behavior="menu"
   >
     <template #no-option>
       <q-item>

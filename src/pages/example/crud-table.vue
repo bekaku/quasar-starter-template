@@ -1,22 +1,8 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import {
-  biAirplane,
-  biChatLeft,
-  biGear,
-  biLightbulb,
-  biNewspaper,
-  biPerson,
-  biPhone,
-  biQuestionCircle,
-  biRadar,
-  biShop,
-  biWrench,
-} from '@quasar/extras/bootstrap-icons';
+import { biPerson } from '@quasar/extras/bootstrap-icons';
 import UserService from 'src/api/UserService';
-import BaseButton from 'src/components/base/BaseButton.vue';
-import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import CrudApiList from 'src/components/base/CrudApiList.vue';
 import { useBase } from 'src/composables/useBase';
@@ -39,7 +25,6 @@ const headers = ref<ICrudListHeader[]>([
     options: {
       fillable: true,
       align: 'center',
-      size: '55px',
     },
   },
   {
@@ -83,6 +68,7 @@ const headers = ref<ICrudListHeader[]>([
       searchType: ICrudListHeaderOptionSearchType.BOOLEAN,
       searchModel: true,
       searchOperation: '=',
+      clickable: true,
     },
   },
   {
@@ -169,7 +155,7 @@ const onItemPerPageChange = async (no: number | undefined) => {
   pages.value.itemsPerPage = no;
   await fetchData();
 };
-const onSort = async (column: string) => {
+const onSort = async (column: any) => {
   if (sort.value.column === column) {
     sort.value.mode = sort.value.mode === 'asc' ? 'desc' : 'asc';
   } else {
@@ -213,6 +199,26 @@ const onItemDelete = async (indexOrIds: number | number[], isSingle: boolean) =>
 const onNewForm = () => {
   console.log('onNewForm');
 };
+const onColClick = (event: any, index: number, headerOption: ICrudListHeader, colValue: any) => {
+  console.log('pages/permission/index.vue : onColClick', {
+    index,
+    event,
+    headerOption,
+    colValue,
+  });
+  if (headerOption && headerOption.column && headerOption.column == 'active') {
+    const rowItem = dataList.value[index];
+    if (rowItem) {
+      console.log('rowItem.active', rowItem.active);
+      dataList.value.map((item) => {
+        if (item.id == rowItem.id) {
+          item.active = !item.active;
+        }
+        return item;
+      });
+    }
+  }
+};
 </script>
 <template>
   <BasePage>
@@ -236,11 +242,7 @@ const onNewForm = () => {
       @on-advance-search="onAdvanceSearch"
       @on-item-delete="onItemDelete"
       @on-new-form="onNewForm"
+      @on-col-click="onColClick"
     />
   </BasePage>
 </template>
-<style lang="scss" scoped>
-.btn-fixed-width {
-  width: 200px;
-}
-</style>

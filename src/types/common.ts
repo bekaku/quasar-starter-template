@@ -39,7 +39,7 @@ export type IMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export type IThemeSettingOptions = 'dark' | 'light' | 'system' | 'realtime';
 export type ITheme = 'dark' | 'light';
 export type ILanguge = 'en' | 'th';
-export type ICrudAction = 'new' | 'view' | 'copy';
+export type ICrudAction = 'new' | 'view' | 'copy' | 'edit';
 export type GenerateLinkType = 'post' | 'profile';
 export type EmojiSet = 'native' | 'apple' | 'facebook' | 'google' | 'twitter';
 export type IResult =
@@ -351,6 +351,7 @@ export interface ICrudListHeaderOption {
   func?: any;
   trueIcon?: string;
   falseIcon?: string;
+  clickable?: boolean;
 }
 export interface ICrudListHeader {
   column?: string;

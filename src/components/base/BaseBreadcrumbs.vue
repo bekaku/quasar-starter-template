@@ -5,7 +5,12 @@ import { computed } from 'vue';
 import type { LabelValue, AppColor } from '@/types/common';
 import { useAppStore } from '@/stores/appStore';
 
-const { items, showSeparator = true } = defineProps<{
+const {
+  items,
+  showSeparator = true,
+  textColor = 'primary',
+  activeColor = 'black',
+} = defineProps<{
   items: LabelValue<any>[];
   showSeparator?: boolean;
   separatorIcon?: string;
