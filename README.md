@@ -13,7 +13,7 @@ A Quasar Project\
 
 ![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat01.png)
 
-![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat02.png)
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat03.png)
 
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart01.png)
 
