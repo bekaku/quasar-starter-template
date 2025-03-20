@@ -8,6 +8,7 @@ const {
   avatarSize = '24px',
   dense = true,
   seperator = false,
+  rounded = false,
 } = defineProps<{
   item?: LabelValue<T>;
   iconSize?: string;
@@ -15,6 +16,7 @@ const {
   dense?: boolean;
   clickable?: boolean | undefined;
   seperator?: boolean;
+  rounded?: boolean;
   color?: AppColor;
 }>();
 const emit = defineEmits<{
@@ -27,7 +29,14 @@ const onClick = () => {
 };
 </script>
 <template>
-  <q-item v-if="item" v-bind="$attrs" :clickable="clickable" :dense @click="onClick">
+  <q-item
+    v-if="item"
+    v-bind="$attrs"
+    :clickable="clickable"
+    :class="{ rounded }"
+    :dense
+    @click="onClick"
+  >
     <slot name="start">
       <q-item-section v-if="item.avatar || item.icon" side>
         <template v-if="item.avatar">

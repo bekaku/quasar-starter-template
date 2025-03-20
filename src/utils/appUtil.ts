@@ -1,5 +1,6 @@
 import type {
   AppException,
+  ChatMessageType,
   IHrefTarget,
   ISortModeType,
   LabelValue,
@@ -470,5 +471,22 @@ export const appPreventDefult = async (event: any) => {
       event.stopPropagation();
       event.preventDefault();
       event.stopImmediatePropagation();
+  }
+};
+export const getMessageTypeText = (type: ChatMessageType | undefined | null): string | number => {
+  if (!type) {
+    return '';
+  }
+  switch (type) {
+    case 'IMAGE':
+      return 'chats.messageType.IMAGE';
+    case 'FILE':
+      return 'chats.messageType.FILE';
+    case 'LOCATION':
+      return 'chats.messageType.LOCATION';
+    case 'WI_DOC':
+      return 'chats.messageType.WI_DOC';
+    default:
+      return '';
   }
 };

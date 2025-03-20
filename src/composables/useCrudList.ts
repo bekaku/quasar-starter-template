@@ -25,7 +25,7 @@ export const useCrudList = <T>(
     options ? options.itemsPerPage : 10
   );
   const { t } = useLang();
-  const { appGoto, getCurrentPath, getQuery, appConfirm, appLoading, inputSanitizeHtml } =
+  const { appNavigateTo, getCurrentPath, getQuery, appConfirm, appLoading, inputSanitizeHtml } =
     useBase();
   const { callAxios } = useAxios();
   const dataList = ref<T[]>([]);
@@ -248,7 +248,7 @@ export const useCrudList = <T>(
     if (!pathParam.value) {
       return;
     }
-    appGoto(pathParam.value);
+    appNavigateTo(pathParam.value);
     // onReplaceUrl(pathParam.value);
     await fetchList();
   };
@@ -329,7 +329,7 @@ export const useCrudList = <T>(
 
   const onNewForm = () => {
     if (options.apiEndpoint && options.crudName) {
-      appGoto(`${options.crudName.replaceAll('_', '-')}/${CrudAction.NEW}/0`);
+      appNavigateTo(`${options.crudName.replaceAll('_', '-')}/${CrudAction.NEW}/0`);
     }
   };
   const onItemClick = async (index: number) => {
@@ -338,7 +338,7 @@ export const useCrudList = <T>(
       return;
     }
     if (options.apiEndpoint && options.crudName) {
-      appGoto(
+      appNavigateTo(
         `${options.crudName.replaceAll('_', '-')}/${CrudAction.VIEW}/${item.id}`
       );
     }
@@ -349,7 +349,7 @@ export const useCrudList = <T>(
       return;
     }
     if (options.apiEndpoint && options.crudName) {
-      appGoto(
+      appNavigateTo(
         `${options.crudName.replaceAll('_', '-')}/${CrudAction.COPY}/${item.id}`
       );
     }

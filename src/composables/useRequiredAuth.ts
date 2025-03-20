@@ -3,7 +3,7 @@ import { watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { useBase } from './useBase';
 export const useRequiredAuth = () => {
-  const { appGoto } = useBase();
+  const { appNavigateTo } = useBase();
   const route = useRoute();
   const appStore = useAppStore();
   watchEffect(async () => {
@@ -13,7 +13,7 @@ export const useRequiredAuth = () => {
         const permissions = pageMeta?.permission;
         const state = await appStore.isHavePermissionLazy(permissions as string[])
         if (!state) {
-          appGoto('/error?code=401');
+          appNavigateTo('/error?code=401');
         }
       }
     }

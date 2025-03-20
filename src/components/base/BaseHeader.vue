@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import UserNavSetting from '@/components/user/UserNavSetting.vue';
 import { useLang } from '@/composables/useLang';
-import { useNotification } from '@/composables/useNotification';
 import {
-  biBell,
-  biChatDots,
   biChevronLeft,
   biChevronRight,
   biGithub,
@@ -15,6 +12,7 @@ import { useBase } from 'src/composables/useBase';
 import { useDevice } from 'src/composables/useDevice';
 import { useAppStore } from 'src/stores/appStore';
 import { defineAsyncComponent, ref } from 'vue';
+import ChatHeaderIcon from '../chats/ChatHeaderIcon.vue';
 import BaseLangugeSwitcherButton from './BaseLangugeSwitcherButton.vue';
 import BaseThemeSwitcher from './BaseThemeSwitcher.vue';
 const NotificationBarMenu = defineAsyncComponent(
@@ -30,6 +28,7 @@ const {
   showUserSetting = true,
   hambergerIcon = biChevronLeft,
   hambergerIconOff = biChevronRight,
+  showChatBtn = true
 } = defineProps<{
   bordered?: boolean;
   reveal?: boolean;
@@ -40,11 +39,11 @@ const {
   hambergerIcon?: string;
   hambergerIconOff?: string;
   showUserSetting?: boolean;
+  showChatBtn?: boolean;
 }>();
 
 const { dark, screen } = useQuasar();
-const { appGoto } = useBase();
-const { notify, resetBadgeCount } = useNotification();
+const { appNavigateTo } = useBase();
 const { t } = useLang();
 const { isSmallScreen } = useDevice();
 const showSearch = ref(false);
@@ -54,7 +53,7 @@ const onOpenSearch = () => {
 const onSearchMenuClick = (to: string) => {
   showSearch.value = false;
   setTimeout(() => {
-    appGoto(to);
+    appNavigateTo(to);
   }, 500);
 };
 </script>
@@ -118,25 +117,16 @@ const onSearchMenuClick = (to: string) => {
         <q-btn v-if="!screen.gt.xs" round dense flat @click="onOpenSearch">
           <q-icon :name="biSearch" />
         </q-btn>
-        <!-- <q-btn round dense flat @click="resetBadgeCount" :icon="biBell">
-          <q-badge
-            v-if="notify && notify.totalNotify"
-            color="negative"
-            rounded
-            text-color="white"
-            floating
-          >
-            {{ notify.totalNotify > 99 ? '99+' : notify.totalNotify }}
-          </q-badge>
-          <q-tooltip>{{ t('nav.notifications') }}</q-tooltip>
-          <q-menu anchor="bottom left" self="top left" :style="{ width: '360px' }">
-            <notification-bar-menu />
-          </q-menu>
-        </q-btn> -->
-        <q-btn :icon="biGithub" flat round dense href="https://github.com/bekaku/quasar-starter-template" target="_blank" />
-        <q-btn round dense flat :icon="biChatDots" to="/example/chats">
-          <q-tooltip>Messages</q-tooltip>
-        </q-btn>
+        <q-btn
+          :icon="biGithub"
+          flat
+          round
+          dense
+          href="https://github.com/bekaku/quasar-starter-template"
+          target="_blank"
+        />
+        <NotificationBarMenu v-if="!isSmallScreen" />
+        <ChatHeaderIcon v-if="showChatBtn" />
         <BaseLangugeSwitcherButton v-if="!isSmallScreen" />
         <BaseThemeSwitcher v-if="!isSmallScreen" toggle />
         <user-nav-setting v-if="showUserSetting" style="max-width: 225px" />

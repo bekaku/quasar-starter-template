@@ -73,7 +73,7 @@ defineOptions({
   },
 });
 
-const { appGoto, isDevMode } = useBase();
+const { appNavigateTo, isDevMode } = useBase();
 const exceptionStore = useExceptionStore();
 const router = useRouter();
 const authenStore = useAuthenStore();
@@ -88,7 +88,7 @@ onMounted(() => {
   initialDevice();
 
   if (exceptionStore.error && exceptionStore.error.status && exceptionStore.error.message) {
-    appGoto('/error', true);
+    appNavigateTo('/error', true);
   }
   if (authenStore.auth) {
     if (isDevMode()) {
@@ -107,7 +107,7 @@ onMounted(() => {
     //   this.$router.push('/');
     // }
     // if (authenStore.auth === undefined) {
-    //   appGoto('/auth/login', true);
+    //   appNavigateTo('/auth/login', true);
     // }
   };
 });
@@ -115,7 +115,7 @@ onMounted(() => {
 
 // watch(authenStore, (state) => {
 //   if (state && state.sessionExpired) {
-//     appGoto('/auth/login', true);
+//     appNavigateTo('/auth/login', true);
 //   }
 // });
 onBeforeUnmount(() => {});

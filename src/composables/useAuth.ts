@@ -18,7 +18,7 @@ export const useAuth = () => {
   const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   const authenStore = useAuthenStore();
-  const { appConfirm, appLoading, isDevMode, appGoto } = useBase();
+  const { appConfirm, appLoading, isDevMode, appNavigateTo } = useBase();
   const { t } = useLang();
   const { singoutToServer } = AuthenService();
   const { logoutClear } = useCache();
@@ -136,7 +136,7 @@ export const useAuth = () => {
     if (forceRedirectToLoginPage) {
       // window.location.replace('/auth/login');
       // window.location.replace('/');
-      appGoto('/auth/login', true);
+      appNavigateTo('/auth/login', true);
     }
   };
 

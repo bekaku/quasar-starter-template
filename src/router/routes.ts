@@ -336,8 +336,9 @@ const routes: RouteRecordRaw[] = [
     meta: { requireAuth: true },
     component: () => import('layouts/chat.vue'),
     children: [
+      { path: '', redirect: '/example/chats/g/0' },
       {
-        path: '',
+        path: 'g/:groupId',
         component: () => import('@/pages/example/chats/index.vue')
       },
     ]

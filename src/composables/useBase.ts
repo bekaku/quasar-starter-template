@@ -4,7 +4,7 @@ import { useQuasar } from 'quasar';
 import { useLang } from './useLang';
 import type { ITextValue, NotifyOptions } from '@/types/common';
 import { SearchOperation } from '@/libs/constant';
-import { formatDate, formatDateTime, formatDistanceFromNow } from '@/utils/dateUtil';
+import { formatDate, formatDateTime, formatDistanceFromNow, getDateAutoFormatBy } from '@/utils/dateUtil';
 import {
   biCheckCircle,
   biExclamationCircle,
@@ -51,7 +51,7 @@ export const useBase = () => {
   const onReplaceUrl = (url: string) => {
     history.pushState({}, '', url);
   };
-  const appGoto = (link: string | undefined, replace?: boolean): void => {
+  const appNavigateTo = (link: string | undefined, replace?: boolean): void => {
     if (!link) {
       return;
     }
@@ -218,6 +218,9 @@ export const useBase = () => {
   const appFormatDateDistance = (d: string) => {
     return formatDistanceFromNow(d, locale.value);
   };
+  const appFormatDateAuto = (d: string) => {
+    return d ? getDateAutoFormatBy(d, locale.value) : '';
+  };
 
   /**
    * <div ref="bottomSection"></div>
@@ -278,7 +281,7 @@ export const useBase = () => {
   return {
     getParam,
     getQuery,
-    appGoto,
+    appNavigateTo,
     appLoading,
     appToast,
     appConfirm,
@@ -298,5 +301,6 @@ export const useBase = () => {
     readableNumber,
     isDark,
     writeToClipboard,
+    appFormatDateAuto
   };
 };

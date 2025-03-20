@@ -1,4 +1,4 @@
-import type { IconColor, ISsIcons, Date } from '@/types/common';
+import type { IconColor, ISsIcons, Date, ChatType, ChatMessageType } from '@/types/common';
 export type IPlatForm = 1 | 2 | 3; // 1=web, 2=ios, 3=android
 export type IPermissionOperationType = 1 | 2 | 3; // 1=crud, 2=report, 3=other
 export type ICompanyPostLevel = 1 | 2; // 1: By organization hierarchy , 2: public all user can view all post
@@ -345,4 +345,42 @@ export interface PostData {
   reference?: PostReference
   gallery: FileManagerDto[]
   hashtag: Hashtag[]
+}
+export interface GroupChatMemberDto extends Id {
+  favorite: boolean
+  muteNotify: boolean
+  pin: boolean
+  online?: boolean
+  joinDate: string
+  offDate?: string
+  member: UserProfileDto
+}
+
+export interface GroupChatDto extends Id {
+  fileAvatarSelectId?: number | null
+  dtoAvatar?: ImageDto | null
+  chatType: ChatType
+  groupName?: string | null
+  latestMessage?: string | null
+  latestUpdate?: string | null
+  latestMessageType?: ChatMessageType | null
+  totalNewMessage: number
+  totalMembers?: number
+  pin: boolean
+  favorite: boolean
+  muteNotify: boolean
+  online: boolean
+  memberItems?: GroupChatMemberDto[]
+  totalImages?: number
+  totalFile?: number
+}
+
+export interface GroupChatRequest {
+  fileAvatarSelectId?: number | null | undefined
+  chatType: ChatType
+  groupName: string | null
+  newMemberUserIds: number[]
+  deleteAvatar?: boolean | undefined
+  newAvatar?: ImageDto | undefined
+  avatarPreview?: string | undefined
 }

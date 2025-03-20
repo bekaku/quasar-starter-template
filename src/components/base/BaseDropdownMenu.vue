@@ -59,7 +59,7 @@ const onHide = () => {
     ref="menuRef"
     v-bind="$attrs"
     v-model="open"
-    class="q-py-sm"
+    class="q-py-xs q-px-xs"
     :style="{ minWidth: width }"
     :cover
     :anchor
@@ -71,6 +71,7 @@ const onHide = () => {
           :item="item"
           :dense
           :clickable="item.value != undefined || (item.children && item.children.length > 0)"
+          rounded
           @on-click="onClick"
         >
           <template v-if="item.children && item.children.length > 0">
@@ -79,7 +80,7 @@ const onHide = () => {
               <q-icon :name="matKeyboardArrowRight" />
             </q-item-section>
 
-            <q-menu anchor="top end" self="top start">
+            <q-menu anchor="top end" self="top start" class="q-py-xs q-px-xs">
               <q-list :dense>
                 <BaseLabelValueItem
                   v-for="(itemLevel2, indexLevel2) in item.children"
@@ -89,6 +90,7 @@ const onHide = () => {
                     item.value != undefined || (item.children && item.children.length > 0)
                   "
                   :dense
+                  rounded
                   @on-click="onClick"
                 >
                   <template v-if="itemLevel2.children && itemLevel2.children.length > 0">
@@ -96,7 +98,7 @@ const onHide = () => {
                     <q-item-section side>
                       <q-icon :name="matKeyboardArrowRight" />
                     </q-item-section>
-                    <q-menu anchor="top end" self="top start">
+                    <q-menu anchor="top end" self="top start" class="q-py-xs q-px-xs">
                       <q-list :dense>
                         <BaseLabelValueItem
                           v-for="(itemLevel3, indexLevel3) in itemLevel2.children"
@@ -106,6 +108,7 @@ const onHide = () => {
                           "
                           :item="itemLevel3"
                           :dense
+                          rounded
                           @on-click="onClick"
                         />
                       </q-list>

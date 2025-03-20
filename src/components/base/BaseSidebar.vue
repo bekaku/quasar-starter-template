@@ -29,7 +29,7 @@ const {
 
 const { version: quasarVersion } = useQuasar();
 const { t } = useLang();
-const { appGoto } = useBase();
+const { appNavigateTo } = useBase();
 const { isMobileOrTablet: checkMobileOrTablet } = useDevice();
 const appStore = useAppStore();
 const modelValue = defineModel<boolean>({ default: true });
@@ -51,7 +51,7 @@ const onOpenSearch = () => {
 const onSearchMenuClick = (to: string) => {
   showSearch.value = false;
   setTimeout(() => {
-    appGoto(to);
+    appNavigateTo(to);
   }, 500);
 };
 const onDrawerHide = () => {

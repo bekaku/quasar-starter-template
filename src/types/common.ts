@@ -154,6 +154,19 @@ export type AppColor = 'primary' | 'secondary' | 'accent' | 'dark' | 'positive' 
   | 'brown' | 'brown-1' | 'brown-2' | 'brown-3' | 'brown-4' | 'brown-5' | 'brown-6' | 'brown-7' | 'brown-8' | 'brown-9' | 'brown-10' | 'brown-11' | 'brown-12' | 'brown-13' | 'brown-14'
   | 'grey' | 'grey-1' | 'grey-2' | 'grey-3' | 'grey-4' | 'grey-5' | 'grey-6' | 'grey-7' | 'grey-8' | 'grey-9' | 'grey-10' | 'grey-11' | 'grey-12' | 'grey-13' | 'grey-14'
   | 'blue-grey' | 'blue-grey-1' | 'blue-grey-2' | 'blue-grey-3' | 'blue-grey-4' | 'blue-grey-5' | 'blue-grey-6' | 'blue-grey-7' | 'blue-grey-8' | 'blue-grey-9' | 'blue-grey-10' | 'blue-grey-11' | 'blue-grey-12' | 'blue-grey-13' | 'blue-grey-14';
+
+export type ChatSettingType =
+  'NOTIFICATION'
+  | 'PIN'
+  | 'FAVORITE'
+  | 'LEAVE'
+  | 'UPDATE_READ_ALL'
+  | 'CLEAR_NEW_MESSAGE_NUMBER'
+  | 'CLEAR_NEW_MESSAGE_NUMBER_ONLY'
+  | 'UPDATE_DATA'
+  ;
+export type ChatType = 'PERSONAL' | 'GROUP';
+export type ChatMessageType = 'TEXT' | 'IMAGE' | 'WI_DOC' | 'FILE' | 'INVITE' | 'LEAVE' | 'LOCATION';
 // interface
 export interface ILocales {
   name: string;
@@ -188,6 +201,7 @@ export interface ApiResponse {
   response?: any;
   error?: any;
 }
+
 export interface ResponseMessage {
   status: IHttpStatus;
   message?: string;

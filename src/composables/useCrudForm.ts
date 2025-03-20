@@ -24,7 +24,7 @@ import {
 
 
 export const useCrudForm = <T>(options: CrudFormApiOptions, initialEntity: T) => {
-  const { appGoto, getParam, appToast, appConfirm, isDevMode, getPreviousPath } = useBase();
+  const { appNavigateTo, getParam, appToast, appConfirm, isDevMode, getPreviousPath } = useBase();
   const { callAxios } = useAxios();
   const { t } = useLang();
 
@@ -130,7 +130,7 @@ export const useCrudForm = <T>(options: CrudFormApiOptions, initialEntity: T) =>
             : '';
     }
     if (backLink) {
-      appGoto(backLink);
+      appNavigateTo(backLink);
     }
   };
   const apiEnpoint = computed(() => {

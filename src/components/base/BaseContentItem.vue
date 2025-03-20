@@ -51,7 +51,7 @@ const props = withDefaults(
     hashtagUrlify: false,
   },
 );
-const { appGoto } = useBase();
+const { appNavigateTo } = useBase();
 const { t } = useLang();
 const lineHeight = ref(0);
 const showMoreBtn = ref(false);
@@ -124,7 +124,7 @@ const onHashtagClick = (event: any) => {
     // eslint-disable-next-line unicorn/prefer-dom-node-text-content
     const hashtag = event.srcElement.innerText;
     if (hashtag) {
-      appGoto(`/hashtag/${hashtag.replace('#', '')}`);
+      appNavigateTo(`/hashtag/${hashtag.replace('#', '')}`);
     }
   }
 
@@ -170,7 +170,7 @@ const urlify = (rawText: string, linkColor: string | undefined = undefined) => {
 };
 const onOpenPage = (event: any) => {
   if (props.to) {
-    appGoto(props.to);
+    appNavigateTo(props.to);
   }
 
   event.stopImmediatePropagation();

@@ -1,18 +1,37 @@
 <script setup lang="ts">
-import BaseAvatar from '@/components/base/BaseAvatar.vue';
+import ChatHistoryItem from '@/components/chats/ChatHistoryItem.vue';
 import { useLang } from '@/composables/useLang';
-import type { ChatHistoryTab, LabelValue } from '@/types/common';
-import { biPlus, biSearch } from '@quasar/extras/bootstrap-icons';
-import { onMounted, ref } from 'vue';
-import BaseTabs from '../base/BaseTabs.vue';
-import BaseScrollArea from '../base/BaseScrollArea.vue';
+import type { ChatHistoryTab, ChatType, LabelValue } from '@/types/common';
+import {
+  biChatDots,
+  biPeople,
+  biPerson,
+  biPlus,
+  biSearch,
+  biX,
+} from '@quasar/extras/bootstrap-icons';
+import { chatHistoryListApi } from 'src/libs/data';
+import { useChatStore } from 'src/stores/chatStore';
+import type { GroupChatDto } from 'src/types/models';
+import { computed, onMounted, ref, watch } from 'vue';
+import BaseButton from '../base/BaseButton.vue';
+import BaseCard from '../base/BaseCard.vue';
+import BaseDropdownMenu from '../base/BaseDropdownMenu.vue';
 import BaseInput from '../base/BaseInput.vue';
-
-const { t } = useLang();
-const { height = 450, autofocus = false } = defineProps<{
+import BaseResult from '../base/BaseResult.vue';
+import BaseScrollArea from '../base/BaseScrollArea.vue';
+import BaseTabs from '../base/BaseTabs.vue';
+import BaseTooltip from '../base/BaseTooltip.vue';
+import { sortArray } from 'src/utils/appUtil';
+import { da } from 'date-fns/locale';
+const { showClose = false, autoDetect = true } = defineProps<{
   height?: number;
-  autofocus?: boolean;
+  showClose?: boolean;
+  autoDetect?: boolean;
 }>();
+const { t } = useLang();
+const chatStore = useChatStore();
+const emit = defineEmits(['on-item-click', 'on-close']);
 const histotyTab = ref<ChatHistoryTab>('ALL');
 const histotyTabs = ref<LabelValue<ChatHistoryTab>[]>([
   {
@@ -28,165 +47,173 @@ const histotyTabs = ref<LabelValue<ChatHistoryTab>[]>([
     value: 'FAVORITE',
   },
 ]);
+const modelValue = defineModel<GroupChatDto | undefined>();
+const dataList = ref<GroupChatDto[]>(chatHistoryListApi.dataList);
+
 const searchText = ref();
-onMounted(async () => {});
-const items = [
+// new chat
+const showNewChatDialog = ref(false);
+const newChatType = ref<ChatType>('PERSONAL');
+const menus = ref<LabelValue<ChatType>[]>([
   {
-    id: 1,
-    name: 'Cody Fisher',
-    time: '12.30',
-    new: 9,
-    online: true,
-    image: 'https://randomuser.me/api/portraits/men/1.jpg',
-    message: 'Hey there! I\'ve heard about PrimeVue. Any cool tips for getting started?',
+    label: t('chats.addNewprivateChat'),
+    icon: biPerson,
+    value: 'PERSONAL',
   },
   {
-    id: 2,
-    name: 'Vue Team',
-    time: '12.30',
-    new: 0,
-    online: true,
-    image: 'https://randomuser.me/api/portraits/men/2.jpg',
-    message: 'Let\'s implement PrimeVue. Elevating our UI game! 🚀',
+    label: t('chats.groupChatCreate'),
+    icon: biPeople,
+    value: 'GROUP',
   },
-  {
-    id: 3,
-    name: 'Robert Fox',
-    time: '12.30',
-    new: 8,
-    online: true,
-    image: 'https://randomuser.me/api/portraits/men/3.jpg',
-    message: 'Interesting! PrimeVue sounds amazing. What\'s your favorite feature?\n',
-  },
-  {
-    id: 4,
-    name: 'Esther Howard',
-    time: '12.30',
-    new: 1,
-    online: false,
-    image: 'https://randomuser.me/api/portraits/women/79.jpg',
-    message: 'Quick one, team! Anyone',
-  },
-  {
-    id: 5,
-    name: 'Darlene Robertson',
-    time: '12.30',
-    new: 0,
-    online: false,
-    image: 'https://randomuser.me/api/portraits/women/21.jpg',
-    message: 'ust explored PrimeVue\'s themes',
-  },
-  {
-    id: 6,
-    name: 'Ralph Edwards',
-    time: '12.30',
-    new: 0,
-    online: false,
-    image: 'https://randomuser.me/api/portraits/men/44.jpg',
-    message: 'PrimeVue is a game-changer, righ',
-  },
-  {
-    id: 7,
-    name: 'Darrell Steward',
-    time: '12.30',
-    new: 0,
-    online: true,
-    image: 'https://randomuser.me/api/portraits/men/81.jpg',
-    message: 'Reflecting on PrimeVue\'s impact o',
-  },
-  {
-    id: 8,
-    name: 'Vue Team',
-    time: '12.30',
-    new: 0,
-    online: false,
-    image: 'https://randomuser.me/api/portraits/men/88.jpg',
-    message: 'Let\'s implement PrimeVue',
-  },
-  {
-    id: 9,
-    name: 'Cody Fisher',
-    time: '12.30',
-    new: 9,
-    online: true,
-    image: 'https://randomuser.me/api/portraits/men/0.jpg',
-    message: 'Hey there! I\'ve heard about PrimeVue. Any cool tips for getting started?',
-  },
-  {
-    id: 10,
-    name: 'Vuy Team',
-    time: '12.30',
-    new: 0,
-    online: true,
-    image: 'https://randomuser.me/api/portraits/men/30.jpg',
-    message: 'Let\'s implement PrimeVue. Elevating our UI game! 🚀',
-  },
-  {
-    id: 11,
-    name: 'Robert Fox',
-    time: '12.30',
-    new: 8,
-    online: true,
-    image: 'https://randomuser.me/api/portraits/men/22.jpg',
-    message: 'Interesting! PrimeVue sounds amazing. What\'s your favorite feature?\n',
-  },
-  {
-    id: 12,
-    name: 'Esther Howard',
-    time: '12.30',
-    new: 1,
-    online: false,
-    image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar13.jpg',
-    message: 'Quick one, team! Anyone',
-  },
-  {
-    id: 13,
-    name: 'Darlene Robertson',
-    time: '12.30',
-    new: 0,
-    online: false,
-    image: 'https://randomuser.me/api/portraits/women/44.jpg',
-    message: 'ust explored PrimeVue\'s themes',
-  },
-  {
-    id: 14,
-    name: 'Ralph Edwards',
-    time: '12.30',
-    new: 0,
-    online: false,
-    image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar6.png',
-    message: 'PrimeVue is a game-changer, righ',
-  },
-  {
-    id: 15,
-    name: 'Darrell Steward',
-    time: '12.30',
-    new: 0,
-    online: true,
-    image: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar7.png',
-    message: 'Reflecting on PrimeVue impact o',
-  },
-  {
-    id: 16,
-    name: 'Staf Team',
-    time: '12.30',
-    new: 0,
-    online: false,
-    image: 'https://randomuser.me/api/portraits/women/17.jpg',
-    message: 'Let\'s implement PrimeVue',
-  },
-];
+]);
+onMounted(async () => {
+  if (autoDetect) {
+    detectAutoChat();
+  }
+});
+
+const filterHistoryItems = computed<GroupChatDto[]>(() => {
+  const s = searchText.value?.toString().trim();
+  if (!s) {
+    return dataList.value;
+  }
+  return dataList.value.filter((item) => item.groupName && item.groupName.includes(s));
+});
+const detectAutoChat = () => {
+  if (dataList.value && dataList.value.length > 0) {
+    const firstItem = dataList.value[0];
+    if (firstItem) {
+      onItemClick(firstItem);
+    }
+  }
+};
+const onMenuClick = (value: ChatType | string | undefined) => {
+  console.log('onMenuClick', value);
+};
+const onItemClick = (item: GroupChatDto) => {
+  emit('on-item-click', item);
+};
+// new chat
+const onOpenNewChatDialog = (type: ChatType = 'PERSONAL') => {
+  newChatType.value = type;
+  showNewChatDialog.value = true;
+};
+const onSuccessCreatedNewChat = (item: GroupChatDto) => {
+  onItemClick(item);
+  showNewChatDialog.value = false;
+};
+
+const onUpdatesearch = (e: string | number | undefined | null) => {
+  console.log('onUpdatesearch', e);
+};
+const findIndexByID = (groupChatd: number) => {
+  return dataList.value.findIndex((t) => t.id == groupChatd);
+};
+const findItemByIndex = (index: number) => {
+  return dataList.value[index];
+};
+const updatePinSort = async () => {
+  const list = await sortArray(dataList.value, 'pin', 'desc');
+  dataList.value = list;
+};
+const removeChat = (id: number | null) => {
+  if (id && id > 0) {
+    // const item = findItemByIndex(index);
+    dataList.value = dataList.value.filter((t) => t.id != id);
+  }
+};
+const clearUnreadMessage = async (groupChatId: number, clearToServer = true) => {
+  if (groupChatId) {
+    const index = findIndexByID(groupChatId);
+    if (index >= 0) {
+      const item = findItemByIndex(index);
+      if (item && item.id) {
+        item.totalNewMessage = 0;
+        if (clearToServer) {
+          //TODO
+        }
+      }
+    }
+  }
+};
+const updateSetting = () => {
+  if (!chatStore?.chatId || !chatStore?.chatSettingType) {
+    chatStore.clearSetting();
+    return;
+  }
+  const index = findIndexByID(chatStore.chatId);
+  if (index >= 0) {
+    const item = findItemByIndex(index);
+    if (item) {
+      switch (chatStore.chatSettingType) {
+        case 'NOTIFICATION':
+          item.muteNotify = !item.muteNotify;
+          break;
+        case 'PIN':
+          item.pin = !item.pin;
+          updatePinSort();
+          break;
+        case 'FAVORITE':
+          item.favorite = !item.favorite;
+          break;
+        case 'LEAVE':
+          removeChat(item.id);
+          break;
+        case 'CLEAR_NEW_MESSAGE_NUMBER':
+          if (item.totalNewMessage > 0 && item.id) {
+            clearUnreadMessage(item.id, true);
+          }
+          break;
+        case 'CLEAR_NEW_MESSAGE_NUMBER_ONLY':
+          if (item.id) {
+            clearUnreadMessage(item.id, false);
+          }
+          break;
+        case 'UPDATE_DATA':
+          // TODO
+          // if (chatStore?.requestItem) {
+          //   item.groupName = chatStore.requestItem.groupName;
+          //   if (chatStore.requestItem?.deleteAvatar) {
+          //     item.dtoAvatar = null;
+          //   }
+          //   if (chatStore.requestItem?.newAvatar) {
+          //     item.dtoAvatar = chatStore.requestItem.newAvatar;
+          //   }
+          // }
+          break;
+      }
+    }
+  }
+  chatStore.clearSetting();
+};
+watch(chatStore, (state) => {
+  if (state.toggleChatSetting) {
+    console.log('ChatLEft watch', state);
+    updateSetting();
+  }
+});
 </script>
 <template v-bind="$attrs">
-  <q-card flat>
+  <BaseCard flat :bordered="false">
     <q-toolbar>
       <q-toolbar-title class="text-weight-bold">
         {{ t('chats.chats') }}
       </q-toolbar-title>
-      <q-btn flat round :icon="biPlus" />
+      <BaseButton v-if="showClose" flat round :icon="biX" @click="$emit('on-close')" />
+      <BaseButton flat round :icon="biPlus">
+        <BaseDropdownMenu :items="menus" @on-click="onMenuClick" />
+        <BaseTooltip>
+          {{ t('chats.addNewChat') }}
+        </BaseTooltip>
+      </BaseButton>
     </q-toolbar>
     <q-card-section>
-      <BaseInput v-model="searchText" :label="t('base.search')">
+      <BaseInput
+        v-model="searchText"
+        :label="t('base.search')"
+        :debounce="500"
+        @update:model-value="onUpdatesearch"
+      >
         <template #prepend>
           <q-icon :name="biSearch" />
         </template>
@@ -195,47 +222,29 @@ const items = [
 
     <BaseTabs v-model="histotyTab" :items="histotyTabs" use-tab-panels keep-alive class="q-ml-xs">
       <template #ALL>
-        <q-list>
-          <BaseScrollArea height="61vh">
-            <q-item v-for="(item, index) in items" :key="`${item.id}-${index}`" clickable>
-              <q-item-section avatar>
-                <base-avatar :fetch-image="false" :src="item.image" size="42px">
-                  <template v-if="item.online" #extra>
-                    <q-badge
-                      floating
-                      color="positive"
-                      rounded
-                      transparent
-                      class="absolute"
-                      style="top: 30px"
-                    />
-                  </template>
-                </base-avatar>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>
-                  {{ item.name }}
-                </q-item-label>
-                <q-item-label caption lines="1">
-                  {{ item.message }}
-                </q-item-label>
-              </q-item-section>
-              <q-item-section side>
-                <q-item-label caption lines="1">
-                  {{ item.time }}
-                </q-item-label>
-                <q-item-label v-if="item.new > 0" caption>
-                  <q-badge color="negative">
-                    {{ item.new }}
-                  </q-badge>
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-          </BaseScrollArea>
-        </q-list>
+        <template v-if="filterHistoryItems.length > 0">
+          <q-list>
+            <BaseScrollArea height="61vh">
+              <chat-history-item
+                v-for="(item, index) in dataList"
+                :key="`all-${item.id}-${index}`"
+                :item="item"
+                :is-active="modelValue?.id == item.id"
+                @on-item-click="onItemClick"
+              />
+            </BaseScrollArea>
+          </q-list>
+        </template>
+        <template v-else>
+          <BaseResult status="empty" :description="t('chats.chatHistoryEmpty')" :show-icon="false">
+            <template #extra>
+              <q-icon :name="biChatDots" size="70px" class="text-muted" />
+            </template>
+          </BaseResult>
+        </template>
       </template>
       <template #GROUP> GROUP </template>
       <template #FAVORITE> FAVORITE </template>
     </BaseTabs>
-  </q-card>
+  </BaseCard>
 </template>
