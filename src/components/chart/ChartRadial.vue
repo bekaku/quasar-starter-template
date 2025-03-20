@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { useBase } from 'src/composables/useBase';
-import { onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffect } from 'vue';
 import type { ChartMode, ChartPosition, ChartThemePalete } from '@/types/chart';
-import { useQuasar } from 'quasar';
+import { useTheme } from 'src/composables/useTheme';
+import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 interface GridPadding {
   top?: number;
   right?: number;
@@ -46,7 +45,7 @@ const {
   trackBackgroudDark = '#383a42',
   fillType = 'gradient',
   valUnit,
-  dark = false 
+  dark = false,
 } = defineProps<{
   chartId?: string;
   height?: string;
@@ -84,8 +83,9 @@ const {
 }>();
 const chartSeries = ref(series);
 const options = ref<any>();
-// const { dark: isDark } = useQuasar();
+  const { isDark } = useTheme();
 const chartRadialRef = useTemplateRef<any>('chartRadialRef');
+const watchTimeout = ref<any>();
 // watchEffect(() => {
 //   if (series && series.length > 0) {
 //     chartSeries.value = series;
@@ -94,6 +94,10 @@ const chartRadialRef = useTemplateRef<any>('chartRadialRef');
 onUnmounted(() => {
   options.value = undefined;
   chartSeries.value = [];
+  if (watchTimeout.value) {
+    clearTimeout(watchTimeout.value);
+    watchTimeout.value = undefined;
+  }
 });
 
 onMounted(() => {
@@ -126,9 +130,11 @@ const updateTheme = (darkMode: boolean) => {
     });
   }
 };
-// watch(() => isDark.isActive, (state) => {
-//   updateTheme(state);
-// });
+watch(isDark, (state) => {
+  watchTimeout.value = setTimeout(() => {
+    updateTheme(state);
+  }, 50);
+});
 const chartSetup = () => {
   if (series.length > 0) {
     options.value = {

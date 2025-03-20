@@ -67,9 +67,8 @@
   ::-webkit-scrollbar {
     width: 10px;
   }
-
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--color-zinc-100) !important;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -408,9 +407,5 @@ body.body--dark {
       0 0 $elevation-dark-ambient,
       0 0 $elevation-dark-ambient,
       0 1px 2px 0 $elevation-dark-ambient !important;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--color-dark-500);
   }
 }

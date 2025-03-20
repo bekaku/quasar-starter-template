@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import BaseAvatar from '@/components/base/BaseAvatar.vue';
-import BaseRippleItem from '@/components/base/RippleItem.vue';
 import BaseSwiperSlides from '@/components/base/BaseSwiperSlides.vue';
+import BaseRippleItem from '@/components/base/RippleItem.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import type { SlideOptions } from '@/types/common';
+import { biArrowLeft, biArrowRight } from '@quasar/extras/bootstrap-icons';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseImage from 'src/components/base/BaseImage.vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -227,10 +229,22 @@ const slideOptsVertical: SlideOptions = {
 
               <template #start> Slot start </template>
               <template #end>
-                <q-card-section v-if="testSwiperRef">
-                  <q-btn @click="testSwiperRef.onPrev()"> Prev </q-btn>
-                  <q-btn @click="testSwiperRef.onNext()"> Next </q-btn>
-                </q-card-section>
+                <div v-if="testSwiperRef" class="row justify-center q-gutter-md">
+                  <BaseButton
+                    flat
+                    light
+                    label="Prev"
+                    :icon="biArrowLeft"
+                    @click="testSwiperRef.onPrev()"
+                  />
+                  <BaseButton
+                    flat
+                    light
+                    label="Next"
+                    :icon="biArrowRight"
+                    @click="testSwiperRef.onNext()"
+                  />
+                </div>
               </template>
             </base-swiper-slides>
           </q-card-section>

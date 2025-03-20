@@ -74,7 +74,7 @@ const isActive = computed(() => {
 <style scoped lang="scss">
 .nav-active {
   // background-color: #e0e0e0 !important;
-  background-color: var(--color-stone-200) !important;
+  background-color: var(--color-zinc-200) !important;
 }
 // .active-menu-link {
 // color: var(--color-primary-600) !important;

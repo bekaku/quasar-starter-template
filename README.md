@@ -4,21 +4,34 @@ A Quasar Project\
 [Demo Link](https://bekaku.github.io/quasar-starter/)
 
 ![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/index01.png)
+
 ![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/index02.png)
+
 ![feed](https://bekaku.github.io/images/screenshot-quasar-starter/feed01.png)
+
 ![feed](https://bekaku.github.io/images/screenshot-quasar-starter/feed02.png)
+
 ![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat01.png)
+
 ![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat02.png)
+
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart01.png)
+
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart02.png)
+
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart03.png)
-![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/gallerry.png)
-![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/pdf-view.png)
-![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/gallerry.png)
-![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/image-crop.png)
-![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/drag-drop.png)
-![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/md.png)
-![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/setting.png)
+
+![gallerry](https://bekaku.github.io/images/screenshot-quasar-starter/gallerry.png)
+
+![pdf-view](https://bekaku.github.io/images/screenshot-quasar-starter/pdf-view.png)
+
+![image-crop](https://bekaku.github.io/images/screenshot-quasar-starter/image-crop.png)
+
+![drag-drop](https://bekaku.github.io/images/screenshot-quasar-starter/drag-drop.png)
+
+![markdown](https://bekaku.github.io/images/screenshot-quasar-starter/md.png)
+
+![setting](https://bekaku.github.io/images/screenshot-quasar-starter/setting.png)
 
 
 # Backend Rest Api
@@ -143,7 +156,7 @@ modify /src/api/AuthenService.ts
 ```
 
 modify /src/api/FileManagerService.ts
-```js
+```ts
 const uploadApi = async (
     file: any,
     fileDirectoryId = 0,
@@ -191,7 +204,7 @@ const uploadApi = async (
   };
 ```
 modify /src/api/PermissionService.ts
-```js
+```ts
 const userAcl = async (getMenuList = 0): Promise<IAcl | null> => {
     return await callAxios<IAcl | null>({
       API: `/api/permission/userAcl?getMenuList=${getMenuList}`,
@@ -219,7 +232,7 @@ const userAcl = async (getMenuList = 0): Promise<IAcl | null> => {
   };
 ```
 modify /src/api/RoleService.ts
-```js
+```ts
 const findAllBackendRole = async (): Promise<Role[] | null> => {
     return await callAxios<Role[]>({
       API: '/api/role/findAllBackend',
@@ -255,7 +268,7 @@ const findAllBackendRole = async (): Promise<Role[] | null> => {
   };
 ```
 modify /src/api/UserService.ts
-```js
+```ts
 const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => {
       console.log('UserService.ts > findAll > ', `/api/user${q}`);
       return await callAxios<IApiListResponse<UserDto>>({
@@ -352,7 +365,7 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
   };
 ```
 modify /src/api/UtilService.ts
-```js
+```ts
 const getOgMeta = async (link: string): Promise<OgMeta | null> => {
     return await callAxios<OgMeta>({
       API: `/api/public/getOgMeta?url=${link}`,
@@ -364,7 +377,7 @@ const getOgMeta = async (link: string): Promise<OgMeta | null> => {
 Config your Project at `my-app`/quasar.config.ts
 
 devServer
-```js
+```ts
    devServer: {
       open: false, // opens browser window automatically
       port: 9000,

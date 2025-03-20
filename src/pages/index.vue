@@ -38,7 +38,7 @@ const showChart = ref<boolean>(false);
 onMounted(() => {
   setTimeout(() => {
     showChart.value = true;
-  }, 1500);
+  }, 500);
 });
 const statisticItems = ref<LabelValue<string>[]>([
   {
@@ -362,7 +362,7 @@ const heroItems: LabelValue<string>[] = [
         <div class="col-12 col-md-8 q-px-md">
           <BaseCard title="Overview" :flat="false">
             <q-card-section>
-              <SkeletonCard height="200px" v-if="!showChart" />
+              <SkeletonCard height="365px" v-if="!showChart" />
               <Transition>
                 <q-no-ssr>
                   <ChartArea
