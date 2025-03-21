@@ -16,7 +16,6 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { escapeHtml, isEmpty, openUrlInNewTab, roundDecimal } from '@/utils/appUtil';
 import { useBase } from '@/composables/useBase';
 import { useLang } from '@/composables/useLang';
-import BaseLink from '@/components/base/BaseLink.vue';
 import ContentHtml from '@/components/base/ContentHtml.vue';
 import BaseButton from './BaseButton.vue';
 

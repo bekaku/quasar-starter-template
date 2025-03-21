@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, onMounted, ref, watch } from 'vue';
-import { useLang } from '@/composables/useLang';
-import { useAppMeta } from '@/composables/useAppMeta';
 import ChatContent from '@/components/chats/ChatContent.vue';
+import { useAppMeta } from '@/composables/useAppMeta';
+import { useLang } from '@/composables/useLang';
+import { biChatDots } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import type { GroupChatDto } from 'src/types/models';
-import { useBase } from 'src/composables/useBase';
+import BaseResult from 'src/components/base/BaseResult.vue';
+import BaseSpinner from 'src/components/base/BaseSpinner.vue';
 import BaseSuspense from 'src/components/base/BaseSuspense.vue';
 import SkeletonItem from 'src/components/skeleton/SkeletonItem.vue';
-import { useRoute } from 'vue-router';
+import { useBase } from 'src/composables/useBase';
+import { useDevice } from 'src/composables/useDevice';
 import { chatHistoryListApi } from 'src/libs/data';
-import BaseResult from 'src/components/base/BaseResult.vue';
-import { biChatDots } from '@quasar/extras/bootstrap-icons';
-import BaseSpinner from 'src/components/base/BaseSpinner.vue';
-import type { ChatSettingType } from 'src/types/common';
 import { useChatStore } from 'src/stores/chatStore';
+import type { ChatSettingType } from 'src/types/common';
+import type { GroupChatDto } from 'src/types/models';
+import { cloneObject } from 'src/utils/appUtil';
+import { computed, defineAsyncComponent, onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 const ChatLeft = defineAsyncComponent(() => import('@/components/chats/ChatLeft.vue'));
 const ChatRight = defineAsyncComponent(() => import('@/components/chats/ChatRight.vue'));
@@ -24,6 +26,7 @@ const { setTitle } = useAppMeta();
 setTitle(`${t('chats.chats')} | ${t('app.name')}`);
 const { getParamNumber, appNavigateTo } = useBase();
 const chatStore = useChatStore();
+const { isSmallScreen } = useDevice();
 const route = useRoute();
 const groupItem = ref<GroupChatDto>();
 const groupId = computed<number>(() => getParamNumber('groupId') || 0);
@@ -31,6 +34,8 @@ const dialogLeft = ref(false);
 const dialogRight = ref(false);
 const firstLoad = ref(false);
 const loading = ref(true);
+
+const dataList = ref<GroupChatDto[]>([...chatHistoryListApi.dataList]);
 onMounted(async () => {
   await onFetchGroupData();
   firstLoad.value = true;
@@ -47,10 +52,10 @@ const onFetchGroupData = async () => {
     loading.value = false;
     return new Promise((resolve) => resolve(false));
   }
-  const res = chatHistoryListApi.dataList.find((t) => t.id == groupId.value);
+  const res = dataList.value.find((t) => t.id == groupId.value);
   console.log('onFetchGroupData, id ', groupId.value, res);
   if (res) {
-    groupItem.value = res;
+    groupItem.value = cloneObject<GroupChatDto>(res);
   }
   loading.value = false;
   return new Promise((resolve) => {
@@ -73,7 +78,7 @@ const toggleMute = async (chatId: number, fromConversation: boolean = true) => {
     console.log('toggleMute', chatId);
     groupItem.value.muteNotify = !groupItem.value.muteNotify;
   }
-  // setSettingeStore('NOTIFICATION', chatId);
+  setSettingeStore('NOTIFICATION', chatId);
 };
 const togglepin = async (chatId: number, fromConversation: boolean = true) => {
   if (!chatId) {
@@ -91,7 +96,7 @@ const toggleFav = async (chatId: number, fromConversation: boolean = true) => {
   if (fromConversation && groupItem.value) {
     groupItem.value.favorite = !groupItem.value.favorite;
   }
-  // setSettingeStore('FAVORITE', chatId);
+  setSettingeStore('FAVORITE', chatId);
 };
 const deleteChat = async (chatId: number, fromConversation: boolean = true) => {
   if (!chatId) {
@@ -135,7 +140,7 @@ watch(
               <chat-left
                 class="content-limit720"
                 @on-item-click="onItemClick"
-                v-model="groupItem"
+                :group-item="groupItem"
               />
             </template>
             <template #fallback>
@@ -173,7 +178,16 @@ watch(
         <div class="col-12 col-md-3 q-pa-sm" v-if="screen.gt.xs && screen.gt.sm">
           <BaseSuspense>
             <template #default>
-              <chat-right class="content-limit720" />
+              <chat-right
+                v-if="groupItem"
+                v-model="groupItem"
+                @toggle-mute="toggleMute"
+                @toggle-pin="togglepin"
+                @toggle-fav="toggleFav"
+                :show-close="isSmallScreen"
+                @on-close="dialogRight = false"
+                class="content-limit720"
+              />
             </template>
             <template #fallback>
               <SkeletonItem :no="5" />

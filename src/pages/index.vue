@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  biBarChart,
-  biChatDots,
-  biCreditCard,
-  biCurrencyDollar,
-  biGraphUp,
-  biMusicNote,
-  biNewspaper,
-  biPeople,
-} from '@quasar/extras/bootstrap-icons';
+import { biMusicNote } from '@quasar/extras/bootstrap-icons';
 import { useMeta } from 'quasar';
 import BaseAvatar from 'src/components/base/BaseAvatar.vue';
 import BaseButton from 'src/components/base/BaseButton.vue';
@@ -23,7 +14,13 @@ import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
 import SkeletonCard from 'src/components/skeleton/SkeletonCard.vue';
 import { useDevice } from 'src/composables/useDevice';
 import { useTheme } from 'src/composables/useTheme';
-import type { ISeriresCategories } from 'src/types/chart';
+import {
+  dashBaordRecentSalseItems,
+  dashBaordStatisticItems,
+  dashboardChartData,
+  dashboardHeroItems,
+  dashboardSparkLineItems,
+} from 'src/libs/data';
 import type { LabelValue } from 'src/types/common';
 import { onMounted, ref } from 'vue';
 useMeta({
@@ -40,197 +37,8 @@ onMounted(() => {
     showChart.value = true;
   }, 500);
 });
-const statisticItems = ref<LabelValue<string>[]>([
-  {
-    label: 'Total Revenue',
-    value: '$45,231.89',
-    description: '+20.1% from last month',
-    icon: biCurrencyDollar,
-  },
-  {
-    label: 'Subscriptions',
-    value: '+2350',
-    description: '+180.1% from last month',
-    icon: biPeople,
-  },
-  {
-    label: 'Sales',
-    value: '+12,234',
-    description: '+19% from last month',
-    icon: biCreditCard,
-  },
-  {
-    label: 'Active Now',
-    value: '+573',
-    description: '+201 since last hour',
-    icon: biGraphUp,
-  },
-]);
-const recentSalseItems = ref<LabelValue<string>[]>([
-  {
-    label: 'Olivia Martin',
-    value: '+$1,999.00',
-    description: 'olivia.martin@email.com',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar2.png',
-  },
-  {
-    label: 'Jackson Lee',
-    value: '+$39.00',
-    description: 'jackson.lee@email.com',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar3.png',
-  },
-  {
-    label: 'Isabella Nguyen',
-    value: '+$299.00',
-    description: 'isabella.nguyen@email.com',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar4.png',
-  },
-  {
-    label: 'William Kim',
-    value: '+$99.00',
-    description: 'will@email.com',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar5.png',
-  },
-  {
-    label: 'Sofia Davis',
-    value: '+$39.00',
-    description: 'sofia.davis@email.com',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar6.png',
-  },
-]);
-const chartData: ISeriresCategories = {
-  categories: [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ],
-  series: [
-    {
-      name: 'Access',
-      data: [32, 26, 57, 21, 8, 6, 14, 39, 10, 7, 9, 25],
-    },
-    {
-      name: 'Post',
-      data: [10, 8, 30, 21, 27, 10, 9, 40, 20, 10, 50, 12],
-    },
-    {
-      name: 'Repost',
-      data: [8, 10, 15, 21, 4, 15, 10, 50, 8, 0, 9, 25],
-    },
-    {
-      name: 'Comment',
-      data: [11, 20, 12, 14, 0, 10, 51, 22, 30, 10, 31, 11],
-    },
-    {
-      name: 'Feel',
-      data: [20, 10, 40, 16, 0, 5, 19, 1, 5, 0, 1, 4],
-    },
-    {
-      name: 'Share',
-      data: [1, 10, 11, 21, 17, 36, 51, 30, 15, 24, 56, 8],
-    },
-    {
-      name: 'Read',
-      data: [75, 38, 25, 70, 3, 2, 45, 35, 9, 6, 11, 24],
-    },
-    {
-      name: 'Learn',
-      data: [22, 0, 3, 2, 45, 11, 31, 20, 22, 10, 12, 21],
-    },
-    {
-      name: 'Reward',
-      data: [30, 1, 13, 1, 0, 0, 3, 0, 3, 0, 20, 15],
-    },
-  ],
-};
-const sparkLineItems = [
-  {
-    label: 'Revenue Status',
-    description: '12.030',
-    value: '27%',
-    color: '#15803d',
-    bg: 'green-1',
-    series: [
-      {
-        name: 'status',
-        data: [10000, 14000, 20000, 16000, 18000, 20000, 16000, 14500, 18000],
-      },
-    ],
-    categories: ['status'],
-  },
-  {
-    label: 'Page View',
-    description: '5592',
-    value: '12%',
-    color: '#f97316',
-    bg: 'orange-1',
-    series: [
-      {
-        name: 'view',
-        data: [5000, 7500, 9000, 8500, 7000, 6000, 8000, 9500, 7200],
-      },
-    ],
-    categories: ['view'],
-  },
-  {
-    label: 'Bounce Rate',
-    description: '55.56%',
-    value: '22%',
-    color: '#ef4444',
-    bg: 'red-1',
-    series: [
-      {
-        name: 'rate',
-        data: [28000, 25000, 27000, 24000, 23000, 26000, 25000, 22000, 20000],
-      },
-    ],
-    categories: ['rate'],
-  },
-  {
-    label: 'Product Sale Rate',
-    description: '12.56%',
-    value: '17%',
-    color: '#8b5cf6',
-    bg: 'purple-1',
-    series: [
-      {
-        name: 'sale',
-        data: [15000, 12000, 18000, 22000, 14000, 11000, 25000, 20000, 17000],
-      },
-    ],
-    categories: ['sale'],
-  },
-];
-
-const heroItems: LabelValue<string>[] = [
-  {
-    label: 'Social Feed',
-    description: 'Example Facebook feed clone',
-    to: '/example/feed',
-    icon: biNewspaper,
-  },
-  {
-    label: 'Chats',
-    description: 'Chat layout example',
-    to: '/example/chats',
-    icon: biChatDots,
-  },
-  {
-    label: 'Charts',
-    description: 'Chart components Area, Bar, Line, Pie...',
-    to: '/example/charts',
-    icon: biBarChart,
-  },
-];
+const statisticItems = ref<LabelValue<string>[]>(dashBaordStatisticItems);
+const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
 </script>
 <template>
   <BasePage scroll-event show-to-top>
@@ -273,15 +81,17 @@ const heroItems: LabelValue<string>[] = [
       </q-card-section>
 
       <div class="row">
-        <div v-for="(item, index) in heroItems" :key="index" class="col-12 col-md-4 q-px-md">
+        <div
+          v-for="(item, index) in dashboardHeroItems"
+          :key="index"
+          class="col-12 col-md-4 q-px-md"
+        >
           <BaseCard flat class="card-shade">
             <q-card-section>
               <BaseTextHeader :icon="item.icon" :title="item.label">
                 <template #end>
                   <q-item-section side>
-                    <BaseLink :to="item.to || ''" color="primary">
-                      Explore
-                    </BaseLink>
+                    <BaseLink :to="item.to || ''" color="primary"> Explore </BaseLink>
                   </q-item-section>
                 </template>
               </BaseTextHeader>
@@ -318,12 +128,12 @@ const heroItems: LabelValue<string>[] = [
         <BaseCard>
           <div class="row">
             <div
-              v-for="(item, index) in sparkLineItems"
+              v-for="(item, index) in dashboardSparkLineItems"
               :key="index"
               class="col-12 col-md-3"
               :style="{
                 borderRight:
-                  !isSmallScreen && index < sparkLineItems.length - 1
+                  !isSmallScreen && index < dashboardSparkLineItems.length - 1
                     ? `1px solid ${!isDark ? 'var(--color-zinc-200)' : 'var(--color-zinc-700)'}`
                     : 'none',
               }"
@@ -372,8 +182,8 @@ const heroItems: LabelValue<string>[] = [
                     height="350"
                     type="bar"
                     :colors="['#64748B', '#94A3B8', '#CBD5E1']"
-                    :series="chartData.series.slice(3, 6)"
-                    :categories="chartData.categories"
+                    :series="dashboardChartData.series.slice(3, 6)"
+                    :categories="dashboardChartData.categories"
                     strokestyle="smooth"
                     :label-rotate="!isSmallScreen ? 0 : -45"
                     :xaxis-tickamount="4"

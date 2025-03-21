@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import type { FileManagerDto } from '@/types/models';
 import { computed } from 'vue';
-import FilesPreviewItem from '../base/FilesPreviewItem.vue';
+import FilesPreviewItem from '../base/BaseFilesPreviewItem.vue';
 const { items } = defineProps<{
   items: FileManagerDto[];
 }>();

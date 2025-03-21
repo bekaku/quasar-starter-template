@@ -3,34 +3,47 @@
 A Quasar Project\
 [Demo Link](https://bekaku.github.io/quasar-starter/)
 
+Dashboard
 ![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/index01.png)
 
 ![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/index02.png)
 
+Social feed
 ![feed](https://bekaku.github.io/images/screenshot-quasar-starter/feed01.png)
 
 ![feed](https://bekaku.github.io/images/screenshot-quasar-starter/feed02.png)
 
+Chat layout
 ![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat01.png)
 
 ![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat03.png)
 
+Charts
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart01.png)
 
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart02.png)
 
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart03.png)
 
+Gallery
 ![gallerry](https://bekaku.github.io/images/screenshot-quasar-starter/gallerry.png)
 
+Pdf view
 ![pdf-view](https://bekaku.github.io/images/screenshot-quasar-starter/pdf-view.png)
 
+Image corpper
 ![image-crop](https://bekaku.github.io/images/screenshot-quasar-starter/image-crop.png)
 
+Drag drop
 ![drag-drop](https://bekaku.github.io/images/screenshot-quasar-starter/drag-drop.png)
 
+Markdown editor
 ![markdown](https://bekaku.github.io/images/screenshot-quasar-starter/md.png)
 
+Carousel
+![markdown](https://bekaku.github.io/images/screenshot-quasar-starter/swipper01.png)
+
+Settings
 ![setting](https://bekaku.github.io/images/screenshot-quasar-starter/setting.png)
 
 

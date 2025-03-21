@@ -2,136 +2,169 @@
 import BaseAvatar from '@/components/base/BaseAvatar.vue';
 import { useLang } from '@/composables/useLang';
 import {
+  biChevronRight,
+  biPinAngle,
+  biPinFill,
+  biStar,
+  biStarFill,
+  biVolumeMute,
+  biVolumeUp,
+  biX,
+  biGear,
   biArrowRight,
   biBoxArrowRight,
   biCameraVideo,
-  biChevronRight,
   biTelephone,
   biThreeDots,
-  biVolumeUp,
 } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import type { LabelValue } from 'src/types/common';
-import { onMounted, ref } from 'vue';
+import type { ChatMessageType, LabelValue } from 'src/types/common';
+import { computed, onMounted, ref } from 'vue';
 import BaseTabs from '../base/BaseTabs.vue';
+import type { GroupChatDto, UserDto } from 'src/types/models';
+import BaseCard from '../base/BaseCard.vue';
+import BaseButton from '../base/BaseButton.vue';
+import BaseScrollArea from '../base/BaseScrollArea.vue';
+import ChatGroupAvatar from './ChatGroupAvatar.vue';
+import { userItems } from '@/libs/data';
+import ChatGroupFilesTabs from './ChatGroupFilesTabs.vue';
+import BaseLink from '../base/BaseLink.vue';
 
 const { t } = useLang();
 const { dark } = useQuasar();
-const { height = 450, autofocus = false } = defineProps<{
-  height?: number;
-  autofocus?: boolean;
+const { showClose = false, chatWith } = defineProps<{
+  showClose?: boolean;
+  chatWith?: UserDto;
 }>();
-const midiaTab = ref<'MEDIA' | 'FILES'>('MEDIA');
-const notification = ref(true);
-const midiaTabs = ref<LabelValue<'MEDIA' | 'FILES'>[]>([
-  {
-    label: t('chats.media'),
-    value: 'MEDIA',
-  },
-  {
-    label: t('chats.files'),
-    value: 'FILES',
-  },
-]);
-onMounted(async () => {});
-const onHMidiaTabChange = (event: any) => {
-  console.log('onHMidiaTabChange', event);
+const emit = defineEmits<{
+  'toggle-mute': [chatId: number];
+  'toggle-pin': [chatId: number];
+  'toggle-fav': [chatId: number];
+  'on-close': [];
+}>();
+const modelValue = defineModel<GroupChatDto>();
+
+const showMember = ref(false);
+const showFileDialog = ref(false);
+const showFileDialogType = ref<ChatMessageType>('IMAGE');
+
+const getProfileViewLink = computed(() => {
+  if (!chatWith) {
+    return '#';
+  }
+  return `/user/${chatWith.id}`;
+});
+const toggleMute = () => {
+  if (!modelValue.value || !modelValue.value.id) {
+    return;
+  }
+  emit('toggle-mute', modelValue.value.id);
+};
+const togglePin = () => {
+  if (!modelValue.value || !modelValue.value.id) {
+    return;
+  }
+  emit('toggle-pin', modelValue.value.id);
+};
+const toggleFav = () => {
+  if (!modelValue.value || !modelValue.value.id) {
+    return;
+  }
+  emit('toggle-fav', modelValue.value.id);
+};
+const onOpenFileDialog = (fileType: ChatMessageType) => {
+  showFileDialogType.value = fileType;
+  showFileDialog.value = true;
 };
 </script>
 <template>
-  <q-card v-bind="$attrs" flat class="">
-    <q-scroll-area
-      style="height: 90vh"
-      content-active-style="width: 100%;"
-      content-style="width: 100%;"
-    >
+  <BaseCard v-bind="$attrs" v-if="modelValue" flat :bordered="false">
+    <BaseButton v-if="showClose" flat round :icon="biX" @click="$emit('on-close')" />
+    <BaseScrollArea height="85vh" :style="showClose ? 'width: 350px' : ''">
       <q-card-section class="text-center">
-        <base-avatar
-          :fetch-image="false"
-          src="https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar13.jpg"
-          rounded
-          size="75px"
-        />
-        <div class="text-subtitle1 text-weight-bold q-pt-sm">Esther Howard</div>
-        <div class="text-caption text-muted">@esther_howard</div>
+        <ChatGroupAvatar :item="modelValue" rounded avatar-size="75px" :show-pin="false" />
+        <div class="text-subtitle1 text-weight-bold q-pt-sm long-text-break">
+          <BaseLink :to="getProfileViewLink">
+            {{ modelValue.groupName }}
+          </BaseLink>
+        </div>
+        <div class="text-caption text-muted">
+          {{ modelValue.chatType == 'PERSONAL' ? 'Software engineer' : 'Group' }}
+        </div>
         <div class="row justify-center">
-          <q-btn flat round :icon="biTelephone" size="sm" />
-          <q-btn flat round :icon="biCameraVideo" size="sm" />
-          <q-btn flat round :icon="biBoxArrowRight" size="sm" />
-          <q-btn flat round :icon="biThreeDots" size="sm" />
+          <q-btn
+            flat
+            round
+            :icon="!modelValue.pin ? biPinAngle : biPinFill"
+            size="sm"
+            @click="togglePin"
+            :color="modelValue.pin ? 'primary' : undefined"
+          >
+            <q-tooltip>
+              {{ modelValue.pin ? t('chats.unpin') : t('chats.pin') }}
+            </q-tooltip>
+          </q-btn>
+
+          <q-btn
+            flat
+            round
+            :icon="!modelValue.favorite ? biStar : biStarFill"
+            size="sm"
+            @click="toggleFav"
+            :color="modelValue.favorite ? 'amber-8' : undefined"
+          >
+            <q-tooltip>
+              {{ modelValue.favorite ? t('chats.unfavorite') : t('chats.favorite') }}
+            </q-tooltip>
+          </q-btn>
+          <q-btn
+            flat
+            round
+            :icon="!modelValue.muteNotify ? biVolumeUp : biVolumeMute"
+            size="sm"
+            @click="toggleMute"
+            :color="modelValue.muteNotify ? 'negative' : undefined"
+          >
+            <q-tooltip>
+              {{ modelValue.muteNotify ? t('chats.unmuteNotify') : t('chats.muteNotify') }}
+            </q-tooltip>
+          </q-btn>
+
+          <q-btn
+            v-if="modelValue.chatType == 'GROUP'"
+            flat
+            round
+            :icon="biGear"
+            size="sm"
+            @click="showMember = true"
+          >
+            <q-tooltip>
+              {{ t('chats.groupSettings') }}
+            </q-tooltip>
+          </q-btn>
         </div>
       </q-card-section>
-      <q-list dense>
-        <q-item>
-          <q-item-section avatar>
-            <q-icon :name="biVolumeUp" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Notification</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-toggle v-model="notification" />
-          </q-item-section>
-        </q-item>
+
+      <q-list v-if="modelValue.chatType == 'GROUP'" dense>
         <q-item>
           <q-item-section>
-            <q-item-label> Members(99) </q-item-label>
+            <q-item-label> {{ `${t('chats.members')}(${userItems.length})` }} </q-item-label>
           </q-item-section>
           <q-item-section side>
-            <q-btn flat label="See All" no-caps class="text-weight-bold q-text-black" />
+            <BaseButton flat :label="t('base.viewAll')" />
           </q-item-section>
         </q-item>
-        <q-item clickable>
+        <q-item
+          v-for="(u, index) in userItems.slice(0, 5)"
+          :key="`index-${index}-${u.id}`"
+          clickable
+        >
           <q-item-section avatar>
-            <base-avatar
-              :fetch-image="false"
-              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar2.png"
-            />
+            <base-avatar :src="u.avatar?.thumbnail || '/images/ninja.png'" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Robin Jonas</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-btn flat round :icon="biChevronRight" />
-          </q-item-section>
-        </q-item>
-        <q-item clickable>
-          <q-item-section avatar>
-            <base-avatar
-              :fetch-image="false"
-              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Cameron Williamson</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-btn flat round :icon="biChevronRight" />
-          </q-item-section>
-        </q-item>
-        <q-item clickable>
-          <q-item-section avatar>
-            <base-avatar
-              :fetch-image="false"
-              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar5.png"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Eleanor Pena</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-btn flat round :icon="biChevronRight" />
-          </q-item-section>
-        </q-item>
-        <q-item clickable>
-          <q-item-section avatar>
-            <base-avatar
-              :fetch-image="false"
-              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar8.png"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Arlene McCoy</q-item-label>
+            <q-item-label>{{ u.username }}</q-item-label>
+            <q-item-label caption>{{ u.email }}</q-item-label>
           </q-item-section>
           <q-item-section side>
             <q-btn flat round :icon="biChevronRight" />
@@ -139,50 +172,7 @@ const onHMidiaTabChange = (event: any) => {
         </q-item>
       </q-list>
 
-      <BaseTabs v-model="midiaTab" :items="midiaTabs" use-tab-panels class="q-ml-xs">
-        <template #MEDIA>
-          <div class="row">
-            <div class="col-4 q-pa-sm cursor-pointer">
-              <q-img
-                src="https://www.primefaces.org/cdn/primevue/images/landing/apps/chat-image1.png"
-              />
-            </div>
-            <div class="col-4 q-pa-sm cursor-pointer">
-              <q-img
-                src="https://www.primefaces.org/cdn/primevue/images/landing/apps/chat-image2.png"
-              />
-            </div>
-            <div class="col-4 q-pa-sm cursor-pointer">
-              <q-img
-                src="https://www.primefaces.org/cdn/primevue/images/landing/apps/chat-image3.png"
-              />
-            </div>
-            <div class="col-4 q-pa-sm cursor-pointer">
-              <q-img
-                src="https://www.primefaces.org/cdn/primevue/images/landing/apps/chat-image4.png"
-              />
-            </div>
-            <div class="col-4 q-pa-sm cursor-pointer">
-              <q-img
-                src="https://www.primefaces.org/cdn/primevue/images/landing/apps/chat-image5.png"
-              />
-            </div>
-            <div class="col-4 q-pa-sm">
-              <div
-                v-ripple
-                class="text-subtitle1 full-height row items-center justify-center relative-position q-hoverable cursor-pointer app-border-radius"
-                :class="dark.isActive ? 'bg-grey-8' : 'bg-grey-3'"
-              >
-                <span class="q-focus-helper" />
-                <div>99+</div>
-              </div>
-            </div>
-          </div>
-
-          <q-btn class="full-width q-mt-md" label="See more" outline :icon-right="biArrowRight" />
-        </template>
-        <template #FILES> DOCS </template>
-      </BaseTabs>
-    </q-scroll-area>
-  </q-card>
+      <ChatGroupFilesTabs :group-chat="modelValue" @on-open-dialog="onOpenFileDialog" />
+    </BaseScrollArea>
+  </BaseCard>
 </template>

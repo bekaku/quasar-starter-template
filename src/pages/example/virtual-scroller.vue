@@ -14,6 +14,7 @@ const { setTitle } = useAppMeta();
 setTitle(`Virtual scroller | ${t('app.name')}`);
 
 const dataList = ref<any[]>([]);
+
 const maxSize = 10000;
 const updateItem = ref<VirtualScrollerUpdate>();
 const scrollerDynamicRef = useTemplateRef<any>('scrollerDynamicRef');
@@ -21,13 +22,17 @@ const scrollerDynamicRef = useTemplateRef<any>('scrollerDynamicRef');
 const scrollerRecycleRef = useTemplateRef<any>('scrollerRecycleRef');
 const chatInfinityScrollRef = useTemplateRef<any>('chatInfinityScrollRef');
 const items = ref<any[]>([]);
-const loading = ref(false);
 
 const scrollPosition = ref<number>(10);
 
 const virtualListRef = useTemplateRef<any>('virtualListRef');
 const virtualListIndex = ref(0);
+
+const virtualChatListRef = useTemplateRef<any>('virtualChatListRef');
+const chatList = ref<any[]>([]);
+const chatInfiniteDisable = ref<boolean>(true);
 onMounted(() => {
+  stopChatInfinityScroll();
   for (let i = 0; i < maxSize; i++) {
     dataList.value.push({
       id: i + 1,
@@ -35,6 +40,7 @@ onMounted(() => {
     });
   }
   generateItems();
+  initialChatList();
 });
 const onVirtualScrollUpdate = (item: VirtualScrollerUpdate) => {
   // console.log('onVirtualScrollUpdate', item);
@@ -67,16 +73,7 @@ const scrollTo = () => {
     scrollerRecycleRef.value.onScrollToItem(scrollPosition.value || 0);
   }
 };
-const stopInfinityScroll = () => {
-  if (chatInfinityScrollRef.value) {
-    chatInfinityScrollRef.value.stop();
-  }
-};
-const resumeInfinityScroll = () => {
-  if (chatInfinityScrollRef.value) {
-    chatInfinityScrollRef.value.resume();
-  }
-};
+
 const onInfinite = (index: number, done: any) => {
   setTimeout(() => {
     generateItems();
@@ -103,15 +100,77 @@ const onInfiniteVirtual = (index: number, done: any) => {
       });
     }
     done();
-  }, 2000);
+  }, 1000);
+};
+
+const initialChatList = async () => {
+  // stopChatInfinityScroll();
+  await onSetChatData();
+  onVirtualChatScrollTo(chatList.value.length - 1);
+  // resumeChatInfinityScroll();
+  setTimeout(() => {
+    chatInfiniteDisable.value = false;
+  }, 1000);
+};
+
+const onSetChatData = () => {
+  return new Promise((resolve) => {
+    let count = chatList.value.length;
+    for (let i = 0; i < 40; i++) {
+      count++;
+      chatList.value.push({
+        id: count,
+        label: 'Option ' + count,
+      });
+    }
+    resolve(true);
+  });
+};
+const onFetchChatPage = () => {
+  return new Promise((resolve) => {
+    for (let i = 0; i < 10; i++) {
+      chatList.value.unshift({
+        id: dataList.value.length + 1,
+        label: 'Option ' + (dataList.value.length + 1),
+      });
+    }
+    resolve(true);
+  });
+};
+const onVirtualChatScrollTo = (index: number) => {
+  if (virtualChatListRef.value) {
+    virtualChatListRef.value.scrollTo(index, 'start-force');
+  }
+};
+const onInfiniteChatVirtual = (index: number, done: any) => {
+  console.log('onInfiniteChatVirtual', index);
+  setTimeout(async () => {
+    await onFetchChatPage();
+    done();
+    if (index == 3) {
+      stopChatInfinityScroll();
+    }
+    onVirtualChatScrollTo(9);
+  }, 1000);
+};
+const stopChatInfinityScroll = () => {
+  if (chatInfinityScrollRef.value) {
+    chatInfinityScrollRef.value.stop();
+    chatInfiniteDisable.value = true;
+  }
+};
+const resumeChatInfinityScroll = () => {
+  if (chatInfinityScrollRef.value) {
+    chatInfinityScrollRef.value.resume();
+    chatInfiniteDisable.value = false;
+  }
 };
 </script>
 
 <template>
   <BasePage :full="false">
-    <BaseCard flat bordered title="Virtual scroller">
+    <BaseCard title="Dynamic Scroller">
       <q-card-section class="q-gutter-y-lg">
-        <div class="text-h5">Dynamic Scroller</div>
         <div>
           <p v-if="updateItem">
             ({{
@@ -143,10 +202,10 @@ const onInfiniteVirtual = (index: number, done: any) => {
           <template #slotAfter> After Slot </template>
         </BaseVirtualScrollerDynamic>
       </q-card-section>
+    </BaseCard>
 
+    <BaseCard title="Recycle Scroller + infinite-scroll">
       <q-card-section class="q-gutter-y-lg">
-        <div class="text-h5">Recycle Scroller + infinite-scroll</div>
-
         <div>
           <q-input v-model="scrollPosition" label="Scroll to" type="number">
             <template #append>
@@ -183,9 +242,10 @@ const onInfiniteVirtual = (index: number, done: any) => {
         </BaseVirtualScrollerRecycle>
         <BaseInfiniteScroll scroll-target="#scroll-chat-target-id" @on-infinite="onInfinite" />
       </q-card-section>
+    </BaseCard>
 
+    <BaseCard flat bordered title="Quasar virtual Scroller">
       <q-card-section class="q-gutter-y-lg">
-        <div class="text-h5">Quasar virtual Scroller</div>
         <div class="q-pa-md row justify-center">
           <q-input
             v-model.number="virtualListIndex"
@@ -236,6 +296,49 @@ const onInfiniteVirtual = (index: number, done: any) => {
             scroll-target="#virtual-scroll-target-holder"
             @on-infinite="onInfiniteVirtual"
           />
+        </div>
+      </q-card-section>
+    </BaseCard>
+
+    <BaseCard flat bordered title="Chat style virtual scroller">
+      <q-card-section>
+        <div id="virtual-scroll-chat-target-holder" class="scroll" style="max-height: 300px">
+          <BaseInfiniteScroll
+            ref="chatInfinityScrollRef"
+            scroll-target="#virtual-scroll-chat-target-holder"
+            reverse
+            :disable="chatInfiniteDisable"
+            @on-infinite="onInfiniteChatVirtual"
+          />
+          <q-virtual-scroll
+            id="q-scroll-target-id"
+            ref="virtualChatListRef"
+            v-slot="{ item, index }"
+            scroll-target="#virtual-scroll-chat-target-holder"
+            :items="chatList"
+            separator
+            @virtual-scroll="onVirtualScroll"
+          >
+            <div class="q-pa-md row justify-center">
+              <div style="width: 100%">
+                <q-chat-message
+                  name="me"
+                  avatar="https://cdn.quasar.dev/img/avatar4.jpg"
+                  sent
+                  stamp="7 minutes ago"
+                >
+                  <div>#{{ index }} - {{ item.label }}</div>
+                </q-chat-message>
+                <q-chat-message
+                  name="Jane"
+                  avatar="https://cdn.quasar.dev/img/avatar3.jpg"
+                  stamp="4 minutes ago"
+                >
+                  <div>#{{ index }} - {{ item.label }}</div>
+                </q-chat-message>
+              </div>
+            </div>
+          </q-virtual-scroll>
         </div>
       </q-card-section>
     </BaseCard>

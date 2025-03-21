@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FileManagerDto } from '@/types/models';
-import FilesPreviewItemAlt from './FilesPreviewItemAlt.vue';
-import FilesPreviewItem from './FilesPreviewItem.vue';
+import FilesPreviewItemAlt from './BaseFilesPreviewItemAlt.vue';
+import FilesPreviewItem from './BaseFilesPreviewItem.vue';
 
 const {
   showDelete = true,

@@ -37,12 +37,7 @@
   --app-main-border-light-color-theme-dark: var(--app-main-border-color-theme-dark);
 
   --app-color-white: #fff;
-  //twitter
-  // --app-text-muted: #536471;
-  --app-text-muted: #5F6E79;
-  // --app-text-muted: #666666;
-  --app-text-muted2: #6b7982;
-  --v-main-text-muted-theme-dark: #8b99a3;
+  --app-text-muted: var(--color-zinc-500);
 
   --v-main-text-icon: #797f8f;
   --v-main-text-icon-theme-dark: #8e8e93;
@@ -112,9 +107,6 @@ body {
   background-color: var(--app-second-bg-color-theme-dark) !important;
 }
 
-// .body--dark .wee-text-muted {
-//   color: var(--v-main-text-muted-theme-dark) !important;
-// }
 .app-main-bg {
   background-color: var(--main-bg-color) !important;
 }
@@ -372,8 +364,7 @@ body.body--dark {
   --main-bg-color: var(--app-main-bg-color-theme-dark);
   --second-bg-color: var(--app-second-bg-color-theme-dark);
   --v-text-black: #fff;
-  --app-text-muted: var(--v-main-text-muted-theme-dark);
-  --app-text-muted2: #6b7982;
+  --app-text-muted: var(--color-zinc-400);
   --app-main-border-color: var(--app-main-border-color-theme-dark);
   --app-main-border-light-color: var(--app-main-border-light-color-theme-dark);
   --border-lighter-color: var(--app-main-border-light-color-theme-dark);

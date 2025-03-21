@@ -3,7 +3,7 @@ import BaseAvatar from '@/components/base/BaseAvatar.vue';
 import BaseButton from '@/components/base/BaseButton.vue';
 import FilesPreview from '@/components/base/BaseFilesPreview.vue';
 import BaseScrollArea from '@/components/base/BaseScrollArea.vue';
-import FilesPreviewItemAlt from '@/components/base/FilesPreviewItemAlt.vue';
+import FilesPreviewItemAlt from '@/components/base/BaseFilesPreviewItemAlt.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from '@/stores/authenStore';

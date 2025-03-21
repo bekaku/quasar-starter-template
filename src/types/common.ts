@@ -166,7 +166,7 @@ export type ChatSettingType =
   | 'UPDATE_DATA'
   ;
 export type ChatType = 'PERSONAL' | 'GROUP';
-export type ChatMessageType = 'TEXT' | 'IMAGE' | 'WI_DOC' | 'FILE' | 'INVITE' | 'LEAVE' | 'LOCATION';
+export type ChatMessageType = 'MEDIA' | 'TEXT' | 'IMAGE' | 'FILE' | 'INVITE' | 'LEAVE' | 'LOCATION';
 // interface
 export interface ILocales {
   name: string;

@@ -46,13 +46,7 @@ const {
       </template>
     </base-avatar>
     <q-avatar v-else :size="`${avatarSize}px`" :rounded="rounded">
-      <q-img
-        :src="
-          item.chatType == 'GROUP'
-            ? '/images/ninja_duplicate.png'
-            : 'images/ninja.png'
-        "
-      />
+      <q-img alt="avatar" src="images/ninja.png" />
       <slot name="extra">
         <q-badge
           v-if="item.online"

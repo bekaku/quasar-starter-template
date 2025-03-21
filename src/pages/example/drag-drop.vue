@@ -7,6 +7,7 @@ import {
   biCheck2,
   biClock,
   biFileEarmark,
+  biGrid3x3Gap,
 } from '@quasar/extras/bootstrap-icons';
 import BaseAvatar from 'src/components/base/BaseAvatar.vue';
 import BaseButton from 'src/components/base/BaseButton.vue';
@@ -225,7 +226,7 @@ const onEndDrag = () => {
                                 </q-item-label>
                               </q-item-section>
                               <q-item-section v-if="isSmallScreen" side>
-                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                                <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
                               </q-item-section>
                             </q-item>
                             <div class="text-body2">{{ element.description }}</div>
@@ -292,7 +293,7 @@ const onEndDrag = () => {
                                 </q-item-label>
                               </q-item-section>
                               <q-item-section v-if="isSmallScreen" side>
-                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                                <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
                               </q-item-section>
                             </q-item>
                             <div class="text-body2">{{ element.description }}</div>
@@ -357,7 +358,7 @@ const onEndDrag = () => {
                                 </q-item-label>
                               </q-item-section>
                               <q-item-section v-if="isSmallScreen" side>
-                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                                <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
                               </q-item-section>
                             </q-item>
                             <div class="text-body2">{{ element.description }}</div>
@@ -423,7 +424,7 @@ const onEndDrag = () => {
                                 </q-item-label>
                               </q-item-section>
                               <q-item-section v-if="isSmallScreen" side>
-                                <BaseButton class="handle" flat :icon="biArrowsMove" round />
+                                <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
                               </q-item-section>
                             </q-item>
                             <div class="text-body2">{{ element.description }}</div>

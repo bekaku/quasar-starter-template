@@ -1,3 +1,62 @@
+<script setup lang="ts">
+import BaseImage from '@/components/base/BaseImage.vue';
+import type { FileManagerDto } from '@/types/models';
+import { formatBytes } from '@/utils/appUtil';
+import { getFileTypeIcon } from '@/utils/fileUtil';
+import { biX } from '@quasar/extras/bootstrap-icons';
+import { computed } from 'vue';
+
+const {
+  showDelete = true,
+  col = 'col-3 q-pa-md',
+  ratio = 4 / 3,
+  formatSize = false,
+  fetch = false,
+  showName = true,
+  showSize = true,
+  useThumbnail = false,
+  showTooltip = false,
+  dense = true,
+  imageSize = '125px',
+  iconSize = '4em',
+  linesName = 1,
+  item,
+} = defineProps<{
+  showDelete?: boolean;
+  col?: string;
+  item: FileManagerDto;
+  index: number;
+  formatSize?: boolean;
+  fetch?: boolean;
+  useThumbnail?: boolean;
+  showName?: boolean;
+  showSize?: boolean;
+  imageSize?: string;
+  imageHeight?: string;
+  iconSize?: string;
+  textColor?: string | undefined;
+  dense?: boolean;
+  showTooltip?: boolean;
+  ratio?: number;
+  linesName?: number;
+}>();
+const emit = defineEmits(['on-remove', 'on-click']);
+const getImagePath = computed(() =>
+  useThumbnail && item.fileThumbnailPath ? item.fileThumbnailPath : item.filePath,
+);
+const onRemove = (event: any, index: number) => {
+  emit('on-remove', index);
+  if (event) {
+    event.stopImmediatePropagation();
+  }
+};
+const onClick = (event: any, index: number) => {
+  emit('on-click', index);
+  if (event) {
+    event.stopImmediatePropagation();
+  }
+};
+</script>
 <template>
   <template v-if="item?.isImage || item?.image">
     <!-- :style="{ maxHeight: imageHeight || imageSize, maxWidth: imageSize }" -->
@@ -92,67 +151,3 @@
     </div>
   </template>
 </template>
-
-<script setup lang="ts">
-import BaseImage from '@/components/base/BaseImage.vue';
-import type { FileManagerDto } from '@/types/models';
-import { formatBytes } from '@/utils/appUtil';
-import { getFileTypeIcon } from '@/utils/fileUtil';
-import { biX } from '@quasar/extras/bootstrap-icons';
-import { computed } from 'vue';
-
-const props = withDefaults(
-  defineProps<{
-    showDelete?: boolean;
-    col?: string;
-    item: FileManagerDto;
-    index: number;
-    formatSize?: boolean;
-    fetch?: boolean;
-    useThumbnail?: boolean;
-    showName?: boolean;
-    showSize?: boolean;
-    imageSize?: string;
-    imageHeight?: string;
-    iconSize?: string;
-    textColor?: string;
-    dense?: boolean;
-    showTooltip?: boolean;
-    ratio?: number;
-    linesName?: number;
-  }>(),
-  {
-    showDelete: true,
-    col: 'col-3 q-pa-md',
-    ratio: 4 / 3,
-    formatSize: false,
-    fetch: false,
-    showName: true,
-    showSize: true,
-    useThumbnail: false,
-    showTooltip: false,
-    dense: true,
-    imageSize: '125px',
-    iconSize: '4em',
-    linesName: 1,
-  },
-);
-const emit = defineEmits(['on-remove', 'on-click']);
-const getImagePath = computed(() =>
-  props.useThumbnail && props.item.fileThumbnailPath
-    ? props.item.fileThumbnailPath
-    : props.item.filePath,
-);
-const onRemove = (event: any, index: number) => {
-  emit('on-remove', index);
-  if (event) {
-    event.stopImmediatePropagation();
-  }
-};
-const onClick = (event: any, index: number) => {
-  emit('on-click', index);
-  if (event) {
-    event.stopImmediatePropagation();
-  }
-};
-</script>

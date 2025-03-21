@@ -6,11 +6,13 @@ const {
   debounce = 250,
   offset = 500,
   reverse = false,
+  disable = false,
 } = defineProps<{
   scrollTarget?: string; // #scroll-target-id
   reverse?: boolean;
   debounce?: number;
   offset?: number;
+  disable?: boolean;
 }>();
 const emit = defineEmits<{
   'on-infinite': [index: number, done: any];
@@ -42,6 +44,7 @@ defineExpose({
       :reverse
       :offset
       :debounce
+      :disable
       :scroll-target="scrollTarget"
       @load="onInfinite"
     >

@@ -1,18 +1,3 @@
-import type {
-  AppException,
-  ChatMessageType,
-  IHrefTarget,
-  ISortModeType,
-  LabelValue,
-  ResponseMessage,
-  ServerException,
-} from '@/types/common';
-import type {
-  EmojiType,
-  FeedType,
-  IListResponse,
-  IMenuPageItem
-} from '@/types/models';
 import {
   AppAuthRefeshTokenKey,
   AppAuthTokenCreatedKey,
@@ -20,7 +5,20 @@ import {
   AppAuthTokenKey,
   SucureDeviceIdAtt
 } from '@/libs/constant';
-import { getCurrentTimestamp } from '@/utils/dateUtil';
+import type {
+  AppException,
+  ChatMessageType,
+  IHrefTarget,
+  LabelValue,
+  ResponseMessage,
+  ServerException
+} from '@/types/common';
+import type {
+  EmojiType,
+  FeedType,
+  IListResponse,
+  IMenuPageItem
+} from '@/types/models';
 export const isNumber = (value: string | number): boolean => {
   return value != null && value !== '' && !Number.isNaN(Number(value.toString()));
 };
@@ -195,7 +193,7 @@ export const formatBytes = (bytes: any, decimals = 2) => {
 
   return Number.parseFloat((bytes / k ** i).toFixed(dm)) + ' ' + sizes[i];
 };
-export const readableNumber = (num: number, digits: number) => {
+export const readableNumber = (num: number, digits: number = 1) => {
   if (num < 1000) {
     return num;
   }
@@ -208,16 +206,20 @@ export const readableNumber = (num: number, digits: number) => {
     { value: 1e15, symbol: 'P' },
     { value: 1e18, symbol: 'E' },
   ];
-  const rx = /\.0+$|(\.\d*[1-9])0+$/;
+  // const rx = /\.0+$|(\.\d*[1-9])0+$/;
   const item = lookup
     .slice()
     .reverse()
     .find((item) => {
       return num >= item.value;
     });
+  // return item
+  //   ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol
+  //   : '0';
+  // return item ? Math.floor((num / item.value) * 10) / 10 + item.symbol : '0';
   return item
-    ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol
-    : '0';
+  ? (Math.floor((num / item.value) * 10**digits) / 10**digits) + item.symbol
+  : '0';
 };
 export const percentage = (val: number, total: number, decimal = 2): number => {
   if (total === 0) {
@@ -431,7 +433,7 @@ export const escapeHtml = (unsafe: string | undefined) => {
     '\'': '&#039;'
   };
 
-  return unsafe.replace(/[&<>"']/g, char => map[char]);
+  return unsafe.replace(/[&<>"']/g, char => map[char] || '');
 };
 export const unescapeHtml = (safe: string | undefined) => {
   if (!safe) {
@@ -444,7 +446,7 @@ export const unescapeHtml = (safe: string | undefined) => {
     '&quot;': '"',
     '&#039;': '\''
   };
-  return safe.replace(/&(amp|lt|gt|quot|#039);/g, entity => map[entity]);
+  return safe.replace(/&(amp|lt|gt|quot|#039);/g, entity => map[entity] ||'');
 };
 
 export const getValFromObjectByPath = (obj: any, path: any) => {
@@ -468,9 +470,9 @@ export const getValFromObjectByPath = (obj: any, path: any) => {
 };
 export const appPreventDefult = async (event: any) => {
   if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-      event.stopImmediatePropagation();
+    event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
   }
 };
 export const getMessageTypeText = (type: ChatMessageType | undefined | null): string | number => {
@@ -484,9 +486,17 @@ export const getMessageTypeText = (type: ChatMessageType | undefined | null): st
       return 'chats.messageType.FILE';
     case 'LOCATION':
       return 'chats.messageType.LOCATION';
-    case 'WI_DOC':
-      return 'chats.messageType.WI_DOC';
     default:
       return '';
   }
+};
+
+export const cloneObject = <T>(obj: T) => {
+  return Object.assign({}, obj) as T;
+};
+export const cloneObjectV2 = <T>(obj: T) => {
+  return { ...obj } as T;
+};
+export const cloneObjectV3 = <T>(obj: T) => {
+  return JSON.parse(JSON.stringify(obj)) as T;
 };

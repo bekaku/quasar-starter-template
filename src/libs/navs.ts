@@ -291,7 +291,8 @@ export const additionalMenu: LabelValue<any>[] = [
       },
       {
         icon: biArrowLeftRight,
-        label: 'Swiper',
+        label: 'Swiper Carousel',
+        description: 'Swiper js',
         translateLabel: false,
         to: '/example/swiper'
       },

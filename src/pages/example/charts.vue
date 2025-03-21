@@ -9,7 +9,13 @@ import ChartRadar from 'src/components/chart/ChartRadar.vue';
 import ChartRadial from 'src/components/chart/ChartRadial.vue';
 import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
 import { useTheme } from 'src/composables/useTheme';
-import type { ISeriresCategories } from 'src/types/chart';
+import {
+  appleStockPrices,
+  chartData,
+  chartData2,
+  simpleCategories,
+  simpleSeries,
+} from 'src/libs/data';
 import { onMounted, reactive } from 'vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
@@ -64,93 +70,6 @@ const setShowChart = (no: number) => {
     }, 100);
   });
 };
-const chartData: ISeriresCategories = {
-  categories: [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ],
-  series: [
-    {
-      name: 'Access',
-      data: [32, 26, 57, 21, 8, 6, 14, 39, 10, 7, 9, 25],
-    },
-    {
-      name: 'Post',
-      data: [10, 8, 30, 21, 27, 10, 9, 40, 20, 10, 50, 12],
-    },
-    {
-      name: 'Repost',
-      data: [8, 10, 15, 21, 4, 15, 10, 50, 8, 0, 9, 25],
-    },
-    {
-      name: 'Comment',
-      data: [1, 0, 2, 4, 0, 0, 1, 2, 0, 0, 1, 11],
-    },
-    {
-      name: 'Feel',
-      data: [20, 10, 40, 16, 0, 5, 19, 1, 5, 0, 1, 4],
-    },
-    {
-      name: 'Share',
-      data: [1, 10, 11, 21, 17, 36, 51, 30, 15, 24, 56, 8],
-    },
-    {
-      name: 'Read',
-      data: [75, 38, 25, 70, 3, 2, 45, 35, 9, 6, 11, 24],
-    },
-    {
-      name: 'Learn',
-      data: [22, 0, 3, 2, 45, 11, 31, 20, 22, 10, 12, 21],
-    },
-    {
-      name: 'Reward',
-      data: [30, 1, 13, 1, 0, 0, 3, 0, 3, 0, 20, 15],
-    },
-  ],
-};
-const chartData2: ISeriresCategories = {
-  categories: ['January', 'February', 'March', 'April', 'May', 'June'],
-  series: [
-    {
-      name: 'Access',
-      data: [80, 50, 30, 40, 100, 20],
-    },
-    {
-      name: 'Post',
-      data: [20, 30, 40, 80, 20, 80],
-    },
-    {
-      name: 'Repost',
-      data: [44, 76, 78, 13, 43, 10],
-    },
-  ],
-};
-
-const appleStockPrices: ISeriresCategories = {
-  categories: ['AAPL'],
-  series: [
-    {
-      name: 'AAPL',
-      data: [
-        1382.54, 1285.23, 1688.76, 1090.12, 1307.65, 1285.98, 1309.34, 1311.56, 1393.24, 1300.87,
-        1188.98, 1091.45, 1193.67, 1335.23, 1302.87, 1370.98, 1103.34, 1295.78, 817.34, 1395.87,
-      ],
-    },
-  ],
-};
-
-const simpleSeries: number[] = [44, 55, 41, 37, 22, 43, 21];
-const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
 </script>
 <template>
   <BasePage>
@@ -446,16 +365,15 @@ const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'J
               class="q-my-sm"
               chart-id="chart-donut"
               height="350"
-              palette="palette5"
               type="donut"
               :colors="[
-                '#FFB900',
-                '#E74856',
-                '#0078D7',
-                '#0099BC',
-                '#7A7574',
-                '#00CC6A',
-                '#8E8CD8',
+                '#78350f',
+                '#92400e',
+                '#b45309',
+                '#d97706',
+                '#f59e0b',
+                '#fbbf24',
+                '#fcd34d',
               ]"
               :series="simpleSeries"
               :categories="simpleCategories"

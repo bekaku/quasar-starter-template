@@ -94,7 +94,7 @@
 }
 
 .text-message-sent {
-  color: var(--color-primary-600) !important;
+  color: var(--color-primary-200) !important;
 }
 
 .text-message-received {
@@ -116,7 +116,7 @@
 
 body.body--dark {
   .text-message-received {
-    color: var(--color-zinc-600) !important;
+    color: var(--color-zinc-700) !important;
   }
 
   .text-message-unsend {

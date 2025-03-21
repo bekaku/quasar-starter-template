@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import {
-    biChevronDown,
-    biSearch,
-    biStarFill,
-    biThreeDots
-} from '@quasar/extras/bootstrap-icons';
+import { biChevronDown, biSearch, biStarFill, biThreeDots } from '@quasar/extras/bootstrap-icons';
 import { useLang } from 'src/composables/useLang';
 import type { GroupChatDto, UserDto } from 'src/types/models';
 import { computed, ref } from 'vue';
 import ChatGroupAvatar from './ChatGroupAvatar.vue';
 import ChatMenu from './ChatMenu.vue';
+import BaseLink from '../base/BaseLink.vue';
 
 const {
   miniChat = false,
@@ -38,7 +34,7 @@ defineEmits<{
 }>();
 const getProfileViewLink = computed(() => {
   if (!chatWith) {
-    return undefined;
+    return '#';
   }
   return `/user/${chatWith.id}`;
 });
@@ -62,7 +58,6 @@ const onSearch = () => {
 </script>
 <template>
   <q-item class="card-top-bg">
-    muteNotify  {{ item.muteNotify }}
     <q-badge v-if="miniChat && miniminze && miniminzeNewMessage > 0" color="negative" floating>
       {{ miniminzeNewMessage }}
     </q-badge>
@@ -71,13 +66,9 @@ const onSearch = () => {
     </q-item-section>
     <q-item-section>
       <q-item-label lines="2">
-        <router-link v-if="getProfileViewLink" :to="getProfileViewLink" class="app-text-link">
+        <BaseLink :to="getProfileViewLink">
           {{ item.groupName }}
-        </router-link>
-        <template v-else>
-          {{ item.groupName ? item.groupName : t('chats.groupUntitledName') }}
-        </template>
-
+        </BaseLink>
         <q-icon
           v-if="item.favorite"
           color="amber-8"
@@ -86,8 +77,8 @@ const onSearch = () => {
           :name="biStarFill"
         />
       </q-item-label>
-      <q-item-label v-if="item.chatType == 'PERSONAL'" caption lines="1">
-        Software Engineer
+      <q-item-label caption lines="1">
+        {{ item.chatType == 'PERSONAL' ? 'Software engineer' : 'Group' }}
       </q-item-label>
     </q-item-section>
     <q-item-section side>

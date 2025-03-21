@@ -32,6 +32,7 @@ export const LatestSyncActiveStatusKey = PrefixKey + 'web_latest_sync_active_sta
 export const MaxSelectFiles = 10;
 export const LimitFileSizeMB = 50;
 export const LimitFileSize = LimitFileSizeMB * 1024 * 1024;
+export const ChatMesageFocusableId = 'web-chat-message-focusable';
 export const CacheKey = {
   YEAR_AVAILABLE: PrefixKey + 'year_available',
   LOGIN_LOG: PrefixKey + 'login_log',

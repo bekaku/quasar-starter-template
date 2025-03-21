@@ -23,8 +23,12 @@ import BaseScrollArea from '../base/BaseScrollArea.vue';
 import BaseTabs from '../base/BaseTabs.vue';
 import BaseTooltip from '../base/BaseTooltip.vue';
 import { sortArray } from 'src/utils/appUtil';
-import { da } from 'date-fns/locale';
-const { showClose = false, autoDetect = true } = defineProps<{
+const {
+  showClose = false,
+  autoDetect = true,
+  groupItem,
+} = defineProps<{
+  groupItem?: GroupChatDto | undefined;
   height?: number;
   showClose?: boolean;
   autoDetect?: boolean;
@@ -47,8 +51,7 @@ const histotyTabs = ref<LabelValue<ChatHistoryTab>[]>([
     value: 'FAVORITE',
   },
 ]);
-const modelValue = defineModel<GroupChatDto | undefined>();
-const dataList = ref<GroupChatDto[]>(chatHistoryListApi.dataList);
+const dataList = ref<GroupChatDto[]>([...chatHistoryListApi.dataList]);
 
 const searchText = ref();
 // new chat
@@ -77,8 +80,12 @@ const filterHistoryItems = computed<GroupChatDto[]>(() => {
   if (!s) {
     return dataList.value;
   }
-  return dataList.value.filter((item) => item.groupName && item.groupName.includes(s));
+  return dataList.value.filter(
+    (item) => item.groupName && item.groupName.toLowerCase().includes(s.toLowerCase()),
+  );
 });
+const itemGroups = computed(() => filterHistoryItems.value.filter((t) => t.chatType == 'GROUP'));
+const itemFavorites = computed(() => filterHistoryItems.value.filter((t) => t.favorite));
 const detectAutoChat = () => {
   if (dataList.value && dataList.value.length > 0) {
     const firstItem = dataList.value[0];
@@ -116,10 +123,12 @@ const updatePinSort = async () => {
   const list = await sortArray(dataList.value, 'pin', 'desc');
   dataList.value = list;
 };
-const removeChat = (id: number | null) => {
-  if (id && id > 0) {
-    // const item = findItemByIndex(index);
-    dataList.value = dataList.value.filter((t) => t.id != id);
+const removeChat = (index: number | null) => {
+  if (index != null && index >= 0) {
+    const item = findItemByIndex(index);
+    if (item) {
+      dataList.value.splice(index, 1);
+    }
   }
 };
 const clearUnreadMessage = async (groupChatId: number, clearToServer = true) => {
@@ -130,7 +139,7 @@ const clearUnreadMessage = async (groupChatId: number, clearToServer = true) => 
       if (item && item.id) {
         item.totalNewMessage = 0;
         if (clearToServer) {
-          //TODO
+          // TODO
         }
       }
     }
@@ -141,6 +150,7 @@ const updateSetting = () => {
     chatStore.clearSetting();
     return;
   }
+
   const index = findIndexByID(chatStore.chatId);
   if (index >= 0) {
     const item = findItemByIndex(index);
@@ -157,7 +167,7 @@ const updateSetting = () => {
           item.favorite = !item.favorite;
           break;
         case 'LEAVE':
-          removeChat(item.id);
+          removeChat(index);
           break;
         case 'CLEAR_NEW_MESSAGE_NUMBER':
           if (item.totalNewMessage > 0 && item.id) {
@@ -188,7 +198,6 @@ const updateSetting = () => {
 };
 watch(chatStore, (state) => {
   if (state.toggleChatSetting) {
-    console.log('ChatLEft watch', state);
     updateSetting();
   }
 });
@@ -211,7 +220,7 @@ watch(chatStore, (state) => {
       <BaseInput
         v-model="searchText"
         :label="t('base.search')"
-        :debounce="500"
+        :debounce="250"
         @update:model-value="onUpdatesearch"
       >
         <template #prepend>
@@ -220,16 +229,16 @@ watch(chatStore, (state) => {
       </BaseInput>
     </q-card-section>
 
-    <BaseTabs v-model="histotyTab" :items="histotyTabs" use-tab-panels keep-alive class="q-ml-xs">
+    <BaseTabs v-model="histotyTab" :items="histotyTabs" use-tab-panels keep-alive :animated="false" class="q-ml-xs">
       <template #ALL>
         <template v-if="filterHistoryItems.length > 0">
           <q-list>
             <BaseScrollArea height="61vh">
               <chat-history-item
-                v-for="(item, index) in dataList"
+                v-for="(item, index) in filterHistoryItems"
                 :key="`all-${item.id}-${index}`"
                 :item="item"
-                :is-active="modelValue?.id == item.id"
+                :is-active="groupItem?.id == item.id"
                 @on-item-click="onItemClick"
               />
             </BaseScrollArea>
@@ -243,8 +252,50 @@ watch(chatStore, (state) => {
           </BaseResult>
         </template>
       </template>
-      <template #GROUP> GROUP </template>
-      <template #FAVORITE> FAVORITE </template>
+      <template #GROUP>
+        <template v-if="filterHistoryItems.length > 0">
+          <q-list>
+            <BaseScrollArea height="61vh">
+              <chat-history-item
+                v-for="(itemGroup, indexGroup) in itemGroups"
+                :key="`group-${itemGroup.id}-${indexGroup}`"
+                :item="itemGroup"
+                :is-active="groupItem?.id == itemGroup.id"
+                @on-item-click="onItemClick"
+              />
+            </BaseScrollArea>
+          </q-list>
+        </template>
+        <template v-else>
+          <BaseResult status="empty" :description="t('chats.chatHistoryEmpty')" :show-icon="false">
+            <template #extra>
+              <q-icon :name="biChatDots" size="70px" class="text-muted" />
+            </template>
+          </BaseResult>
+        </template>
+      </template>
+      <template #FAVORITE> 
+        <template v-if="itemFavorites.length > 0">
+          <q-list>
+            <BaseScrollArea height="61vh">
+              <chat-history-item
+              v-for="(itemFav, indexFav) in itemFavorites"
+                :key="`fav-${itemFav.id}-${indexFav}`"
+                :item="itemFav"
+                :is-active="groupItem?.id == itemFav.id"
+                @on-item-click="onItemClick"
+              />
+            </BaseScrollArea>
+          </q-list>
+        </template>
+        <template v-else>
+          <BaseResult status="empty" :description="t('chats.chatHistoryEmpty')" :show-icon="false">
+            <template #extra>
+              <q-icon :name="biChatDots" size="70px" class="text-muted" />
+            </template>
+          </BaseResult>
+        </template>  
+      </template>
     </BaseTabs>
   </BaseCard>
 </template>

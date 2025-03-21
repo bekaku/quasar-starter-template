@@ -113,12 +113,13 @@ export interface FileManagerDto extends Id {
   fileMime: string
   fileName: string
   filePath: string
-  fileThumbnailPath: string
+  fileThumbnailPath: string | null
   fileSize: string
-  functionId?: number
+  functionId?: number | null
   isImage?: boolean
   image?: boolean
   file?: any
+  createdDate?: string
 }
 export interface AccessTokenDto extends Id {
   ipAddredd: string
@@ -313,6 +314,7 @@ export interface UserDto extends Id {
   selectedRoles?: number[]
   defaultLocale?: AppLocale
   permissions?: string[] | undefined
+  name?: string
 }
 export interface UserProfileDto extends Id {
   id: number
@@ -357,7 +359,6 @@ export interface GroupChatMemberDto extends Id {
 }
 
 export interface GroupChatDto extends Id {
-  fileAvatarSelectId?: number | null
   dtoAvatar?: ImageDto | null
   chatType: ChatType
   groupName?: string | null
@@ -383,4 +384,35 @@ export interface GroupChatRequest {
   deleteAvatar?: boolean | undefined
   newAvatar?: ImageDto | undefined
   avatarPreview?: string | undefined
+}
+export interface GroupChatFileDto extends Id {
+  fileManager?: FileManagerDto | null | undefined
+}
+
+export interface EmojiCountDto {
+  total: number
+  emojiType: EmojiType
+}
+export interface GroupChatMsgDto extends Id {
+  groupId?: number | undefined
+  chatMsg?: string | undefined | null
+  msgDateTime: string
+  readCount: number
+  unsend?: boolean | undefined
+  sent: boolean
+  sendUser?: UserDto | undefined
+  files?: GroupChatFileDto[] | undefined |null
+  liked?: boolean | undefined
+  onlyLabel?: boolean | undefined
+  emojiType?: EmojiType | null | undefined
+  reactionEngage?: EmojiCountDto[] | undefined
+  dtoReplyTo?: GroupChatMsgDto | null | undefined
+  chatMessageType?: ChatMessageType | undefined
+}
+export interface GroupChatMsgRequest {
+  chatMessageType?: ChatMessageType | undefined | null
+  chatMsg?: string | null
+  fileIds?: number[]
+  shareMessageIds?: number[]
+  replyToId?: number | null
 }

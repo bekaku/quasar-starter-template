@@ -4,7 +4,7 @@ import { useQuasar } from 'quasar';
 import { useLang } from './useLang';
 import type { ITextValue, NotifyOptions } from '@/types/common';
 import { SearchOperation } from '@/libs/constant';
-import { formatDate, formatDateTime, formatDistanceFromNow, getDateAutoFormatBy } from '@/utils/dateUtil';
+import { formatDate, formatDateTime, formatDistanceFromNow, getDateAutoFormatBy, getDateTimeAutoFormatBy } from '@/utils/dateUtil';
 import {
   biCheckCircle,
   biExclamationCircle,
@@ -221,6 +221,9 @@ export const useBase = () => {
   const appFormatDateAuto = (d: string) => {
     return d ? getDateAutoFormatBy(d, locale.value) : '';
   };
+  const appFormatDateTimeAuto = (d: string) => {
+    return d ? getDateTimeAutoFormatBy(d, locale.value) : '';
+  };
 
   /**
    * <div ref="bottomSection"></div>
@@ -301,6 +304,7 @@ export const useBase = () => {
     readableNumber,
     isDark,
     writeToClipboard,
-    appFormatDateAuto
+    appFormatDateAuto,
+    appFormatDateTimeAuto
   };
 };
