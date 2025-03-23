@@ -209,12 +209,11 @@ watch(chatStore, (state) => {
         {{ t('chats.chats') }}
       </q-toolbar-title>
       <BaseButton v-if="showClose" flat round :icon="biX" @click="$emit('on-close')" />
-      <BaseButton flat round :icon="biPlus">
-        <BaseDropdownMenu :items="menus" @on-click="onMenuClick" />
-        <BaseTooltip>
-          {{ t('chats.addNewChat') }}
-        </BaseTooltip>
-      </BaseButton>
+      <!-- <BaseButton flat round :icon="biPlus"> -->
+      <BaseDropdownMenu :items="menus" :tooltip="t('chats.addNewChat')" :icon="biPlus" @on-click="onMenuClick">
+      </BaseDropdownMenu>
+
+      <!-- </BaseButton> -->
     </q-toolbar>
     <q-card-section>
       <BaseInput
@@ -229,7 +228,14 @@ watch(chatStore, (state) => {
       </BaseInput>
     </q-card-section>
 
-    <BaseTabs v-model="histotyTab" :items="histotyTabs" use-tab-panels keep-alive :animated="false" class="q-ml-xs">
+    <BaseTabs
+      v-model="histotyTab"
+      :items="histotyTabs"
+      use-tab-panels
+      keep-alive
+      :animated="false"
+      class="q-ml-xs"
+    >
       <template #ALL>
         <template v-if="filterHistoryItems.length > 0">
           <q-list>
@@ -274,12 +280,12 @@ watch(chatStore, (state) => {
           </BaseResult>
         </template>
       </template>
-      <template #FAVORITE> 
+      <template #FAVORITE>
         <template v-if="itemFavorites.length > 0">
           <q-list>
             <BaseScrollArea height="61vh">
               <chat-history-item
-              v-for="(itemFav, indexFav) in itemFavorites"
+                v-for="(itemFav, indexFav) in itemFavorites"
                 :key="`fav-${itemFav.id}-${indexFav}`"
                 :item="itemFav"
                 :is-active="groupItem?.id == itemFav.id"
@@ -294,7 +300,7 @@ watch(chatStore, (state) => {
               <q-icon :name="biChatDots" size="70px" class="text-muted" />
             </template>
           </BaseResult>
-        </template>  
+        </template>
       </template>
     </BaseTabs>
   </BaseCard>

@@ -5,6 +5,7 @@ import { useLang } from '@/composables/useLang';
 import type { FileManagerDto, GroupChatFileDto } from '@/types/models';
 import { computed, defineAsyncComponent, ref } from 'vue';
 import { useTheme } from 'src/composables/useTheme';
+import { useDevice } from 'src/composables/useDevice';
 const BaseFileViewDialog = defineAsyncComponent(
   () => import('@/components/base/BaseFileViewDialog.vue'),
 );
@@ -20,7 +21,7 @@ const {
   miniChat?: boolean;
   fileTextColor?: string;
 }>();
-const { isDark } = useTheme();
+const { isSmallScreen } = useDevice();
 const { t } = useLang();
 const fileForView = ref<GroupChatFileDto>();
 const fileImageItemsForView = ref<FileManagerDto[]>([]);
@@ -127,7 +128,7 @@ const onFilePreviewClick = async (index: number, event: any) => {
       >
         <BaseFilesPreviewItem
           v-if="p.fileManager"
-          class="app-border"
+          class="rounded"
           style="border-radius: 10px"
           :item="p.fileManager"
           :index="previewIndex"
@@ -144,7 +145,7 @@ const onFilePreviewClick = async (index: number, event: any) => {
       </div>
     </div>
     <div v-if="getFileItems && getFileItems.length > 0" class="row">
-      <div class="col q-py-sm">
+      <div class="col-12 q-py-sm" style="overflow-x: auto">
         <q-list>
           <template
             v-for="(f, previewFileIndex) in getFileItems"
@@ -152,6 +153,7 @@ const onFilePreviewClick = async (index: number, event: any) => {
           >
             <BaseFilesPreviewItemAlt
               v-if="f.fileManager"
+               :style="{ maxWidth: !isSmallScreen ? '100%' : '230px' }"
               :item="f.fileManager"
               :index="previewFileIndex"
               @on-click="(index: number, ev: any) => onFilePreviewClick(index, ev)"

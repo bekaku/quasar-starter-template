@@ -271,6 +271,7 @@ export interface LabelValue<Type> {
   to?: string;
   translateLabel?: boolean;
   value?: Type | undefined;
+  onHandle?: (...params: any[] | []) => void;
 }
 export interface ITextValue {
   text: string;

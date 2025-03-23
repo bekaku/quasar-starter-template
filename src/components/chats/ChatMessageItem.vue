@@ -5,7 +5,6 @@ import { computed, defineAsyncComponent, ref, watch } from 'vue';
 import BaseAvatar from '@/components/base/BaseAvatar.vue';
 import { useLang } from '@/composables/useLang';
 import { useBase } from '@/composables/useBase';
-// import MessageMenu from '@/components/chats/MessageMenu.vue';
 import { useQuasar } from 'quasar';
 import type { ChatType } from '@/types/common';
 import { numberFormat } from '@/utils/appUtil';
@@ -16,6 +15,7 @@ import OpenGraphItemAlt from '@/components/base/OpenGraphItemAlt.vue';
 import RippleItem from '@/components/base/BaseRippleItem.vue';
 import { ChatMesageFocusableId } from '@/libs/constant';
 import AppReactionMenu from '../app/AppReactionMenu.vue';
+import ChatMessageMenu from './ChatMessageMenu.vue';
 
 // const LikeEmojiMenu = defineAsyncComponent(
 //   () => import('@/components/reaction/LikeEmojiMenu.vue')
@@ -58,9 +58,8 @@ const emit = defineEmits<{
 const chatStore = useChatStore();
 const { screen, dark } = useQuasar();
 const { t } = useLang();
-const { appFormatDateTimeAuto, writeToClipboard, appFormatDate } = useBase();
+const { appFormatDateTimeAuto, writeToClipboard } = useBase();
 const isHoverMessage = ref(false);
-const dateLabel = ref();
 const isFocus = ref(false);
 const messageFocusTimeout = ref<any>(null);
 const cssClass = computed(() =>
@@ -178,6 +177,7 @@ const onShare = async () => {
   emit('message-share', item.id);
 };
 const onCopy = async () => {
+  console.log('onCopy');
   if (item.chatMsg) {
     await writeToClipboard(item.chatMsg);
   }
@@ -359,16 +359,7 @@ watch(chatStore, (state) => {
 
               <div v-if="item.id" :class="cssClass" :style="cssStyle">
                 <div class="row items-center" style="z-index: 99999">
-                  <q-btn
-                    flat
-                    round
-                    dense
-                    size="sm"
-                    :icon="biThreeDotsVertical"
-                    class="text-muted"
-                    style="opacity: 0.5"
-                  >
-                    <!-- <message-menu
+                    <ChatMessageMenu
                       :chat-id="item.id"
                       :sent="item.sent"
                       :show-copy="item.chatMsg != null && true && item.chatMsg.length > 0"
@@ -378,10 +369,7 @@ watch(chatStore, (state) => {
                       @message-unsend="onUnsend"
                       @message-reply="onRepy"
                       @message-share="onShare"
-                      @on-share-post="$emit('on-share-post')"
-                      @on-share-action="$emit('on-share-action')"
-                    /> -->
-                  </q-btn>
+                    />
                   <q-btn
                     flat
                     round
@@ -394,7 +382,7 @@ watch(chatStore, (state) => {
                       auto-close
                       anchor="top end"
                       self="bottom middle"
-                      style="height: 80px; width: 310px"
+                      style="height: 65px; width: 265px"
                     >
                       <!-- <like-emoji-menu :icon-size="45" :icon-zoom-size="64" @on:like="onReact" /> -->
                       <AppReactionMenu @on:like="onReact" />

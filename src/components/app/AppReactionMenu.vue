@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useLang } from '@/composables/useLang';
 import type { EmojiType } from '@/types/models';
 import {
   mdiEmoticonLol,
@@ -14,12 +12,12 @@ import {
   mdiThumbUp,
   mdiThumbUpOutline,
 } from '@quasar/extras/mdi-v7';
-const { iconSize = '45px', iconZoomSize = '64px' } = defineProps<{
+import { ref } from 'vue';
+const { iconSize = '40px', iconZoomSize = '55px' } = defineProps<{
   iconSize?: string;
   iconZoomSize?: string;
 }>();
 const emit = defineEmits(['on:like']);
-const { t } = useLang();
 const loveHover = ref(false);
 const fightHover = ref(false);
 const laughHover = ref(false);
@@ -31,7 +29,7 @@ const onLike = (l: EmojiType) => {
 </script>
 <template>
   <!-- <div class="row justify-between q-pa-md q-gutter-md"> -->
-  <div class="row q-pa-md q-gutter-md">
+  <div class="row justify-center q-pa-sm q-gutter-sm">
     <transition-group appear enter-active-class="animated lightSpeedInLeft">
       <div key="btn-1" class="btn-holder">
         <q-btn

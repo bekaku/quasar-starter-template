@@ -29,7 +29,7 @@ const emit = defineEmits<{
   'message-reply': [id: number];
   'on-open-seen-dialog': [id: number, count: number];
   'message-share': [id: number];
-  'on-open-message-dialog': [id: number];
+  'on-focus-message-reply': [id: number];
 }>();
 
 const onReact = async (l: EmojiType) => {
@@ -73,9 +73,9 @@ const onReplyClick = (messageId: number) => {
   // if (selector && selector?.scrollIntoView) {
   //   selector.scrollIntoView();
   // } else {
-  //   emit('on-open-message-dialog', messageId);
+  //   emit('on-focus-message-reply', messageId);
   // }
-  emit('on-open-message-dialog', messageId);
+  emit('on-focus-message-reply', messageId);
 };
 </script>
 

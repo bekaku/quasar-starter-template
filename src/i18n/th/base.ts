@@ -287,6 +287,7 @@ export default {
         typeForsearch: 'พิมพ์เพื่อค้นหา',
         typeCommandForsearch: 'Type a command to search',
         searchMenu: 'ค้นหาเมนู',
+        you: 'คุณ',
     },
     'theme': {
         'light': 'กลางวัน',
@@ -513,6 +514,7 @@ export default {
         openChatPage: 'เปิดหน้าแชท',
         recieveNewMessage: 'มีข้อความใหม่',
         replyTo: 'ตอบกลับ {name}',
+        reply: 'ตอบกลับ',
         replyToSelf: 'ตอบกลับข้อความของคุณเอง',
         groupSettings: 'ตั้งค่ากลุ่ม',
         share: 'แชร์',

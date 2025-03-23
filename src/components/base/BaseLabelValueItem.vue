@@ -20,11 +20,14 @@ const {
   color?: AppColor;
 }>();
 const emit = defineEmits<{
-  'on-click': [val: T | undefined];
+  'on-click': [val: LabelValue<T> | undefined];
 }>();
 const onClick = () => {
   if (!item?.children || item.children.length == 0) {
-    emit('on-click', item?.value);
+    // if (item?.onHandle != undefined) {
+    //   item.onHandle();
+    // }
+    emit('on-click', item);
   }
 };
 </script>

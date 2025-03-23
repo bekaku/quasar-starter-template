@@ -2,7 +2,7 @@
 import ChatContent from '@/components/chats/ChatContent.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biChatDots } from '@quasar/extras/bootstrap-icons';
+import { biChatDots, biList } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
 import BaseResult from 'src/components/base/BaseResult.vue';
 import BaseSpinner from 'src/components/base/BaseSpinner.vue';
@@ -26,7 +26,7 @@ const { setTitle } = useAppMeta();
 setTitle(`${t('chats.chats')} | ${t('app.name')}`);
 const { getParamNumber, appNavigateTo } = useBase();
 const chatStore = useChatStore();
-const { isSmallScreen } = useDevice();
+const { isSmallScreen, isMobileOrTablet } = useDevice();
 const route = useRoute();
 const groupItem = ref<GroupChatDto>();
 const groupId = computed<number>(() => getParamNumber('groupId') || 0);
@@ -37,6 +37,11 @@ const loading = ref(true);
 
 const dataList = ref<GroupChatDto[]>([...chatHistoryListApi.dataList]);
 onMounted(async () => {
+  isMobileOrTablet().then((res) => {
+    if (res) {
+      dialogLeft.value = true;
+    }
+  });
   await onFetchGroupData();
   firstLoad.value = true;
 });
@@ -46,8 +51,8 @@ const onItemClick = (item: GroupChatDto) => {
   }
 };
 const onFetchGroupData = async () => {
-  onClearConversation();
   loading.value = true;
+  await onClearConversation();
   if (!groupId.value) {
     loading.value = false;
     return new Promise((resolve) => resolve(false));
@@ -64,6 +69,11 @@ const onFetchGroupData = async () => {
 };
 const onClearConversation = () => {
   groupItem.value = undefined;
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, 500);
+  });
 };
 const setSettingeStore = (type: ChatSettingType, chatId: number) => {
   chatStore.toggleChatSetting = true;
@@ -148,8 +158,13 @@ watch(
             </template>
           </BaseSuspense>
         </div>
+        <div v-else class="col-12">
+          <q-btn :icon="biList" flat round @click="dialogLeft = true" />
+          <q-btn :icon="biList" flat round @click="dialogRight = true" class="float-right" />
+        </div>
         <div class="col-12 col-md-6 col-sm-8 q-pa-md">
-          <base-spinner v-if="loading" />
+          <!-- <base-spinner v-if="loading" /> -->
+          <SkeletonItem v-if="loading" show-header :no="8" />
           <chat-content
             v-else-if="groupItem"
             v-model="groupItem"
@@ -196,5 +211,30 @@ watch(
         </div>
       </div>
     </q-card>
+
+    <q-dialog v-model="dialogLeft" position="left">
+      <q-card style="max-width: 350px; min-width: 90vw; min-height: 100vh">
+        <chat-left
+          :auto-detect="false"
+          @on-item-click="onItemClick"
+          show-close
+          @on-close="dialogLeft = false"
+          :group-item="groupItem"
+        />
+      </q-card>
+    </q-dialog>
+    <q-dialog v-if="dialogRight && groupItem" v-model="dialogRight" position="right">
+      <q-card style="max-width: 350px; min-height: 100vh">
+        <chat-right
+          v-model="groupItem"
+          @toggle-mute="toggleMute"
+          @toggle-pin="togglepin"
+          @toggle-fav="toggleFav"
+          show-close
+          @on-close="dialogRight = false"
+          class="content-limit720"
+        />
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>

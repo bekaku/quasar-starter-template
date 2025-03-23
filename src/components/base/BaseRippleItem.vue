@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { cursorPointer = true, borderRadius='5px' } = defineProps<{
-  cursorPointer?: boolean
-  borderRadius?: string
+const { cursorPointer = true, borderRadius = '5px' } = defineProps<{
+  cursorPointer?: boolean;
+  borderRadius?: string;
 }>();
 </script>
 
@@ -9,7 +9,7 @@ const { cursorPointer = true, borderRadius='5px' } = defineProps<{
   <div
     v-ripple
     v-bind="$attrs"
-    class="relative-position  q-hoverable"
+    class="relative-position q-hoverable"
     :class="{ 'cursor-pointer': cursorPointer }"
     :style="{ borderRadius }"
   >
@@ -20,6 +20,4 @@ const { cursorPointer = true, borderRadius='5px' } = defineProps<{
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

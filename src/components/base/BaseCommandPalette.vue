@@ -83,10 +83,11 @@ const filterItems = computed(() => {
     })
     .filter((item) => item !== null && (!item.children || item.children.length > 0));
 });
-const onClick = (val: T | undefined) => {
+const onClick = (calbackItem: LabelValue<T> | undefined) => {
   if (readonly) {
     return;
   }
+  const val = calbackItem?.value;
   emit('on-click', val);
   if (val == undefined) {
     return;

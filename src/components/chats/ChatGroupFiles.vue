@@ -6,15 +6,14 @@ import type { GroupChatDto, GroupChatFileDto } from '@/types/models';
 import { readableNumber } from '@/utils/appUtil';
 import { biArrowRight } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import { computed, defineAsyncComponent, onMounted, ref } from 'vue';
-import BaseResult from '../base/BaseResult.vue';
-import BaseButton from '../base/BaseButton.vue';
-import BaseSpinner from '../base/BaseSpinner.vue';
 import { imageItemsData, pdfItemsData } from 'src/libs/data';
+import { computed, ref } from 'vue';
+import BaseButton from '../base/BaseButton.vue';
+import BaseResult from '../base/BaseResult.vue';
+import BaseSpinner from '../base/BaseSpinner.vue';
 import ChatMessageFile from './ChatMessageFile.vue';
 
 const {
-  groupChat,
   fileType,
   canOpenDialog = true,
   showLoadmore = false,
@@ -50,8 +49,6 @@ const dataList = computed<GroupChatFileDto[]>(() => {
     };
   });
 });
-
-console.log('dataList', dataList.value);
 const onOpenDialog = () => {
   if (!canOpenDialog) {
     return;
