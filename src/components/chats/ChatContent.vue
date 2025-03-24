@@ -8,7 +8,9 @@ import { useChatStore } from 'src/stores/chatStore';
 import type {
   EmojiCountDto,
   EmojiType,
+  FileManagerDto,
   GroupChatDto,
+  GroupChatFileDto,
   GroupChatMsgDto,
   GroupChatMsgRequest,
 } from 'src/types/models';
@@ -21,8 +23,11 @@ import ChatContentHeader from './ChatContentHeader.vue';
 import { biArrowDown } from '@quasar/extras/bootstrap-icons';
 import { useTheme } from 'src/composables/useTheme';
 import { randomNumber } from 'src/utils/appUtil';
+import { getImgUrlFromFile, isImageFile } from '@/utils/fileUtil';
 import { FORMAT_DATE13, getCurrentDateByFormat } from 'src/utils/dateUtil';
 import type { VirtualScrollerUpdate } from 'src/types/common';
+import { file } from 'jszip';
+import { is } from 'quasar';
 const ChatReplyItem = defineAsyncComponent(() => import('@/components/chats/ChatReplyItem.vue'));
 const {
   showHeader = true,
@@ -315,6 +320,7 @@ const onSendMessage = async (
   if (!message && !files && !mapLatlong) {
     return;
   }
+  scrollToBottom();
   creatingNewMessage.value = true;
   console.log('onSendMessage', { message, files, mapLatlong });
   if (message) {
@@ -327,10 +333,12 @@ const onSendMessage = async (
   if (replyMessageItem.value && replyMessageItem.value?.id) {
     messageEntity.value.replyToId = replyMessageItem.value.id;
   }
-  if (files && files.length > 0) {
-    // TODO upload file to server
-  }
 
+
+  const filesUploads: GroupChatFileDto[] = await uploadFileProcess(files);
+  if (filesUploads.length > 0) {
+    messageEntity.value.chatMessageType = 'IMAGE';
+  }
   // TODO
   // try {
   //   await createNewMessage(modelValue.value.id, messageEntity.value)
@@ -339,14 +347,55 @@ const onSendMessage = async (
   // } finally {
   //   onClearMessage()
   // }
-  scrollToBottom();
-  await mockCreateNewMessage();
+
+  await mockCreateNewMessage(filesUploads);
   scrollToBottom();
   await creatMockReplyMessage();
   scrollToBottom();
   onClearMessage();
 };
-const mockCreateNewMessage = () => {
+const uploadFileProcess = async (files: File[] | undefined): Promise<GroupChatFileDto[]> => {
+  const filesUploads: GroupChatFileDto[] = [];
+  if (files && files.length > 0) {
+    // TODO upload file to server
+    for (const f of files) {
+      const finalFile = await mockUploadFile(f);
+      if (finalFile) {
+        filesUploads.push(finalFile);
+      }
+    }
+    return new Promise((resolve) => resolve(filesUploads));
+  } else {
+    return new Promise((resolve) => resolve(filesUploads));
+  }
+};
+const mockUploadFile = async (f: File): Promise<GroupChatFileDto | null> => {
+  const isImg = isImageFile(f);
+  let url: string | undefined;
+  if (isImg) {
+    url = await getImgUrlFromFile(f);
+    mockLatesChattId.value++;
+    return new Promise((resolve) =>
+      resolve({
+        id: mockLatesChattId.value,
+        fileManager: {
+          id: mockLatesChattId.value,
+          fileMime: f.type,
+          fileName: f.name,
+          filePath: url || '',
+          fileThumbnailPath: '',
+          fileSize: f.size + '',
+          functionId: 0,
+          isImage: isImg,
+          image: isImg,
+          file: f,
+        },
+      }),
+    );
+  }
+  return new Promise((resolve) => resolve(null));
+};
+const mockCreateNewMessage = (filesUploads: GroupChatFileDto[]) => {
   if (!messageEntity.value) {
     return new Promise((resolve) => resolve(true));
   }
@@ -356,17 +405,18 @@ const mockCreateNewMessage = () => {
     chatMsg: messageEntity.value.chatMsg,
     msgDateTime: getCurrentDateByFormat(FORMAT_DATE13),
     groupId: 17,
-    readCount: 10,
+    readCount: 0,
     unsend: false,
     sent: true,
     sendUser: authenStore.auth,
-    files: [],
+    files: filesUploads,
     liked: false,
     emojiType: null,
     reactionEngage: [],
     dtoReplyTo: replyMessageItem.value || null,
-    chatMessageType: 'TEXT',
+    chatMessageType: messageEntity.value.chatMessageType || 'TEXT',
   };
+  console.log('createItem', createItem);
   return new Promise((resolve) => {
     createMessageTimeout.value = setTimeout(() => {
       creatingNewMessage.value = false;
@@ -435,6 +485,7 @@ onUnmounted(() => {
       class="card-bg"
       :class="{ 'card-minipage-style': miniChat }"
       :square
+      :margin="false"
     >
       <template v-if="showHeader">
         <ChatContentHeader
@@ -448,10 +499,14 @@ onUnmounted(() => {
           @leave-group="(chatId: number) => $emit('leave-group', chatId)"
           @invite-people="invitePeople"
           @on-close="(chatId: number) => $emit('on-close', chatId)"
-        />
+        >
+        <template #headerRight>
+          <slot name="headerRight" />
+        </template>
+
+        </ChatContentHeader>
         <q-separator />
       </template>
-
       <div v-show="!miniminze">
         <BaseVirtualScrollerDynamic
           id="scroll-chat-target-id"
@@ -541,7 +596,7 @@ onUnmounted(() => {
         />
       </div>
     </BaseCard>
-    <ChatReplyItem v-if="replyMessageItem" :item="replyMessageItem" @on-close="onCloseReplyTo" />
+    <ChatReplyItem v-if="!miniminze&&replyMessageItem" :item="replyMessageItem" @on-close="onCloseReplyTo" />
     <chat-input
       ref="chatContentInputRef"
       v-if="!miniminze && modelValue && modelValue.id && showChatInput"

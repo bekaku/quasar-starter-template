@@ -287,6 +287,7 @@ export default {
         typeCommandForsearch: 'Type a command to search',
         searchMenu: 'Search menu',
         you: 'You',
+        reCoordinatesSet: 'Coordinates set',
     },
     'theme': {
         'light': 'Light',

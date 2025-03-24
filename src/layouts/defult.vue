@@ -2,9 +2,11 @@
 import BaseHeader from '@/components/base/BaseHeader.vue';
 import BaseSidebar from '@/components/base/BaseSidebar.vue';
 import LayoutBreadcrumbTab from '@/components/base/LayoutBreadcrumbTab.vue';
+import ChatMini from '@/components/chats/ChatMini.vue';
 import { BackendLogin } from '@/libs/permissions';
 import { biList, biWindowSidebar } from '@quasar/extras/bootstrap-icons';
 import { useAppStore } from 'src/stores/appStore';
+
 // defineOptions({
 //   preFetch({ /* ssrContext, redirect */ redirect }) {
 //     const appStore = useAppStore();
@@ -28,6 +30,7 @@ const appStore = useAppStore();
     <q-page-container>
       <layout-breadcrumb-tab />
       <router-view />
+      <ChatMini />
     </q-page-container>
   </q-layout>
 </template>

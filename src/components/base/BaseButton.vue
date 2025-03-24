@@ -16,7 +16,6 @@ const {
   disable = false,
   dense = false,
   full = false,
-  color = 'primary',
   light = false,
   textCapitalize = true,
   dark = false,

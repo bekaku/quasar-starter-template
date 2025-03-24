@@ -7,6 +7,7 @@ const {
   separator = false,
   bgTransparent = false,
   margin = true,
+  square = false,
 } = defineProps<{
   flat?: boolean;
   bordered?: boolean;
@@ -16,6 +17,7 @@ const {
   separator?: boolean;
   bgTransparent?: boolean;
   margin?: boolean;
+  square?: boolean;
 }>();
 </script>
 <template>
@@ -23,8 +25,13 @@ const {
     v-bind="$attrs"
     :flat
     :bordered="bordered"
-    :class="{ 'default-card-shadow': !flat, 'bg-transparent': bgTransparent, 'q-mb-md': margin }"
-    class="default-card"
+    :square
+    :class="{
+      'default-card': !square,
+      'default-card-shadow': !flat,
+      'bg-transparent': bgTransparent,
+      'q-mb-md': margin,
+    }"
   >
     <slot name="header">
       <BaseTextHeader

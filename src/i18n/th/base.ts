@@ -288,6 +288,7 @@ export default {
         typeCommandForsearch: 'Type a command to search',
         searchMenu: 'ค้นหาเมนู',
         you: 'คุณ',
+        reCoordinatesSet: 'จับพิกัด',
     },
     'theme': {
         'light': 'กลางวัน',
