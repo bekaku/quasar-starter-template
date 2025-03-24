@@ -3,6 +3,9 @@
 A Quasar Project\
 [Demo Link](https://bekaku.github.io/quasar-starter/)
 
+Nuxt + Quasar version\
+[Nuxt version](https://github.com/bekaku/nuxt-quasar-example-app)
+
 Dashboard
 ![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/index01.png)
 
