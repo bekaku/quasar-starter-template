@@ -2,6 +2,7 @@
 import { biCheck2, biMoon, biSun } from '@quasar/extras/bootstrap-icons';
 import { useLang } from 'src/composables/useLang';
 import BaseButton from './BaseButton.vue';
+import BaseTooltip from './BaseTooltip.vue';
 import { useTheme } from 'src/composables/useTheme';
 import { useQuasar } from 'quasar';
 import type { ITheme } from 'src/types/common';
@@ -35,9 +36,9 @@ const setTheme = (theme: ITheme) => {
     dense
     @click="!dark.isActive ? setTheme('dark') : setTheme('light')"
   >
-  <q-tooltip>
+  <BaseTooltip>
       {{ dark.isActive ? t('theme.switchThemeLight') : t('theme.switchThemeDark') }}
-    </q-tooltip>
+    </BaseTooltip>
   </BaseButton>
   <q-menu v-else :anchor="anchor" :self="self" v-bind="$attrs" :auto-close="closeOnClick">
     <q-list :style="{ minWidth: width }">

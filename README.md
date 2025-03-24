@@ -16,7 +16,21 @@ Social feed
 Chat layout
 ![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat01.png)
 
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat02.png)
+
 ![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat03.png)
+
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat04.png)
+
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat05.png)
+
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat06.png)
+
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat07.png)
+
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat08.png)
+
+![chat](https://bekaku.github.io/images/screenshot-quasar-starter/chat09.png)
 
 Charts
 ![charts](https://bekaku.github.io/images/screenshot-quasar-starter/chart01.png)

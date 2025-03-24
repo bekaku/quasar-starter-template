@@ -313,9 +313,9 @@ defineExpose({
                 :size="!miniChat ? 'md' : 'sm'"
                 color="primary"
               >
-                <q-tooltip>
+                <BaseTooltip>
                   {{ t('chats.send') }}
-                </q-tooltip>
+                </BaseTooltip>
               </q-btn>
             </template>
             <template v-if="inputAvata" #prepend>

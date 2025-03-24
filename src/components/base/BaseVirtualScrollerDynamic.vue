@@ -72,7 +72,6 @@ const onScrollToItem = (index: number | undefined) => {
   }
 };
 const onScrollToBottom = () => {
-  console.log('onScrollToBottom');
   if (appDynamicScrollerRef.value) {
     appDynamicScrollerRef.value.scrollToBottom();
   }

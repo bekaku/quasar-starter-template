@@ -12,7 +12,7 @@ import type {
   GroupChatMsgDto,
   GroupChatMsgRequest,
 } from 'src/types/models';
-import { computed, defineAsyncComponent, onMounted, ref, useTemplateRef } from 'vue';
+import { computed, defineAsyncComponent, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseInfiniteScroll from '../base/BaseInfiniteScroll.vue';
 import BaseAvatar from '../base/BaseAvatar.vue';
@@ -75,33 +75,29 @@ const showMessageShareDialog = ref(false);
 const miniminzeNewMessage = ref<number>(0);
 const shareMessageItem = ref<GroupChatMsgDto>();
 const scrollerChatRef = useTemplateRef<any>('scrollerChatRef');
-const infinityResumeTimeout = ref<any>(null);
+
 const chatInfiniteDisable = ref<boolean>(true);
-const virtualListIndex = ref<number>(0);
 const creatingNewMessage = ref(false);
 
 const uploadFileTotal = ref<number>(0);
 const uploadFileSucess = ref<number>(0);
 const mockLatesChattId = ref<number>(1000);
 const isScrollingToTop = ref<boolean>(false);
+
+const initialTimeout = ref<any>(null);
+const createMessageTimeout = ref<any>(null);
 onMounted(async () => {
   initialChatList();
 });
 
-const showToBottomBtn = computed(() => {
-  if (dataList.value.length == 0) {
-    return 0;
-  }
-  return dataList.value.length - 1 !== virtualListIndex.value;
-});
 // infinite scroll
 const initialChatList = async () => {
-  setTimeout(() => {
+  initialTimeout.value = setTimeout(() => {
     scrollToBottom();
-    setTimeout(() => {
+    initialTimeout.value = setTimeout(() => {
       chatInfiniteDisable.value = false;
     }, 1000);
-  }, 500);
+  }, 1500);
 };
 const onInfiniteChatVirtual = (index: number, done: any) => {
   console.log('onInfiniteChatVirtual', index);
@@ -127,12 +123,10 @@ const onVirtualScrollUpdate = (item: VirtualScrollerUpdate) => {
   if (!item) {
     return;
   }
-  // isScrollingToTop.value = !(item.visibleEndIndex == item.viewEndIndex)
-  console.log('onVirtualScrollUpdate', item);
+  isScrollingToTop.value = !(item.visibleEndIndex == item.viewEndIndex);
 };
 const scrollToBottom = () => {
   isScrollingToTop.value = false;
-  console.log('scrollerChatRef.value', scrollerChatRef.value)
   if (scrollerChatRef.value) {
     scrollerChatRef.value.onScrollToBottom();
   }
@@ -345,14 +339,12 @@ const onSendMessage = async (
   // } finally {
   //   onClearMessage()
   // }
+  scrollToBottom();
   await mockCreateNewMessage();
-  console.log('dataList.value', dataList.value.length);
-  setTimeout(() => {
-    scrollToBottom();
-    // onScrollToItem(dataList.value.length - 1);
-  }, 500);
-  // creatMockReplyMessage();
-  // onClearMessage();
+  scrollToBottom();
+  await creatMockReplyMessage();
+  scrollToBottom();
+  onClearMessage();
 };
 const mockCreateNewMessage = () => {
   if (!messageEntity.value) {
@@ -375,12 +367,12 @@ const mockCreateNewMessage = () => {
     dtoReplyTo: replyMessageItem.value || null,
     chatMessageType: 'TEXT',
   };
-  dataList.value.push(createItem);
   return new Promise((resolve) => {
-    setTimeout(() => {
+    createMessageTimeout.value = setTimeout(() => {
       creatingNewMessage.value = false;
+      dataList.value.push(createItem);
       resolve(true);
-    }, 1500);
+    }, 1000);
   });
 };
 
@@ -395,7 +387,7 @@ const creatMockReplyMessage = () => {
     readCount: 10,
     unsend: false,
     sent: false,
-    sendUser: userItems[randomNumber(1, 15)],
+    sendUser: userItems[randomNumber(0, 14)],
     files: [],
     liked: false,
     emojiType: null,
@@ -403,12 +395,12 @@ const creatMockReplyMessage = () => {
     dtoReplyTo: replyMessageItem.value || null,
     chatMessageType: 'TEXT',
   };
-  dataList.value.push(createAutoReplyItem);
   return new Promise((resolve) => {
-    setTimeout(() => {
+    createMessageTimeout.value = setTimeout(() => {
       showTypingTextProgress.value = false;
+      dataList.value.push(createAutoReplyItem);
       resolve(true);
-    }, 1000);
+    }, 3000);
   });
 };
 
@@ -423,6 +415,16 @@ const onClearMessage = () => {
   uploadFileSucess.value = 0;
 };
 // end send message
+onUnmounted(() => {
+  if (initialTimeout.value) {
+    clearTimeout(initialTimeout.value);
+    initialTimeout.value = null;
+  }
+  if (createMessageTimeout.value.value) {
+    clearTimeout(createMessageTimeout.value.value);
+    createMessageTimeout.value.value = null;
+  }
+});
 </script>
 <template>
   <div v-bind="$attrs">
@@ -450,14 +452,7 @@ const onClearMessage = () => {
         <q-separator />
       </template>
 
-      <div id="virtualscrollChatTargetHolder" class="scroll q-pa-sm" style="max-height: 68vh">
-        <BaseInfiniteScroll
-          ref="chatInfinityScrollRef"
-          scroll-target="#virtualscrollChatTargetHolder"
-          reverse
-          :disable="chatInfiniteDisable"
-          @on-infinite="onInfiniteChatVirtual"
-        />
+      <div v-show="!miniminze">
         <BaseVirtualScrollerDynamic
           id="scroll-chat-target-id"
           ref="scrollerChatRef"
@@ -468,6 +463,16 @@ const onClearMessage = () => {
           :scroll-area-height="scrollAreaHeight"
           @on-update="onVirtualScrollUpdate"
         >
+          <template #slotBefore>
+            <BaseInfiniteScroll
+              ref="chatInfinityScrollRef"
+              scroll-target="#scroll-chat-target-id"
+              reverse
+              :disable="chatInfiniteDisable"
+              :offset="0"
+              @on-infinite="onInfiniteChatVirtual"
+            />
+          </template>
           <template #default="{ item, index /*active */ }">
             <ChatMessage
               :key="`message-${item.id}-${index}`"
@@ -485,42 +490,45 @@ const onClearMessage = () => {
               @message-share="onShare"
             />
           </template>
+          <template #slotAfter>
+            <q-chat-message
+              v-if="creatingNewMessage"
+              :name="t('base.you')"
+              bg-color="message-sent"
+              sent
+            >
+              <template #avatar>
+                <base-avatar
+                  v-if="authenStore?.auth?.avatar?.thumbnail"
+                  class="q-message-avatar q-message-avatar--sent"
+                  :src="authenStore?.auth?.avatar?.thumbnail"
+                />
+              </template>
+              <div>
+                <template v-if="uploadFileTotal > 0">
+                  {{
+                    t('chats.sendFileFmt', { success: uploadFileSucess, total: uploadFileTotal })
+                  }}
+                </template>
+                <template v-else>
+                  {{ t('chats.sendingMessage') }}
+                </template>
+                <q-spinner-dots class="q-ml-sm" size="2rem" />
+              </div>
+            </q-chat-message>
+            <q-chat-message v-if="showTypingTextProgress" bg-color="message-received" :sent="false">
+              <template #avatar>
+                <BaseAvatar class="q-mr-xs" src="https://cdn.quasar.dev/img/avatar4.jpg" />
+              </template>
+              <div class="text-center">
+                <q-spinner-dots size="2rem" color="primary" />
+              </div>
+            </q-chat-message>
+          </template>
         </BaseVirtualScrollerDynamic>
-        <!-- <q-chat-message
-          v-if="creatingNewMessage"
-          :name="t('base.you')"
-          bg-color="message-sent"
-          sent
-        >
-          <template #avatar>
-            <base-avatar
-              v-if="authenStore?.auth?.avatar?.thumbnail"
-              class="q-message-avatar q-message-avatar--sent"
-              :src="authenStore?.auth?.avatar?.thumbnail"
-            />
-          </template>
-          <div>
-            <template v-if="uploadFileTotal > 0">
-              {{ t('chats.sendFileFmt', { success: uploadFileSucess, total: uploadFileTotal }) }}
-            </template>
-            <template v-else>
-              {{ t('chats.sendingMessage') }}
-            </template>
-            <q-spinner-dots class="q-ml-sm" size="2rem" />
-          </div>
-        </q-chat-message>
-        <q-chat-message v-if="showTypingTextProgress" bg-color="message-received" :sent="false">
-          <template #avatar>
-            <BaseAvatar class="q-mr-xs" src="https://cdn.quasar.dev/img/avatar4.jpg" />
-          </template>
-          <div class="text-center">
-            <q-spinner-dots size="2rem" color="primary" />
-          </div>
-        </q-chat-message> -->
       </div>
-
       <div
-        v-if="showToBottomBtn && !miniminze"
+        v-if="isScrollingToTop && !miniminze"
         class="row justify-center absolute full-width"
         style="bottom: 50px"
       >

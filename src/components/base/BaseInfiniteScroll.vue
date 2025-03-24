@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
-import BaseSpinner from './BaseSpinner.vue';
 
 const {
   debounce = 250,
@@ -37,7 +36,7 @@ defineExpose({
 });
 </script>
 <template>
-  <div>
+  <div v-bind="$attrs">
     <slot />
     <q-infinite-scroll
       ref="baseInfiniteScrollRef"
@@ -49,8 +48,8 @@ defineExpose({
       @load="onInfinite"
     >
       <template #loading>
-        <div class="row justify-center q-my-md">
-          <BaseSpinner />
+        <div class="row justify-center">
+          <q-spinner-dots color="primary" size="2em" class="self-center" />
         </div>
       </template>
     </q-infinite-scroll>
