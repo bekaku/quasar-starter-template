@@ -387,7 +387,7 @@ const creatMockReplyMessage = () => {
     readCount: 10,
     unsend: false,
     sent: false,
-    sendUser: userItems[randomNumber(0, 14)],
+    sendUser: userItems[randomNumber(0, 15)],
     files: [],
     liked: false,
     emojiType: null,
@@ -400,7 +400,7 @@ const creatMockReplyMessage = () => {
       showTypingTextProgress.value = false;
       dataList.value.push(createAutoReplyItem);
       resolve(true);
-    }, 3000);
+    }, 1000);
   });
 };
 
@@ -420,9 +420,9 @@ onUnmounted(() => {
     clearTimeout(initialTimeout.value);
     initialTimeout.value = null;
   }
-  if (createMessageTimeout.value.value) {
-    clearTimeout(createMessageTimeout.value.value);
-    createMessageTimeout.value.value = null;
+  if (createMessageTimeout.value) {
+    clearTimeout(createMessageTimeout.value);
+    createMessageTimeout.value = null;
   }
 });
 </script>

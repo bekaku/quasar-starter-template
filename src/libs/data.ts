@@ -250,8 +250,8 @@ export const userItems: UserDto[] = [
         email: 'Howard@mydomain.com',
         username: 'Esther Howard',
         avatar: {
-            image: 'https://www.primefaces.org/cdn/Vue/images/landing/apps/avatar13.jpg',
-            thumbnail: 'https://www.primefaces.org/cdn/Vue/images/landing/apps/avatar13.jpg'
+            image: 'https://randomuser.me/api/portraits/women/45.jpg',
+            thumbnail: 'https://randomuser.me/api/portraits/women/45.jpg'
         },
         active: true,
     },
@@ -270,8 +270,8 @@ export const userItems: UserDto[] = [
         email: 'Edwards@mydomain.com',
         username: 'Ralph Edwards',
         avatar: {
-            image: 'https://www.primefaces.org/cdn/Vue/images/landing/apps/avatar6.png',
-            thumbnail: 'https://www.primefaces.org/cdn/Vue/images/landing/apps/avatar6.png'
+            image: 'https://randomuser.me/api/portraits/women/11.jpg',
+            thumbnail: 'https://randomuser.me/api/portraits/women/11.jpg'
         },
         active: true,
     },
@@ -280,8 +280,8 @@ export const userItems: UserDto[] = [
         email: 'Steward@mydomain.com',
         username: 'Darrell Steward',
         avatar: {
-            image: 'https://www.primefaces.org/cdn/Vue/images/landing/apps/avatar7.png',
-            thumbnail: 'https://www.primefaces.org/cdn/Vue/images/landing/apps/avatar7.png'
+            image: 'https://randomuser.me/api/portraits/men/38.jpg',
+            thumbnail: 'https://randomuser.me/api/portraits/men/38.jpg'
         },
         active: true,
     },

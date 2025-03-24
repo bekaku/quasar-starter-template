@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-import type { LabelValue } from '@/types/common';
+import type { AppColor, LabelValue } from '@/types/common';
 import { biThreeDots } from '@quasar/extras/bootstrap-icons';
 import { matKeyboardArrowRight } from '@quasar/extras/material-icons';
 import { ref } from 'vue';
@@ -15,7 +15,9 @@ const {
   icon = biThreeDots,
   emptyBody = false,
   flat = true,
-  round = true,
+  round = false,
+  color = 'light',
+  light = false,
 } = defineProps<{
   items: LabelValue<T>[];
   icon?: string;
@@ -47,6 +49,8 @@ const {
   flat?: boolean;
   round?: boolean;
   tooltip?: string;
+  color?: AppColor;
+  light?: boolean | undefined;
 }>();
 const open = defineModel<boolean>('open', { default: undefined });
 const menuRef = ref<any>();
@@ -74,11 +78,11 @@ const onHide = () => {
 <template>
   <div v-bind="$attrs" class="cursor-pointer holder inline-block">
     <slot>
-      <BaseButton v-if="!emptyBody" :icon="icon" :flat :round :label>
-         <BaseTooltip v-if="tooltip">
+      <BaseButton v-if="!emptyBody" :icon="icon" :flat :round :label :color :light>
+        <BaseTooltip v-if="tooltip">
           {{ tooltip }}
         </BaseTooltip>
-        </BaseButton>
+      </BaseButton>
     </slot>
     <q-menu
       ref="menuRef"
