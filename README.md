@@ -1,6 +1,5 @@
 # Vue JS 3 + Typescript + Quasar 2 (SSR SPA mode) + Docker
 
-A Quasar Project\
 [Demo Link](https://bekaku.github.io/quasar-starter/)
 
 [Nuxt + Quasar version](https://github.com/bekaku/nuxt-quasar-example-app)
