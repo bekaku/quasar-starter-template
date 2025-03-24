@@ -4,6 +4,10 @@
 
 [Nuxt + Quasar version](https://github.com/bekaku/nuxt-quasar-example-app)
 
+# Backend Rest Api
+
+1 Java Springboot [java-spring-boot-starter](https://github.com/bekaku/java-spring-boot-starter)
+
 Dashboard
 ![dashboard](https://bekaku.github.io/images/screenshot-quasar-starter/index01.png)
 
@@ -64,10 +68,6 @@ Carousel
 Settings
 ![setting](https://bekaku.github.io/images/screenshot-quasar-starter/setting.png)
 
-
-# Backend Rest Api
-
-1 Java Springboot [java-spring-boot-starter](https://github.com/bekaku/java-spring-boot-starter)
 
 
 ## Install the dependencies
