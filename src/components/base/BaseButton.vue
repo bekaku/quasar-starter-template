@@ -19,6 +19,7 @@ const {
   light = false,
   textCapitalize = true,
   dark = false,
+  color='primary'
 } = defineProps<{
   align?: 'left' | 'right' | 'center' | 'around' | 'between' | 'evenly';
   color?: AppColor;
