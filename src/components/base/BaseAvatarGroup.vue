@@ -78,13 +78,17 @@ withDefaults(
   border: 2px solid v-bind(boderColor);
   margin-left: v-bind(overrapSize);
   object-fit: cover;
+  &:hover {
+    transform: translateY(-3px);
+    z-index: 999 !important;
+  }
 }
 
 .avatar.extra {
   width: v-bind(size);
   height: v-bind(size);
   border-radius: 50%;
-  background-color: var(--gray-200);
+  background-color: var(--color-zinc-200);
   color: #000;
   display: flex;
   align-items: center;
@@ -95,7 +99,7 @@ withDefaults(
 
 body.body--dark {
   .avatar.extra {
-    background-color: var(--color-dark-500);
+    background-color: var(--color-zinc-600);
     color: white;
   }
 }

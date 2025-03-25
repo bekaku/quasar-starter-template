@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import BaseImage from '@/components/base/BaseImage.vue';
+import type { AvatarProps } from 'src/types/props';
+import BaseBadge from './BaseBadge.vue';
 const {
   spinnerColor = 'white',
   ratio = 1,
@@ -11,21 +13,7 @@ const {
   bordered = false,
   borderedColor = '#fff',
   borderedWidth = '2px',
-} = defineProps<{
-  src: string;
-  spinnerColor?: string;
-  color?: string;
-  imgBg?: string;
-  ratio?: number;
-  size?: string;
-  square?: boolean;
-  rounded?: boolean;
-  fetch?: boolean;
-  bordered?: boolean;
-  borderedColor?: string;
-  borderedWidth?: string;
-  alt?: string;
-}>();
+} = defineProps<AvatarProps>();
 </script>
 <template>
   <q-avatar :size="size" :square="square" :rounded="rounded" v-bind="$attrs" :color="color">
@@ -59,6 +47,9 @@ const {
         />
       </template>
       <slot name="extra" />
+      <slot name="badge">
+        <BaseBadge v-if="badge" v-bind="badge" />
+      </slot>
     </slot>
   </q-avatar>
 </template>

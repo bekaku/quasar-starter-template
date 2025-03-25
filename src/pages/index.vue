@@ -12,6 +12,7 @@ import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
 import ChartArea from 'src/components/chart/ChartArea.vue';
 import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
 import SkeletonCard from 'src/components/skeleton/SkeletonCard.vue';
+import UserItem from 'src/components/user/UserItem.vue';
 import { useDevice } from 'src/composables/useDevice';
 import { useTheme } from 'src/composables/useTheme';
 import {
@@ -86,7 +87,7 @@ const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
           :key="index"
           class="col-12 col-md-4 q-px-md"
         >
-          <BaseCard flat class="card-shade">
+          <BaseCard class="card-shade" hover>
             <q-card-section>
               <BaseTextHeader :icon="item.icon" :title="item.label">
                 <template #end>
@@ -202,20 +203,23 @@ const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
             style="min-height: 480px"
           >
             <q-list>
-              <q-item v-for="(item, index) in recentSalseItems" :key="index">
-                <q-item-section avatar>
-                  <BaseAvatar :src="item.avatar || '/images/no_picture_thumb.jpg'" size="40px" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label> {{ item.label }} </q-item-label>
-                  <q-item-label caption>
-                    {{ item.description }}
-                  </q-item-label>
-                </q-item-section>
-                <q-item-section side top class="text-subtitle1 q-text-black text-weight-bold">
-                  {{ item.value }}
-                </q-item-section>
-              </q-item>
+              <UserItem
+                v-for="(item, index) in recentSalseItems"
+                :key="index"
+                :name="item.label"
+                :description="item.description"
+                :avatar="{
+                  src: item.avatar || '/images/no_picture_thumb.jpg',
+                  size: '42px',
+                }"
+                side-top
+              >
+                <template #end>
+                  <div class="text-subtitle1 q-text-black text-weight-bold">
+                    {{ item.value }}
+                  </div>
+                </template>
+              </UserItem>
             </q-list>
           </BaseCard>
         </div>

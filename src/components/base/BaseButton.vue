@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { AppColor, IHrefTarget } from '@/types/common';
 import { useTheme } from 'src/composables/useTheme';
+import type { ButtonProps } from 'src/types/props';
 
 const {
   outline = false,
@@ -20,38 +20,7 @@ const {
   textCapitalize = true,
   dark = false,
   color='primary'
-} = defineProps<{
-  align?: 'left' | 'right' | 'center' | 'around' | 'between' | 'evenly';
-  color?: AppColor;
-  count?: number;
-  disable?: boolean;
-  dense?: boolean;
-  flat?: boolean;
-  full?: boolean;
-  glossy?: boolean;
-  href?: string;
-  icon?: string;
-  iconRight?: string;
-  label?: string | undefined;
-  light?: boolean;
-  loading?: boolean;
-  noCaps?: boolean;
-  outline?: boolean;
-  outlineColor?: AppColor | undefined;
-  push?: boolean;
-  round?: boolean;
-  rounded?: boolean;
-  size?: string;
-  square?: boolean;
-  stack?: boolean;
-  textColor?: AppColor;
-  to?: string;
-  target?: IHrefTarget;
-  type?: 'button' | 'a' | 'submit' | 'reset';
-  unelevated?: boolean;
-  textCapitalize?: boolean;
-  dark?: boolean;
-}>();
+} = defineProps<ButtonProps>();
 const { isDark } = useTheme();
 </script>
 <template>

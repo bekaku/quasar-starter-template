@@ -22,6 +22,59 @@ h5,
 h6 {
     line-height: 1.5;
 }
+.text-xs{
+    font-size: $text-xs;
+    line-height: $text-line-height-xs;
+}
+.text-sm{
+    font-size: $text-sm;
+    line-height: $text-line-height-sm;
+}
+.text-md{
+    font-size: $text-md;
+    line-height: $text-line-height-md;
+}
+
+.text-lg{
+    font-size: $text-lg;
+    line-height: $text-line-height-lg;
+}
+.text-xl{
+    font-size: $text-xl;
+    line-height: $text-line-height-xl;
+}
+.text-2xl{
+    font-size: $text-2xl;
+    line-height: $text-line-height-2xl;
+}
+.text-3xl{
+    font-size: $text-3xl;
+    line-height: $text-line-height-3xl;
+}
+.text-4xl{
+    font-size: $text-4xl;
+    line-height: $text-line-height-4xl;
+}
+.text-5xl{
+    font-size: $text-5xl;
+    line-height: $text-line-height-5xl;
+}
+.text-6xl{
+    font-size: $text-6xl;
+    line-height: $text-line-height-6xl;
+}
+.text-7xl{
+    font-size: $text-7xl;
+    line-height: $text-line-height-7xl;
+}
+.text-8xl{
+    font-size: $text-8xl;
+    line-height: $text-line-height-8xl;
+}
+.text-9xl{
+    font-size: $text-9xl;
+    line-height: $text-line-height-9xl;
+}
 
 p{
     margin: 0;
