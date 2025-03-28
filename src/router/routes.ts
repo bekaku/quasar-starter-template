@@ -263,6 +263,13 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('@/pages/example/ui/button.vue'),
               },
               {
+                path: 'card',
+                meta: {
+                  name: 'ExampleUiCard',
+                },
+                component: () => import('@/pages/example/ui/card.vue'),
+              },
+              {
                 path: 'dialog',
                 meta: {
                   name: 'ExampleUiDialog',
@@ -318,6 +325,13 @@ const routes: RouteRecordRaw[] = [
                   name: 'ExampleUiTabs',
                 },
                 component: () => import('@/pages/example/ui/tabs.vue'),
+              },
+              {
+                path: 'user',
+                meta: {
+                  name: 'ExampleUiUser',
+                },
+                component: () => import('@/pages/example/ui/user.vue'),
               },
             ],
           },

@@ -11,6 +11,7 @@ import {
   biChatDots,
   biChevronExpand,
   biChevronRight,
+  biCreditCard2Front,
   biCrop,
   biCursorText,
   biDatabase,
@@ -160,6 +161,12 @@ export const additionalMenu: LabelValue<any>[] = [
             to: '/example/ui/button'
           },
           {
+            icon: biCreditCard2Front,
+            label: 'Card',
+            translateLabel: false,
+            to: '/example/ui/card'
+          },
+          {
             icon: biCalendar,
             label: 'Date-time picker',
             translateLabel: false,
@@ -211,6 +218,12 @@ export const additionalMenu: LabelValue<any>[] = [
             label: 'Options group',
             translateLabel: false,
             to: '/example/ui/toggle'
+          },
+          {
+            icon: biPerson,
+            label: 'User',
+            translateLabel: false,
+            to: '/example/ui/user'
           },
         ],
       },

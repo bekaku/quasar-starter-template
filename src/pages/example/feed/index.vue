@@ -237,14 +237,16 @@ const onLoadRef = (index: number, done: any) => {
       <q-card v-if="!screen.gt.sm" flat bordered class="q-mb-md">
         <UserCard
           v-if="authenStore.auth"
-          :avatar-image="authenStore.auth?.avatar?.image"
+          :avatar="{
+            src: authenStore.auth?.avatar?.image,
+          }"
           :cover-image="authenStore.loginedCover"
           :name="authenStore.loginedDisplay"
           description="Software Engineer"
           height="100px"
           avatar-top="50px"
           avatar-size="65px"
-          descriptionStyle="margin-top:25px"
+          :description-style="{ marginTop: '25px' }"
         />
       </q-card>
 

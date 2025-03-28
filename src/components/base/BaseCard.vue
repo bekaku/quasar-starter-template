@@ -49,7 +49,7 @@ const onHover = (state: boolean) => {
     <slot name="header">
       <BaseTextHeader
         v-if="icon || title"
-        class="q-py-md q-px-lg"
+        class="q-px-lg"
         :title="title"
         :sub-title="subTitle"
         :icon

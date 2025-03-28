@@ -83,8 +83,8 @@ const { isDark } = useTheme();
         :class="`text-${textColor ? textColor : outlineColor ? outlineColor : !isDark ? 'black' : 'white'}`"
       >
         <!-- <div :class="`text-${textColor ? textColor: outlineColor ? outlineColor:color ?color:  !isDark ? 'black' :'white'}`"> -->
-        <q-icon v-if="icon" :name="icon" class="q-mr-sm" />{{ label }}
-        <q-icon v-if="iconRight" :name="iconRight" class="q-ml-sm" />
+        <q-icon v-if="icon" :name="icon" :size="iconSize" class="q-mr-sm" />{{ label }}
+        <q-icon v-if="iconRight" :name="iconRight" :size="iconSize" class="q-ml-sm" />
       </div>
     </template>
     <slot />

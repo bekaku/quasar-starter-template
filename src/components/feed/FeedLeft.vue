@@ -4,14 +4,16 @@
       <BaseCard :style="{ width: `${FeedSectionWidth}px` }">
         <UserCard
           v-if="authenStore.auth"
-          :avatar-image="authenStore.auth?.avatar?.image"
+          :avatar="{
+            src: authenStore.auth?.avatar?.image,
+          }"
           :cover-image="authenStore.loginedCover"
           :name="authenStore.loginedDisplay"
           description="Software Engineer"
           height="100px"
           avatar-top="35px"
           avatar-size="65px"
-          descriptionStyle="margin-top:5px"
+          :description-style="{ marginTop: '5px' }"
         />
       </BaseCard>
       <section-saved-post v-if="screen.gt.sm" />

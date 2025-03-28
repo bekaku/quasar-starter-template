@@ -16,7 +16,7 @@ const {
 } = defineProps<AvatarProps>();
 </script>
 <template>
-  <q-avatar :size="size" :square="square" :rounded="rounded" v-bind="$attrs" :color="color">
+  <q-avatar v-bind="$attrs" :size="size" :square="square" :rounded="rounded" :color="color">
     <slot>
       <template v-if="!fetch">
         <q-img

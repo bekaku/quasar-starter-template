@@ -1,7 +1,7 @@
 import type { AppColor, IHrefTarget } from './common';
 
 export interface AvatarProps {
-    src?: string;
+    src?: string | undefined;
     spinnerColor?: string;
     color?: string;
     imgBg?: string;
@@ -38,6 +38,7 @@ export interface ButtonProps {
     glossy?: boolean;
     href?: string;
     icon?: string;
+    iconSize?: string;
     iconRight?: string;
     label?: string | undefined;
     light?: boolean;

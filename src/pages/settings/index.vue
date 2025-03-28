@@ -9,6 +9,7 @@ import { useLang } from '@/composables/useLang';
 import { biPencilFill } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
+import BaseTooltip from 'src/components/base/BaseTooltip.vue';
 import SettingLayout from 'src/components/settings/SettingLayout.vue';
 import { useAuthenStore } from 'stores/authenStore';
 import { defineAsyncComponent, ref } from 'vue';
@@ -33,7 +34,7 @@ const onOkay = async (f: any) => {
     // update user data in pinia store
     const authItem = authenStore.auth;
     if (authItem.avatar) {
-      authItem.avatar.thumbnail = response.fileThumbnailPath;
+      authItem.avatar.thumbnail = response.fileThumbnailPath || '';
       authItem.avatar.image = response.filePath;
     }
   }
@@ -52,7 +53,7 @@ const onUploadCover = async (f: any) => {
     await updateUserCover(response.id);
     const authItem = authenStore.auth;
     authItem.cover = {
-      thumbnail: response.fileThumbnailPath,
+      thumbnail: response.fileThumbnailPath || '',
       image: response.filePath,
     };
   }
@@ -70,13 +71,15 @@ const onCoverCropClose = () => {
       <BaseCard>
         <UserCard
           v-if="authenStore.auth"
-          :avatar-image="authenStore.auth?.avatar?.image"
+          :avatar="{
+            src: authenStore.auth?.avatar?.image,
+          }"
           :cover-image="authenStore.loginedCover"
           :name="authenStore.loginedDisplay"
           :description="t('app.name')"
           height="250px"
           avatar-top="110px"
-          description-style="margin-top:35px"
+          :description-style="{ marginTop: '35px' }"
         >
           <template #extra>
             <div class="text-white absolute-right q-pa-md">
@@ -87,13 +90,13 @@ const onCoverCropClose = () => {
                 :icon="biPencilFill"
                 @click="onOpenCropperCover"
               >
-                <q-tooltip>{{ t('base.changeCover') }}</q-tooltip>
+                <BaseTooltip>{{ t('base.changeCover') }}</BaseTooltip>
               </BaseButton>
             </div>
             <div class="text-white absolute-center">
               <div class="absolute-bottom" style="top: 55px">
                 <BaseButton round :icon="biPencilFill" color="pink" @click="onOpenCropper">
-                  <q-tooltip>{{ t('base.changeAvatar') }}</q-tooltip>
+                  <BaseTooltip>{{ t('base.changeAvatar') }}</BaseTooltip>
                 </BaseButton>
               </div>
             </div>
@@ -129,7 +132,7 @@ const onCoverCropClose = () => {
           avatar-top="110px"
           avatar-flat
           flat
-          description-style="margin-top:35px"
+          :description-style="{ marginTop: '35px' }"
         />
       </template>
     </BaseImageCropperDialog>

@@ -6,6 +6,7 @@ import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from '@/stores/authenStore';
 import { biArrowUpRight } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
+import BaseTooltip from 'src/components/base/BaseTooltip.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import UserItem from 'src/components/user/UserItem.vue';
@@ -80,9 +81,9 @@ const getTooltipBy = (index: number) => {
         <div class="row q-gutter-x-xl">
           <base-avatar-group :items="items" :limit="5" size="42px">
             <template #extra="{ index }">
-              <q-tooltip>
+              <BaseTooltip>
                 {{ getTooltipBy(index) }}
-              </q-tooltip>
+              </BaseTooltip>
             </template>
           </base-avatar-group>
           <base-avatar-group :items="items" :limit="5" size="42px" boder-color="#00a0dc" />

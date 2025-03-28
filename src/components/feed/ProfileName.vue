@@ -22,14 +22,16 @@
     >
       <q-card flat>
         <UserCard
-          avatar-image="https://i.pravatar.cc/450"
           cover-image="https://images.unsplash.com/photo-1741568032886-18d3f2a694c2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          :avatar="{
+            src: 'https://i.pravatar.cc/450',
+          }"
           :name="label"
           description="Software Engineer"
           height="85px"
           avatar-top="35px"
           avatar-size="48px"
-          descriptionStyle="margin-top:5px"
+          :description-style="{ marginTop: '5px' }"
         />
       </q-card>
     </q-menu>

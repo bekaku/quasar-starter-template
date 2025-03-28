@@ -2,6 +2,7 @@
 import { useLang } from 'src/composables/useLang';
 import BaseAvatar from '../base/BaseAvatar.vue';
 import { biChatSquare, biGift, biPatchCheck, biPencil } from '@quasar/extras/bootstrap-icons';
+import type { AvatarProps } from 'src/types/props';
 const {
   height = '250px',
   avatarTop = '75px',
@@ -9,13 +10,15 @@ const {
   avatarFlat = false,
   flat = false,
 } = defineProps<{
+  avatar?: AvatarProps;
   coverImage?: string | undefined;
-  avatarImage?: string | undefined;
   height?: string;
   avatarTop?: string;
   avatarFlat?: boolean;
   avatarSize?: string;
-  descriptionStyle?: string;
+  descriptionStyle?: {
+    [key: string]: string | number;
+  };
   name?: string | undefined;
   description?: string | undefined;
   flat?: boolean;
@@ -37,13 +40,11 @@ const { t } = useLang();
             background-size: cover;`"
       />
       <slot name="avatar">
-        <div class="text-white absolute-center">
+        <div v-if="avatar != undefined" class="text-white absolute-center">
           <base-avatar
-            v-if="avatarImage"
-            :src="avatarImage"
-            :size="avatarSize"
             :style="{ top: avatarTop }"
             :class="{ 'shadow-5': !avatarFlat }"
+            v-bind="{ ...avatar, size: avatar.size || avatarSize }"
           />
         </div>
       </slot>
