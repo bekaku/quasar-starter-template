@@ -1,3 +1,5 @@
+import type { AvatarProps } from './props';
+
 // enum
 export enum HttpMethod {
   GET,
@@ -252,8 +254,9 @@ export interface ILabelValue {
   value: string | number | boolean;
 }
 export interface LabelValue<Type> {
-  avatar?: string;
-  avatarSize?: string;
+  // avatar?: string;
+  // avatarSize?: string;
+  avatar?: AvatarProps;
   border?: boolean;
   children?: LabelValue<Type>[]
   color?: string;

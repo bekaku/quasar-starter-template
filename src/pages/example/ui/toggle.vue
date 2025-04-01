@@ -18,7 +18,7 @@ const optionsSelected = ref<number[]>([]);
 const radioSelectd = ref<number>();
 const options: LabelValue<number>[] = [
   { label: 'Crud', value: 1, color: 'negative', icon: biAndroid },
-  { label: 'Report', value: 2, color: 'purple', avatar: 'https://cdn.quasar.dev/img/avatar2.jpg' },
+  { label: 'Report', value: 2, color: 'purple', avatar: { src: 'https://cdn.quasar.dev/img/avatar2.jpg' } },
   { label: 'Other', value: 3 },
 ];
 </script>

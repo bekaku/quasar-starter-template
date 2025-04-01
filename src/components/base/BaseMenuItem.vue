@@ -39,10 +39,7 @@ const isActive = computed(() => {
     <q-item-section v-if="item.avatar || item.icon" side>
       <template v-if="item.avatar">
         <base-avatar
-          v-if="item.avatar"
-          :size="item.avatarSize || avatarSize"
-          :fetch-image="!!item.fetch"
-          :src="item.avatar"
+          v-bind="{ ...item.avatar, size: item.avatar.size || avatarSize }"
         />
       </template>
       <template v-else>

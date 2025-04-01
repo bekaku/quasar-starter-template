@@ -40,6 +40,7 @@ const modelValue = defineModel<boolean | T[]>();
     :color="color"
     :size="size"
     :disable="!editMode || disable"
+    class="default"
     :label="
       !showLabel
         ? ''

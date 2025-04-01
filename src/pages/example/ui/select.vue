@@ -3,17 +3,12 @@ import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import type { LabelValue } from '@/types/common';
 import {
-  biAirplane,
   biApple,
   biFacebook,
-  biGear,
   biGoogle,
-  biLightbulb,
   biMicrosoft,
-  biPerson,
-  biPhone,
   biTwitter,
-  biX,
+  biX
 } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
@@ -75,31 +70,31 @@ const simpleItems2: LabelValue<number>[] = [
     label: 'Cody Fisher',
     value: 6,
     description: 'Fisher',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg' },
   },
   {
     label: 'Robert Fox',
     value: 7,
     description: 'Fox',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar12.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar12.jpg' },
   },
   {
     label: 'Esther Howard',
     value: 8,
     description: 'Howard',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar13.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar13.jpg' },
   },
   {
     label: 'Darlene Robertson',
     value: 9,
     description: 'Robertson',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar9.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar9.jpg' },
   },
   {
     label: 'Ralph Edwards',
     value: 10,
     description: 'Edwards',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar6.png',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar6.png' },
   },
 ];
 const simpleItems3: any[] = [

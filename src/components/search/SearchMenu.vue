@@ -32,18 +32,16 @@ const onSetMenu = (): Promise<boolean> => {
         for (const p of menuLevel1.children) {
           if (p.children != undefined && p.children.length > 0) {
             const parentItem: LabelValue<string> = {
+              ...p,
               label: p.label && p.translateLabel !== false ? t(p.label) : p.label || '',
-              description: p.description,
-              icon: p.icon,
               children: [],
             };
             const childs: LabelValue<string>[] = [];
             for (const item of p.children) {
               childs.push({
+                ...item,
                 label:
                   item.label && item.translateLabel !== false ? t(item.label) : item.label || '',
-                description: item.description,
-                icon: item.icon,
                 value: item.to,
               });
             }
@@ -51,9 +49,8 @@ const onSetMenu = (): Promise<boolean> => {
             menuItems.value.push(parentItem);
           } else {
             menuItems.value.push({
+              ...p,
               label: p.label && p.translateLabel !== false ? t(p.label) : p.label || '',
-              description: p.description,
-              icon: p.icon,
               value: p.to,
             });
           }

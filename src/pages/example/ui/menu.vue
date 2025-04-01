@@ -18,7 +18,7 @@ import {
   biPlusCircle,
   biShieldCheck,
   biThreeDotsVertical,
-  biTrash
+  biTrash,
 } from '@quasar/extras/bootstrap-icons';
 import BaseAvatar from 'src/components/base/BaseAvatar.vue';
 import BaseBreadcrumbs from 'src/components/base/BaseBreadcrumbs.vue';
@@ -90,37 +90,37 @@ const menus2: LabelValue<number>[] = [
     label: 'Cody Fisher',
     value: 1,
     description: 'Fisher',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg' },
   },
   {
     label: 'Robert Fox',
     value: 2,
     description: 'Fox',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar12.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar12.jpg' },
   },
   {
     label: 'Esther Howard',
     value: 3,
     description: 'Howard',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar13.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar13.jpg' },
   },
   {
     label: 'Darlene Robertson',
     value: 4,
     description: 'Robertson',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar9.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar9.jpg' },
   },
   {
     label: 'Ralph Edwards',
     value: 5,
     description: 'Edwards',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar6.png',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar6.png' },
   },
 ];
 const submenus: LabelValue<string>[] = [
   {
     label: 'Cody Fisher',
-    avatar: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg',
+    avatar: { src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg' },
     border: true,
   },
   {
@@ -216,7 +216,12 @@ const onItemClick = () => {
     <BaseCard flat :bordered="false" title="Dropdown menu">
       <q-card-section class="q-gutter-md">
         <BaseDropdownMenu :items="menus" label="Simple menu" @on-click="onMenuClick" />
-        <BaseDropdownMenu :items="submenus" :icon="biDiagram2" label="Submenus" @on-click="onMenuClick" />
+        <BaseDropdownMenu
+          :items="submenus"
+          :icon="biDiagram2"
+          label="Submenus"
+          @on-click="onMenuClick"
+        />
         <BaseDropdownMenu :items="submenus" @on-click="onMenuClick">
           <BaseAvatar src="https://cdn.quasar.dev/img/avatar5.jpg" />
           <BaseTooltip> Click here </BaseTooltip>
@@ -225,8 +230,18 @@ const onItemClick = () => {
         <q-item clickable @click="onItemClick">
           <q-item-section> Q-item open state </q-item-section>
           <q-item-section side>
-            <BaseButton :icon="biThreeDotsVertical" outline label="Click here" @click="openMenu($event)">
-              <BaseDropdownMenu v-model:open="showMenu" empty-body :items="menus2" @on-click="onMenuClick" />
+            <BaseButton
+              :icon="biThreeDotsVertical"
+              outline
+              label="Click here"
+              @click="openMenu($event)"
+            >
+              <BaseDropdownMenu
+                v-model:open="showMenu"
+                empty-body
+                :items="menus2"
+                @on-click="onMenuClick"
+              />
             </BaseButton>
           </q-item-section>
         </q-item>

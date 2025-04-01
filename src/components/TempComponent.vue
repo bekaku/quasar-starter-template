@@ -1,5 +1,4 @@
 <script setup lang="ts" generic="T">
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { PropType, computed } from 'vue';
 import { useLang } from '@/composables/useLang';
 import { ISortMode, LabelValue } from '@/types/common';

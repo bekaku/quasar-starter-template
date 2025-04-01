@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { biMusicNote } from '@quasar/extras/bootstrap-icons';
 import { useMeta } from 'quasar';
-import BaseAvatar from 'src/components/base/BaseAvatar.vue';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseDatePicker from 'src/components/base/BaseDatePicker.vue';
@@ -209,7 +208,7 @@ const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
                 :name="item.label"
                 :description="item.description"
                 :avatar="{
-                  src: item.avatar || '/images/no_picture_thumb.jpg',
+                  src: item.avatar?.src || '/images/no_picture_thumb.jpg',
                   size: '42px',
                 }"
                 side-top

@@ -4,6 +4,7 @@ import type { VueMoneyConFig } from '@/types/common';
 import BaseAvatar from './BaseAvatar.vue';
 import { numberFormat } from '@/utils/appUtil';
 import BaseInputMoney from './BaseInputMoney.vue';
+import type { AvatarProps } from 'src/types/props';
 const {
   dense = true,
   debounce = 0,
@@ -17,7 +18,6 @@ const {
   rounded = false,
   borderless = false,
   iconSize = '24px',
-  avatarSize = '30px',
   type = 'text',
   autogrow = true,
   rows = 1,
@@ -34,8 +34,7 @@ const {
   stackLabel = false,
   required = false,
 } = defineProps<{
-  avatar?: string;
-  avatarSize?: string;
+  avatar?: AvatarProps
   bottomSlots?: boolean;
   borderless?: boolean;
   autogrow?: boolean;
@@ -128,7 +127,7 @@ defineEmits<{
         </template>
         <template #prepend>
           <slot name="prepend">
-            <base-avatar v-if="avatar" :fetch-image="fetchImage" :src="avatar" :size="avatarSize" />
+            <base-avatar v-if="avatar" v-bind="{ ...avatar }" />
             <q-icon v-else-if="icon" :name="icon" :size="iconSize" />
           </slot>
         </template>
@@ -201,7 +200,7 @@ defineEmits<{
     </template>
     <template v-if="viewShowPrepend" #prepend>
       <slot name="prepend">
-        <base-avatar v-if="avatar" :fetch-image="fetchImage" :src="avatar" :size="avatarSize" />
+        <base-avatar v-if="avatar" v-bind="{ ...avatar }" />
         <q-icon v-else-if="icon" :name="icon" :size="iconSize" />
       </slot>
     </template>

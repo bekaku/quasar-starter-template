@@ -104,7 +104,7 @@ export const appNavs: LabelValue<any>[] = [
 
 export const additionalMenu: LabelValue<any>[] = [
   {
-    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+    avatar: { src: 'https://cdn.quasar.dev/img/avatar3.jpg' },
     label: 'My profile',
     translateLabel: false,
   },
@@ -145,7 +145,7 @@ export const additionalMenu: LabelValue<any>[] = [
       },
       {
         icon: biBrush,
-        label: 'UI',
+        label: 'Components',
         translateLabel: false,
         children: [
           {
@@ -288,7 +288,7 @@ export const additionalMenu: LabelValue<any>[] = [
         label: 'Infinite scroll',
         translateLabel: false,
         to: '/example/infinite-scroll'
-    },
+      },
       {
         icon: biMarkdown,
         label: 'Markdown editor',

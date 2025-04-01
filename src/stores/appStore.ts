@@ -111,34 +111,31 @@ export const useAppStore = defineStore('appStore', () => {
         });
     }
     const setMenuPage = (p: LabelValue<any>): Promise<LabelValue<any>> => {
-        const menuHaveChild: LabelValue<any> = {};
+        // const menuHaveChild: LabelValue<any> = {};
 
-        if (p?.label) {
-            menuHaveChild.label = p.label;
-        }
-        if (p?.icon) {
-            menuHaveChild.icon = p.icon;
-        }
-        if (p?.color) {
-            menuHaveChild.color = p.color;
-        }
-        // if (p?.iconText) {
-        //     menuHaveChild.iconText = p.iconText;
+        // if (p?.label) {
+        //     menuHaveChild.label = p.label;
         // }
-        if (p?.noActiveLink != undefined) {
-            menuHaveChild.noActiveLink = p.noActiveLink;
-        }
-        if (p?.to) {
-            menuHaveChild.to = p.to;
-        }
-        if (p?.border != undefined) {
-            menuHaveChild.border = p.border;
-        }
-        if (p?.translateLabel != undefined) {
-            menuHaveChild.translateLabel = p.translateLabel;
-        }
+        // if (p?.icon) {
+        //     menuHaveChild.icon = p.icon;
+        // }
+        // if (p?.color) {
+        //     menuHaveChild.color = p.color;
+        // }
+        // if (p?.noActiveLink != undefined) {
+        //     menuHaveChild.noActiveLink = p.noActiveLink;
+        // }
+        // if (p?.to) {
+        //     menuHaveChild.to = p.to;
+        // }
+        // if (p?.border != undefined) {
+        //     menuHaveChild.border = p.border;
+        // }
+        // if (p?.translateLabel != undefined) {
+        //     menuHaveChild.translateLabel = p.translateLabel;
+        // }
         return new Promise((resolve) => {
-            resolve(menuHaveChild)
+            resolve(p)
         });
     }
     const setMobileOrTablet = (state: boolean) => {

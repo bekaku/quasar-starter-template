@@ -1,34 +1,28 @@
 <script setup lang="ts">
 import BaseAvatar from '@/components/base/BaseAvatar.vue';
 import { useLang } from '@/composables/useLang';
+import { userItems } from '@/libs/data';
 import {
   biChevronRight,
+  biGear,
   biPinAngle,
   biPinFill,
   biStar,
   biStarFill,
   biVolumeMute,
   biVolumeUp,
-  biX,
-  biGear,
-  biArrowRight,
-  biBoxArrowRight,
-  biCameraVideo,
-  biTelephone,
-  biThreeDots,
+  biX
 } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import type { ChatMessageType, LabelValue } from 'src/types/common';
-import { computed, onMounted, ref } from 'vue';
-import BaseTabs from '../base/BaseTabs.vue';
+import type { ChatMessageType } from 'src/types/common';
 import type { GroupChatDto, UserDto } from 'src/types/models';
-import BaseCard from '../base/BaseCard.vue';
+import { computed, ref } from 'vue';
 import BaseButton from '../base/BaseButton.vue';
+import BaseCard from '../base/BaseCard.vue';
+import BaseLink from '../base/BaseLink.vue';
 import BaseScrollArea from '../base/BaseScrollArea.vue';
 import ChatGroupAvatar from './ChatGroupAvatar.vue';
-import { userItems } from '@/libs/data';
 import ChatGroupFilesTabs from './ChatGroupFilesTabs.vue';
-import BaseLink from '../base/BaseLink.vue';
 
 const { t } = useLang();
 const { dark } = useQuasar();

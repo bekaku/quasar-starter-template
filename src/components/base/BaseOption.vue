@@ -7,7 +7,6 @@ const {
   size = 'md',
   showTitle = false,
   inline = true,
-  fetchImage = false,
   leftLabel = false,
   editMode = true,
 } = defineProps<{
@@ -18,7 +17,6 @@ const {
   disable?: boolean;
   items: LabelValue<T>[] | any;
   inline?: boolean;
-  fetchImage?: boolean;
   leftLabel?: boolean;
   editMode?: boolean;
 }>();
@@ -40,7 +38,7 @@ const modelValue = defineModel<T[]>();
   >
     <template #label="opt">
       <div class="row items-center q-gutter-x-sm">
-        <base-avatar v-if="opt.avatar" :fetch-image="fetchImage" :src="opt.avatar" />
+        <base-avatar v-if="opt.avatar" v-bind="{ ...opt.avatar }" />
         <q-icon v-else-if="opt.icon" :name="opt.icon" />
         <span>{{ opt.label }}</span>
       </div>

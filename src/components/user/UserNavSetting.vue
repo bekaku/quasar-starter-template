@@ -48,8 +48,8 @@ const { isSmallScreen } = useDevice();
       <q-icon :name="biChevronExpand" size="16px" />
     </q-item-section>
     <q-menu>
-      <q-list style="min-width: 260px">
-        <q-item clickable v-close-popup to="/example/feed">
+      <q-list dense style="min-width: 260px" class="q-pa-xs">
+        <q-item clickable v-close-popup to="/example/feed" class="rounded">
           <q-item-section avatar>
             <base-avatar
               v-if="authenStore.loginedAvatar"
@@ -62,18 +62,18 @@ const { isSmallScreen } = useDevice();
           <q-item-section>{{ t('base.yourProfile') }}</q-item-section>
         </q-item>
         <q-separator />
-        <q-item clickable>
+        <q-item clickable class="rounded">
           <q-item-section avatar>
             <q-icon :name="isDark ? biMoon : biSun" />
           </q-item-section>
           <q-item-section>
-            <q-item-label lines="1">
-              {{ t('base.appearance') }} :
-              {{ isDark ? t('theme.dark') : t('theme.light') }}
+            <q-item-label>
+              {{ t('base.appearance') }}:
+              <span class="text-weight-medium">{{ isDark ? t('theme.dark') : t('theme.light') }}</span>
             </q-item-label>
           </q-item-section>
           <q-item-section side>
-            <q-icon :name="biChevronRight" />
+            <q-icon :name="biChevronRight" size="xs" />
           </q-item-section>
           <BaseThemeSwitcher
             :toggle="false"
@@ -81,18 +81,18 @@ const { isSmallScreen } = useDevice();
             self="top start"
           />
         </q-item>
-        <q-item clickable>
+        <q-item clickable class="rounded">
           <q-item-section avatar>
             <q-icon :name="biGlobe" />
           </q-item-section>
           <q-item-section>
-            <q-item-label lines="1">
-              {{ t('base.language') }} :
-              {{ currenLocale ? currenLocale.name : '' }}
+            <q-item-label>
+              {{ t('base.language') }}:
+              <span class="text-weight-medium">{{ currenLocale ? currenLocale.name : '' }}</span>
             </q-item-label>
           </q-item-section>
           <q-item-section side>
-            <q-icon :name="biChevronRight" />
+            <q-icon :name="biChevronRight" size="xs" />
           </q-item-section>
           <BaseLangugeSwitcher
             :anchor="!screen.gt.xs ? 'bottom left' : 'top end'"
@@ -101,19 +101,19 @@ const { isSmallScreen } = useDevice();
         </q-item>
 
         <q-separator />
-        <q-item clickable v-close-popup>
+        <q-item clickable v-close-popup class="rounded">
           <q-item-section avatar>
             <q-icon :name="biQuestionCircle" />
           </q-item-section>
           <q-item-section>{{ t('base.help') }}</q-item-section>
         </q-item>
-        <q-item clickable v-close-popup to="/settings">
+        <q-item clickable v-close-popup to="/settings" class="rounded">
           <q-item-section avatar>
             <q-icon :name="biGear" />
           </q-item-section>
           <q-item-section>{{ t('base.setting') }}</q-item-section>
         </q-item>
-        <q-item clickable v-close-popup @click="signOut">
+        <q-item clickable v-close-popup @click="signOut" class="rounded">
           <q-item-section avatar>
             <q-icon :name="biBoxArrowRight" />
           </q-item-section>

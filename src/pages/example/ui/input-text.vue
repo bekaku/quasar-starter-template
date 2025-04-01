@@ -93,7 +93,7 @@ const onInputUpdate = (val: string | number | undefined | null) => {
                 :edit-mode="editMode"
                 label="Surname"
                 :rules="[required]"
-                avatar="https://cdn.quasar.dev/img/avatar2.jpg"
+                :avatar="{ src: 'https://cdn.quasar.dev/img/avatar2.jpg' }"
               />
               <BaseInput
                 v-model="email"
@@ -210,7 +210,7 @@ const onInputUpdate = (val: string | number | undefined | null) => {
               v-model="surname"
               :edit-mode="false"
               label="Surname"
-              avatar="https://cdn.quasar.dev/img/avatar2.jpg"
+              :avatar="{ src: 'https://cdn.quasar.dev/img/avatar2.jpg' }"
             />
             <BaseInput
               v-model="email"
