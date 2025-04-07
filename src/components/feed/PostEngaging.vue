@@ -15,7 +15,7 @@
             style="left: 0px"
           />
           <q-avatar
-            color="amber-8"
+            color="amber-5"
             text-color="white"
             size="20px"
             :icon="biGiftFill"

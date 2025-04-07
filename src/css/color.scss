@@ -1,15 +1,4 @@
 :root {
-  --color-dark-50: #f7f8f8;
-  --color-dark-100: #eeeef0;
-  --color-dark-200: #d8dadf;
-  --color-dark-300: #b6bac3;
-  --color-dark-400: #8f95a1;
-  --color-dark-500: #717886;
-  --color-dark-600: #5b606e;
-  --color-dark-700: #4a4e5a;
-  --color-dark-800: #40434c;
-  --color-dark-900: #383a42;
-  --color-dark-950: #1d1e22; //main
 
   --color-primary-50: #f0f9fe;
   --color-primary-100: #ddf0fc;
@@ -17,7 +6,7 @@
   --color-primary-300: #9ad6f6;
   --color-primary-400: #6abff0;
   --color-primary-500: #47a3ea;
-  --color-primary-600: #2e86de; //main
+  --color-primary-600: #2e86de;
   --color-primary-700: #2972cc;
   --color-primary-800: #275da6;
   --color-primary-900: #254f83;
@@ -28,7 +17,7 @@
   --color-success-200: #bbf7cf;
   --color-success-300: #85f0aa;
   --color-success-400: #49df7d;
-  --color-success-500: #23d160; //main
+  --color-success-500: #23d160;
   --color-success-600: #15a447;
   --color-success-700: #14813b;
   --color-success-800: #166533;
@@ -40,7 +29,7 @@
   --color-danger-200: #ffcad3;
   --color-danger-300: #ff9fae;
   --color-danger-400: #ff6983;
-  --color-danger-500: #ff3860; //manin
+  --color-danger-500: #ff3860;
   --color-danger-600: #ed1148;
   --color-danger-700: #c8083d;
   --color-danger-800: #a8093a;
@@ -51,25 +40,13 @@
   --color-warning-100: #ffefd4;
   --color-warning-200: #ffdaa8;
   --color-warning-300: #ffc071;
-  --color-warning-400: #ff9f43; //main
+  --color-warning-400: #ff9f43;
   --color-warning-500: #fe7b11;
   --color-warning-600: #ef6007;
   --color-warning-700: #c64608;
   --color-warning-800: #9d390f;
   --color-warning-900: #7e3010;
   --color-warning-950: #441506;
-
-  --color-info-50: #f0faff;
-  --color-info-100: #e0f4fe;
-  --color-info-200: #b9ebfe;
-  --color-info-300: #7cdcfd;
-  --color-info-400: #36cbfa;
-  --color-info-500: #0cb5eb;
-  --color-info-600: #00a0dc; //main
-  --color-info-700: #0174a3;
-  --color-info-800: #066286;
-  --color-info-900: #0b516f;
-  --color-info-950: #07344a;
 
   --color-zinc-50: oklch(0.985 0 0);
   --color-zinc-100: oklch(0.967 0.001 286.375);
@@ -88,7 +65,7 @@
 }
 
 .bg-dark-900 {
-  background-color: var(--color-dark-900) !important;
+  background-color: var(--color-zinc-900) !important;
 }
 
 .text-message-sent {
@@ -96,7 +73,7 @@
 }
 
 .text-message-received {
-  color: var(--color-zinc-200) !important;
+  color: var(--color-zinc-100) !important;
 }
 
 .text-message-unsend {
@@ -118,7 +95,7 @@ body.body--dark {
   }
 
   .text-message-unsend {
-    color: var(--color-dark-500) !important;
+    color: var(--color-zinc-500) !important;
   }
 
   .bg-app-content-item{

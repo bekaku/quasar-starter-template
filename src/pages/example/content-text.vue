@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ContentItem from '@/components/base/ContentItem.vue';
+import ContentItem from '@/components/base/BaseContentItem.vue';
 import OpenGraphItemAlt from '@/components/base/OpenGraphItemAlt.vue';
 import BaseButton from '@/components/base/BaseButton.vue';
 import { useAppMeta } from '@/composables/useAppMeta';

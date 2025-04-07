@@ -71,7 +71,7 @@ const onSearch = () => {
         </BaseLink>
         <q-icon
           v-if="item.favorite"
-          color="amber-8"
+          color="amber-5"
           size="14px"
           class="q-ml-xs q-mb-xs"
           :name="biStarFill"

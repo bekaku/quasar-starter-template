@@ -37,7 +37,7 @@ const onClick = (ev: any) => {
       </q-avatar>
       <q-avatar
         v-else-if="item.emojiType == 'LAUGH'"
-        color="orange"
+        color="amber"
         text-color="white"
         :size="size"
       >

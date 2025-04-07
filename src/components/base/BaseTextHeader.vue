@@ -8,7 +8,7 @@ const { header = true, iconSize = '24px' } = defineProps<{
 }>();
 </script>
 <template>
-  <q-item v-bind="$attrs" v-if="icon || title" class="q-pl-none">
+  <q-item v-bind="$attrs" v-if="icon || title" class="q-pl-none q-pb-none">
     <slot name="start">
       <q-item-section v-if="icon" side>
         <q-icon v-if="icon" :name="icon" :size="iconSize" class="q-text-black" />

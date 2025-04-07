@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import { biEmojiSmile, biThreeDotsVertical } from '@quasar/extras/bootstrap-icons';
-import type { EmojiType, GroupChatMsgDto } from '@/types/models';
-import { computed, defineAsyncComponent, ref, watch } from 'vue';
 import BaseAvatar from '@/components/base/BaseAvatar.vue';
-import { useLang } from '@/composables/useLang';
-import { useBase } from '@/composables/useBase';
-import { useQuasar } from 'quasar';
-import type { ChatType } from '@/types/common';
-import { numberFormat } from '@/utils/appUtil';
-import ContentItem from '@/components/base/ContentItem.vue';
-import { useChatStore } from '@/stores/chatStore';
-import { FORMAT_DATE1 } from '@/utils/dateUtil';
-import OpenGraphItemAlt from '@/components/base/OpenGraphItemAlt.vue';
 import RippleItem from '@/components/base/BaseRippleItem.vue';
+import ContentItem from '@/components/base/BaseContentItem.vue';
+import OpenGraphItemAlt from '@/components/base/OpenGraphItemAlt.vue';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
 import { ChatMesageFocusableId } from '@/libs/constant';
+import { useChatStore } from '@/stores/chatStore';
+import type { ChatType } from '@/types/common';
+import type { EmojiType, GroupChatMsgDto } from '@/types/models';
+import { numberFormat } from '@/utils/appUtil';
+import { biEmojiSmile } from '@quasar/extras/bootstrap-icons';
+import { useQuasar } from 'quasar';
+import { computed, defineAsyncComponent, ref, watch } from 'vue';
 import AppReactionMenu from '../app/AppReactionMenu.vue';
 import ChatMessageMenu from './ChatMessageMenu.vue';
 
@@ -376,7 +375,7 @@ watch(chatStore, (state) => {
                     dense
                     size="sm"
                     :icon="biEmojiSmile"
-                    :class="item.liked ? 'text-amber-9' : 'text-muted'"
+                    :class="item.liked ? 'text-amber-5' : 'text-muted'"
                   >
                     <q-menu
                       auto-close

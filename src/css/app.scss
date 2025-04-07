@@ -354,7 +354,7 @@ body.body--light {
   background-color: var(--app-main-bg-color) !important;
 
   .chip-color {
-    background-color: var(--color-dark-100);
+    background-color: var(--color-zinc-100);
   }
 }
 
@@ -371,7 +371,7 @@ body.body--dark {
   --emoji-icon-bg: var(--emoji-icon-bg-black);
 
   .chip-color {
-    background-color: var(--color-dark-900);
+    background-color: var(--color-zinc-900);
   }
 
   .base-sidebar {

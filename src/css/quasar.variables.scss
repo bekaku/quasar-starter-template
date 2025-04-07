@@ -11,40 +11,252 @@
 // It's highly recommended to change the default colors
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
+$red: oklch(0.577 0.245 27.325);
+$red-1: oklch(0.936 0.032 17.717);
+$red-2: oklch(0.885 0.062 18.334);
+$red-3: oklch(0.808 0.114 19.571);
+$red-4: oklch(0.704 0.191 22.216);
+$red-5: oklch(0.637 0.237 25.331);
+$red-6: oklch(0.577 0.245 27.325);
+$red-7: oklch(0.505 0.213 27.518);
+$red-8: oklch(0.444 0.177 26.899);
+$red-9: oklch(0.396 0.141 25.723);
+$red-10: oklch(0.258 0.092 26.042);
 
-$primary: #2e86de;
-$secondary: #1dd1a1;
-$accent: #00d1b2;
+$pink: oklch(0.656 0.241 354.308);
+$pink-1: oklch(0.948 0.028 342.258);
+$pink-2: oklch(0.899 0.061 343.231);
+$pink-3: oklch(0.823 0.12 346.018);
+$pink-4: oklch(0.718 0.202 349.761);
+$pink-5: oklch(0.656 0.241 354.308);
+$pink-6: oklch(0.592 0.249 0.584);
+$pink-7: oklch(0.525 0.223 3.958);
+$pink-8: oklch(0.459 0.187 3.815);
+$pink-9: oklch(0.408 0.153 2.432);
+$pink-10: oklch(0.284 0.109 3.907);
+
+$purple: oklch(0.558 0.288 302.321);
+$purple-1: oklch(0.946 0.033 307.174);
+$purple-2: oklch(0.902 0.063 306.703);
+$purple-3: oklch(0.827 0.119 306.383);
+$purple-4: oklch(0.714 0.203 305.504);
+$purple-5: oklch(0.627 0.265 303.9);
+$purple-6: oklch(0.558 0.288 302.321);
+$purple-7: oklch(0.496 0.265 301.924);
+$purple-8: oklch(0.438 0.218 303.724);
+$purple-9: oklch(0.381 0.176 304.987);
+$purple-10: oklch(0.291 0.149 302.717);
+
+$deep-purple: oklch(0.541 0.281 293.009);
+$deep-purple-1: oklch(0.943 0.029 294.588);
+$deep-purple-2: oklch(0.894 0.057 293.283);
+$deep-purple-3: oklch(0.811 0.111 293.571);
+$deep-purple-4: oklch(0.702 0.183 293.541);
+$deep-purple-5: oklch(0.606 0.25 292.717);
+$deep-purple-6: oklch(0.541 0.281 293.009);
+$deep-purple-7: oklch(0.491 0.27 292.581);
+$deep-purple-8: oklch(0.432 0.232 292.759);
+$deep-purple-9: oklch(0.38 0.189 293.745);
+$deep-purple-9: oklch(0.283 0.141 291.089);
+
+$indigo: oklch(0.511 0.262 276.966);
+$indigo-1: oklch(0.93 0.034 272.788);
+$indigo-2: oklch(0.87 0.065 274.039);
+$indigo-3: oklch(0.785 0.115 274.713);
+$indigo-4: oklch(0.673 0.182 276.935);
+$indigo-5: oklch(0.585 0.233 277.117);
+$indigo-6: oklch(0.511 0.262 276.966);
+$indigo-7: oklch(0.457 0.24 277.023);
+$indigo-8: oklch(0.398 0.195 277.366);
+$indigo-9: oklch(0.359 0.144 278.697);
+$indigo-10: oklch(0.257 0.09 281.288);
+
+$blue: oklch(0.623 0.214 259.815);
+$blue-1: oklch(0.932 0.032 255.585);
+$blue-2: oklch(0.882 0.059 254.128);
+$blue-3: oklch(0.809 0.105 251.813);
+$blue-4: oklch(0.707 0.165 254.624);
+$blue-5: oklch(0.623 0.214 259.815);
+$blue-6: oklch(0.546 0.245 262.881);
+$blue-7: oklch(0.488 0.243 264.376);
+$blue-8: oklch(0.424 0.199 265.638);
+$blue-9: oklch(0.379 0.146 265.522);
+$blue-10: oklch(0.282 0.091 267.935);
+
+$light-blue: oklch(0.685 0.169 237.323);
+$light-blue-1: oklch(0.951 0.026 236.824);
+$light-blue-2: oklch(0.901 0.058 230.902);
+$light-blue-3: oklch(0.828 0.111 230.318);
+$light-blue-4: oklch(0.746 0.16 232.661);
+$light-blue-5: oklch(0.685 0.169 237.323);
+$light-blue-6: oklch(0.588 0.158 241.966);
+$light-blue-7: oklch(0.5 0.134 242.749);
+$light-blue-8: oklch(0.443 0.11 240.79);
+$light-blue-9: oklch(0.391 0.09 240.876);
+$light-blue-10: oklch(0.293 0.066 243.157);
+
+$cyan: oklch(0.715 0.143 215.221);
+$cyan-100: oklch(0.956 0.045 203.388);
+$cyan-200: oklch(0.917 0.08 205.041);
+$cyan-300: oklch(0.865 0.127 207.078);
+$cyan-400: oklch(0.789 0.154 211.53);
+$cyan-500: oklch(0.715 0.143 215.221);
+$cyan-600: oklch(0.609 0.126 221.723);
+$cyan-700: oklch(0.52 0.105 223.128);
+$cyan-800: oklch(0.45 0.085 224.283);
+$cyan-900: oklch(0.398 0.07 227.392);
+$cyan-950: oklch(0.302 0.056 229.695);
+
+$teal: oklch(0.704 0.14 182.503);
+$teal-1: oklch(0.953 0.051 180.801);
+$teal-2: oklch(0.91 0.096 180.426);
+$teal-3: oklch(0.855 0.138 181.071);
+$teal-4: oklch(0.777 0.152 181.912);
+$teal-5: oklch(0.704 0.14 182.503);
+$teal-6: oklch(0.6 0.118 184.704);
+$teal-7: oklch(0.511 0.096 186.391);
+$teal-8: oklch(0.437 0.078 188.216);
+$teal-9: oklch(0.386 0.063 188.416);
+$teal-10: oklch(0.277 0.046 192.524);
+
+$green: oklch(0.627 0.194 149.214);
+$green-1: oklch(0.962 0.044 156.743);
+$green-2: oklch(0.925 0.084 155.995);
+$green-3: oklch(0.871 0.15 154.449);
+$green-4: oklch(0.792 0.209 151.711);
+$green-5: oklch(0.723 0.219 149.579);
+$green-6: oklch(0.627 0.194 149.214);
+$green-7: oklch(0.527 0.154 150.069);
+$green-8: oklch(0.448 0.119 151.328);
+$green-9: oklch(0.393 0.095 152.535);
+$green-10: oklch(0.266 0.065 152.934);
+
+$light-green: oklch(0.596 0.145 163.225);
+$light-green-1: oklch(0.95 0.052 163.051);
+$light-green-2: oklch(0.905 0.093 164.15);
+$light-green-3: oklch(0.845 0.143 164.978);
+$light-green-4: oklch(0.765 0.177 163.223);
+$light-green-5: oklch(0.696 0.17 162.48);
+$light-green-6: oklch(0.596 0.145 163.225);
+$light-green-7: oklch(0.508 0.118 165.612);
+$light-green-8: oklch(0.432 0.095 166.913);
+$light-green-9: oklch(0.378 0.077 168.94);
+$light-green-10: oklch(0.262 0.051 172.552);
+
+$lime: oklch(0.768 0.233 130.85);
+$lime-1: oklch(0.967 0.067 122.328);
+$lime-2: oklch(0.938 0.127 124.321);
+$lime-3: oklch(0.897 0.196 126.665);
+$lime-4: oklch(0.841 0.238 128.85);
+$lime-5: oklch(0.768 0.233 130.85);
+$lime-6: oklch(0.648 0.2 131.684);
+$lime-7: oklch(0.532 0.157 131.589);
+$lime-8: oklch(0.453 0.124 130.933);
+$lime-9: oklch(0.405 0.101 131.063);
+$lime-10: oklch(0.274 0.072 132.109);
+
+$yellow: oklch(0.795 0.184 86.047);
+$yellow-1: oklch(0.973 0.071 103.193);
+$yellow-2: oklch(0.945 0.129 101.54);
+$yellow-3: oklch(0.905 0.182 98.111);
+$yellow-4: oklch(0.852 0.199 91.936);
+$yellow-5: oklch(0.795 0.184 86.047);
+$yellow-6: oklch(0.681 0.162 75.834);
+$yellow-7: oklch(0.554 0.135 66.442);
+$yellow-8: oklch(0.476 0.114 61.907);
+$yellow-9: oklch(0.421 0.095 57.708);
+$yellow-10: oklch(0.286 0.066 53.813);
+
+$amber: oklch(0.769 0.188 70.08);
+$amber-1: oklch(0.962 0.059 95.617);
+$amber-2: oklch(0.924 0.12 95.746);
+$amber-3: oklch(0.879 0.169 91.605);
+$amber-4: oklch(0.828 0.189 84.429);
+$amber-5: oklch(0.769 0.188 70.08);
+$amber-6: oklch(0.666 0.179 58.318);
+$amber-7: oklch(0.555 0.163 48.998);
+$amber-8: oklch(0.473 0.137 46.201);
+$amber-9: oklch(0.414 0.112 45.904);
+$amber-10: oklch(0.279 0.077 45.635);
+
+$orange: oklch(0.646 0.222 41.116);
+$orange-1: oklch(0.954 0.038 75.164);
+$orange-2: oklch(0.901 0.076 70.697);
+$orange-3: oklch(0.837 0.128 66.29);
+$orange-4: oklch(0.75 0.183 55.934);
+$orange-5: oklch(0.705 0.213 47.604);
+$orange-6: oklch(0.646 0.222 41.116);
+$orange-7: oklch(0.553 0.195 38.402);
+$orange-8: oklch(0.47 0.157 37.304);
+$orange-9: oklch(0.408 0.123 38.172);
+$orange-10: oklch(0.266 0.079 36.259);
+
+$brown: oklch(0.553 0.013 58.071);
+$brown-1: oklch(0.97 0.001 106.424);
+$brown-2: oklch(0.923 0.003 48.717);
+$brown-3: oklch(0.869 0.005 56.366);
+$brown-4: oklch(0.709 0.01 56.259);
+$brown-5: oklch(0.553 0.013 58.071);
+$brown-6: oklch(0.444 0.011 73.639);
+$brown-7: oklch(0.374 0.01 67.558);
+$brown-8: oklch(0.268 0.007 34.298);
+$brown-9: oklch(0.216 0.006 56.043);
+$brown-10: oklch(0.147 0.004 49.25);
+
+$grey: oklch(0.446 0.03 256.802);
+$grey-1: oklch(0.967 0.003 264.542);
+$grey-2: oklch(0.928 0.006 264.531);
+$grey-3: oklch(0.872 0.01 258.338);
+$grey-4: oklch(0.707 0.022 261.325);
+$grey-5: oklch(0.551 0.027 264.364);
+$grey-6: oklch(0.446 0.03 256.802);
+$grey-7: oklch(0.373 0.034 259.733);
+$grey-8: oklch(0.278 0.033 256.848);
+$grey-9: oklch(0.21 0.034 264.665);
+$grey-10: oklch(0.13 0.028 261.692);
+
+$blue-grey-50: oklch(0.446 0.043 257.281);
+$blue-grey-100: oklch(0.968 0.007 247.896);
+$blue-grey-200: oklch(0.929 0.013 255.508);
+$blue-grey-300: oklch(0.869 0.022 252.894);
+$blue-grey-400: oklch(0.704 0.04 256.788);
+$blue-grey-500: oklch(0.554 0.046 257.417);
+$blue-grey-600: oklch(0.446 0.043 257.281);
+$blue-grey-700: oklch(0.372 0.044 257.287);
+$blue-grey-800: oklch(0.279 0.041 260.031);
+$blue-grey-900: oklch(0.208 0.042 265.755);
+$blue-grey-950: oklch(0.129 0.042 264.695);
+
+$primary: $blue;
 $positive: #23d160;
 $negative: #ff3860;
-$info: #00a0dc;
 $warning: #ff9f43;
 
 // used by dark mode
-// $dark: #272a32 !default;
-$dark: var(--color-zinc-900) !default;
-$dark-page: $dark !default;
-// $dark-page: #1d1e22 !default;
+// $dark: #272a32 !default;;
+$dark: var(--color-zinc-900) !default;;
+$dark-page: $dark !default;;
+// $dark-page: #1d1e22 !default;;
 
 
-// $separator-color: #e9e9ec !default;
-// $separator-dark-color: #45464b !default; //#394552
-$separator-color: var(--color-zinc-200) !default;
-$separator-dark-color: var(--color-zinc-700) !default;
+// $separator-color: #e9e9ec !default;;
+// $separator-dark-color: #45464b !default;; //#394552
+$separator-color: var(--color-zinc-200) !default;;
+$separator-dark-color: var(--color-zinc-700) !default;;
 
-// $shadow-color: #1d1e22 !default;
-// $elevation-umbra: rgba($shadow-color, 0.12) !default;
-// $elevation-penumbra: rgba($shadow-color, 0.14) !default;
-// $elevation-ambient: rgba($shadow-color, 0.12) !default;
+// $shadow-color: #1d1e22 !default;;
+// $elevation-umbra: rgba($shadow-color, 0.12) !default;;
+// $elevation-penumbra: rgba($shadow-color, 0.14) !default;;
+// $elevation-ambient: rgba($shadow-color, 0.12) !default;;
 
-// $dark-shadow-color : #bac4d0 !default;
-// $elevation-dark-umbra : rgba($dark-shadow-color, 0.12) !default;
-// $elevation-dark-penumbra : rgba($dark-shadow-color, 0.14) !default;
-// $elevation-dark-ambient : rgba($dark-shadow-color, 0.12) !default;
+// $dark-shadow-color : #bac4d0 !default;;
+// $elevation-dark-umbra : rgba($dark-shadow-color, 0.12) !default;;
+// $elevation-dark-penumbra : rgba($dark-shadow-color, 0.14) !default;;
+// $elevation-dark-ambient : rgba($dark-shadow-color, 0.12) !default;;
 
-$generic-border-radius: 11px !default;
-$button-font-weight: 400 !default;
-$button-border-radius : 11px !default;
+$generic-border-radius: 11px !default;;
+$button-font-weight: 400 !default;;
+$button-border-radius : 11px !default;;
 
 $text-xs:12px;
 $text-sm:14px;

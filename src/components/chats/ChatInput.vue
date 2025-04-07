@@ -339,7 +339,7 @@ defineExpose({
 }
 body.body--dark {
   .input-bg {
-    background-color: var(--color-dark-900);
+    background-color: var(--color-zinc-900);
   }
 }
 </style>

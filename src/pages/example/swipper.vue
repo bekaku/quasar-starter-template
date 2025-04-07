@@ -166,25 +166,6 @@ const items = [
 const defualtStyle = {
   minHeight: '100px',
 };
-const slideOpts: SlideOptions = {
-  initialSlide: 0,
-  speed: 400,
-  slidesPerView: 4.7,
-  spaceBetween: 5,
-  centeredSlides: false,
-  navigation: true,
-  autoplay: false,
-  // style: {
-  //     '--swiper-navigation-color': '#00aba9',
-  //     '--swiper-pagination-color': '#00aba9',
-  // },
-  pagination: true,
-  paginationDynamic: true,
-  paginationType: 'bullets',
-  // direction: 'vertical',
-  effect: 'slide',
-  zoom: true,
-};
 const slideOptsVertical: SlideOptions = {
   initialSlide: 0,
   speed: 400,
@@ -206,9 +187,25 @@ const slideOptsVertical: SlideOptions = {
   <BasePage>
     <div class="row">
       <div class="col-12 col-md-6 q-pa-sm">
-        <BaseCard title="Horizontal" style="min-height: 450px;">
+        <BaseCard title="Horizontal" style="min-height: 450px">
           <q-card-section>
-            <base-swiper-slides ref="testSwiperRef" :params="slideOpts">
+            <base-swiper-slides
+              ref="testSwiperRef"
+              :params="{
+                initialSlide: 0,
+                speed: 400,
+                slidesPerView: !isSmallScreen ? 4.7 : 2.5,
+                spaceBetween: 5,
+                centeredSlides: false,
+                navigation: true,
+                autoplay: false,
+                pagination: true,
+                paginationDynamic: true,
+                paginationType: 'bullets',
+                effect: 'slide',
+                zoom: true,
+              }"
+            >
               <swiper-slide v-for="(item, i) in items" :key="i">
                 <q-card flat class="text-center" style="height: 150px">
                   <base-ripple-item>
@@ -311,7 +308,7 @@ const slideOptsVertical: SlideOptions = {
         </BaseCard>
       </div>
       <div class="col-12 col-md-6 q-pa-sm">
-        <BaseCard title="Grid" style="min-height: 440px;">
+        <BaseCard title="Grid" style="min-height: 440px">
           <q-card-section>
             <q-no-ssr>
               <base-swiper-slides

@@ -112,7 +112,7 @@
 </template>
 
 <script setup lang="ts">
-import ContentItem from '@/components/base/ContentItem.vue';
+import ContentItem from '@/components/base/BaseContentItem.vue';
 import CommentArea from '@/components/feed/CommentArea.vue';
 import CommentItems from '@/components/feed/CommentItems.vue';
 import CommentSort from '@/components/feed/CommentSort.vue';

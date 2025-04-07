@@ -47,7 +47,7 @@ const onItemClick = () => {
       <q-item-label lines="1">
         <q-icon
           v-if="item.favorite && showSettingIcon"
-          color="amber-8"
+          color="amber-5"
           size="11px"
           class="q-mb-xs"
           :name="biStarFill"

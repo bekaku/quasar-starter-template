@@ -67,13 +67,13 @@ const onLike = (l: EmojiType) => {
           round
           dense
           flat
-          color="orange"
+          color="amber"
           @mouseover="laughHover = true"
           @mouseleave="laughHover = false"
           @click="onLike('LAUGH')"
         >
           <q-icon :name="laughHover ? mdiEmoticonLol : mdiEmoticonLolOutline" :size="laughHover ? iconZoomSize : iconSize" />
-          <q-tooltip class="bg-orange" anchor="top middle" self="center middle"> LOL </q-tooltip>
+          <q-tooltip class="bg-amber" anchor="top middle" self="center middle"> LOL </q-tooltip>
         </q-btn>
       </div>
 

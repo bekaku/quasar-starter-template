@@ -14,8 +14,11 @@
  */
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { escapeHtml, isEmpty, openUrlInNewTab, roundDecimal } from '@/utils/appUtil';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
+import ContentHtml from '@/components/base/BaseContentHtml.vue';
+import BaseButton from './BaseButton.vue';
+
 const props = withDefaults(
   defineProps<{
     contentId?: string;
@@ -33,7 +36,7 @@ const props = withDefaults(
     linkStyle?: string;
     textStyle?: string;
     isEscapeHtml?: boolean;
-    highLightText?: string;
+    highLightText?: string | undefined;
   }>(),
   {
     contentId: 'content-id',
@@ -193,26 +196,35 @@ const onShowMoreText = async () => {
   >
     <slot name="top" />
     <div
-      :id="contentId || 'content-id'"
       v-ripple
+      :id="contentId || 'content-id'"
       :class="{
         'word-limit': showMoreBtn && !showMoreText,
         'cursor-pointer': to,
       }"
       class="app-auto-newline dont-break-out text-holder"
     >
-      <BaseContentHtml
+      <content-html
+        v-if="content != undefined"
         :content="urlify(content, 'text-primary')"
         :high-light-text="highLightText"
         @on-press="onOpenPage($event)"
       />
     </div>
-    <base-link
+    <BaseButton
       v-if="showMoreBtn && !showMoreText"
+      flat
+      dense
       :label="t('base.seeMore')"
-      color="primary"
       @click="onShowMoreText"
     />
+    <!-- <base-link
+      v-if="showMoreBtn && !showMoreText"
+      :label="t('base.seeMore')"
+      color="text-primary"
+      @click="onShowMoreText"
+    /> -->
+
     <slot name="bottom" />
   </div>
 </template>
@@ -222,13 +234,21 @@ const onShowMoreText = async () => {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: v-bind(limit);
+  /* number of lines to show */
   line-clamp: v-bind(limit);
   -webkit-box-orient: vertical;
 }
 
+// .text-holder {
+//color: var(--v-text-black);
+//line-height: 1.5;
+//font-size: 15px;
+// }
+
 .text-holder-fitcontent {
   width: fit-content;
-  background-color: var(--color-zinc-100);
+  //background-color: #f5f5f5;
+  background-color: var(--gray-100);
   padding: 10px;
   border-radius: 8px;
   margin-top: 5px;
@@ -236,7 +256,8 @@ const onShowMoreText = async () => {
 
 body.body--dark {
   .text-holder-fitcontent {
-    background-color: var(--color-dark-900);
+    //background-color: var(--wee-main-bg-color-theme-dark);
+    background-color: var( --color-zinc-700);
     color: #fafafa;
   }
 }

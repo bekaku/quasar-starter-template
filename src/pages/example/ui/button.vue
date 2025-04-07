@@ -25,6 +25,33 @@ const progress = ref(false);
 </script>
 <template>
   <BasePage>
+    <BaseCard title="Color">
+      <q-card-section>
+        <div class="q-pa-md q-gutter-sm">
+          <BaseButton label="red" color="red" />
+          <BaseButton label="pink" color="pink" />
+          <BaseButton label="purple" color="purple" />
+          <BaseButton label="deep-purple" color="deep-purple" />
+          <BaseButton label="indigo" color="indigo" />
+          <BaseButton label="blue" color="blue" />
+          <BaseButton label="light-blue" color="light-blue" />
+          <BaseButton label="cyan" color="cyan" />
+          <BaseButton label="teal" color="teal" />
+          <BaseButton label="green" color="green" />
+          <BaseButton label="light-green" color="light-green" />
+          <BaseButton label="lime" color="lime" />
+          <BaseButton label="yellow" color="yellow" />
+          <BaseButton label="amber" color="amber" />
+          <BaseButton label="orange" color="orange" />
+          <BaseButton label="brown" color="brown" />
+          <BaseButton label="grey" color="grey" />
+          <BaseButton label="blue-grey" color="blue-grey" />
+          <BaseButton label="positive" color="positive" />
+          <BaseButton label="negative" color="negative" />
+          <BaseButton label="warning" color="warning" />
+        </div>
+      </q-card-section>
+    </BaseCard>
     <BaseCard title="Button">
       <q-card-section>
         <div class="q-pa-md q-gutter-sm">

@@ -105,7 +105,7 @@ const onOpenFileDialog = (fileType: ChatMessageType) => {
             :icon="!modelValue.favorite ? biStar : biStarFill"
             size="sm"
             @click="toggleFav"
-            :color="modelValue.favorite ? 'amber-8' : undefined"
+            :color="modelValue.favorite ? 'amber-5' : undefined"
           >
             <q-tooltip>
               {{ modelValue.favorite ? t('chats.unfavorite') : t('chats.favorite') }}

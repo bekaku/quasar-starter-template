@@ -9,6 +9,7 @@ import { biArrowRightShort } from '@quasar/extras/bootstrap-icons';
 import { chatHistoryListApi } from 'src/libs/data';
 import { onMounted, ref } from 'vue';
 import BaseButton from '../base/BaseButton.vue';
+import BaseLink from '../base/BaseLink.vue';
 
 const { t } = useLang();
 const { onOpenMiniChat } = useChat();
@@ -36,7 +37,9 @@ const onItemClick = (item: GroupChatDto) => {
       </q-toolbar-title>
       <q-space />
 
-      <BaseButton :label="t('chats.openChatPage')" to="/example/chats" dense flat :icon-right="biArrowRightShort" />
+      <BaseLink to="/example/chats">
+        {{ t('chats.openChatPage') }}
+      </BaseLink>
     </q-toolbar>
     <q-separator />
 

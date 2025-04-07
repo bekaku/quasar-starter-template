@@ -81,6 +81,7 @@ onBeforeUnmount(() => {
     v-if="chatStore && chatStore?.openMiniChatPage && chatStore?.miniChatGroupId"
     position="bottom-right"
     :offset="[50, 0]"
+    style="z-index: 999"
   >
     <q-card
       class="card-style shadow-8"

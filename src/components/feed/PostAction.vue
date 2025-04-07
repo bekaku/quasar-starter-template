@@ -39,13 +39,13 @@
               round
               dense
               flat
-              color="amber-8"
+              color="amber-5"
               @mouseover="prizeHover = true"
               @mouseleave="prizeHover = false"
               :icon="prizeHover ? biGiftFill : biGift"
               @click="onLiked('PRIZE_IT')"
             >
-              <q-tooltip anchor="top middle" self="center middle" class="bg-amber-8"
+              <q-tooltip anchor="top middle" self="center middle" class="bg-amber-5"
                 >Prize it</q-tooltip
               ></q-btn
             >
@@ -210,7 +210,7 @@ const actionColor = computed(() => {
   if (actionType.value == 'LOVE_IT') {
     return 'pink';
   } else if (actionType.value == 'PRIZE_IT') {
-    return 'amber-8';
+    return 'amber-5';
   } else if (actionType.value == 'ADOPT_IT') {
     return 'green';
   } else {
