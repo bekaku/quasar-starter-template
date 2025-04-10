@@ -333,6 +333,13 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('@/pages/example/ui/user.vue'),
               },
+              {
+                path: 'transitions',
+                meta: {
+                  name: 'ExampleUiTransitions',
+                },
+                component: () => import('@/pages/example/ui/transitions.vue'),
+              },
             ],
           },
         ]

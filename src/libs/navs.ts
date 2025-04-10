@@ -23,6 +23,7 @@ import {
   biGear,
   biHouseDoor,
   biInputCursorText,
+  biLayers,
   biLayoutSidebar,
   biList,
   biMarkdown,
@@ -218,6 +219,12 @@ export const additionalMenu: LabelValue<any>[] = [
             label: 'Options group',
             translateLabel: false,
             to: '/example/ui/toggle'
+          },
+          {
+            icon: biLayers,
+            label: 'Transitions',
+            translateLabel: false,
+            to: '/example/ui/transitions'
           },
           {
             icon: biPerson,

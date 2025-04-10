@@ -16,6 +16,7 @@
     "dev:ssr": "quasar dev -m ssr",
     "postinstall": "quasar prepare",
     "build": "quasar build",
+    "build:ssr": "quasar build -m ssr",
     "build:pwa": "quasar build -m pwa",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
