@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useLang } from 'src/composables/useLang';
 import BaseAvatar from '../base/BaseAvatar.vue';
-import { biChatSquare, biGift, biPatchCheck, biPencil } from '@quasar/extras/bootstrap-icons';
+import { biChatSquare, biGift, biPatchCheckFill, biPencil } from '@quasar/extras/bootstrap-icons';
 import type { AvatarProps } from 'src/types/props';
 const {
   height = '250px',
@@ -56,7 +56,7 @@ const { t } = useLang();
           <q-item-section>
             <q-item-label class="text-weight-bold" lines="1">
               {{ name }}
-              <q-icon :name="biPatchCheck" color="blue" />
+              <q-icon :name="biPatchCheckFill" color="blue" size="16px" />
             </q-item-label>
             <q-item-label caption>
               {{ description }}

@@ -6,7 +6,7 @@ import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import { useValidation } from '@/composables/useValidation';
 import { extractHashtagsFromString } from '@/utils/appUtil';
-import Ellipsis from '@/components/base/Ellipsis.vue';
+import Ellipsis from '@/components/base/BaseEllipsis.vue';
 import { ref, useId } from 'vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';

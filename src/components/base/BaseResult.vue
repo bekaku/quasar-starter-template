@@ -14,6 +14,7 @@ const AppResult = defineAsyncComponent(
 );
 */
 import type { IResult } from '@/types/common';
+import { biInbox } from '@quasar/extras/bootstrap-icons';
 import {
   mdiAlert,
   mdiAlertBoxOutline,
@@ -21,9 +22,8 @@ import {
   mdiCheckBold,
   mdiInboxRemoveOutline,
   mdiInformationVariant,
-  mdiPackageVariant,
   mdiPaperclip,
-  mdiRobotConfused,
+  mdiRobotConfused
 } from '@quasar/extras/mdi-v7';
 import { useBase } from 'src/composables/useBase';
 
@@ -70,7 +70,7 @@ const getIcon = (): string => {
       icon = mdiAlert;
       break;
     case 'empty':
-      icon = mdiPackageVariant;
+      icon = biInbox;
       break;
     default:
       icon = mdiInformationVariant;

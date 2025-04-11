@@ -350,6 +350,32 @@ body.body--dark .emoji-mart-anchor {
   background-color: var(--color-zinc-50);
 }
 
+.bg-dark-900 {
+  background-color: var(--color-zinc-900) !important;
+}
+
+.text-message-sent {
+  color: var(--color-primary-200) !important;
+}
+
+.text-message-received {
+  color: var(--color-zinc-200) !important;
+}
+
+.text-message-unsend {
+  color: var(--color-zinc-100) !important;
+}
+
+.text-message-transparent {
+  color: transparent !important;
+}
+
+.bg-app-content-item{
+  background-color: var(--color-zinc-100);
+}
+
+
+
 body.body--light {
   background-color: var(--app-main-bg-color) !important;
 
@@ -398,5 +424,17 @@ body.body--dark {
       0 0 $elevation-dark-ambient,
       0 0 $elevation-dark-ambient,
       0 1px 2px 0 $elevation-dark-ambient !important;
+  }
+
+  .text-message-received {
+    color: var(--color-zinc-700) !important;
+  }
+
+  .text-message-unsend {
+    color: var(--color-zinc-500) !important;
+  }
+
+  .bg-app-content-item{
+    background-color: var(--color-zinc-800);
   }
 }

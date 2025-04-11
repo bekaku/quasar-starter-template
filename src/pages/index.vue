@@ -27,8 +27,8 @@ useMeta({
   title: 'Index Page',
 });
 const { isSmallScreen } = useDevice();
-const dateRangeStart = ref<string>();
-const dateRangeEnd = ref<string>();
+const dateRangeStart = ref<string>('2025-04-13');
+const dateRangeEnd = ref<string>('2025-04-15');
 const toggleModel = ref<string>('overview');
 const { isDark } = useTheme();
 const showChart = ref<boolean>(false);

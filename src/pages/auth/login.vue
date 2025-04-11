@@ -20,7 +20,7 @@ import BaseLangugeSwitcherButton from 'src/components/base/BaseLangugeSwitcherBu
 import BaseLink from 'src/components/base/BaseLink.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
-import Ellipsis from 'src/components/base/Ellipsis.vue';
+import Ellipsis from 'src/components/base/BaseEllipsis.vue';
 import { useBase } from 'src/composables/useBase';
 import { AppAuthTokenKey } from 'src/libs/constant';
 import { defineAsyncComponent, onMounted, ref } from 'vue';

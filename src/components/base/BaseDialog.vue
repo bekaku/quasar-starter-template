@@ -21,7 +21,7 @@ import {
 import { useBase } from 'src/composables/useBase';
 import { useLang } from 'src/composables/useLang';
 import { ref } from 'vue';
-import Ellipsis from './Ellipsis.vue';
+import Ellipsis from './BaseEllipsis.vue';
 import { useDevice } from 'src/composables/useDevice';
 
 const {

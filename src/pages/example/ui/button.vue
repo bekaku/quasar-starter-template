@@ -16,6 +16,7 @@ import {
 } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
+import BaseEllipsis from 'src/components/base/BaseEllipsis.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import { ref } from 'vue';
 const { t } = useLang();
@@ -49,6 +50,7 @@ const progress = ref(false);
           <BaseButton label="positive" color="positive" />
           <BaseButton label="negative" color="negative" />
           <BaseButton label="warning" color="warning" />
+          <BaseButton label="light" light />
         </div>
       </q-card-section>
     </BaseCard>
@@ -89,7 +91,9 @@ const progress = ref(false);
           </BaseButton>
           <BaseButton> Multiline<br />Button </BaseButton>
           <BaseButton style="width: 200px">
-            <div class="ellipsis">This is some very long text that is expected to be truncated</div>
+            <BaseEllipsis :lines="1">
+              This is some very long text that is expected to be truncated
+            </BaseEllipsis>
           </BaseButton>
 
           <BaseButton align="left" class="btn-fixed-width" color="primary" label="Align to left" />
