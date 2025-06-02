@@ -63,11 +63,10 @@ const lorem =
       </div>
       <div class="col-12 col-md-4 q-pa-sm">
         <BaseCard>
-          <img src="https://cdn.quasar.dev/img/mountains.jpg">
+          <img src="https://images.unsplash.com/photo-1741568032886-18d3f2a694c2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
           <q-card-section>
             {{ lorem }}
           </q-card-section>
-          <q-separator />
         </BaseCard>
       </div>
     </div>

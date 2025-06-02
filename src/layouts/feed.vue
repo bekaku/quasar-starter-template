@@ -14,6 +14,7 @@
           <feed-right class="fixed" />
         </div>
       </div>
+      <ChatMini />
     </q-page-container>
   </q-layout>
 </template>
@@ -23,6 +24,7 @@ import FeedDrawer from '@/components/feed/FeedDrawer.vue';
 import BaseHeader from '@/components/base/BaseHeader.vue';
 import FeedLeft from '@/components/feed/FeedLeft.vue';
 import FeedRight from '@/components/feed/FeedRight.vue';
+import ChatMini from '@/components/chats/ChatMini.vue';
 import { useQuasar } from 'quasar';
 const { screen } = useQuasar();
 </script>
