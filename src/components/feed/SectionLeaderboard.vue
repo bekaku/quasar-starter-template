@@ -3,7 +3,7 @@
     <q-list>
       <q-item>
         <q-item-section avatar>
-          <q-avatar size="48px" color="orange" class="text-white">
+          <q-avatar size="48px" color="amber" class="text-white">
             <q-icon :name="biTrophy" />
           </q-avatar>
         </q-item-section>

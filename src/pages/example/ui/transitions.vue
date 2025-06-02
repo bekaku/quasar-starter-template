@@ -1,19 +1,6 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import {
-  biAirplane,
-  biChatLeft,
-  biGear,
-  biLightbulb,
-  biNewspaper,
-  biPerson,
-  biPhone,
-  biQuestionCircle,
-  biRadar,
-  biShop,
-  biWrench,
-} from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -89,7 +76,7 @@ const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
                 <BaseButton :label="slideDown ? 'Hide me' : ' Show me'" @click="slideDown = !slideDown" />
             </template>
           <q-card-section>
-            <BaseTransitionWrapper name="slide-up">
+            <BaseTransitionWrapper name="slide-down">
               <div v-if="slideDown" class="div text-h5 q-pa-md">{{ text }}</div>
             </BaseTransitionWrapper>
           </q-card-section>
