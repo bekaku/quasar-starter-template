@@ -49,7 +49,7 @@ const onCropImageEnd = (imageUrl: string) => {
 
 <template>
   <BasePage>
-    <BaseCard title="Image Cropper" sub-title="Ratio">
+    <BaseCard title="Image Cropper" subtitle="Ratio">
       <BaseRadio v-model="ratioSelected" :items="ratioOptions" />
       <q-no-ssr>
         <BaseImageCropper

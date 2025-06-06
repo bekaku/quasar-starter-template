@@ -46,7 +46,9 @@ export const appNavs: LabelValue<any>[] = [
         icon: biHouseDoor,
         label: 'nav.dashboard',
         to: '/',
-        permissions: ['backend_login'],
+        rbac: {
+          permissions: ['backend_login']
+        }
       }
     ]
   },
@@ -61,7 +63,9 @@ export const appNavs: LabelValue<any>[] = [
             label: 'model_permission',
             icon: biShieldCheck,
             to: '/permission',
-            permissions: ['permission_list']
+            rbac: {
+              permissions: ['permission_list']
+            }
           }
         ]
       }
@@ -78,13 +82,17 @@ export const appNavs: LabelValue<any>[] = [
             label: 'nav.userRole',
             icon: biPeople,
             to: '/role',
-            permissions: ['role_list']
+            rbac: {
+              permissions: ['role_list']
+            }
           },
           {
             label: 'nav.appUser',
             icon: biPerson,
             to: '/user',
-            permissions: ['user_list']
+            rbac: {
+              permissions: ['user_list']
+            }
           }
         ]
       }
@@ -97,7 +105,9 @@ export const appNavs: LabelValue<any>[] = [
         label: 'model_files_manager',
         icon: biFolder,
         to: '/myFiles?_id=root',
-        permissions: ['file_manager_manage']
+        rbac: {
+          permissions: ['file_manager_manage']
+        }
       }
     ]
   }

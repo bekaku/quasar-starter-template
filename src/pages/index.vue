@@ -46,7 +46,7 @@ const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
       title="Dashboard"
       :bordered="false"
       flat
-      sub-title="Top picks for you. Updated daily."
+      subtitle="Top picks for you. Updated daily."
       :icon="biMusicNote"
     >
       <q-card-section>
@@ -197,7 +197,7 @@ const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
         <div class="col-12 col-md-4 q-px-md">
           <BaseCard
             title="Recent Sales"
-            sub-title="You made 265 sales this month."
+            subtitle="You made 265 sales this month."
             :flat="false"
             style="min-height: 480px"
           >

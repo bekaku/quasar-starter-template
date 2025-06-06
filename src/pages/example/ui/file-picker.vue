@@ -90,7 +90,7 @@ const onCustomRemove2 = (index: number) => {
         <BaseButton class="q-my-md" color="positive" @click="onSubmit"> Submit </BaseButton>
       </q-card-section>
     </BaseCard>
-    <BaseCard title="Simple Picker 2" sub-title="Gallery Preview">
+    <BaseCard title="Simple Picker 2" subtitle="Gallery Preview">
       <q-card-section>
         <BaseFilePicker
           v-model="files"

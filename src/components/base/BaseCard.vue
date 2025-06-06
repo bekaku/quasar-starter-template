@@ -14,7 +14,7 @@ const {
   flat?: boolean;
   bordered?: boolean;
   title?: string;
-  subTitle?: string;
+  subtitle?: string;
   icon?: string;
   separator?: boolean;
   bgTransparent?: boolean;
@@ -51,7 +51,7 @@ const onHover = (state: boolean) => {
         v-if="icon || title"
         class="q-px-lg"
         :title="title"
-        :sub-title="subTitle"
+        :subtitle="subtitle"
         :icon
       >
         <template #start>
