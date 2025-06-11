@@ -338,6 +338,7 @@ export enum ICrudListHeaderOptionSearchType {
   BOOLEAN,
   DATE,
   DATETIME,
+  OPTIONS,
 }
 export interface ICrudListHeaderOption {
   searchable?: boolean;
@@ -369,6 +370,10 @@ export interface ICrudListHeaderOption {
   trueIcon?: string;
   falseIcon?: string;
   clickable?: boolean;
+  selectOption?: {
+    items: LabelValue<any>[]
+    multiple?: boolean
+  };
 }
 export interface ICrudListHeader {
   column?: string;

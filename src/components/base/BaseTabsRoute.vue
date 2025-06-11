@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useQuasar } from 'quasar';
-import { useLang } from 'src/composables/useLang';
-import { computed } from 'vue';
-import type { LabelValue } from '@/types/common';
-import { useBase } from 'src/composables/useBase';
-import { useAppStore } from '@/stores/appStore';
 import BaseTabs from '@/components/base/BaseTabs.vue';
+import type { LabelValue } from '@/types/common';
+import { useQuasar } from 'quasar';
+import { useBase } from 'src/composables/useBase';
+import { useLang } from 'src/composables/useLang';
+import { useRbac } from 'src/composables/useRbac';
+import { computed } from 'vue';
 const {
   dense = true,
   items,
@@ -22,7 +22,7 @@ const {
 const { screen } = useQuasar();
 const { t } = useLang();
 const { getParam } = useBase();
-const appStore = useAppStore();
+const { hasPermission } = useRbac();
 const getLink = (item: LabelValue<any>) => {
   let link = item.to;
   const params = item.params;
@@ -37,10 +37,10 @@ const getLink = (item: LabelValue<any>) => {
   return link;
 };
 const canShow = (item: LabelValue<any>) => {
-  if (item.permissions == undefined) {
+  if (item.rbac == undefined) {
     return true;
   }
-  return appStore.isHavePermission(item.permissions);
+  return hasPermission(item.rbac);
 };
 const getItems = computed<LabelValue<any>[]>(() => {
   return items.filter((t) => canShow(t) === true);

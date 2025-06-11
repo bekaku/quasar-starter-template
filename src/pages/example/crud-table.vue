@@ -16,6 +16,7 @@ import { computed, onMounted, ref } from 'vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Crud table | ${t('app.name')}`);
+
 const headers = ref<ICrudListHeader[]>([
   {
     label: 'Image',
@@ -69,6 +70,63 @@ const headers = ref<ICrudListHeader[]>([
       searchModel: true,
       searchOperation: '=',
       clickable: true,
+    },
+  },
+  {
+    label: 'Select options',
+    translateLabel: false,
+    column: 'selectedOption',
+    type: CrudListDataType.TEXT,
+    options: {
+      searchable: true,
+      searchType: ICrudListHeaderOptionSearchType.OPTIONS,
+      searchModel: null,
+      searchOperation: '=',
+      selectOption: {
+        items: [
+          {
+            label: 'Cody Fisher',
+            value: 6,
+            description: 'Fisher',
+            avatar: {
+              src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar11.jpg',
+            },
+          },
+          {
+            label: 'Robert Fox',
+            value: 7,
+            description: 'Fox',
+            avatar: {
+              src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar12.jpg',
+            },
+          },
+          {
+            label: 'Esther Howard',
+            value: 8,
+            description: 'Howard',
+            avatar: {
+              src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar13.jpg',
+            },
+          },
+          {
+            label: 'Darlene Robertson',
+            value: 9,
+            description: 'Robertson',
+            avatar: {
+              src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar9.jpg',
+            },
+          },
+          {
+            label: 'Ralph Edwards',
+            value: 10,
+            description: 'Edwards',
+            avatar: {
+              src: 'https://www.primefaces.org/cdn/primevue/images/landing/apps/avatar6.png',
+            },
+          },
+        ],
+        multiple: false,
+      },
     },
   },
   {

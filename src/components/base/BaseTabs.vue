@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { AppColor, LabelValue } from '@/types/common';
 import { useQuasar } from 'quasar';
 import { useLang } from 'src/composables/useLang';
+import { useRbac } from 'src/composables/useRbac';
 import { computed } from 'vue';
-import type { AppColor, LabelValue } from '@/types/common';
-import { useAppStore } from '@/stores/appStore';
 const {
   animated = true,
   dense = true,
@@ -34,16 +34,16 @@ const {
 }>();
 const { screen } = useQuasar();
 const { t } = useLang();
-const appStore = useAppStore();
 const modelValue = defineModel<string | undefined>();
+const { hasPermission } = useRbac();
 const emit = defineEmits<{
   'on-change': [any];
 }>();
 const canShow = (item: LabelValue<any>) => {
-  if (item.permissions == undefined) {
+  if (item.rbac == undefined) {
     return true;
   }
-  return appStore.isHavePermission(item.permissions);
+  return hasPermission(item.rbac);
 };
 const getItems = computed<LabelValue<any>[]>(() => {
   return filterAcl ? items.filter((t) => canShow(t) === true) : items;
@@ -53,7 +53,7 @@ const getCssClass = computed<string>(() => {
   //   return '';
   // }
 
-  return `${textColor ? 'text-' + textColor : ''} ${bgColor ? 'bg-' + bgColor : ''} ${!fullWidth? 'limit-width' :''}`;
+  return `${textColor ? 'text-' + textColor : ''} ${bgColor ? 'bg-' + bgColor : ''} ${!fullWidth ? 'limit-width' : ''}`;
 });
 const onChange = (event: any) => {
   emit('on-change', event);
