@@ -3,6 +3,7 @@ import BaseImage from '@/components/base/BaseImage.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import { getImgUrlFromFile } from '@/utils/fileUtil';
+import { biCode } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseImageCropper from 'src/components/base/BaseImageCropper.vue';
@@ -50,6 +51,17 @@ const onCropImageEnd = (imageUrl: string) => {
 <template>
   <BasePage>
     <BaseCard title="Image Cropper" subtitle="Ratio">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/image-cropper.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <BaseRadio v-model="ratioSelected" :items="ratioOptions" />
       <q-no-ssr>
         <BaseImageCropper

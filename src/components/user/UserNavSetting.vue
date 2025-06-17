@@ -61,7 +61,7 @@ const { isSmallScreen } = useDevice();
           </q-item-section>
           <q-item-section>{{ t('base.yourProfile') }}</q-item-section>
         </q-item>
-        <q-separator />
+        <q-separator class="q-my-xs" />
         <q-item clickable class="rounded">
           <q-item-section avatar>
             <q-icon :name="isDark ? biMoon : biSun" />
@@ -100,7 +100,7 @@ const { isSmallScreen } = useDevice();
           />
         </q-item>
 
-        <q-separator />
+        <q-separator class="q-my-xs" />
         <q-item clickable v-close-popup class="rounded">
           <q-item-section avatar>
             <q-icon :name="biQuestionCircle" />

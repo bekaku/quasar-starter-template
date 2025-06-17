@@ -4,11 +4,12 @@ import { useLang } from '@/composables/useLang';
 import type { LabelValue } from '@/types/common';
 import {
   biApple,
+  biCode,
   biFacebook,
   biGoogle,
   biMicrosoft,
   biTwitter,
-  biX
+  biX,
 } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
@@ -171,6 +172,17 @@ const onLazyScroll = (to: number, ref: any) => {
 <template>
   <BasePage>
     <BaseCard title="Select">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/select.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-4 q-pa-md">

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
+import { biCode } from '@quasar/extras/bootstrap-icons';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
 import ChartArea from 'src/components/chart/ChartArea.vue';
 import ChartPie from 'src/components/chart/ChartPie.vue';
 import ChartRadar from 'src/components/chart/ChartRadar.vue';
@@ -73,6 +76,19 @@ const setShowChart = (no: number) => {
 </script>
 <template>
   <BasePage>
+    <BaseTextHeader title="Charts">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/charts.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+    </BaseTextHeader>
     <Transition>
       <BaseCard v-if="showChart.radial" class="q-my-md" title="Radial">
         <q-card-section>

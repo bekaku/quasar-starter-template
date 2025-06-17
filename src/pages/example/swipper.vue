@@ -5,13 +5,14 @@ import BaseRippleItem from '@/components/base/BaseRippleItem.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import type { SlideOptions } from '@/types/common';
-import { biArrowLeft, biArrowRight } from '@quasar/extras/bootstrap-icons';
+import { biArrowLeft, biArrowRight, biCode } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseImage from 'src/components/base/BaseImage.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import { useDevice } from 'src/composables/useDevice';
 import { useTemplateRef } from 'vue';
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Swipper | ${t('app.name')}`);
@@ -185,6 +186,19 @@ const slideOptsVertical: SlideOptions = {
 
 <template>
   <BasePage>
+    <BaseTextHeader title="Swipper">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/swiper.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+    </BaseTextHeader>
     <div class="row">
       <div class="col-12 col-md-6 q-pa-sm">
         <BaseCard title="Horizontal" style="min-height: 450px">

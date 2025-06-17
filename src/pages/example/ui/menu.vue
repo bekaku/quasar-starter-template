@@ -5,6 +5,7 @@ import { additionalMenu } from '@/libs/navs';
 import {
   biChat,
   biChevronRight,
+  biCode,
   biCopy,
   biCreditCard,
   biDiagram2,
@@ -214,6 +215,17 @@ const onItemClick = () => {
 <template>
   <BasePage :full="false">
     <BaseCard flat :bordered="false" title="Dropdown menu">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/menu.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section class="q-gutter-md">
         <BaseDropdownMenu :items="menus" label="Simple menu" @on-click="onMenuClick" />
         <BaseDropdownMenu

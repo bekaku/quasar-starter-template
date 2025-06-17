@@ -10,6 +10,7 @@ import Ellipsis from '@/components/base/BaseEllipsis.vue';
 import { ref, useId } from 'vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
+import { biCode } from '@quasar/extras/bootstrap-icons';
 const { required } = useValidation();
 const { t } = useLang();
 const { setTitle } = useAppMeta();
@@ -62,6 +63,17 @@ const testExtractHashTag = () => {
 <template>
   <BasePage>
     <BaseCard title="Content Text">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/content-text.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-6">

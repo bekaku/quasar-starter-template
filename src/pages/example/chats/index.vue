@@ -5,7 +5,6 @@ import { useLang } from '@/composables/useLang';
 import { biChatDots, biList } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
 import BaseResult from 'src/components/base/BaseResult.vue';
-import BaseSpinner from 'src/components/base/BaseSpinner.vue';
 import BaseSuspense from 'src/components/base/BaseSuspense.vue';
 import SkeletonItem from 'src/components/skeleton/SkeletonItem.vue';
 import { useBase } from 'src/composables/useBase';

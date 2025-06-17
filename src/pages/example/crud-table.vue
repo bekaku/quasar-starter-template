@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biPerson } from '@quasar/extras/bootstrap-icons';
+import { biCode, biPerson } from '@quasar/extras/bootstrap-icons';
 import UserService from 'src/api/UserService';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BasePage from 'src/components/base/BasePage.vue';
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
 import CrudApiList from 'src/components/base/CrudApiList.vue';
 import { useBase } from 'src/composables/useBase';
 import { usePaging } from 'src/composables/usePaging';
@@ -280,6 +282,19 @@ const onColClick = (event: any, index: number, headerOption: ICrudListHeader, co
 </script>
 <template>
   <BasePage>
+    <BaseTextHeader title="Crud Table" class="q-py-md">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/crud-table.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+    </BaseTextHeader>
     <CrudApiList
       :icon="biPerson"
       :title="t('model_user')"

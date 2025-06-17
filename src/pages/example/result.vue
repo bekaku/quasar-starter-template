@@ -2,7 +2,7 @@
 import BaseResult from '@/components/base/BaseResult.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biImage } from '@quasar/extras/bootstrap-icons';
+import { biCode, biImage } from '@quasar/extras/bootstrap-icons';
 import {
   ionBatteryHalfOutline,
   ionCheckmarkOutline,
@@ -11,6 +11,7 @@ import {
   ionShieldOutline,
 } from '@quasar/extras/ionicons-v7';
 import BaseAlert from 'src/components/base/BaseAlert.vue';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 const { t } = useLang();
@@ -21,6 +22,17 @@ setTitle(`Result | ${t('app.name')}`);
 <template>
   <BasePage :full="false">
     <BaseCard title="Alert">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/result.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-6 q-pa-md">

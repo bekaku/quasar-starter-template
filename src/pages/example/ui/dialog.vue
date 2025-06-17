@@ -4,7 +4,7 @@ import BaseDialog from '@/components/base/BaseDialog.vue';
 import BasePopConfirm from '@/components/base/BasePopConfirm.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biPencil, biTrash } from '@quasar/extras/bootstrap-icons';
+import { biCode, biPencil, biTrash } from '@quasar/extras/bootstrap-icons';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BasePopover from 'src/components/base/BasePopover.vue';
@@ -41,9 +41,19 @@ const onConfirmToClose = async () => {
 </script>
 <template>
   <BasePage>
-    <BaseCard>
+    <BaseCard title="Dialog">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/dialog.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section class="q-gutter-md">
-        <BaseTextHeader title="Dialog" />
 
         <BaseButton outline label="Dialog" @click="dialog = true" />
         <BaseButton outline label="Dialog persistent" @click="dialog2 = true" />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { biMusicNote } from '@quasar/extras/bootstrap-icons';
+import { biCode, biMusicNote } from '@quasar/extras/bootstrap-icons';
 import { useMeta } from 'quasar';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
@@ -8,6 +8,7 @@ import BaseLink from 'src/components/base/BaseLink.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseTabs from 'src/components/base/BaseTabs.vue';
 import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
+import BaseTooltip from 'src/components/base/BaseTooltip.vue';
 import ChartArea from 'src/components/chart/ChartArea.vue';
 import ChartSparklines from 'src/components/chart/ChartSparklines.vue';
 import SkeletonCard from 'src/components/skeleton/SkeletonCard.vue';
@@ -49,6 +50,19 @@ const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
       subtitle="Top picks for you. Updated daily."
       :icon="biMusicNote"
     >
+      <template #end>
+        <q-item-section side>
+          <BaseButton
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index.vue"
+            target="_blank"
+            :icon="biCode"
+            flat
+            round
+          >
+          <BaseTooltip>View Source</BaseTooltip>
+        </BaseButton>
+        </q-item-section>
+      </template>
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-8" :class="{ 'q-pr-md': !isSmallScreen }">

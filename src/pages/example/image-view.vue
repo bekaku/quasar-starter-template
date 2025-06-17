@@ -13,6 +13,8 @@ import BaseImageView from 'src/components/base/BaseImageView.vue';
 import { useTheme } from 'src/composables/useTheme';
 import BasePdfView from '@/components/base/BasePdfView.vue';
 import { imageItemsData, pdfItemsData } from 'src/libs/data';
+import BaseButton from 'src/components/base/BaseButton.vue';
+import { biCode } from '@quasar/extras/bootstrap-icons';
 const BaseImageViewDialog = defineAsyncComponent(
   () => import('@/components/base/BaseImageViewDialog.vue'),
 );
@@ -103,6 +105,17 @@ const setImagesFileView = (file: FileManagerDto) => {
 <template>
   <BasePage padding>
     <BaseCard title="Image Only">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/image-view.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-6">

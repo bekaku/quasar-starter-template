@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
+import { biCode } from '@quasar/extras/bootstrap-icons';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseInfiniteScroll from 'src/components/base/BaseInfiniteScroll.vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -33,6 +35,17 @@ const nextPage = (index: number, done: any) => {
 <template>
   <BasePage scroll-event show-to-top>
     <BaseCard title="Infinite scroll">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/infinite-scroll.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <BaseInfiniteScroll @on-infinite="nextPage">
         <q-list dense>
           <q-item v-for="(item, index) in items" :key="item.id" clickable>

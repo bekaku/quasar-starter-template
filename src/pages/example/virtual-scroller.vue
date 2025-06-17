@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biArrowDown, biArrowUp } from '@quasar/extras/bootstrap-icons';
+import { biArrowDown, biArrowUp, biCode } from '@quasar/extras/bootstrap-icons';
 import { onMounted, ref, useTemplateRef } from 'vue';
 import type { VirtualScrollerUpdate } from '@/types/common';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -9,6 +9,8 @@ import BaseVirtualScrollerDynamic from 'src/components/base/BaseVirtualScrollerD
 import BaseVirtualScrollerRecycle from 'src/components/base/BaseVirtualScrollerRecycle.vue';
 import BaseInfiniteScroll from 'src/components/base/BaseInfiniteScroll.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
+import BaseButton from 'src/components/base/BaseButton.vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Virtual scroller | ${t('app.name')}`);
@@ -169,6 +171,19 @@ const resumeChatInfinityScroll = () => {
 
 <template>
   <BasePage :full="false">
+    <BaseTextHeader title="Charts">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/virtual-scroller.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+    </BaseTextHeader>
     <BaseCard title="Dynamic Scroller">
       <q-card-section class="q-gutter-y-lg">
         <div>

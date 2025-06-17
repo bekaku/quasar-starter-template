@@ -1,33 +1,30 @@
 <script setup lang="ts">
 import ChatInput from '@/components/chats/ChatInput.vue';
 import ChatMessage from '@/components/chats/ChatMessage.vue';
+import { getImgUrlFromFile, isImageFile } from '@/utils/fileUtil';
+import { biArrowDown } from '@quasar/extras/bootstrap-icons';
 import { useLang } from 'src/composables/useLang';
+import { useTheme } from 'src/composables/useTheme';
 import { chatMessageListApi, userItems } from 'src/libs/data';
 import { useAuthenStore } from 'src/stores/authenStore';
 import { useChatStore } from 'src/stores/chatStore';
+import type { VirtualScrollerUpdate } from 'src/types/common';
 import type {
   EmojiCountDto,
   EmojiType,
-  FileManagerDto,
   GroupChatDto,
   GroupChatFileDto,
   GroupChatMsgDto,
   GroupChatMsgRequest,
 } from 'src/types/models';
-import { computed, defineAsyncComponent, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
+import { randomNumber } from 'src/utils/appUtil';
+import { FORMAT_DATE13, getCurrentDateByFormat } from 'src/utils/dateUtil';
+import { defineAsyncComponent, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
+import BaseAvatar from '../base/BaseAvatar.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseInfiniteScroll from '../base/BaseInfiniteScroll.vue';
-import BaseAvatar from '../base/BaseAvatar.vue';
 import BaseVirtualScrollerDynamic from '../base/BaseVirtualScrollerDynamic.vue';
 import ChatContentHeader from './ChatContentHeader.vue';
-import { biArrowDown } from '@quasar/extras/bootstrap-icons';
-import { useTheme } from 'src/composables/useTheme';
-import { randomNumber } from 'src/utils/appUtil';
-import { getImgUrlFromFile, isImageFile } from '@/utils/fileUtil';
-import { FORMAT_DATE13, getCurrentDateByFormat } from 'src/utils/dateUtil';
-import type { VirtualScrollerUpdate } from 'src/types/common';
-import { file } from 'jszip';
-import { is } from 'quasar';
 const ChatReplyItem = defineAsyncComponent(() => import('@/components/chats/ChatReplyItem.vue'));
 const {
   showHeader = true,
@@ -98,7 +95,7 @@ onMounted(async () => {
 // infinite scroll
 const initialChatList = async () => {
   initialTimeout.value = setTimeout(() => {
-    scrollToBottom();
+    scrollToBottom(true);
     initialTimeout.value = setTimeout(() => {
       chatInfiniteDisable.value = false;
     }, 1000);
@@ -130,10 +127,14 @@ const onVirtualScrollUpdate = (item: VirtualScrollerUpdate) => {
   }
   isScrollingToTop.value = !(item.visibleEndIndex == item.viewEndIndex);
 };
-const scrollToBottom = () => {
+const scrollToBottom = (fromInitial: boolean| undefined = false) => {
   isScrollingToTop.value = false;
   if (scrollerChatRef.value) {
-    scrollerChatRef.value.onScrollToBottom();
+    if (!fromInitial) {
+      scrollerChatRef.value.onScrollToBottom();
+    } else {
+      scrollerChatRef.value.onScrollToItem(dataList.value.length - 1);
+    }
   }
 };
 const onScrollToItem = (index: number | undefined) => {
@@ -334,7 +335,6 @@ const onSendMessage = async (
     messageEntity.value.replyToId = replyMessageItem.value.id;
   }
 
-
   const filesUploads: GroupChatFileDto[] = await uploadFileProcess(files);
   if (filesUploads.length > 0) {
     messageEntity.value.chatMessageType = 'IMAGE';
@@ -500,10 +500,9 @@ onUnmounted(() => {
           @invite-people="invitePeople"
           @on-close="(chatId: number) => $emit('on-close', chatId)"
         >
-        <template #headerRight>
-          <slot name="headerRight" />
-        </template>
-
+          <template #headerRight>
+            <slot name="headerRight" />
+          </template>
         </ChatContentHeader>
         <q-separator />
       </template>
@@ -514,7 +513,7 @@ onUnmounted(() => {
           class="q-pa-sm"
           key-field="id"
           :items="dataList"
-          :min-item-size="24"
+          :min-item-size="55"
           :scroll-area-height="scrollAreaHeight"
           @on-update="onVirtualScrollUpdate"
         >
@@ -591,12 +590,16 @@ onUnmounted(() => {
           round
           :color="!isDark ? 'white' : 'black'"
           :text-color="!isDark ? 'black' : 'white'"
-          @click="scrollToBottom"
+          @click="scrollToBottom(false)"
           :icon="biArrowDown"
         />
       </div>
     </BaseCard>
-    <ChatReplyItem v-if="!miniminze&&replyMessageItem" :item="replyMessageItem" @on-close="onCloseReplyTo" />
+    <ChatReplyItem
+      v-if="!miniminze && replyMessageItem"
+      :item="replyMessageItem"
+      @on-close="onCloseReplyTo"
+    />
     <chat-input
       ref="chatContentInputRef"
       v-if="!miniminze && modelValue && modelValue.id && showChatInput"

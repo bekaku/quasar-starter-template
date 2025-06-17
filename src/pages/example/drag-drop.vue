@@ -6,6 +6,7 @@ import {
   biBug,
   biCheck2,
   biClock,
+  biCode,
   biFileEarmark,
   biGrid3x3Gap,
 } from '@quasar/extras/bootstrap-icons';
@@ -189,6 +190,17 @@ const onEndDrag = () => {
 <template>
   <BasePage>
     <BaseCard title="Dragdrop" subtitle="https://github.com/SortableJS/vue.draggable.next">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/drag-drop.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-no-ssr>
         <q-scroll-area :style="{ height: '75vh', maxWidth: '100vw' }">
           <div class="row no-wrap">
@@ -276,7 +288,7 @@ const onEndDrag = () => {
                       v-model="inProgressItems"
                       item-key="id"
                       class="drag-area"
-                       :handle="!isSmallScreen ? '' : '.handle'"
+                      :handle="!isSmallScreen ? '' : '.handle'"
                       v-bind="dragOptions"
                       :component-data="{ name: 'flip-list', type: 'transition' }"
                       @change="log"
@@ -341,7 +353,7 @@ const onEndDrag = () => {
                       v-model="testingItems"
                       item-key="id"
                       class="drag-area"
-                       :handle="!isSmallScreen ? '' : '.handle'"
+                      :handle="!isSmallScreen ? '' : '.handle'"
                       v-bind="dragOptions"
                       :component-data="{ name: 'flip-list', type: 'transition' }"
                       @change="log"
@@ -406,7 +418,7 @@ const onEndDrag = () => {
                       v-model="doneItems"
                       item-key="id"
                       class="drag-area"
-                       :handle="!isSmallScreen ? '' : '.handle'"
+                      :handle="!isSmallScreen ? '' : '.handle'"
                       v-bind="dragOptions"
                       :component-data="{ name: 'flip-list', type: 'transition' }"
                       @change="log"

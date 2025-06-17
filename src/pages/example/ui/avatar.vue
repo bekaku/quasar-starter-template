@@ -4,7 +4,7 @@ import BaseAvatarGroup from '@/components/base/BaseAvatarGroup.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from '@/stores/authenStore';
-import { biArrowUpRight } from '@quasar/extras/bootstrap-icons';
+import { biArrowUpRight, biCode } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseTooltip from 'src/components/base/BaseTooltip.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
@@ -33,6 +33,19 @@ const getTooltipBy = (index: number) => {
 <template>
   <BasePage :full="false">
     <BaseCard title="Avatar" hover>
+      <template #end>
+        <q-item-section side>
+          <BaseButton
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/avatar.vue"
+            target="_blank"
+            :icon="biCode"
+            flat
+            round
+          >
+          <BaseTooltip>View Source</BaseTooltip>
+        </BaseButton>
+        </q-item-section>
+      </template>
       <q-card-section>
         <div class="text-3xl">
           Hey there! I've heard about Vue. Any cool tips for getting started?

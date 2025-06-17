@@ -2,7 +2,8 @@
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import { TabTest } from '@/libs/tabs';
-import { biChatDots, biMic, biMusicNote, biPlay } from '@quasar/extras/bootstrap-icons';
+import { biChatDots, biCode, biMic, biMusicNote, biPlay } from '@quasar/extras/bootstrap-icons';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseButtonToggle from 'src/components/base/BaseButtonToggle.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -48,6 +49,17 @@ const toggleOptions: LabelValue<string>[] = [
 <template>
   <BasePage>
     <BaseCard flat :bordered="false" title="Tabs route">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/tabs.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <BaseTabsRoute :items="TabTest" />
       </q-card-section>

@@ -8,6 +8,8 @@ import { FORMAT_DATE14, getCurrentDateByFormat } from '@/utils/dateUtil';
 import { ref } from 'vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
+import { biCode } from '@quasar/extras/bootstrap-icons';
+import BaseButton from 'src/components/base/BaseButton.vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Date time Picker | ${t('app.name')}`);
@@ -29,6 +31,17 @@ const onUpdateDateRange = (v: string) => {
 <template>
   <BasePage>
     <BaseCard title="Date time picker">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/date-picker.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <div class="row">
           <div class="col-12 col-md-4 q-pa-md">

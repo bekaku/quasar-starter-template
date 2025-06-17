@@ -10,11 +10,12 @@ import { useAuthenStore } from '@/stores/authenStore';
 import type { FileManagerDto } from '@/types/models';
 import { FileExtensionAccept } from '@/libs/constant';
 import {
+  biCode,
   biEmojiSmile,
   biImage,
   biPlus,
   biSend,
-  biUpload
+  biUpload,
 } from '@quasar/extras/bootstrap-icons';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseFilePicker from 'src/components/base/BaseFilePicker.vue';
@@ -80,6 +81,17 @@ const onCustomRemove2 = (index: number) => {
 <template>
   <BasePage :full="false">
     <BaseCard title="Simple Picker">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/file-picker.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <BaseFilePicker
           v-model="files"

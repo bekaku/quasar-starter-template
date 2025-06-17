@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import BaseAlert from '@/components/base/BaseAlert.vue';
 import BaseButton from '@/components/base/BaseButton.vue';
 import SkeletonItem from '@/components/skeleton/SkeletonItem.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useAxios } from '@/composables/useAxios';
 import { useLang } from '@/composables/useLang';
 import type { IApiListResponse, Permission } from '@/types/models';
+import { biCode, biExclamationCircleFill } from '@quasar/extras/bootstrap-icons';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
-import BaseAlert from '@/components/base/BaseAlert.vue';
 import { ref } from 'vue';
-import { biExclamation, biExclamationCircle, biExclamationCircleFill, biInfo } from '@quasar/extras/bootstrap-icons';
 
 const { t } = useLang();
 const { setTitle } = useAppMeta();
@@ -118,6 +118,19 @@ csont putResponse:Permission = await callAxios<Permission>({
 <template>
   <BasePage>
     <BaseCard title="useAxios">
+      <template #end>
+        <q-item-section side>
+          <BaseButton
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/composables/use-axios.vue"
+            target="_blank"
+            :icon="biCode"
+            flat
+            round
+          >
+          <BaseTooltip>View Source</BaseTooltip>
+        </BaseButton>
+        </q-item-section>
+      </template>
       <q-card-section>
         <BaseAlert
           type="is-warning"

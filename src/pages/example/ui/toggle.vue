@@ -2,7 +2,8 @@
 import BaseToggle from '@/components/base/BaseToggle.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biAndroid } from '@quasar/extras/bootstrap-icons';
+import { biAndroid, biCode } from '@quasar/extras/bootstrap-icons';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BaseCheckbox from 'src/components/base/BaseCheckbox.vue';
 import BaseOption from 'src/components/base/BaseOption.vue';
@@ -18,13 +19,29 @@ const optionsSelected = ref<number[]>([]);
 const radioSelectd = ref<number>();
 const options: LabelValue<number>[] = [
   { label: 'Crud', value: 1, color: 'negative', icon: biAndroid },
-  { label: 'Report', value: 2, color: 'purple', avatar: { src: 'https://cdn.quasar.dev/img/avatar2.jpg' } },
+  {
+    label: 'Report',
+    value: 2,
+    color: 'purple',
+    avatar: { src: 'https://cdn.quasar.dev/img/avatar2.jpg' },
+  },
   { label: 'Other', value: 3 },
 ];
 </script>
 <template>
   <BasePage>
     <BaseCard title="Toggle, Options , Radios">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/toggle.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <div class="text-h6">Toggle/ Checkbox : {{ toggle }}</div>
         <div class="row">

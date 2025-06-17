@@ -5,7 +5,7 @@ import BaseButton from '@/components/base/BaseButton.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from '@/stores/authenStore';
-import { biEmojiSmile, biImage, biSend } from '@quasar/extras/bootstrap-icons';
+import { biCode, biEmojiSmile, biImage, biSend } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
 import { ref, useId } from 'vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -29,6 +29,17 @@ const onEmojiClick = (emoji: string) => {
 <template>
   <BasePage :full="false">
     <BaseCard title="Emoji picker">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/emoji-picker.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <q-input outlined v-model="message" type="textarea" autogrow label="Type message">
           <template #prepend v-if="authenStore?.auth?.avatar?.thumbnail">

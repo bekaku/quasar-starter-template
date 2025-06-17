@@ -3,9 +3,11 @@ import MarkdownEditor from '@/components/base/MarkdownEditor.vue';
 import MarkdownPreview from '@/components/base/MarkdownPreview.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biEye, biPencil } from '@quasar/extras/bootstrap-icons';
+import { biCode, biEye, biPencil } from '@quasar/extras/bootstrap-icons';
+import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
 import { ref, useId } from 'vue';
 // import md from 'src/assets/data.md';
 const { t } = useLang();
@@ -84,6 +86,19 @@ note、abstract、info、tip、success、question、warning、failure、danger�
 </script>
 <template>
   <BasePage :full="false">
+    <BaseTextHeader title="Markdown">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/markdown-editor.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+    </BaseTextHeader>
     <q-card-section class="q-gutter-y-lg">
       <BaseCard flat class="q-pa-md" title="Editor" :icon="biPencil">
         <markdown-editor v-model="content" :editor-id="contentId" />

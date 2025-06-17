@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biArrowUpRight } from '@quasar/extras/bootstrap-icons';
+import { biArrowUpRight, biCode } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -19,6 +19,19 @@ const { isSmallScreen } = useDevice();
 
 <template>
   <BasePage>
+    <BaseTextHeader title="Transitions">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/user.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+    </BaseTextHeader>
     <div class="row">
       <div class="col-12 col-md-6 q-pa-md">
         <BaseTextHeader title="User list" />

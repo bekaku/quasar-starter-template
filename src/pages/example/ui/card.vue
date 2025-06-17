@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
-import { biMusicNote, biPlusCircle, biSearch } from '@quasar/extras/bootstrap-icons';
+import { biCode, biMusicNote, biPlusCircle, biSearch } from '@quasar/extras/bootstrap-icons';
 import BaseButton from 'src/components/base/BaseButton.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -21,6 +21,15 @@ const lorem =
             <div class="row q-gutter-sm">
               <BaseButton :icon="biSearch" round flat />
               <BaseButton :icon="biPlusCircle" round flat />
+              <BaseButton
+                href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/card.vue"
+                target="_blank"
+                :icon="biCode"
+                flat
+                round
+              >
+                <q-tooltip>View Source</q-tooltip>
+              </BaseButton>
             </div>
           </template>
           <q-card-section>
@@ -63,7 +72,9 @@ const lorem =
       </div>
       <div class="col-12 col-md-4 q-pa-sm">
         <BaseCard>
-          <img src="https://images.unsplash.com/photo-1741568032886-18d3f2a694c2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+          <img
+            src="https://images.unsplash.com/photo-1741568032886-18d3f2a694c2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          />
           <q-card-section>
             {{ lorem }}
           </q-card-section>

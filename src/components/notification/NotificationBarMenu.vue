@@ -9,7 +9,7 @@
     >
       {{ notify.totalNotify > 99 ? '99+' : notify.totalNotify }}
     </q-badge>
-    <q-tooltip>{{ t('nav.notifications') }}</q-tooltip>
+    <BaseTooltip>{{ t('nav.notifications') }}</BaseTooltip>
     <q-menu anchor="bottom left" self="top left" :style="{ width: '360px' }">
       <q-card flat>
         <q-card-section>
@@ -45,6 +45,7 @@ import type { NotificationDto } from '@/types/models';
 import UserNotifyService from '@/api/UserNotifyService';
 import { useNotification } from 'src/composables/useNotification';
 import { biBell } from '@quasar/extras/bootstrap-icons';
+import BaseTooltip from '../base/BaseTooltip.vue';
 const SkeletonItem = defineAsyncComponent(() => import('@/components/skeleton/SkeletonItem.vue'));
 const BaseResult = defineAsyncComponent(() => import('@/components/base/BaseResult.vue'));
 const { findAllByUser } = UserNotifyService();

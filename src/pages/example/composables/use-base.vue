@@ -2,11 +2,12 @@
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useBase } from '@/composables/useBase';
 import { useLang } from '@/composables/useLang';
-import { biCopy } from '@quasar/extras/bootstrap-icons';
+import { biCode, biCopy } from '@quasar/extras/bootstrap-icons';
 import { ref } from 'vue';
 import BaseButton from '@/components/base/BaseButton.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import BaseCard from 'src/components/base/BaseCard.vue';
+import BaseTooltip from 'src/components/base/BaseTooltip.vue';
 
 const { t } = useLang();
 const { setTitle } = useAppMeta();
@@ -65,6 +66,19 @@ const onCopyText = async () => {
 <template>
   <BasePage>
     <BaseCard title="useBase">
+      <template #end>
+        <q-item-section side>
+          <BaseButton
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/composables/use-base.vue"
+            target="_blank"
+            :icon="biCode"
+            flat
+            round
+          >
+          <BaseTooltip>View Source</BaseTooltip>
+        </BaseButton>
+        </q-item-section>
+      </template>
       <q-card-section class="q-gutter-md">
         <BaseButton label="show loading" color="primary" unelevated @click="loader" />
         <BaseButton label="show toast" color="warning" @click="toaster" />

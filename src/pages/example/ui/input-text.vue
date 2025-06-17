@@ -2,6 +2,7 @@
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import {
+  biCode,
   biCoin,
   biEnvelope,
   biEye,
@@ -50,7 +51,19 @@ const onInputUpdate = (val: string | number | undefined | null) => {
 </script>
 <template>
   <BasePage>
-    <BaseTextHeader title="Input Text" />
+    <BaseTextHeader title="Input Text">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/input-text.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+    </BaseTextHeader>
     <div class="row">
       <div class="col-12 col-md-6 q-pa-md">
         <q-form @submit="onSubmit">

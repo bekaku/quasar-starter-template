@@ -4,6 +4,7 @@ import { useLang } from '@/composables/useLang';
 import {
   biAirplane,
   biChatLeft,
+  biCode,
   biGear,
   biLightbulb,
   biNewspaper,
@@ -27,6 +28,17 @@ const progress = ref(false);
 <template>
   <BasePage>
     <BaseCard title="Color">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/button.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
       <q-card-section>
         <div class="q-pa-md q-gutter-sm">
           <BaseButton label="red" color="red" />

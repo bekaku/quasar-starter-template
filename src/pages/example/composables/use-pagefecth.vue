@@ -1,15 +1,16 @@
 <script setup lang="ts">
+import BaseScrollArea from '@/components/base/BaseScrollArea.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import { usePagefecth } from '@/composables/usePageFetch';
 import type { Permission } from '@/types/models.ts';
-import { defineAsyncComponent, onMounted } from 'vue';
-import BaseScrollArea from '@/components/base/BaseScrollArea.vue';
-import BasePage from 'src/components/base/BasePage.vue';
-import BaseCard from 'src/components/base/BaseCard.vue';
-import { biArrowClockwise, biExclamationCircleFill } from '@quasar/extras/bootstrap-icons';
-import BaseButton from 'src/components/base/BaseButton.vue';
+import { biArrowClockwise, biCode, biExclamationCircleFill } from '@quasar/extras/bootstrap-icons';
 import BaseAlert from 'src/components/base/BaseAlert.vue';
+import BaseButton from 'src/components/base/BaseButton.vue';
+import BaseCard from 'src/components/base/BaseCard.vue';
+import BasePage from 'src/components/base/BasePage.vue';
+import BaseTooltip from 'src/components/base/BaseTooltip.vue';
+import { defineAsyncComponent, onMounted } from 'vue';
 
 const Paging = defineAsyncComponent(() => import('@/components/base/Paging.vue'));
 const BaseSpinner = defineAsyncComponent(() => import('@/components/base/BaseSpinner.vue'));
@@ -51,6 +52,15 @@ onMounted(() => {
       <template #end>
         <BaseButton flat round :icon="biArrowClockwise" @click="onReload">
           <q-tooltip> Reload data </q-tooltip>
+        </BaseButton>
+          <BaseButton
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/composables/use-pagefecth.vue"
+            target="_blank"
+            :icon="biCode"
+            flat
+            round
+          >
+          <BaseTooltip>View Source</BaseTooltip>
         </BaseButton>
       </template>
       <q-card-section>
