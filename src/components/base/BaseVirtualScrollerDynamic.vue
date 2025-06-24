@@ -68,12 +68,18 @@ const onScrollToItem = (index: number | undefined) => {
     return;
   }
   if (appDynamicScrollerRef.value) {
+    appDynamicScrollerRef.value.$forceUpdate(); // Recalculate sizes
     appDynamicScrollerRef.value.scrollToItem(index);
   }
 };
 const onScrollToBottom = () => {
   if (appDynamicScrollerRef.value) {
     appDynamicScrollerRef.value.scrollToBottom();
+  }
+};
+const onForceUpdate = () => {
+  if (appDynamicScrollerRef.value) {
+    appDynamicScrollerRef.value.$forceUpdate(); // Recalculate sizes
   }
 };
 const onUpdate = (
@@ -103,6 +109,7 @@ const onResize = () => {};
 defineExpose({
   onScrollToBottom,
   onScrollToItem,
+  onForceUpdate,
 });
 </script>
 

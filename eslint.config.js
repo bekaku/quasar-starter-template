@@ -77,6 +77,7 @@ export default antfu({
     'style/indent-binary-ops': 'off',
     'vue/operator-linebreak': 'off',
     'style/quotes': 'warn',
+    'style/padding-line-between-statements': 'off',
     eqeqeq: 'off',
   },
 });
