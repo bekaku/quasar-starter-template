@@ -126,19 +126,21 @@ const setImagesFileView = (file: FileManagerDto) => {
                 v-for="(item, i) in imageItems"
                 :key="`img-${i}-${item.fileName}`"
               >
+              <div style="overflow: hidden;" class="rounded">
                 <files-preview-item
-                  style="border-radius: 10px"
                   :item="item"
                   :index="i"
                   :show-delete="false"
                   show-tooltip
+                  hover-zoom
+                  class="rounded"
                   :use-thumbnail="false"
-                  image-size="100%"
                   :show-name="false"
                   :show-size="false"
                   @on-click="onImgPreviewClick"
                 >
                 </files-preview-item>
+                   </div>
               </div>
             </div>
           </div>

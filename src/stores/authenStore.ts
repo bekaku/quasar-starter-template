@@ -107,7 +107,7 @@ export const useAuthenStore = defineStore('authenStore', () => {
         }
         const errResponse = error?.response;
         let fourceLogout = false;
-        if (errResponse && errResponse.status == 401) {
+        if (errResponse && errResponse.status == 403) {
           sessionExpired.value = true;
           fourceLogout = true;
         }

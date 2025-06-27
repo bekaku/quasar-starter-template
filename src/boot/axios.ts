@@ -72,7 +72,7 @@ export default boot(({ app, redirect, ssrContext, store }) => {
       const originalRequest = error.config;
       // const ck = isServer ? Cookies.parseSSR(ssrContext) : Cookies;
       const refreshToken = Cookies.get(AppAuthRefeshTokenKey);
-      if (refreshToken && error.response && error.response.status === 403 && !originalRequest._retry) {
+      if (refreshToken && error.response && error.response.status === 401 && !originalRequest._retry) {
         if (isRefreshing) {
           return new Promise((resolve, reject) => {
             console.warn('isRefreshing > failedQueue.push', originalRequest.url);
@@ -125,7 +125,7 @@ export default boot(({ app, redirect, ssrContext, store }) => {
               console.warn('/api/auth/refreshToken catch', errRefesh);
               processQueue(errRefesh, null);
               if (errRefesh?.response && errRefesh?.response?.status) {
-                if (errRefesh.response.status == 401) {
+                if (errRefesh.response.status == 403) {
                   console.warn('GOTO LoginPage');
                   redirect({ path: '/auth/login' });
                 }

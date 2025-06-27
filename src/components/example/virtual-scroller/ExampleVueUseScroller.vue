@@ -100,13 +100,11 @@ onMounted(() => {
   overflow-y: auto;
   position: relative;
   border: 1px solid #ccc;
-  background: #f9f9f9;
   padding: 10px 0;
 }
 .chat-message {
   margin: 6px 12px;
   padding: 10px;
-  background: white;
   border-radius: 6px;
   max-width: 80%;
 }

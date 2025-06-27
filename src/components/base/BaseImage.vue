@@ -1,39 +1,3 @@
-<template>
-  <q-img
-    v-if="loading"
-    :spinner-color="spinnerColor"
-    :placeholder-src="placHolder"
-    :ratio="ratio"
-    v-bind="$attrs"
-    loading="lazy"
-  >
-    <div class="absolute-full flex flex-center">
-      <q-inner-loading showing color="white" size="xs" />
-    </div>
-  </q-img>
-  <q-img
-    v-else-if="srcUrl"
-    :src="srcUrl"
-    :fit="fit"
-    :placeholder-src="placHolder"
-    :spinner-color="spinnerColor"
-    :ratio="ratio"
-    v-bind="$attrs"
-    loading="lazy"
-    :class="{ 'img-bg': imageBg }"
-    :alt
-  >
-    <template #error>
-      <div class="absolute-full flex flex-center bg-primary text-white">
-        <q-icon :name="biCardImage" class="q-mr-sm" size="md" />
-        Cannot load image
-      </div>
-    </template>
-    <slot />
-  </q-img>
-  <q-img v-else :ratio="ratio" v-bind="$attrs" loading="lazy" src="/images/no_picture_thumb.jpg" />
-</template>
-
 <script setup lang="ts">
 /*
  <BaseImage
@@ -55,6 +19,7 @@ const {
   imageBg = false,
   fit = 'cover',
   alt = 'img',
+  hoverZoom = false,
 } = defineProps<{
   src: string;
   fetch?: boolean;
@@ -63,6 +28,7 @@ const {
   spinnerColor?: string;
   alt?: string;
   ratio?: number;
+  hoverZoom?: boolean | undefined;
   fit?: 'cover' | 'fill' | 'contain' | 'none' | 'scale-down';
 }>();
 const { fethCdnData } = FileManagerService();
@@ -108,6 +74,41 @@ onBeforeUnmount(() => {
   srcUrl.value = undefined;
 });
 </script>
+<template>
+  <q-img
+    v-if="loading"
+    :spinner-color="spinnerColor"
+    :placeholder-src="placHolder"
+    :ratio="ratio"
+    v-bind="$attrs"
+    loading="lazy"
+  >
+    <div class="absolute-full flex flex-center">
+      <q-inner-loading showing color="white" size="xs" />
+    </div>
+  </q-img>
+  <q-img
+    v-else-if="srcUrl"
+    :src="srcUrl"
+    :fit="fit"
+    :placeholder-src="placHolder"
+    :spinner-color="spinnerColor"
+    :ratio="ratio"
+    v-bind="$attrs"
+    loading="lazy"
+    :class="{ 'img-bg': imageBg, 'zoom-hover': hoverZoom }"
+    :alt
+  >
+    <template #error>
+      <div class="absolute-full flex flex-center bg-primary text-white">
+        <q-icon :name="biCardImage" class="q-mr-sm" size="md" />
+        Cannot load image
+      </div>
+    </template>
+    <slot />
+  </q-img>
+  <q-img v-else :ratio="ratio" v-bind="$attrs" loading="lazy" src="/images/no_picture_thumb.jpg" />
+</template>
 <style lang="scss" scoped>
 .img-bg {
   background: #000000;
@@ -119,5 +120,17 @@ body.body--dark {
   .img-bg {
     background: #000000;
   }
+}
+
+.zoom-hover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  overflow: hidden !important;
+}
+.zoom-hover:hover {
+  transform: scale(1.2);
+  z-index: 999 !important;
 }
 </style>

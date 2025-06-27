@@ -39,6 +39,7 @@ const {
   showTooltip?: boolean;
   ratio?: number;
   linesName?: number;
+  hoverZoom?: boolean| undefined;
 }>();
 const emit = defineEmits(['on-remove', 'on-click']);
 const getImagePath = computed(() =>
@@ -65,6 +66,7 @@ const onClick = (event: any, index: number) => {
       :src="getImagePath"
       :fetch="fetch || false"
       :ratio="ratio || 1"
+      :hover-zoom="hoverZoom"
       class="cursor-pointer"
       @click="onClick($event, index)"
     >
