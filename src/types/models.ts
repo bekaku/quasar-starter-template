@@ -107,7 +107,7 @@ export interface RefreshTokenResponse {
   userId?: number
   authenticationToken: string
   refreshToken: string
-  expiresAt: string
+  expiresAt?: string
 }
 export interface FileManagerDto extends Id {
   fileMime: string

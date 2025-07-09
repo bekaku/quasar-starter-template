@@ -1,3 +1,4 @@
+import type { RefreshTokenResponse, UserDto } from './models';
 import type { AvatarProps, RBACProps } from './props';
 
 // enum
@@ -174,6 +175,12 @@ export interface ILocales {
   name: string;
   iso: string;
   flag: string;
+}
+
+export interface CookieItem {
+  key?: string
+  value?: any
+  userId?: number | string
 }
 // export interface ILocales {
 //   [key: string]: {
@@ -536,6 +543,12 @@ export interface VueMoneyConFig {
   masked: boolean
   nullValue: string
   reverseFill: boolean
+}
+
+export interface LoginedItems {
+  token: RefreshTokenResponse
+  user: UserDto
+  active: boolean
 }
 export type CountryCode =
   | 'AC'

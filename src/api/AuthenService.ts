@@ -61,7 +61,7 @@ export default () => {
     id: number
   ): Promise<ResponseMessage | null> => {
     // return await callAxios<ResponseMessage>({
-    //   API: `/api/auth/removeAccessTokenSession?id=${id}`,
+    //   API: `/api/user/removeAccessTokenSession?id=${id}`,
     //   method: 'DELETE',
     // });
     return new Promise((resovle) => {

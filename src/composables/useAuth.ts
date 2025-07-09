@@ -1,19 +1,18 @@
-import { Cookies } from 'quasar';
+import AuthenService from '@/api/AuthenService';
 import {
-  AppAuthTokenKey,
-  AppAuthTokenCreatedKey,
   AppAuthRefeshTokenKey,
-  AppAuthTokenExpireKey,
-  ExpireCookieDays,
+  AppAuthTokenKey,
+  ExpireCookieDays
 } from '@/libs/constant';
-import type { UserDto, RefreshTokenResponse } from '@/types/models';
+import type { RefreshTokenResponse, UserDto } from '@/types/models';
+import { addDateByDays } from '@/utils/dateUtil';
+import { Cookies } from 'quasar';
 import { useAuthenStore } from 'stores/authenStore';
 import { useSSRContext } from 'vue';
 import { useBase } from './useBase';
-import { useLang } from './useLang';
-import AuthenService from '@/api/AuthenService';
 import { useCache } from './useCache';
-import { addDateByDays } from '@/utils/dateUtil';
+import { useCookie } from './useCookie';
+import { useLang } from './useLang';
 export const useAuth = () => {
   const ssrContext = process.env.SERVER ? useSSRContext() : null;
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
@@ -22,6 +21,7 @@ export const useAuth = () => {
   const { t } = useLang();
   const { singoutToServer } = AuthenService();
   const { logoutClear } = useCache();
+  const { setCookie, removeCookie } = useCookie();
   const initAppAuthen = (): void => {
     // setAuthen(currentAuth());
   };
@@ -62,37 +62,8 @@ export const useAuth = () => {
     secure: boolean = false
   ) => {
     if (cookies) {
-      cookies.set(AppAuthTokenKey, authResponse.authenticationToken, {
-        expires: addDateByDays(ExpireCookieDays),
-        path: '/',
-        // domain: secure ? AppDomain : null,
-        secure,
-        sameSite: 'Lax'
-      });
-
-      cookies.set(AppAuthRefeshTokenKey, authResponse.refreshToken, {
-        expires: addDateByDays(ExpireCookieDays),
-        path: '/',
-        // domain: secure ? AppDomain : null,
-        secure,
-        sameSite: 'Strict'
-      });
-
-      cookies.set(AppAuthTokenExpireKey, authResponse.expiresAt, {
-        expires: addDateByDays(ExpireCookieDays),
-        path: '/',
-        // domain: secure ? AppDomain : null,
-        secure,
-        sameSite: 'Strict'
-      });
-
-      cookies.set(AppAuthTokenCreatedKey, Date.now().toString(), {
-        expires: addDateByDays(ExpireCookieDays),
-        path: '/',
-        // domain: secure ? AppDomain : null,
-        secure,
-        sameSite: 'Strict'
-      });
+      setCookie(AppAuthTokenKey, authResponse.authenticationToken, 'Lax', secure, addDateByDays(ExpireCookieDays));
+      setCookie(AppAuthRefeshTokenKey, authResponse.refreshToken, 'Strict', secure, addDateByDays(ExpireCookieDays));
     }
   };
   const logoutToServer = async (
@@ -119,10 +90,8 @@ export const useAuth = () => {
   const destroyAuthData = () => {
     return new Promise((resolve) => {
       if (cookies) {
-        cookies.remove(AppAuthTokenKey, { path: '/' });
-        cookies.remove(AppAuthRefeshTokenKey, { path: '/' });
-        cookies.remove(AppAuthTokenExpireKey, { path: '/' });
-        cookies.remove(AppAuthTokenCreatedKey, { path: '/' });
+        removeCookie(AppAuthTokenKey);
+        removeCookie(AppAuthRefeshTokenKey);
       }
       logoutClear();
       resolve(true);

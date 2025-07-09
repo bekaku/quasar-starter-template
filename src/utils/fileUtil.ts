@@ -56,6 +56,18 @@ export const downloadFromBlob = (
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 };
+export const downloadFromBlobUrl = (blobUrl: string, filename: string) => {
+  const a = document.createElement('a');
+  a.href = blobUrl;
+  a.download = filename || 'downloaded-file';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+export const isBlobUrl=(url: string) => {
+  return url!=undefined && url.startsWith('blob:')
+}
 export const downloadFileFromUrl = async (url: string, filename: string) => {
     try {
         const urlBlob = await fileUrlToBlob(url);
