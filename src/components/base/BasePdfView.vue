@@ -21,6 +21,8 @@ import {
   isBlobUrl,
   downloadFromBlobUrl,
 } from 'src/utils/fileUtil';
+import { useAppConfig } from 'src/composables/useAppConfig';
+import { isLinkFromWebApp, isLinkFromWebAppDev } from 'src/utils/appUtil';
 const {
   src,
   title,
@@ -43,7 +45,9 @@ const {
   closeable?: boolean;
 }>();
 const { isDark } = useTheme();
-const { fethCdnData } = FileManagerService();
+const { fethCdnData, downloadCdnData } = FileManagerService();
+const { isProduction } = useAppConfig();
+const production = isProduction();
 const emit = defineEmits(['on-close']);
 const { t } = useLang();
 const show = defineModel('show', { type: Boolean, default: false });
@@ -93,7 +97,15 @@ const downloadPdf = async () => {
       if (isBlobUrl(pdfSrc.value)) {
         downloadFromBlobUrl(pdfSrc.value, title || 'pdf_file.pdf');
       } else {
-        downloadFileFromUrl(src, title || 'pdf_file.pdf');
+        if (fetchToServer) {
+          if (isLinkFromWebApp(pdfSrc.value)) {
+            await downloadCdnData(src, title);
+          } else {
+            downloadFileFromUrl(pdfSrc.value, title || 'pdf_file.pdf');
+          }
+        } else {
+          downloadFileFromUrl(pdfSrc.value, title || 'pdf_file.pdf');
+        }
       }
     } catch (err) {
       console.error(err);

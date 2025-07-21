@@ -500,3 +500,13 @@ export const cloneObjectV2 = <T>(obj: T) => {
 export const cloneObjectV3 = <T>(obj: T) => {
   return JSON.parse(JSON.stringify(obj)) as T;
 };
+
+export const isLinkFromWebApp = (link: string): boolean => {
+  if (!process.env.APP_API_DOMAIN) {
+    return false
+  }
+  return link.includes(process.env.APP_API_DOMAIN)
+}
+export const isLinkFromWebAppDev = (link: string): boolean => {
+  return link.includes('localhost') || link.includes('127.0.0.1')
+}
