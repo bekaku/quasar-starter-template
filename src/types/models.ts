@@ -41,7 +41,7 @@ export type FeedType =
   ;
 export type EmojiType = 'LIKE' | 'FIGHTING' | 'LAUGH' | 'WOW' | 'CARE' | 'SAD';
 export interface Id {
-  id: number | null
+  id: number | string | null
 }
 export interface ApiListResponse {
   totalPages: number

@@ -136,7 +136,7 @@ const {
   onNewForm,
 } = useCrudList<Role>(
   {
-    crudName: 'role',
+    crudName: 'AppRole',
     apiEndpoint: '/api',
     fetchListOnload: true,
     defaultSort: {

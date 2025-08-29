@@ -5,7 +5,7 @@ export default () => {
 
   const findAllBackendRole = async (): Promise<Role[] | null> => {
     // return await callAxios<Role[]>({
-    //   API: '/api/role/findAllBackend',
+    //   API: '/api/appRole/findAllBackend',
     //   method: 'GET',
     // });
     return new Promise((resovle) => {
@@ -17,7 +17,7 @@ export default () => {
 
   const findAllSystemFrontend = async (): Promise<Role[] | null> => {
     // return await callAxios<Role[]>({
-    //   API: '/api/role/findAllSystemFrontend',
+    //   API: '/api/appRole/findAllSystemFrontend',
     //   method: 'GET',
     // });
     return new Promise((resovle) => {
@@ -30,7 +30,7 @@ export default () => {
     companyId: number
   ): Promise<Role[] | null> => {
     // return await callAxios<Role[]>({
-    //   API: `/api/role/findAllByCompanyAndFrontend?companyId=${companyId}`,
+    //   API: `/api/appRole/findAllByCompanyAndFrontend?companyId=${companyId}`,
     //   method: 'GET',
     // });
     return new Promise((resovle) => {
@@ -41,7 +41,7 @@ export default () => {
   };
   const findAllRoleByCompany = async (): Promise<Role[] | null> => {
     // return await callAxios<Role[] | null>({
-    //   API: '/api/role/findAllByCompany',
+    //   API: '/api/appRole/findAllByCompany',
     //   method: 'GET',
     // });
     return new Promise((resovle) => {
@@ -52,7 +52,7 @@ export default () => {
   };
   const findAllByAuthAndFrontend = async (): Promise<Role[] | null> => {
     // return await callAxios<Role[]>({
-    //   API: '/api/role/findAllByAuthAndFrontend',
+    //   API: '/api/appRole/findAllByAuthAndFrontend',
     //   method: 'GET',
     // });
     return new Promise((resovle) => {

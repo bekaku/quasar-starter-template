@@ -101,7 +101,7 @@ const entity: Permission = {
 const { crudAction, onBack, loading, onSubmit, crudEntity, onDelete, crudName } =
   useCrudForm<Permission>(
     {
-      crudName: 'permission',
+      crudName: 'Permission',
       apiEndpoint: '/api',
       fectchDataOnLoad: true,
       backToPreviousPath: true,

@@ -14,7 +14,7 @@ import type {
   ISortModeType,
 } from '@/types/common';
 import { CrudListDataType, ICrudListHeaderOptionSearchType } from '@/types/common';
-import { appPreventDefult, getValFromObjectByPath, isEmpty } from '@/utils/appUtil';
+import { appPreventDefult, getValFromObjectByPath, isEmpty, pascalToSnake } from '@/utils/appUtil';
 import { FORMAT_DATE1, FORMAT_DATETIME, formatDate, formatDateTime } from '@/utils/dateUtil';
 import {
   biArrowClockwise,
@@ -269,7 +269,7 @@ const isHaveViewPermission = computed(() => {
   return viewPermission
     ? appStore.isHavePermission(viewPermission)
     : crudName
-      ? appStore.isHavePermission([`${crudName}_view`])
+      ? appStore.isHavePermission([`${pascalToSnake(crudName)}_view`])
       : true;
 });
 const isHaveManagePermission = computed(() => {
@@ -279,7 +279,7 @@ const isHaveManagePermission = computed(() => {
   return managePermission
     ? appStore.isHavePermission(managePermission)
     : crudName
-      ? appStore.isHavePermission([`${crudName}_manage`])
+      ? appStore.isHavePermission([`${pascalToSnake(crudName)}_manage`])
       : true;
 });
 const dateForMat = (d: string, format: string | undefined = undefined) => {

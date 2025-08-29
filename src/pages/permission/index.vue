@@ -120,7 +120,7 @@ const {
   onKeywordSearch,
 } = useCrudList<Permission>(
   {
-    crudName: 'permission',
+    crudName: 'Permission',
     apiEndpoint: '/api',
     fetchListOnload: true,
     defaultSort: {

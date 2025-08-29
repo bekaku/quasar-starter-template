@@ -120,7 +120,7 @@ const {
   onNewForm,
 } = useCrudList<UserDto>(
   {
-    crudName: 'user',
+    crudName: 'AppUser',
     apiEndpoint: '/api',
     fetchListOnload: true,
     defaultSort: {

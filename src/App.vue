@@ -38,7 +38,7 @@ defineOptions({
         redirect({ path: '/auth/login' });
       }
       const userDataResponse = await callAxiosProcess<UserDto>({
-        API: '/api/user/currentUserData',
+        API: '/api/appUser/currentUserData',
         method: 'GET',
       });
       */

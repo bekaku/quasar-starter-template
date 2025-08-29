@@ -204,7 +204,7 @@ const {
   crudId,
 } = useCrudForm<UserDto>(
   {
-    crudName: 'user',
+    crudName: 'AppUser',
     apiEndpoint: '/api',
     fectchDataOnLoad: false,
     backToPreviousPath: true,

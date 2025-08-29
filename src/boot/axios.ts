@@ -7,8 +7,8 @@ import { Cookies } from 'quasar';
 // import { canRefreshToken } from '@/utils/JwtUtil';
 import { useAuthenStore } from '@/stores/authenStore';
 // import { getTokenStatus } from '@/utils/jwtUtil';
-
-
+import JSONbig from 'json-bigint'
+const JSONbigString = JSONbig({ storeAsString: true });
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $axios: AxiosInstance;
@@ -33,8 +33,20 @@ const api = axios.create({
     'Accept-Apiclient': process.env.APP_API_CLIENT
     // 'Accept-Language': DefaultLocale,
   },
-  validateStatus: status => status < 400 // Resolve only if the status code is less than 400
+  validateStatus: status => status < 400, // Resolve only if the status code is less than 400
   // validateStatus: (status) => status <= 500 // Resolve only if the status code is less than 500
+  // transformResponse: [data => data],
+  transformResponse: [function (data) {
+    if (data) {
+      try {
+        const parsed = JSONbigString.parse(data);
+        return parsed;
+      } catch (e) {
+        return data;
+      }
+    }
+    return data;
+  }]
 });
 
 

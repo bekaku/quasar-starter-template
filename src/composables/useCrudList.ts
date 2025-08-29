@@ -12,7 +12,8 @@ import {
   isEmpty,
   isListResponse, isServerException,
   isServerResponseMessage,
-  snakeToCamel
+  pascalToCamelCase,
+  pascalToKebab
 } from '@/utils/appUtil';
 import type { IApiListResponse } from '@/types/models';
 
@@ -94,14 +95,14 @@ export const useCrudList = <T>(
     return actionList.value
       ? actionList.value
       : options.apiEndpoint && options.crudName
-        ? options.apiEndpoint + '/' + snakeToCamel(options.crudName)
+        ? options.apiEndpoint + '/' + pascalToCamelCase(options.crudName)
         : '';
   });
   const deleteApiEndpoint = computed(() => {
     return actionDelete.value
       ? actionDelete.value
       : options.apiEndpoint && options.crudName
-        ? options.apiEndpoint + '/' + snakeToCamel(options.crudName)
+        ? options.apiEndpoint + '/' + pascalToCamelCase(options.crudName)
         : '';
   });
   const queryParam = computed((): string | undefined => {
@@ -218,21 +219,30 @@ export const useCrudList = <T>(
     }
     return filters;
   });
-  const onPageNoChange = async (pageNo: number) => {
+  const onPageNoChange = async (pageNo: number | undefined) => {
+    if (pageNo == undefined) {
+      return;
+    }
     pages.value.current = pageNo;
     if (!pathParam.value) {
       return;
     }
     onPasteUrlPathParamAndFetchData();
   };
-  const onItemPerPageChange = async (no: number) => {
+  const onItemPerPageChange = async (no: number | undefined) => {
+    if (no == undefined) {
+      return;
+    }
     pages.value.itemsPerPage = no;
     if (!pathParam.value) {
       return;
     }
     onPasteUrlPathParamAndFetchData();
   };
-  const onSort = async (column: string) => {
+  const onSort = async (column: string | undefined) => {
+    if (column == undefined) {
+      return;
+    }
     if (sort.value.column === column) {
       sort.value.mode = sort.value.mode === 'asc' ? 'desc' : 'asc';
     } else {
@@ -329,7 +339,7 @@ export const useCrudList = <T>(
 
   const onNewForm = () => {
     if (options.apiEndpoint && options.crudName) {
-      appNavigateTo(`${options.crudName.replaceAll('_', '-')}/${CrudAction.NEW}/0`);
+      appNavigateTo(`${pascalToKebab(options.crudName)}/${CrudAction.NEW}/0`);
     }
   };
   const onItemClick = async (index: number) => {
@@ -339,7 +349,7 @@ export const useCrudList = <T>(
     }
     if (options.apiEndpoint && options.crudName) {
       appNavigateTo(
-        `${options.crudName.replaceAll('_', '-')}/${CrudAction.VIEW}/${item.id}`
+        `${pascalToKebab(options.crudName)}/${CrudAction.VIEW}/${item.id}`
       );
     }
   };
@@ -350,7 +360,7 @@ export const useCrudList = <T>(
     }
     if (options.apiEndpoint && options.crudName) {
       appNavigateTo(
-        `${options.crudName.replaceAll('_', '-')}/${CrudAction.COPY}/${item.id}`
+        `${pascalToKebab(options.crudName)}/${CrudAction.COPY}/${item.id}`
       );
     }
   };

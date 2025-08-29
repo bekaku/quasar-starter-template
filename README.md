@@ -95,7 +95,7 @@ defineOptions({
         redirect({ path: '/auth/login' });
       }
       const userDataResponse = await callAxiosProcess<UserDto>({
-        API: '/api/user/currentUserData',
+        API: '/api/appUser/currentUserData',
         method: 'GET',
       });
     /*
@@ -301,15 +301,15 @@ const findAllBackendRole = async (): Promise<Role[] | null> => {
 modify /src/api/UserService.ts
 ```ts
 const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => {
-      console.log('UserService.ts > findAll > ', `/api/user${q}`);
+      console.log('UserService.ts > findAll > ', `/api/appUser${q}`);
       return await callAxios<IApiListResponse<UserDto>>({
-        API: `/api/user${q}`,
+        API: `/api/appUser${q}`,
         method: 'GET',
       });
     };
   const findCurrentUserData = async (): Promise<UserDto | null> => {
     return await callAxios<UserDto>({
-      API: '/api/user/currentUserData',
+      API: '/api/appUser/currentUserData',
       method: 'GET',
     });
   };
@@ -317,7 +317,7 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
     fileManagerId: number
   ): Promise<ResponseMessage | null> => {
     return await callAxios<ResponseMessage>({
-      API: `/api/user/updateUserAvatar?fileManagerId=${fileManagerId}`,
+      API: `/api/appUser/updateUserAvatar?fileManagerId=${fileManagerId}`,
       method: 'PUT',
     });
   };
@@ -325,13 +325,13 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
     fileManagerId: number
   ): Promise<ResponseMessage | null> => {
     return await callAxios<ResponseMessage>({
-      API: `/api/user/updateUserCover?fileManagerId=${fileManagerId}`,
+      API: `/api/appUser/updateUserCover?fileManagerId=${fileManagerId}`,
       method: 'PUT',
     });
   };
   const updateDefaultLocale = async (locale: AppLocale): Promise<UserDto | null> => {
     return await callAxios<UserDto>({
-      API: `/api/user/updateDefaultLocale/?locale=${locale}`,
+      API: `/api/appUser/updateDefaultLocale/?locale=${locale}`,
       method: 'PUT',
     });
   };
@@ -339,7 +339,7 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
     req: UserChangePasswordRequest
   ): Promise<ResponseMessage | null> => {
     return await callAxios<ResponseMessage>({
-      API: '/api/user/selfUpdatePassword',
+      API: '/api/appUser/selfUpdatePassword',
       method: 'PUT',
       body: req,
     });
@@ -349,7 +349,7 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
     userId: number
   ): Promise<ResponseMessage | null> => {
     return await callAxios<ResponseMessage>({
-      API: `/api/user/updateUserPassword/${userId}`,
+      API: `/api/appUser/updateUserPassword/${userId}`,
       method: 'PUT',
       body: req,
     });
@@ -359,14 +359,14 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
     userId: number
   ): Promise<ResponseMessage | null> => {
     return await callAxios<ResponseMessage>({
-      API: `/api/user/updateUserPasswordByAdmin/${userId}`,
+      API: `/api/appUser/updateUserPasswordByAdmin/${userId}`,
       method: 'PUT',
       body: req,
     });
   };
   const currentAuthSession = async (q: string): Promise<AccessTokenDto[] | null> => {
     return await callAxios<AccessTokenDto[]>({
-      API: `/api/user/currentAuthSession${q}`,
+      API: `/api/appUser/currentAuthSession${q}`,
       method: 'GET',
     });
   };
@@ -375,7 +375,7 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
     req: UserPersonalEditRequest
   ): Promise<ResponseMessage | null> => {
     return await callAxios<ResponseMessage>({
-      API: '/api/user/updatePersonalData',
+      API: '/api/appUser/updatePersonalData',
       method: 'PUT',
       body: {
         user: req,
@@ -387,7 +387,7 @@ const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => 
     req: UserPersonalEditRequest
   ): Promise<ResponseMessage | null> => {
     return await callAxios<ResponseMessage>({
-      API: '/api/user/updateEmail',
+      API: '/api/appUser/updateEmail',
       method: 'PUT',
       body: {
         user: req,

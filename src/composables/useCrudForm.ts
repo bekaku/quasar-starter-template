@@ -18,7 +18,7 @@ import type {
 import {
   isAppException,
   isServerResponseMessage,
-  snakeToCamel,
+  pascalToCamelCase,
   convertStringToNumber
 } from '@/utils/appUtil';
 
@@ -71,7 +71,7 @@ export const useCrudForm = <T>(options: CrudFormApiOptions, initialEntity: T) =>
     if (fetchDataLink.value) {
       return fetchDataLink.value;
     }
-    return `${options.apiEndpoint}/${snakeToCamel(
+    return `${options.apiEndpoint}/${pascalToCamelCase(
       options.crudName ? options.crudName : ''
     )}/${crudId.value}`;
   });
@@ -140,11 +140,11 @@ export const useCrudForm = <T>(options: CrudFormApiOptions, initialEntity: T) =>
     if (crudAction.value === CrudAction.VIEW) {
       return options.actionPut
         ? options.actionPut
-        : options.apiEndpoint + '/' + snakeToCamel(options.crudName) + (options.methodPutIncludeId === undefined || options.methodPutIncludeId === true ? '/' + crudEntity.value.id : '');
+        : options.apiEndpoint + '/' + pascalToCamelCase(options.crudName) + (options.methodPutIncludeId === undefined || options.methodPutIncludeId === true ? '/' + crudEntity.value.id : '');
     }
     return options.actionPost
       ? options.actionPost
-      : options.apiEndpoint + '/' + snakeToCamel(options.crudName);
+      : options.apiEndpoint + '/' + pascalToCamelCase(options.crudName);
   });
   const onSubmit = async () => {
     if (!options.apiEndpoint || !options.crudName) {
@@ -154,7 +154,7 @@ export const useCrudForm = <T>(options: CrudFormApiOptions, initialEntity: T) =>
     const requestItem: RequestDto = {};
     requestItem[requestEntityName.value
       ? requestEntityName.value
-      : `${snakeToCamel(options.crudName)}`] = crudEntity.value;
+      : `${pascalToCamelCase(options.crudName)}`] = crudEntity.value;
 
     const api = apiEnpoint.value;
     if (!api) {
@@ -213,7 +213,7 @@ export const useCrudForm = <T>(options: CrudFormApiOptions, initialEntity: T) =>
     return options.actionDelete
       ? options.actionDelete
       : options.apiEndpoint && options.crudName
-        ? `${options.apiEndpoint}/${snakeToCamel(options.crudName)}/${crudId.value
+        ? `${options.apiEndpoint}/${pascalToCamelCase(options.crudName)}/${crudId.value
         }`
         : '';
   });

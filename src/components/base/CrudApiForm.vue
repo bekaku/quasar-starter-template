@@ -4,6 +4,7 @@ import { useLang } from '@/composables/useLang';
 import { useAppStore } from '@/stores/appStore';
 import type { ICrudAction } from '@/types/common';
 import { biArrowLeft, biFile, biPencil, biTrash } from '@quasar/extras/bootstrap-icons';
+import { pascalToSnake } from 'src/utils/appUtil';
 import { computed } from 'vue';
 const {
   crudName,
@@ -49,7 +50,7 @@ const isHaveManagePermission = computed(() => {
   return managePermission
     ? appStore.isHavePermission(managePermission)
     : crudName
-      ? appStore.isHavePermission([`${crudName}_manage`])
+      ? appStore.isHavePermission([`${pascalToSnake(crudName)}_manage`])
       : true;
 });
 const isHaveListPermission = computed(() => {
@@ -59,7 +60,7 @@ const isHaveListPermission = computed(() => {
   return listPermission
     ? appStore.isHavePermission(listPermission)
     : crudName
-      ? appStore.isHavePermission([`${crudName}_list`])
+      ? appStore.isHavePermission([`${pascalToSnake(crudName)}_list`])
       : true;
 });
 </script>

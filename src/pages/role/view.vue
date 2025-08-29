@@ -227,7 +227,7 @@ const entity: Role = {
 const { crudAction, onBack, loading, onSubmit, crudEntity, onDelete, preFectData, crudName } =
   useCrudForm<Role>(
     {
-      crudName: 'role',
+      crudName: 'AppRole',
       apiEndpoint: '/api',
       fectchDataOnLoad: false,
       backToPreviousPath: true,
