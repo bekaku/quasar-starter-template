@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useDevice } from 'src/composables/useDevice';
 import BasePdfView from './BasePdfView.vue';
+import type { PdfWatermarkOptions } from 'src/types/common';
 const {
   src,
   title,
@@ -23,6 +24,7 @@ const {
   minWidth?: string;
   closeable?: boolean;
   maximized?: boolean;
+  watermarkOptions?: PdfWatermarkOptions | undefined;
 }>();
 const emit = defineEmits<{
   'on-close': [];
@@ -55,6 +57,7 @@ const onClose = () => {
       :scroll-height
       :min-height
       :min-width
+      :watermark-options="watermarkOptions"
       @on-close="onClose"
     />
   </q-dialog>

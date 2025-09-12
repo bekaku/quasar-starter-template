@@ -288,6 +288,8 @@ export default {
         searchMenu: 'Search menu',
         you: 'You',
         reCoordinatesSet: 'Coordinates set',
+        print: 'Print',
+        showAllPage: 'Show all pages',
     },
     'theme': {
         'light': 'Light',

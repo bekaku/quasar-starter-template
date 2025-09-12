@@ -10,6 +10,7 @@ import BaseDrawer from './BaseDrawer.vue';
 import BaseMenuItems from './BaseMenuItems.vue';
 import { getYearNow } from '@/utils/dateUtil';
 import { useDevice } from 'src/composables/useDevice';
+import { useAppConfig } from 'src/composables/useAppConfig';
 const SearchMenu = defineAsyncComponent(() => import('@/components/search/SearchMenu.vue'));
 const {
   overlay = false,
@@ -24,12 +25,13 @@ const {
   bordered?: boolean;
   width?: number;
   tranparent?: boolean;
-  expanAll?: boolean
+  expanAll?: boolean;
 }>();
 
 const { version: quasarVersion } = useQuasar();
 const { t } = useLang();
 const { appNavigateTo } = useBase();
+const { getConfig } = useAppConfig();
 const { isMobileOrTablet: checkMobileOrTablet } = useDevice();
 const appStore = useAppStore();
 const modelValue = defineModel<boolean>({ default: true });
@@ -134,8 +136,11 @@ onBeforeUnmount(() => {
               <q-item-label caption>
                 {{ `@ ${getYearNow()} ${t('app.monogram')}` }}
               </q-item-label>
-              <q-item-label caption>
+              <!-- <q-item-label caption>
                 {{ `Quasar ${quasarVersion}` }}
+              </q-item-label> -->
+              <q-item-label caption>
+                {{ `Version ${getConfig('APP_VERSION')}` }}
               </q-item-label>
             </q-item-section>
           </q-item>

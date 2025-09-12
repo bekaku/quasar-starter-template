@@ -32,6 +32,6 @@ yarn-error.log*
 # local .env files
 .env.local*
 **/dist/
-pnpm-lock.yaml
+# pnpm-lock.yaml
 .vercel
 package-lock.json

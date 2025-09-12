@@ -510,6 +510,12 @@ export const isLinkFromWebApp = (link: string): boolean => {
   }
   return link.includes(process.env.APP_API_DOMAIN)
 }
+export const isLinkFromWebCdn = (link: string): boolean => {
+  if (!process.env.APP_BASE_CDN_API) {
+    return false
+  }
+  return link.includes(process.env.APP_BASE_CDN_API)
+}
 export const isLinkFromWebAppDev = (link: string): boolean => {
   return link.includes('localhost') || link.includes('127.0.0.1')
 }

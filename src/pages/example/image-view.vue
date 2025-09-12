@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import FilesPreviewItem from '@/components/base/BaseFilesPreviewItem.vue';
 import FilesPreviewItemAlt from '@/components/base/BaseFilesPreviewItemAlt.vue';
+import BasePdfView from '@/components/base/BasePdfView.vue';
 import BaseScrollArea from '@/components/base/BaseScrollArea.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useLang } from '@/composables/useLang';
 import type { FileManagerDto } from '@/types/models';
-import { computed, defineAsyncComponent, ref } from 'vue';
-import BasePage from 'src/components/base/BasePage.vue';
-import BaseCard from 'src/components/base/BaseCard.vue';
-import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
-import BaseImageView from 'src/components/base/BaseImageView.vue';
-import { useTheme } from 'src/composables/useTheme';
-import BasePdfView from '@/components/base/BasePdfView.vue';
-import { imageItemsData, pdfItemsData } from 'src/libs/data';
-import BaseButton from 'src/components/base/BaseButton.vue';
 import { biCode } from '@quasar/extras/bootstrap-icons';
+import { rgb } from 'pdf-lib';
+import BaseButton from 'src/components/base/BaseButton.vue';
+import BaseCard from 'src/components/base/BaseCard.vue';
+import BaseImageView from 'src/components/base/BaseImageView.vue';
+import BasePage from 'src/components/base/BasePage.vue';
+import BaseTextHeader from 'src/components/base/BaseTextHeader.vue';
+import { useTheme } from 'src/composables/useTheme';
+import { imageItemsData, pdfItemsData } from 'src/libs/data';
+import { computed, defineAsyncComponent, ref } from 'vue';
 const BaseImageViewDialog = defineAsyncComponent(
   () => import('@/components/base/BaseImageViewDialog.vue'),
 );
@@ -34,6 +35,10 @@ const showImageView = ref(false);
 const imageItems = ref<FileManagerDto[]>([...imageItemsData]);
 
 const showPdfView = ref(false);
+const showPdfViewWatermark1 = ref(false);
+const showPdfViewWatermark2 = ref(false);
+const showPdfViewWatermark3 = ref(false);
+const dummyPdfUrl = 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf';
 const pdfSrc = ref<string>();
 const pdfName = ref<string>();
 const pdfItems = ref<FileManagerDto[]>([...pdfItemsData]);
@@ -126,21 +131,21 @@ const setImagesFileView = (file: FileManagerDto) => {
                 v-for="(item, i) in imageItems"
                 :key="`img-${i}-${item.fileName}`"
               >
-              <div style="overflow: hidden;" class="rounded">
-                <files-preview-item
-                  :item="item"
-                  :index="i"
-                  :show-delete="false"
-                  show-tooltip
-                  hover-zoom
-                  class="rounded"
-                  :use-thumbnail="false"
-                  :show-name="false"
-                  :show-size="false"
-                  @on-click="onImgPreviewClick"
-                >
-                </files-preview-item>
-                   </div>
+                <div style="overflow: hidden" class="rounded">
+                  <files-preview-item
+                    :item="item"
+                    :index="i"
+                    :show-delete="false"
+                    show-tooltip
+                    hover-zoom
+                    class="rounded"
+                    :use-thumbnail="false"
+                    :show-name="false"
+                    :show-size="false"
+                    @on-click="onImgPreviewClick"
+                  >
+                  </files-preview-item>
+                </div>
               </div>
             </div>
           </div>
@@ -205,12 +210,29 @@ const setImagesFileView = (file: FileManagerDto) => {
             </files-preview-item>
           </div>
         </div>
+
+        <q-card flat>
+          <BaseTextHeader title="Pdf watermark" />
+          <q-card-section class="q-gutter-lg">
+            <BaseButton label="Defult watermark" @click="showPdfViewWatermark1 = true" />
+            <BaseButton label="Custom watermark" @click="showPdfViewWatermark2 = true" />
+            <BaseButton
+              label="Custom position, text, image"
+              @click="showPdfViewWatermark3 = true"
+            />
+          </q-card-section>
+        </q-card>
+
         <BaseTextHeader title="Pdf inline display" />
         <q-card flat bordered>
-          <base-pdf-view
+          <BasePdfView
             src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
             :closeable="false"
+            :all-page="false"
             title="compressed.tracemonkey-pldi-09.pdf"
+            :watermark-options="{
+              image: '/logo/logo.png',
+            }"
           />
         </q-card>
       </q-card-section>
@@ -241,7 +263,7 @@ const setImagesFileView = (file: FileManagerDto) => {
         </div>
       </q-card-section>
     </BaseCard>
-    <base-image-view-dialog
+    <BaseImageViewDialog
       v-if="showImageView"
       v-model="showImageView"
       :files="imageItems"
@@ -253,12 +275,63 @@ const setImagesFileView = (file: FileManagerDto) => {
       @on-close="onImgPreviewClose"
     />
 
-    <base-pdf-view-dialog
+    <BasePdfViewDialog
       v-if="showPdfView && pdfSrc"
       v-model="showPdfView"
       :src="pdfSrc"
       :title="pdfName"
       @on-close="() => onClosePefView"
+    />
+    <BasePdfViewDialog
+      v-if="showPdfViewWatermark1"
+      v-model="showPdfViewWatermark1"
+      :src="dummyPdfUrl"
+      title="Defult watermark"
+      :watermark-options="{
+        text: 'Defult watermark',
+      }"
+    />
+    <BasePdfViewDialog
+      v-if="showPdfViewWatermark2"
+      v-model="showPdfViewWatermark2"
+      :src="dummyPdfUrl"
+      title="Custom watermark"
+      :watermark-options="{
+        text: 'Watermark',
+        fontSize: 28,
+        rows: 3,
+        columns: 3,
+        rotation: 0,
+        opacity: 0.7,
+        color: rgb(0.1, 1, 0.1),
+      }"
+    />
+    <BasePdfViewDialog
+      v-if="showPdfViewWatermark3"
+      v-model="showPdfViewWatermark3"
+      :src="dummyPdfUrl"
+      title="Custom position"
+      :watermark-options="{
+        image: '/logo/logo.png',
+        items: [
+          {
+            text: 'Top left',
+            position: 'top-left',
+          },
+          {
+            text: 'Top right',
+            position: 'top-right',
+          },
+          {
+            text: 'Bottom left',
+            position: 'bottom-left',
+          },
+          {
+            text: 'Bottom right',
+            position: 'bottom-right',
+          },
+        ],
+      }"
     />
 
     <BaseFileViewDialog

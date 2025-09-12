@@ -289,6 +289,8 @@ export default {
         searchMenu: 'ค้นหาเมนู',
         you: 'คุณ',
         reCoordinatesSet: 'จับพิกัด',
+        print: 'พิมพ์',
+        showAllPage: 'แสดงทั้งหมด',
     },
     'theme': {
         'light': 'กลางวัน',

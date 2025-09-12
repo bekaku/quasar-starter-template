@@ -11,6 +11,10 @@ export const useDevice = () => {
   const appStore = useAppStore();
   const { screen } = useQuasar();
 
+  const isScreenMobile = computed(() => screen.lt.sm) // xs only
+  const isScreenTablet = computed(() => screen.sm || screen.md) // sm, md
+  const isScreenDesktop = computed(() => screen.gt.md) // lg, xl
+  const isScreenMobileOrTablet = computed(() => isScreenMobile.value || isScreenTablet.value)
   const isSmallScreen = computed(() => {
     return screen.sm || screen.xs;
   })
@@ -79,6 +83,6 @@ export const useDevice = () => {
     setSysncActiveStatus,
     isMobileOrTablet,
     initialDevice,
-    isSmallScreen
+    isSmallScreen, isScreenMobile, isScreenTablet, isScreenDesktop, isScreenMobileOrTablet
   };
 };
