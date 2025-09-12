@@ -39,7 +39,7 @@ const miniState = ref(true);
 const isMobileOrTablet = ref<boolean>(false);
 const searchTimeout = ref<any>();
 const showSearch = ref(false);
-
+const appVersion = process.env.APP_VERSION;
 onMounted(() => {
   checkMobileOrTablet().then((result) => {
     isMobileOrTablet.value = result;
@@ -136,11 +136,11 @@ onBeforeUnmount(() => {
               <q-item-label caption>
                 {{ `@ ${getYearNow()} ${t('app.monogram')}` }}
               </q-item-label>
-              <!-- <q-item-label caption>
-                {{ `Quasar ${quasarVersion}` }}
-              </q-item-label> -->
               <q-item-label caption>
-                {{ `Version ${getConfig('APP_VERSION')}` }}
+                {{ `Quasar ${quasarVersion}` }}
+              </q-item-label>
+              <q-item-label caption>
+                {{ `Version ${appVersion}` }}
               </q-item-label>
             </q-item-section>
           </q-item>
