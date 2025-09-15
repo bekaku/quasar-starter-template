@@ -62,7 +62,6 @@ const pages = ref(0);
 const pdfViewBaseRef = useTemplateRef<any>('pdfViewBaseRef');
 const showAllPage = ref(allPage);
 onMounted(async () => {
-  console.log('watermarkOptions', watermarkOptions);
   const fileUrl = await onLoad();
   if (fileUrl) {
     if (
