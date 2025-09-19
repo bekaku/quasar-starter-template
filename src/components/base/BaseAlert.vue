@@ -34,12 +34,14 @@ const show = ref(true);
     }"
   >
     <div>
-      <strong> <q-icon v-if="icon" :name="icon" style="margin-right: 5px" size="md" /></strong>
-      <span v-if="title" class="q-mx-sm text-weight-bold">{{ title }}</span>
-      {{ message ? message : '' }}
-      <div>
-        <slot name="extra" />
-      </div>
+      <slot>
+        <strong> <q-icon v-if="icon" :name="icon" style="margin-right: 5px" size="md" /></strong>
+        <span v-if="title" class="q-mx-sm text-weight-bold">{{ title }}</span>
+        {{ message ? message : '' }}
+        <div>
+          <slot name="extra" />
+        </div>
+      </slot>
     </div>
     <q-btn v-if="closeable" class="delete" dense round flat :icon="biX" @click="show = !show" />
   </div>
