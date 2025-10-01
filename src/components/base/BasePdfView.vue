@@ -62,6 +62,7 @@ const pages = ref(0);
 const pdfViewBaseRef = useTemplateRef<any>('pdfViewBaseRef');
 const showAllPage = ref(allPage);
 onMounted(async () => {
+  loading.value = true
   const fileUrl = await onLoad();
   if (fileUrl) {
     if (
@@ -77,9 +78,9 @@ onMounted(async () => {
       pdfSrc.value = fileUrl;
     }
   }
+  loading.value = false;
 });
 const onLoad = async (): Promise<string> => {
-  loading.value = true;
   let url: string = '';
   if (fetchToServer || isLinkFromWebCdn(src)) {
     const response = await fethCdnData(src, 'axiosresponse');
@@ -93,7 +94,6 @@ const onLoad = async (): Promise<string> => {
   }
 
   return new Promise((resolve) => {
-    loading.value = false;
     resolve(url);
   });
 };
