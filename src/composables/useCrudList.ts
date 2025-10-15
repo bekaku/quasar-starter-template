@@ -15,7 +15,7 @@ import {
   pascalToCamelCase,
   pascalToKebab
 } from '@/utils/appUtil';
-import type { IApiListResponse } from '@/types/models';
+import type { ApiResponse } from '@/types/models';
 
 export const useCrudList = <T>(
   options: CrudListApiOptions,
@@ -162,7 +162,7 @@ export const useCrudList = <T>(
       });
     }
     loading.value = true;
-    const response = await callAxios<IApiListResponse<T>>({
+    const response = await callAxios<{
       API: pageParam.value,
       method: 'GET'
     });

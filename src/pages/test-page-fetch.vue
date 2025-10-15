@@ -24,7 +24,7 @@ const isInfiniteDisabled = ref(false);
 const fristLoaded = ref(false);
 const loading = ref(false);
 
-// const reponseItem = ref<IApiListResponse<Permission>>();
+// const reponseItem = ref<ApiResponse<Permission>>();
 const items = ref<Permission[]>([]);
 
 const pageParam = computed(

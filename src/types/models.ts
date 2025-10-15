@@ -48,14 +48,14 @@ export interface ApiListResponse {
   totalElements: number
   last: boolean
 }
-export interface IApiListResponse<Type> extends ApiListResponse {
+export interface ApiResponse<Type> extends ApiListResponse {
   dataList: Type[]
 }
 
 export interface IListResponse extends ApiListResponse {
   dataList: any[]
 }
-// export interface PermissionResponse extends IApiListResponse {
+// export interface PermissionResponse extends ApiResponse {
 //   dataList: Permission[];
 // }
 export interface ImageDto {

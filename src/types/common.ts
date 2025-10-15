@@ -206,11 +206,6 @@ export interface RequestType {
   contentType?: string;
   responseType?: 'arraybuffer' | 'document' | 'json' | 'text' | 'stream';
 }
-export interface ApiResponse {
-  response?: any;
-  error?: any;
-}
-
 export interface ResponseMessage {
   status: IHttpStatus;
   message?: string;

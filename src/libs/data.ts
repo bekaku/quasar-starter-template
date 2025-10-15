@@ -1,4 +1,4 @@
-import type { FileManagerDto, GroupChatDto, GroupChatMsgDto, IApiListResponse, Permission, RefreshTokenResponse, UserDto } from 'src/types/models';
+import type { FileManagerDto, GroupChatDto, GroupChatMsgDto, ApiResponse, Permission, RefreshTokenResponse, UserDto } from 'src/types/models';
 import { FORMAT_DATE13, getCurrentDateByFormat } from '@/utils/dateUtil'
 import { biBarChart, biChatDots, biCreditCard, biCurrencyDollar, biGraphUp, biNewspaper, biPeople } from '@quasar/extras/bootstrap-icons';
 import type { LabelValue } from 'src/types/common';
@@ -47,7 +47,7 @@ export const authenResponse: RefreshTokenResponse = {
     expiresAt: '2025-03-13T04:50:01.087+00:00'
 }
 
-export const permissionListApi: IApiListResponse<Permission> = {
+export const permissionListApi: ApiResponse<Permission> = {
     dataList: [
         {
             id: 1,
@@ -296,7 +296,7 @@ export const userItems: UserDto[] = [
         active: true,
     }
 ]
-export const userListApi: IApiListResponse<UserDto> = {
+export const userListApi: ApiResponse<UserDto> = {
     dataList: userItems,
     totalPages: 100,
     totalElements: 20000,
@@ -734,7 +734,7 @@ export const appleStockPrices: ISeriresCategories = {
 export const simpleSeries: number[] = [44, 55, 41, 37, 22, 43, 21];
 export const simpleCategories: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
 
-export const chatHistoryListApi: IApiListResponse<GroupChatDto> = {
+export const chatHistoryListApi: ApiResponse<GroupChatDto> = {
     dataList: [
         {
             id: 1,
@@ -916,7 +916,7 @@ export const chatHistoryListApi: IApiListResponse<GroupChatDto> = {
     totalElements: 15,
     last: true
 }
-export const chatMessageListApi: IApiListResponse<GroupChatMsgDto> =
+export const chatMessageListApi: ApiResponse<GroupChatMsgDto> =
 {
     dataList: [
         {

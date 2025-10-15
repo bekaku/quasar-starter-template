@@ -5,7 +5,7 @@ import SkeletonItem from '@/components/skeleton/SkeletonItem.vue';
 import { useAppMeta } from '@/composables/useAppMeta';
 import { useAxios } from '@/composables/useAxios';
 import { useLang } from '@/composables/useLang';
-import type { IApiListResponse, Permission } from '@/types/models';
+import type { ApiResponse, Permission } from '@/types/models';
 import { biCode, biExclamationCircleFill } from '@quasar/extras/bootstrap-icons';
 import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
@@ -16,7 +16,7 @@ const { setTitle } = useAppMeta();
 setTitle(`Use axios | ${t('app.name')}`);
 
 const { callAxios } = useAxios();
-const reponseApiItem = ref<IApiListResponse<Permission> | null>(null);
+const reponseApiItem = ref<ApiResponse<Permission> | null>(null);
 const reaponseApiLoading = ref<boolean>(false);
 
 const reponseListItems = ref<Permission[] | null>(null);
@@ -30,7 +30,7 @@ const responseErrorLoading = ref<boolean>(false);
 
 const fetchResponseApi = async () => {
   reaponseApiLoading.value = true;
-  reponseApiItem.value = await callAxios<IApiListResponse<Permission>>({
+  reponseApiItem.value = await callAxios<ApiResponse<Permission>>({
     API: '/api/permission?page=0&size=10&sort=code,asc',
     method: 'GET',
   });

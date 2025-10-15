@@ -5,16 +5,16 @@ import type {
   UserChangePasswordRequest,
   AccessTokenDto,
   UserPersonalEditRequest,
-  IApiListResponse,
+  ApiResponse,
 } from '@/types/models';
 import type { ResponseMessage } from '@/types/common';
 import { userData, userListApi } from 'src/libs/data';
 export default () => {
   const { callAxios } = useAxios();
 
-    const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => {
+    const findAll = async (q: string): Promise<ApiResponse<UserDto> | null> => {
       console.log('UserService.ts > findAll > ', `/api/appUser${q}`);
-      // return await callAxios<IApiListResponse<UserDto>>({
+      // return await callAxios<ApiResponse<UserDto>>({
       //   API: `/api/appUser${q}`,
       //   method: 'GET',
       // });

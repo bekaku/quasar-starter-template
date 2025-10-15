@@ -5,7 +5,7 @@ import { useSort } from '@/composables/useSort';
 import type { ICrudListApiOptions } from '@/types/common';
 import { useAxios } from '@/composables/useAxios';
 import { isAppException, isArray, isEmpty, isListResponse, isServerResponseMessage } from '@/utils/appUtil';
-import type { IApiListResponse } from '@/types/models';
+import type { ApiResponse } from '@/types/models';
 
 export const usePagefecth = <T>(options: ICrudListApiOptions) => {
   const { callAxios } = useAxios();
@@ -46,7 +46,7 @@ export const usePagefecth = <T>(options: ICrudListApiOptions) => {
   );
   const loadData = async () => {
     loading.value = true;
-    const response = await callAxios<IApiListResponse<T>>({
+    const response = await callAxios<ApiResponse<T>>({
       API: apiEndpoint.value,
       method: 'GET'
     });

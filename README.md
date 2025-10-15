@@ -243,8 +243,8 @@ const userAcl = async (getMenuList = 0): Promise<IAcl | null> => {
     });
   };
 
-  const findAll = async (q: string): Promise<IApiListResponse<Permission> | null> => {
-    return await callAxios<IApiListResponse<Permission>>({
+  const findAll = async (q: string): Promise<ApiResponse<Permission> | null> => {
+    return await callAxios<ApiResponse<Permission>>({
       API: `/api/permission${q}`,
       method: 'GET',
     });
@@ -300,9 +300,9 @@ const findAllBackendRole = async (): Promise<Role[] | null> => {
 ```
 modify /src/api/UserService.ts
 ```ts
-const findAll = async (q: string): Promise<IApiListResponse<UserDto> | null> => {
+const findAll = async (q: string): Promise<ApiResponse<UserDto> | null> => {
       console.log('UserService.ts > findAll > ', `/api/appUser${q}`);
-      return await callAxios<IApiListResponse<UserDto>>({
+      return await callAxios<ApiResponse<UserDto>>({
         API: `/api/appUser${q}`,
         method: 'GET',
       });
