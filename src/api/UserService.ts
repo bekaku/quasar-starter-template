@@ -150,7 +150,7 @@ export default () => {
     //   API: '/api/appUser/updatePersonalData',
     //   method: 'PUT',
     //   body: {
-    //     appUser: req,
+    //     data: req,
     //   },
     // });
     console.log('updatePersonalData', req);
@@ -167,7 +167,7 @@ export default () => {
   //     API: '/api/appUser/updatePersonalData',
   //     method: 'PUT',
   //     body: {
-  //       appUser: req,
+  //       data: req,
   //     },
   //   });
   // };
@@ -178,7 +178,7 @@ export default () => {
     //   API: '/api/appUser/updateEmail',
     //   method: 'PUT',
     //   body: {
-    //     appUser: req,
+    //     data: req,
     //   },
     // });
     return new Promise((resovle) => {

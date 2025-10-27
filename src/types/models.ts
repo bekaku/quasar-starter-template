@@ -81,7 +81,7 @@ export interface AuthenticationResponse {
 //   };
 // }
 export interface LoginRequest {
-  user: {
+  data: {
     emailOrUsername: string | null
     password: string | null
     loginFrom: LoginLogType
@@ -89,7 +89,7 @@ export interface LoginRequest {
   }
 }
 export interface RefreshTokenRequest {
-  refreshToken: {
+  data: {
     refreshToken?: string | null
     fcmToken?: string | null
     email?: string | null
@@ -97,7 +97,7 @@ export interface RefreshTokenRequest {
   }
 }
 export interface UserChangePasswordRequest {
-  userChangePasswordRequest: {
+  data: {
     password: string
     newPassword?: string
     logoutAllDevice: boolean

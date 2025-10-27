@@ -81,7 +81,7 @@ export default () => {
     //   API: '/api/auth/requestVerifyCodeToResetPwd',
     //   method: 'POST',
     //   body: {
-    //     forgotPasswordRequest: req
+    //     data: req
     //   },
     // });
     return new Promise((resovle) => {
@@ -97,7 +97,7 @@ export default () => {
     //   API: '/api/auth/sendVerifyCodeToResetPwd',
     //   method: 'POST',
     //   body: {
-    //     forgotPasswordRequest: req
+    //     data: req
     //   },
     // });
     return new Promise((resovle) => {
@@ -113,7 +113,7 @@ export default () => {
     //   API: '/api/auth/resetPassword',
     //   method: 'POST',
     //   body: {
-    //     forgotPasswordRequest: req
+    //     data: req
     //   },
     // });
     return new Promise((resovle) => {
