@@ -9,12 +9,12 @@ import { mdiEmoticonLol, mdiEmoticonSad, mdiHandPeaceVariant, mdiHeart, mdiThumb
 import { appPreventDefult } from 'src/utils/appUtil';
 import { ref } from 'vue';
 const { chatId, iconSize = 32 } = defineProps<{
-  chatId: number;
+  chatId: number| string;
   items: EmojiCountDto[];
   iconSize?: number;
 }>();
 const emit = defineEmits<{
-  'on-click': [chatId: number];
+  'on-click': [chatId: number| string];
 }>();
 const size = ref(`${iconSize}px`);
 const show = ref(false);

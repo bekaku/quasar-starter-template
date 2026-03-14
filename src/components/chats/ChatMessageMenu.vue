@@ -14,7 +14,7 @@ import { onMounted } from 'vue';
 import BaseDropdownMenu from '../base/BaseDropdownMenu.vue';
 
 const { showCopy = true, sent } = defineProps<{
-  chatId: number;
+  chatId: number| string;
   sent: boolean;
   showCopy?: boolean | undefined;
   messageType?: ChatMessageType | undefined;

@@ -19,12 +19,21 @@ import type {
 } from 'src/types/models';
 import { randomNumber } from 'src/utils/appUtil';
 import { FORMAT_DATE13, getCurrentDateByFormat } from 'src/utils/dateUtil';
-import { defineAsyncComponent, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
+import {
+  defineAsyncComponent,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  ref,
+  useTemplateRef,
+  watch,
+} from 'vue';
 import BaseAvatar from '../base/BaseAvatar.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseInfiniteScroll from '../base/BaseInfiniteScroll.vue';
 import BaseVirtualScrollerDynamic from '../base/BaseVirtualScrollerDynamic.vue';
 import ChatContentHeader from './ChatContentHeader.vue';
+import { ChatMesageFocusableId } from 'src/libs/constant';
 const ChatReplyItem = defineAsyncComponent(() => import('@/components/chats/ChatReplyItem.vue'));
 const {
   showHeader = true,
@@ -67,7 +76,7 @@ const messageEntity = ref<GroupChatMsgRequest>({
 const showTypingTextProgress = ref(false);
 const replyMessageItem = ref<GroupChatMsgDto>();
 const showMessageDialog = ref(false);
-const messageSelectdId = ref<number>();
+const messageSelectdId = ref<number | string>();
 const showSeenDialog = ref(false);
 const messageSelectdReadCount = ref<number>(0);
 const showChatInput = ref(true);
@@ -88,6 +97,8 @@ const isScrollingToTop = ref<boolean>(false);
 
 const initialTimeout = ref<any>(null);
 const createMessageTimeout = ref<any>(null);
+const initialOk = ref(false);
+const chatDivRef = useTemplateRef<any>('chatDivRef');
 onMounted(async () => {
   initialChatList();
 });
@@ -95,11 +106,12 @@ onMounted(async () => {
 // infinite scroll
 const initialChatList = async () => {
   initialTimeout.value = setTimeout(() => {
-    scrollToBottom(true);
     initialTimeout.value = setTimeout(() => {
+      scrollToBottom(true);
       chatInfiniteDisable.value = false;
+      initialOk.value = true;
     }, 1000);
-  }, 1500);
+  }, 1000);
 };
 const onInfiniteChatVirtual = (index: number, done: any) => {
   console.log('onInfiniteChatVirtual', index);
@@ -127,7 +139,7 @@ const onVirtualScrollUpdate = (item: VirtualScrollerUpdate) => {
   }
   isScrollingToTop.value = !(item.visibleEndIndex == item.viewEndIndex);
 };
-const scrollToBottom = (fromInitial: boolean| undefined = false) => {
+const scrollToBottom = async (fromInitial: boolean | undefined = false) => {
   isScrollingToTop.value = false;
   if (scrollerChatRef.value) {
     if (!fromInitial) {
@@ -135,6 +147,12 @@ const scrollToBottom = (fromInitial: boolean| undefined = false) => {
     } else {
       scrollerChatRef.value.onScrollToItem(dataList.value.length - 1);
     }
+  }
+
+  if (chatDivRef.value) {
+    await nextTick();
+    console.log('scrollToBottom', chatDivRef.value.scrollHeight);
+    chatDivRef.value.scrollTop = chatDivRef.value.scrollHeight;
   }
 };
 const onScrollToItem = (index: number | undefined) => {
@@ -144,18 +162,30 @@ const onScrollToItem = (index: number | undefined) => {
   if (scrollerChatRef.value) {
     scrollerChatRef.value.onScrollToItem(index);
   }
+
+  const msg = findItemByIndex(index);
+  if (msg) {
+    const divId = `${ChatMesageFocusableId}-${msg.id}`;
+    const element = document.getElementById(divId);
+    if (element) {
+      // element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      element.scrollIntoView();
+    }
+  }
 };
 // end infinite scroll
 const invitePeople = (chatId: number) => {
   console.log('invitePeople', chatId);
 };
-const findIndexByID = (messageId: number): Promise<number> => {
+const findIndexByID = (messageId: number | string): Promise<number> => {
   return new Promise((resolve) => {
     const i = dataList.value.findIndex((t) => t.id == messageId);
     resolve(i);
   });
 };
-const findMessageById = async (messageId: number): Promise<GroupChatMsgDto | undefined> => {
+const findMessageById = async (
+  messageId: number | string,
+): Promise<GroupChatMsgDto | undefined> => {
   return new Promise((resolve) => {
     const item = dataList.value.find((t) => t.id == messageId);
     resolve(item);
@@ -172,7 +202,7 @@ const removeItemByIndex = (index: number) => {
     resolve(true);
   });
 };
-const messageDelete = async (messageId: number) => {
+const messageDelete = async (messageId: number | string) => {
   console.log('messageDelete', messageId);
   stopChatInfinityScroll();
   const index = await findIndexByID(messageId);
@@ -184,7 +214,7 @@ const messageDelete = async (messageId: number) => {
   // TODO delete from server
   // await deleteMessage(messageId)
 };
-const messageUnsend = async (messageId: number, unsendToServer: boolean = true) => {
+const messageUnsend = async (messageId: number | string, unsendToServer: boolean = true) => {
   console.log('messageUnsend', { messageId, unsendToServer });
   if (!messageId) {
     return;
@@ -218,7 +248,7 @@ const messageRead = async (messageId: number) => {
     }
   }
 };
-const messageReaction = async (l: EmojiType, messageId: number) => {
+const messageReaction = async (l: EmojiType, messageId: number | string) => {
   console.log('messageReaction', { l, messageId });
   const index = await findIndexByID(messageId);
   if (index >= 0) {
@@ -254,7 +284,7 @@ const messageReactionUpdate = async (items: EmojiCountDto[], messageId: number) 
     }
   }
 };
-const messageReply = async (replyToMessageId: number) => {
+const messageReply = async (replyToMessageId: number | string) => {
   console.log('messageReply', replyToMessageId);
   showChatInput.value = false;
   showChatInputTimeout.value = setTimeout(() => {
@@ -271,7 +301,7 @@ const messageReply = async (replyToMessageId: number) => {
 const onCloseReplyTo = () => {
   replyMessageItem.value = undefined;
 };
-const onOpenSeenDialog = (messageId: number, readCount: number) => {
+const onOpenSeenDialog = (messageId: number | string, readCount: number) => {
   console.log('onOpenSeenDialog', { messageId, readCount });
   if (!messageId) {
     return;
@@ -280,7 +310,7 @@ const onOpenSeenDialog = (messageId: number, readCount: number) => {
   messageSelectdReadCount.value = readCount;
   showSeenDialog.value = true;
 };
-const onFocusMessageReply = async (messageId: number) => {
+const onFocusMessageReply = async (messageId: number | string) => {
   if (!messageId) {
     return;
   }
@@ -292,7 +322,7 @@ const onFocusMessageReply = async (messageId: number) => {
     showMessageDialog.value = true;
   }
 };
-const onShare = async (messageId: number) => {
+const onShare = async (messageId: number | string) => {
   console.log('onShare', messageId);
   if (!messageId) {
     return;
@@ -332,7 +362,7 @@ const onSendMessage = async (
     messageEntity.value.chatMessageType = 'LOCATION';
   }
   if (replyMessageItem.value && replyMessageItem.value?.id) {
-    messageEntity.value.replyToId = replyMessageItem.value.id;
+    messageEntity.value.replyToId = replyMessageItem.value.id as number;
   }
 
   const filesUploads: GroupChatFileDto[] = await uploadFileProcess(files);
@@ -475,6 +505,12 @@ onUnmounted(() => {
     createMessageTimeout.value = null;
   }
 });
+// watch(initialOk, (newInit, oldInit) => {
+//   console.log(`initialOk changed from ${oldInit} to ${newInit}`);
+//   if (newInit) {
+//     scrollToBottom(true);
+//   }
+// });
 </script>
 <template>
   <div v-bind="$attrs">
@@ -507,13 +543,13 @@ onUnmounted(() => {
         <q-separator />
       </template>
       <div v-show="!miniminze">
-        <BaseVirtualScrollerDynamic
+        <!-- <BaseVirtualScrollerDynamic
           id="scroll-chat-target-id"
           ref="scrollerChatRef"
           class="q-pa-sm"
           key-field="id"
           :items="dataList"
-          :min-item-size="55"
+          :min-item-size="48"
           :scroll-area-height="scrollAreaHeight"
           @on-update="onVirtualScrollUpdate"
         >
@@ -527,7 +563,7 @@ onUnmounted(() => {
               @on-infinite="onInfiniteChatVirtual"
             />
           </template>
-          <template #default="{ item, index /*active */ }">
+          <template #default="{ item, index }">
             <ChatMessage
               :key="`message-${item.id}-${index}`"
               :item="item"
@@ -579,7 +615,72 @@ onUnmounted(() => {
               </div>
             </q-chat-message>
           </template>
-        </BaseVirtualScrollerDynamic>
+        </BaseVirtualScrollerDynamic> -->
+
+        <div
+          ref="chatDivRef"
+          id="scroll-chat-target-id"
+          style="overflow-y: scroll"
+          :style="{ 'max-height': scrollAreaHeight }"
+          class="q-pa-sm"
+        >
+          <BaseInfiniteScroll
+            ref="chatInfinityScrollRef"
+            scroll-target="#scroll-chat-target-id"
+            reverse
+            :disable="chatInfiniteDisable"
+            :offset="0"
+            @on-infinite="onInfiniteChatVirtual"
+          />
+          <ChatMessage
+            v-for="(item, index) in dataList"
+            :key="`message-${item.id}-${index}`"
+            :item="item"
+            :index="index"
+            :chat-type="modelValue.chatType"
+            :mini-chat="miniChat"
+            :high-light-text="textSearch"
+            @message-reaction="messageReaction"
+            @message-delete="messageDelete"
+            @message-unsend="messageUnsend"
+            @message-reply="messageReply"
+            @on-open-seen-dialog="onOpenSeenDialog"
+            @on-focus-message-reply="onFocusMessageReply"
+            @message-share="onShare"
+          />
+
+          <q-chat-message
+            v-if="creatingNewMessage"
+            :name="t('base.you')"
+            bg-color="message-sent"
+            sent
+          >
+            <template #avatar>
+              <base-avatar
+                v-if="authenStore?.auth?.avatar?.thumbnail"
+                class="q-message-avatar q-message-avatar--sent"
+                :src="authenStore?.auth?.avatar?.thumbnail"
+              />
+            </template>
+            <div>
+              <template v-if="uploadFileTotal > 0">
+                {{ t('chats.sendFileFmt', { success: uploadFileSucess, total: uploadFileTotal }) }}
+              </template>
+              <template v-else>
+                {{ t('chats.sendingMessage') }}
+              </template>
+              <q-spinner-dots class="q-ml-sm" size="2rem" />
+            </div>
+          </q-chat-message>
+          <q-chat-message v-if="showTypingTextProgress" bg-color="message-received" :sent="false">
+            <template #avatar>
+              <BaseAvatar class="q-mr-xs" src="https://cdn.quasar.dev/img/avatar4.jpg" />
+            </template>
+            <div class="text-center">
+              <q-spinner-dots size="2rem" color="primary" />
+            </div>
+          </q-chat-message>
+        </div>
       </div>
       <div
         v-if="isScrollingToTop && !miniminze"
@@ -594,6 +695,13 @@ onUnmounted(() => {
           :icon="biArrowDown"
         />
       </div>
+
+      <q-inner-loading
+        :showing="!initialOk"
+        label="Please wait..."
+        label-class="text-primary"
+        label-style="font-size: 1.1em"
+      />
     </BaseCard>
     <ChatReplyItem
       v-if="!miniminze && replyMessageItem"

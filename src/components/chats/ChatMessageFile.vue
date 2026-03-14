@@ -14,7 +14,7 @@ const {
   sent,
   showImageSlideAll = true,
 } = defineProps<{
-  chatId?: number;
+  chatId?: number | string;
   files: GroupChatFileDto[];
   sent: boolean;
   showImageSlideAll?: boolean;
@@ -153,7 +153,7 @@ const onFilePreviewClick = async (index: number, event: any) => {
           >
             <BaseFilesPreviewItemAlt
               v-if="f.fileManager"
-               :style="{ maxWidth: !isSmallScreen ? '100%' : '230px' }"
+              :style="{ maxWidth: !isSmallScreen ? '100%' : '230px' }"
               :item="f.fileManager"
               :index="previewFileIndex"
               @on-click="(index: number, ev: any) => onFilePreviewClick(index, ev)"

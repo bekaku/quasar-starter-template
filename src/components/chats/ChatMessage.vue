@@ -23,13 +23,13 @@ const {
 }>();
 
 const emit = defineEmits<{
-  'message-reaction': [type: EmojiType, id: number];
-  'message-delete': [id: number];
-  'message-unsend': [id: number];
-  'message-reply': [id: number];
-  'on-open-seen-dialog': [id: number, count: number];
-  'message-share': [id: number];
-  'on-focus-message-reply': [id: number];
+  'message-reaction': [type: EmojiType, id: number| string];
+  'message-delete': [id: number| string];
+  'message-unsend': [id: number| string];
+  'message-reply': [id: number| string];
+  'on-open-seen-dialog': [id: number| string, count: number];
+  'message-share': [id: number| string];
+  'on-focus-message-reply': [id: number| string];
 }>();
 
 const onReact = async (l: EmojiType) => {
@@ -62,7 +62,7 @@ const onShare = async () => {
   }
   emit('message-share', item.id);
 };
-const onOpenReadDialog = (messageId: number, readCount: number) => {
+const onOpenReadDialog = (messageId: number| string, readCount: number) => {
   emit('on-open-seen-dialog', messageId, readCount);
 };
 const onReplyClick = (messageId: number) => {

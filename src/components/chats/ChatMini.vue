@@ -98,7 +98,7 @@ onBeforeUnmount(() => {
               :show-header="true"
               input-dense
               square
-              scroll-area-height="48dvh"
+              scroll-area-height="45dvh"
               :input-avata="false"
               :miniminze="chatStore.miniChatMinimize"
               mini-chat

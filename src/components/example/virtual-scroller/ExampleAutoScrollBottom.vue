@@ -69,6 +69,7 @@ const onImgDidLoad = () => {
       :items="messages"
       :min-item-size="54"
       scroll-area-height="500px"
+      size-dependencies="text"
     >
       <template #default="{ item, index /*active */ }">
         <div class="chat-message" :class="{ image: item.image }">

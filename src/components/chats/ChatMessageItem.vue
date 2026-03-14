@@ -47,12 +47,12 @@ const {
   highLightText?: string | undefined;
 }>();
 const emit = defineEmits<{
-  'message-reaction': [type: EmojiType, id: number];
-  'message-delete': [id: number];
-  'message-unsend': [id: number];
-  'message-reply': [id: number];
-  'on-open-seen-dialog': [id: number, count: number];
-  'message-share': [id: number];
+  'message-reaction': [type: EmojiType, id: number | string];
+  'message-delete': [id: number | string];
+  'message-unsend': [id: number | string];
+  'message-reply': [id: number | string];
+  'on-open-seen-dialog': [id: number | string, count: number];
+  'message-share': [id: number | string];
 }>();
 const chatStore = useChatStore();
 const { screen, dark } = useQuasar();
@@ -218,7 +218,7 @@ const onMessageFocus = async () => {
   messageFocusTimeout.value = null;
   chatStore.messageIdFocus = undefined;
 };
-const onReactionClick = (chatId: number) => {
+const onReactionClick = (chatId: number| string) => {
   console.log('onReactionClick', chatId);
 };
 watch(chatStore, (state) => {
@@ -358,17 +358,17 @@ watch(chatStore, (state) => {
 
               <div v-if="item.id" :class="cssClass" :style="cssStyle">
                 <div class="row items-center" style="z-index: 99999">
-                    <ChatMessageMenu
-                      :chat-id="item.id"
-                      :sent="item.sent"
-                      :show-copy="item.chatMsg != null && true && item.chatMsg.length > 0"
-                      :message-type="item.chatMessageType"
-                      @message-copy="onCopy"
-                      @message-delete="onDelete"
-                      @message-unsend="onUnsend"
-                      @message-reply="onRepy"
-                      @message-share="onShare"
-                    />
+                  <ChatMessageMenu
+                    :chat-id="item.id"
+                    :sent="item.sent"
+                    :show-copy="item.chatMsg != null && true && item.chatMsg.length > 0"
+                    :message-type="item.chatMessageType"
+                    @message-copy="onCopy"
+                    @message-delete="onDelete"
+                    @message-unsend="onUnsend"
+                    @message-reply="onRepy"
+                    @message-share="onShare"
+                  />
                   <q-btn
                     flat
                     round

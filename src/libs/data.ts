@@ -954,22 +954,22 @@ export const chatMessageListApi: ApiResponse<GroupChatMsgDto> =
             dtoReplyTo: null,
             chatMessageType: 'TEXT'
         },
-        {
-            id: 567,
-            chatMsg: '13.9795581,100.6267777',
-            msgDateTime: '2024-10-11 15:36:47',
-            groupId: 17,
-            readCount: 2,
-            unsend: false,
-            sent: true,
-            sendUser: userItems[2],
-            files: [],
-            liked: false,
-            emojiType: null,
-            reactionEngage: [],
-            dtoReplyTo: null,
-            chatMessageType: 'LOCATION'
-        },
+        // {
+        //     id: 567,
+        //     chatMsg: '13.9795581,100.6267777',
+        //     msgDateTime: '2024-10-11 15:36:47',
+        //     groupId: 17,
+        //     readCount: 2,
+        //     unsend: false,
+        //     sent: true,
+        //     sendUser: userItems[2],
+        //     files: [],
+        //     liked: false,
+        //     emojiType: null,
+        //     reactionEngage: [],
+        //     dtoReplyTo: null,
+        //     chatMessageType: 'LOCATION'
+        // },
         {
             id: 665,
             chatMsg: 'https://www.youtube.com/watch?v=_5hAk3ic5Ok',

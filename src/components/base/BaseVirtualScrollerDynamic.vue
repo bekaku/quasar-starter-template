@@ -54,10 +54,12 @@ const {
   keyField?: string;
   pageMode?: boolean;
   buffer?: number;
+  sizeDependencies?: string;
   items: T[];
 }>();
 
-const appDynamicScrollerRef = useTemplateRef<any>('appDynamicScrollerRef');
+const appDynamicScrollerRef =
+  useTemplateRef<InstanceType<typeof DynamicScroller>>('appDynamicScrollerRef');
 // const emit = defineEmits<{
 //   onUpdate: [val: VirtualScrollerUpdate];
 // }>();
@@ -131,7 +133,12 @@ defineExpose({
       <slot name="slotBefore" />
     </template>
     <template #default="{ item, index, active }">
-      <DynamicScrollerItem :item="item" :active="active" :data-index="index">
+      <DynamicScrollerItem
+        :item="item"
+        :active="active"
+        :size-dependencies="sizeDependencies ? item[sizeDependencies] : undefined"
+        :data-index="index"
+      >
         <slot v-bind="{ item, index, active }" />
       </DynamicScrollerItem>
     </template>
