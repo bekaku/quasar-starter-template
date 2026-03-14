@@ -7,13 +7,22 @@ import {
   FileTypeAcceptList,
   LimitFileSize,
   LimitFileSizeMB,
+  MaxImageResize,
+  MaxImageResizeMB,
   MaxSelectFiles,
 } from '@/libs/constant';
-import { getImgUrlFromFile, isImageFile, zipFile } from '@/utils/fileUtil';
+import {
+  getImageDimensions,
+  getImgUrlFromFile,
+  isImageFile,
+  resizeImage,
+  zipFile,
+} from '@/utils/fileUtil';
 import { biPlus } from '@quasar/extras/bootstrap-icons';
 import { onBeforeUnmount, ref } from 'vue';
 import BaseButton from './BaseButton.vue';
 import BaseFilesPreview from './BaseFilesPreview.vue';
+import type { ImageDimensions } from '@/types/common';
 
 const {
   multiple = true,
@@ -21,12 +30,12 @@ const {
   maxFiles = MaxSelectFiles,
   icon = biPlus,
   accept = FileExtensionAccept,
-  gallery = false,
+  gallery = 'CARD',
   previewHieight = '250px',
 } = defineProps<{
   multiple?: boolean;
   showPreview?: boolean;
-  gallery?: boolean;
+  gallery?: 'CARD' | 'LIST' | 'INLINE';
   icon?: string;
   label?: string;
   accept?: string; //* = wildcard all extension
@@ -34,7 +43,7 @@ const {
   maxFiles?: number; // 0 = unlimited pick
   previewHieight?: string;
 }>();
-const { appToast } = useBase();
+const { appToast, appLoading } = useBase();
 const { t } = useLang();
 const modelValue = defineModel<any[]>({ default: () => [] });
 const fileItems = defineModel<FileManagerDto[]>('fileItems', { default: () => [] });
@@ -100,6 +109,7 @@ const validateAndZipFile = async (files: File[]): Promise<any[]> => {
   });
 };
 const onFileAdded = async (files: File[] | File) => {
+  appLoading();
   const fileList = Array.isArray(files) ? files : [files];
   const finalFiles = await validateAndZipFile(fileList);
   emit('on-file-add', finalFiles);
@@ -115,16 +125,37 @@ const onFileAdded = async (files: File[] | File) => {
     await onAddFile(finalFiles[0]);
   }
   modelImageFiles.value = [];
+  appLoading(false);
 };
 const onAddFile = async (f: any) => {
   const isImg = isImageFile(f);
   let url: string | undefined;
+  let dimensions: ImageDimensions | undefined;
+  let file: File = f;
   if (isImg) {
-    url = await getImgUrlFromFile(f);
+    dimensions = await getImageDimensions(f);
+    console.log('dimensions', dimensions);
+    if (dimensions && (dimensions.height > MaxImageResize || dimensions.width > MaxImageResize)) {
+      const coompressFile = await resizeImage(f, {
+        maxSizeMB: MaxImageResizeMB,
+        maxWidthOrHeight: MaxImageResize,
+        useWebWorker: true,
+      });
+      if (coompressFile) {
+        file = coompressFile;
+      }
+      console.log('resize', coompressFile);
+    }
+    url = await getImgUrlFromFile(file);
   }
-  onAddFilePreview(f, isImg, url);
+  onAddFilePreview(file, isImg, dimensions, url);
 };
-const onAddFilePreview = (f: File, isImage: boolean, pathUrl: string | undefined = undefined) => {
+const onAddFilePreview = (
+  f: File,
+  isImage: boolean,
+  dimensions?: ImageDimensions,
+  pathUrl: string | undefined = undefined,
+) => {
   if (modelValue.value) {
     modelValue.value.push(f);
     fileItems.value.push({
@@ -137,6 +168,8 @@ const onAddFilePreview = (f: File, isImage: boolean, pathUrl: string | undefined
       functionId: 0,
       isImage,
       file: f,
+      width: dimensions?.width || 0,
+      height: dimensions?.height || 0,
     });
   }
 };

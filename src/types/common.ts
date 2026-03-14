@@ -71,7 +71,6 @@ export type ISsIcons =
   | 'action_2'
   | 'add'
   | 'admin'
-  | 'avatar'
   | 'adopt'
   | 'avatar'
   | 'block'
@@ -159,18 +158,26 @@ export type AppColor = 'primary' | 'secondary' | 'accent' | 'dark' | 'positive' 
   | 'blue-grey' | 'blue-grey-1' | 'blue-grey-2' | 'blue-grey-3' | 'blue-grey-4' | 'blue-grey-5' | 'blue-grey-6' | 'blue-grey-7' | 'blue-grey-8' | 'blue-grey-9' | 'blue-grey-10' | 'blue-grey-11' | 'blue-grey-12' | 'blue-grey-13' | 'blue-grey-14';
 
 export type ChatSettingType =
-  'NOTIFICATION'
+  | 'NOTIFICATION'
   | 'PIN'
   | 'FAVORITE'
   | 'LEAVE'
   | 'UPDATE_READ_ALL'
   | 'CLEAR_NEW_MESSAGE_NUMBER'
   | 'CLEAR_NEW_MESSAGE_NUMBER_ONLY'
-  | 'UPDATE_DATA'
-  ;
+  | 'UPDATE_DATA';
 export type ChatType = 'PERSONAL' | 'GROUP';
 export type ChatMessageType = 'MEDIA' | 'TEXT' | 'IMAGE' | 'FILE' | 'INVITE' | 'LEAVE' | 'LOCATION';
 // interface
+export interface ImageDimensions {
+  width: number;
+  height: number;
+}
+export interface ImageResizeOptions {
+  maxSizeMB: number;
+  maxWidthOrHeight: number;
+  useWebWorker: boolean
+}
 export interface ILocales {
   name: string;
   iso: string;

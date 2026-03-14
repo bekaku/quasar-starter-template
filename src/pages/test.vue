@@ -6,9 +6,12 @@ import BaseCard from 'src/components/base/BaseCard.vue';
 import BasePage from 'src/components/base/BasePage.vue';
 import { useCookie } from 'src/composables/useCookie';
 import { AppAuthCuurentUserKey, AppAuthRefeshTokenKey, AppAuthTokenKey } from 'src/libs/constant';
+import { ref } from 'vue';
 const { t } = useLang();
 const { setTitle } = useAppMeta();
 setTitle(`Test page | ${t('app.name')}`);
+
+const testVar = ref<string>('');
 
 const { getCookie, setCookie, getAllJwtCookies, getCurrentUserToken } = useCookie();
 const logined = (uid: number) => {

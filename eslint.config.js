@@ -79,5 +79,8 @@ export default antfu({
     'style/quotes': 'warn',
     'style/padding-line-between-statements': 'off',
     eqeqeq: 'off',
+    'e18e/prefer-static-regex': 'off',
+    'e18e/prefer-array-to-reversed': 'off',
+    'e18e/prefer-spread-syntax': 'off',
   },
 });

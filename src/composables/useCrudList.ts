@@ -162,7 +162,7 @@ export const useCrudList = <T>(
       });
     }
     loading.value = true;
-    const response = await callAxios<{
+    const response = await callAxios({
       API: pageParam.value,
       method: 'GET'
     });
@@ -180,7 +180,7 @@ export const useCrudList = <T>(
             pages.value.last = response.last;
           }
         } else if (isArray(response) && response != null) {
-          dataList.value = response;
+          dataList.value = response as any;
         }
       }
       if (!fristLoad.value) {
@@ -212,9 +212,9 @@ export const useCrudList = <T>(
           (c: any) =>
             c[col] &&
             c[col].toString().toLowerCase().includes(search) &&
-            !filters.find((x: any) => x.id === c.id)
+            !filters.some((x: any) => x.id === c.id)
         );
-        filters = filters.concat(searchList);
+        filters = [...filters, ...searchList];
       }
     }
     return filters;

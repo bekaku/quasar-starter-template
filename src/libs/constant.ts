@@ -59,6 +59,8 @@ export const FileTypeAcceptList = [
 ];
 export const LIMIT_FILE_SIZE_MB = 50;
 export const LIMIT_FILE_SIZE = LIMIT_FILE_SIZE_MB * 1024 * 1024;
+export const MaxImageResize = 1776;
+export const MaxImageResizeMB = 10;
 export const FILES_UPLOAD_ATT = '_filesUploadName';
 export const FILES_DIRECTORY_ID_ATT = 'fileDirectoryId';
 export const OS_PLATFORM = {
@@ -101,3 +103,4 @@ export const AUTH_NO_FILTER: string[] = [
   '/auth/login',
   '/error',
 ];
+

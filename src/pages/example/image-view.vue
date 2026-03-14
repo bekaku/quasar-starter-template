@@ -162,6 +162,7 @@ const setImagesFileView = (file: FileManagerDto) => {
                 :show-delete="true"
                 show-name
                 show-size
+                 soft-delete
                 @on-click="onImgPreviewClick"
               >
               </files-preview-item-alt>

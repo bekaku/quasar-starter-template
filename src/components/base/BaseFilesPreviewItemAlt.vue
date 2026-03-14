@@ -18,6 +18,7 @@
     </q-item-section>
     <q-item-section>
       <q-item-label lines="1" :class="textColor">
+        {{ softDelete }}
         <slot name="fileName">
           {{ item.fileName }}
         </slot>
@@ -69,6 +70,7 @@ withDefaults(
     clickable?: boolean;
     textColor?: string;
     showSize?: boolean;
+    softDelete?: boolean
   }>(),
   {
     showDelete: true,
@@ -80,16 +82,24 @@ withDefaults(
     imageSize: '75px',
     textColor: 'q-text-black',
     iconSize: '4em',
+    softDelete: false
   },
 );
 const { t } = useLang();
-const emit = defineEmits(['on-remove', 'on-click']);
+const emit = defineEmits(['on-remove', 'on-click', 'on-soft-delete'])
 const onRemove = (event: any, index: number) => {
   emit('on-remove', index);
   if (event) {
     event.stopImmediatePropagation();
   }
 };
+const onSoftDelete = (event: any, index: number) => {
+  emit('on-soft-delete', index)
+
+  if (event) {
+    event.stopImmediatePropagation()
+  }
+}
 const onClick = (event: any, index: number) => {
   emit('on-click', index, event);
   if (event) {

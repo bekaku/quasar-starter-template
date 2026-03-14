@@ -104,22 +104,35 @@ export interface UserChangePasswordRequest {
   }
 }
 export interface RefreshTokenResponse {
-  userId?: number
-  authenticationToken: string
-  refreshToken: string
-  expiresAt?: string
+  userId?: number;
+  authenticationToken: string;
+  refreshToken: string;
+  expiresAt?: string;
 }
-export interface FileManagerDto extends Id {
-  fileMime: string
-  fileName: string
-  filePath: string
-  fileThumbnailPath: string | null
-  fileSize: string
-  functionId?: number | null
-  isImage?: boolean
-  image?: boolean
-  file?: any
-  createdDate?: string
+
+export interface FileManagerMetaData extends Id {
+  duration?: number | null;
+  title?: string | null;
+  description?: string | null;
+  thumbnailFileId?: number | string | null;
+  thumbnailFile?: any;
+  width?: number;
+  height?: number;
+  view?: number;
+  hidden?: boolean;
+}
+export interface FileManagerDto extends FileManagerMetaData {
+  fileMime: string;
+  fileName: string;
+  filePath: string;
+  fileThumbnailPath: string | null;
+  fileSize: string;
+  functionId?: number | null;
+  isImage?: boolean;
+  image?: boolean;
+  file?: any;
+  createdDate?: string;
+  deleteFlag?: boolean | undefined;
 }
 export interface AccessTokenDto extends Id {
   ipAddredd: string
