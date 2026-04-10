@@ -44,12 +44,15 @@ export const usePagefecth = <T>(options: ICrudListApiOptions) => {
   const apiEndpoint = computed(
     () => `${urlEndpoint.value}${queryParam.value ? '?' + queryParam.value : ''}`
   );
-  const loadData = async () => {
-    loading.value = true;
-    const response = await callAxios<ApiResponse<T>>({
+  const loadDataProcess = async (): Promise<ApiResponse<T> | null> => {
+    return await callAxios<ApiResponse<T>>({
       API: apiEndpoint.value,
       method: 'GET'
     });
+  }
+  const loadData = async () => {
+    loading.value = true;
+    const response = await loadDataProcess()
     let list: T[] = [];
     if (!isAppException(response) && !isServerResponseMessage(response)) {
       if (isListResponse(response)) {

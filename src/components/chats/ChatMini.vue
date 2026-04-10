@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 .card-style {
   min-width: 360px;
-  max-width: 360px;
+  max-width: 370px;
 }
 
 .card-minimize-togle {

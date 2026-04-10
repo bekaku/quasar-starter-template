@@ -170,10 +170,14 @@ const isDragging = computed(
 
 const dragOptions = computed(() => {
   return {
-    animation: 0,
+    animation: 200,
     group: 'description',
     disabled: false,
     ghostClass: 'ghost',
+    forceFallback: true,
+    fallbackOnBody: true,
+    fallbackClass: 'drag-fallback',
+    // handle: '.drag-handle'
   };
 });
 
@@ -475,18 +479,6 @@ const onEndDrag = () => {
   </BasePage>
 </template>
 <style lang="scss" scoped>
-// .drag-area {
-//   height: 325px;
-//   overflow: auto;
-//   border: 1px dashed #ccc;
-// }
-
-// .drag-area-2 {
-//   height: 425px;
-//   overflow: auto;
-//   border: 1px dashed #ccc;
-// }
-
 .flip-list-move {
   transition: transform 0.5s;
 }
@@ -512,9 +504,10 @@ const onEndDrag = () => {
 }
 .drag-area {
   min-height: 70vh;
+  user-select: none;
 }
 .holder-draging {
-  border: 1px dashed var(--color-primary-500) !important;
+  border: 1.5px dashed var(--color-primary-500) !important;
 }
 
 .holder-header {
@@ -524,26 +517,37 @@ const onEndDrag = () => {
 }
 
 .holder-card {
-  cursor: grab;
+  cursor: pointer;
   margin-bottom: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  // &:active {
+  //   cursor: grabbing;
+  // }
 }
 .holder-card .chip {
   background-color: var(--color-zinc-200);
 }
 
-// .holder-card.todo {
-//   border-left: 2px solid var(--color-warning-400);
-// }
-// .holder-card.inprogress {
-//   border-left: 2px solid var(--color-primary-400);
-// }
-// .holder-card.testing {
-//   border-left: 2px solid var(--color-danger-400);
-// }
-// .holder-card.done {
-//   border-left: 2px solid var(--color-success-400);
-// }
-
+.drag-fallback {
+  opacity: 0.8;
+  pointer-events: none !important; 
+}
+.sortable-fallback,
+.sortable-drag {
+  cursor: grabbing !important;
+}
+.drag-fallback {
+  opacity: 0.8;
+  cursor: grabbing !important;
+  pointer-events: none !important;
+}
+body.sortable-dragging,
+body.sortable-dragging * {
+  cursor: grabbing !important;
+}
 body.body--dark {
   .holder {
     border: 1px solid var(--color-zinc-600);

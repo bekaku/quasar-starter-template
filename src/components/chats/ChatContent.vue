@@ -105,16 +105,50 @@ onMounted(async () => {
 
 // infinite scroll
 const initialChatList = async () => {
-  initialTimeout.value = setTimeout(() => {
-    initialTimeout.value = setTimeout(() => {
-      scrollToBottom(true);
+  await nextTick();
+  scrollToBottom();
+  requestAnimationFrame(() => {
+    setTimeout(() => {
       chatInfiniteDisable.value = false;
       initialOk.value = true;
-    }, 1000);
-  }, 1000);
+      console.log('initialOk', initialOk.value);
+      scrollToBottom();
+    }, 500);
+  });
+  // initialTimeout.value = setTimeout(() => {
+  //   initialTimeout.value = setTimeout(() => {
+  //     scrollToBottom(true);
+  //     chatInfiniteDisable.value = false;
+  //     initialOk.value = true;
+  //   }, 1000);
+  // }, 1000);
 };
-const onInfiniteChatVirtual = (index: number, done: any) => {
+const onInfiniteChatVirtual = async (index: number, done: any) => {
   console.log('onInfiniteChatVirtual', index);
+  const scrollElement = chatDivRef.value;
+  let previousScrollHeight = 0;
+  let previousScrollTop = 0;
+
+  if (scrollElement) {
+    previousScrollHeight = scrollElement.scrollHeight;
+    previousScrollTop = scrollElement.scrollTop;
+  }
+  // TODO api for next page and auto scroll lastest message
+  // const response = await loadDataProcess();
+  // if (!response || !response.dataList || response.dataList.length == 0) {
+  //   if (done) {
+  //     done(true);
+  //   }
+  //   return;
+  // }
+  // const list: GroupChatMsgDto[] = response.dataList.reverse();
+  // dataList.value.unshift(...list);
+  // await nextTick();
+  // if (scrollElement) {
+  //   const currentScrollHeight = scrollElement.scrollHeight;
+  //   const heightDifference = currentScrollHeight - previousScrollHeight;
+  //   scrollElement.scrollTop = previousScrollTop + heightDifference;
+  // }
   setTimeout(async () => {
     done();
     // TODO
@@ -141,16 +175,16 @@ const onVirtualScrollUpdate = (item: VirtualScrollerUpdate) => {
 };
 const scrollToBottom = async (fromInitial: boolean | undefined = false) => {
   isScrollingToTop.value = false;
-  if (scrollerChatRef.value) {
-    if (!fromInitial) {
-      scrollerChatRef.value.onScrollToBottom();
-    } else {
-      scrollerChatRef.value.onScrollToItem(dataList.value.length - 1);
-    }
-  }
+  // if (scrollerChatRef.value) {
+  //   if (!fromInitial) {
+  //     scrollerChatRef.value.onScrollToBottom();
+  //   } else {
+  //     scrollerChatRef.value.onScrollToItem(dataList.value.length - 1);
+  //   }
+  // }
 
   if (chatDivRef.value) {
-    await nextTick();
+    // await nextTick();
     console.log('scrollToBottom', chatDivRef.value.scrollHeight);
     chatDivRef.value.scrollTop = chatDivRef.value.scrollHeight;
   }
@@ -171,6 +205,18 @@ const onScrollToItem = (index: number | undefined) => {
       // element.scrollIntoView({ behavior: 'smooth', block: 'end' });
       element.scrollIntoView();
     }
+  }
+};
+const handleScroll = () => {
+  const el = chatDivRef.value;
+  if (!el) {
+    return;
+  }
+  const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 5;
+  if (!isAtBottom) {
+    isScrollingToTop.value = true;
+  } else {
+    isScrollingToTop.value = false;
   }
 };
 // end infinite scroll
@@ -351,8 +397,10 @@ const onSendMessage = async (
   if (!message && !files && !mapLatlong) {
     return;
   }
-  scrollToBottom();
   creatingNewMessage.value = true;
+  await nextTick();
+  scrollToBottom();
+
   console.log('onSendMessage', { message, files, mapLatlong });
   if (message) {
     messageEntity.value.chatMsg = message;
@@ -379,9 +427,13 @@ const onSendMessage = async (
   // }
 
   await mockCreateNewMessage(filesUploads);
-  scrollToBottom();
+  setTimeout(() => {
+    scrollToBottom();
+  }, 50);
   await creatMockReplyMessage();
-  scrollToBottom();
+  setTimeout(() => {
+    scrollToBottom();
+  }, 50);
   onClearMessage();
 };
 const uploadFileProcess = async (files: File[] | undefined): Promise<GroupChatFileDto[]> => {
@@ -446,7 +498,6 @@ const mockCreateNewMessage = (filesUploads: GroupChatFileDto[]) => {
     dtoReplyTo: replyMessageItem.value || null,
     chatMessageType: messageEntity.value.chatMessageType || 'TEXT',
   };
-  console.log('createItem', createItem);
   return new Promise((resolve) => {
     createMessageTimeout.value = setTimeout(() => {
       creatingNewMessage.value = false;
@@ -623,6 +674,7 @@ onUnmounted(() => {
           style="overflow-y: scroll"
           :style="{ 'max-height': scrollAreaHeight }"
           class="q-pa-sm"
+          @scroll="handleScroll"
         >
           <BaseInfiniteScroll
             ref="chatInfinityScrollRef"
@@ -634,7 +686,7 @@ onUnmounted(() => {
           />
           <ChatMessage
             v-for="(item, index) in dataList"
-            :key="`message-${item.id}-${index}`"
+            :key="`message-${item.id}`"
             :item="item"
             :index="index"
             :chat-type="modelValue.chatType"

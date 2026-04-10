@@ -122,7 +122,7 @@ const onFilePreviewClick = async (index: number, event: any) => {
     <div v-if="getImageItems && getImageItems.length > 0" class="row">
       <div
         v-for="(p, previewIndex) in getImageItems"
-        :key="`chat-message-f-preview-${previewIndex}-${p.id}`"
+        :key="`chat-message-f-preview-${p.id}`"
         class="q-pa-xs"
         :class="divSize"
       >
@@ -149,7 +149,7 @@ const onFilePreviewClick = async (index: number, event: any) => {
         <q-list>
           <template
             v-for="(f, previewFileIndex) in getFileItems"
-            :key="`chat-message-file-preview-${previewFileIndex}-${f.id}`"
+            :key="`chat-message-file-preview-${f.id}`"
           >
             <BaseFilesPreviewItemAlt
               v-if="f.fileManager"
