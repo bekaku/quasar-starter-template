@@ -10,6 +10,21 @@ export default defineRouter((/* { store, ssrContext } */) => {
     ? createMemoryHistory
     : createWebHistory;
   const Router = createRouter({
+    // scrollBehavior: () => ({ left: 0, top: 0 }),
+    scrollBehavior: (to, from, savedPosition) => {
+      // 1. ถ้ายูสเซอร์กดปุ่ม Back/Forward ของเบราว์เซอร์ ให้กลับไปตำแหน่งเดิม
+      if (savedPosition) {
+        return savedPosition
+      }
+
+      // 2. ถ้ามี Hash ใน URL (เช่น #section2) ให้เลื่อนไปที่ Hash นั้น
+      if (to.hash) {
+        return { el: to.hash, behavior: 'smooth' }
+      }
+
+      // 3. นอกนั้น (เวลาคลิกเปลี่ยนหน้าปกติ) ให้เด้งกลับไปบนสุดเสมอ!
+      return { left: 0, top: 0 }
+    },
     routes,
     history: createHistory(import.meta.env.VUE_ROUTER_BASE),
   })
