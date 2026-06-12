@@ -10,9 +10,9 @@ import {
   biSearch,
   biX,
 } from '@quasar/extras/bootstrap-icons';
-import { chatHistoryListApi } from 'src/libs/data';
-import { useChatStore } from 'src/stores/chatStore';
-import type { GroupChatDto } from 'src/types/models';
+import { chatHistoryListApi } from '@/libs/data';
+import { useChatStore } from '@/stores/chatStore';
+import type { GroupChatDto } from '@/types/models';
 import { computed, onMounted, ref, watch } from 'vue';
 import BaseButton from '../base/BaseButton.vue';
 import BaseCard from '../base/BaseCard.vue';
@@ -22,7 +22,7 @@ import BaseResult from '../base/BaseResult.vue';
 import BaseScrollArea from '../base/BaseScrollArea.vue';
 import BaseTabs from '../base/BaseTabs.vue';
 import BaseTooltip from '../base/BaseTooltip.vue';
-import { sortArray } from 'src/utils/appUtil';
+import { sortArray } from '@/utils/appUtil';
 const {
   showClose = false,
   autoDetect = true,

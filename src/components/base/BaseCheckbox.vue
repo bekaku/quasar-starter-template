@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 
 const {
   color = 'primary',

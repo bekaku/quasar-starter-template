@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { biCode } from '@quasar/extras/bootstrap-icons';
-import BaseButton from 'src/components/base/BaseButton.vue';
-import BaseCard from 'src/components/base/BaseCard.vue';
-import BaseVirtualScrollerDynamic from 'src/components/base/BaseVirtualScrollerDynamic.vue';
+import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCard from '@/components/base/BaseCard.vue';
+import BaseVirtualScrollerDynamic from '@/components/base/BaseVirtualScrollerDynamic.vue';
 import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
 
 const autoSCrollToBottomRef = useTemplateRef<any>('autoSCrollToBottomRef');

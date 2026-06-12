@@ -11,7 +11,7 @@ import { useChatStore } from '@/stores/chatStore';
 import { defineAsyncComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import type { GroupChatDto } from '@/types/models';
 import { useBase } from '@/composables/useBase';
-import { chatHistoryListApi } from 'src/libs/data';
+import { chatHistoryListApi } from '@/libs/data';
 import BaseTooltip from '../base/BaseTooltip.vue';
 
 const ChatContent = defineAsyncComponent(() => import('@/components/chats/ChatContent.vue'));
@@ -21,19 +21,19 @@ const BaseResult = defineAsyncComponent(() => import('@/components/base/BaseResu
 const chatStore = useChatStore();
 const { t } = useLang();
 const { appNavigateTo } = useBase();
-const groupId = ref<number>();
+const groupId = ref<number | string>();
 const groupItem = ref<GroupChatDto>();
 const firstLoad = ref(false);
 const loading = ref(true);
 
 const onLoad = async () => {
   firstLoad.value = false;
-  if (groupId.value && groupId.value > 0) {
+  if (groupId.value) {
     await onLoadGroupData();
   }
   firstLoad.value = true;
 };
-const findOneChat = async (id: number): Promise<GroupChatDto | undefined> => {
+const findOneChat = async (id: number | string): Promise<GroupChatDto | undefined> => {
   const history = chatHistoryListApi.dataList.find((t) => t.id == id);
   return new Promise((resolve) => resolve(history));
 };
@@ -62,7 +62,7 @@ const onGoToChatPage = () => {
   if (!groupItem.value) {
     return;
   }
-  appNavigateTo(`/example/chats/g/${groupItem.value.id}`);
+  appNavigateTo(`/chats/g/${groupItem.value.id}`);
   onClose();
 };
 watch(chatStore, (state) => {

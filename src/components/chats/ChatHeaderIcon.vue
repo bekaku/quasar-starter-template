@@ -6,7 +6,7 @@ const { screen } = useQuasar();
 </script>
 
 <template>
-  <q-btn v-if="!screen.gt.xs" round dense flat to="/example/chats">
+  <q-btn v-if="!screen.gt.xs" round dense flat to="/chats/g/0">
     <q-icon :name="biChat" />
     <q-badge color="negative" rounded text-color="white" floating> 99+ </q-badge>
   </q-btn>

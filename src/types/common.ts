@@ -279,6 +279,7 @@ export interface LabelValue<Type> {
   rbac?: RBACProps;
   params?: string[];
   queries?: string[];
+  permissions?: string[];
   to?: string;
   translateLabel?: boolean;
   value?: Type | undefined;

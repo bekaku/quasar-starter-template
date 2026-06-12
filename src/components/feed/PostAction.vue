@@ -128,7 +128,7 @@ import {
 } from '@quasar/extras/bootstrap-icons';
 import type { PropType } from 'vue';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { useDevice } from 'src/composables/useDevice';
+import { useDevice } from '@/composables/useDevice';
 const { appToast } = useBase();
 const props = defineProps({
   action: {

@@ -30,7 +30,7 @@ yarn-error.log*
 *.sln
 
 # local .env files
-.env.local*
+# .env.local*
 **/dist/
 # pnpm-lock.yaml
 .vercel

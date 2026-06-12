@@ -4,8 +4,8 @@ import BaseFilesPreviewItemAlt from 'components/base/BaseFilesPreviewItemAlt.vue
 import { useLang } from '@/composables/useLang';
 import type { FileManagerDto, GroupChatFileDto } from '@/types/models';
 import { computed, defineAsyncComponent, ref } from 'vue';
-import { useTheme } from 'src/composables/useTheme';
-import { useDevice } from 'src/composables/useDevice';
+import { useTheme } from '@/composables/useTheme';
+import { useDevice } from '@/composables/useDevice';
 const BaseFileViewDialog = defineAsyncComponent(
   () => import('@/components/base/BaseFileViewDialog.vue'),
 );

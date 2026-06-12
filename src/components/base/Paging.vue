@@ -7,12 +7,12 @@ import {
   mdiSkipPrevious,
 } from '@quasar/extras/mdi-v7';
 import { biChevronExpand } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 import { useQuasar } from 'quasar';
 import { watch } from 'vue';
-import { numberFormat } from 'src/utils/appUtil';
+import { numberFormat } from '@/utils/appUtil';
 import SeparatorDot from './SeparatorDot.vue';
-import { useDevice } from 'src/composables/useDevice';
+import { useDevice } from '@/composables/useDevice';
 const {
   maxPages = 7,
   boundaryNumbers = false,

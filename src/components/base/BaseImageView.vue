@@ -16,9 +16,9 @@ import type { SlideOptions, SwiperSlideChange } from '@/types/common';
 import BaseSwiperSlides from '@/components/base/BaseSwiperSlides.vue';
 import { computed, onMounted, ref, useTemplateRef } from 'vue';
 import { useQuasar } from 'quasar';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
-import { useAuthenStore } from 'src/stores/authenStore';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
+import { useAuthenStore } from '@/stores/authenStore';
 import BaseAvatar from './BaseAvatar.vue';
 const {
   showDeleteImage = false,

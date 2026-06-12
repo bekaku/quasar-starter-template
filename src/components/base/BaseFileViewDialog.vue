@@ -13,10 +13,10 @@ import {
   isBlobUrl,
 } from '@/utils/fileUtil';
 import { onMounted, ref } from 'vue';
-import { useBase } from 'src/composables/useBase';
-import BasePdfViewDialog from 'src/components/base/BasePdfViewDialog.vue';
-import BaseImageViewDialog from 'src/components/base/BaseImageViewDialog.vue';
-import { isLinkFromWebApp } from 'src/utils/appUtil';
+import { useBase } from '@/composables/useBase';
+import BasePdfViewDialog from '@/components/base/BasePdfViewDialog.vue';
+import BaseImageViewDialog from '@/components/base/BaseImageViewDialog.vue';
+import { isLinkFromWebApp } from '@/utils/appUtil';
 const {
   title,
   imageList,

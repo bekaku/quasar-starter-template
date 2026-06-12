@@ -8,9 +8,9 @@ import {
   biSearch
 } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import { useBase } from 'src/composables/useBase';
-import { useDevice } from 'src/composables/useDevice';
-import { useAppStore } from 'src/stores/appStore';
+import { useBase } from '@/composables/useBase';
+import { useDevice } from '@/composables/useDevice';
+import { useAppStore } from '@/stores/appStore';
 import { defineAsyncComponent, ref } from 'vue';
 import ChatHeaderIcon from '../chats/ChatHeaderIcon.vue';
 import BaseLangugeSwitcherButton from './BaseLangugeSwitcherButton.vue';

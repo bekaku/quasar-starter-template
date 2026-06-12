@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import BaseLink from 'src/components/base/BaseLink.vue';
-import { urlify, roundDecimal } from 'src/utils/appUtil';
+import BaseLink from '@/components/base/BaseLink.vue';
+import { urlify, roundDecimal } from '@/utils/appUtil';
 import { useLang } from '@/composables/useLang';
 const props = defineProps({
   content: {

@@ -1,11 +1,11 @@
 import { Cookies } from 'quasar';
-import { LocaleKey } from 'src/libs/constant';
-import type { ILocales } from 'src/types/common';
-import { addDateByDays } from 'src/utils/dateUtil';
+import { LocaleKey } from '@/libs/constant';
+import type { ILocales } from '@/types/common';
+import { addDateByDays } from '@/utils/dateUtil';
 import { computed, useSSRContext } from 'vue';
 import { useI18n } from 'vue-i18n';
 export const useLang = () => {
-  const defaultLocale: string = process.env.APP_DEFAULT_LOCALE || 'th';
+  const defaultLocale: string = import.meta.env.QCLI_APP_DEFAULT_LOCALE || 'th';
   const availableLocales: ILocales[] = [
     {
       name: 'English',
@@ -19,8 +19,8 @@ export const useLang = () => {
     },
   ];
   const { t, locale } = useI18n({ useScope: 'global' });
-  const ssrContext = process.env.SERVER ? useSSRContext() : null;
-  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
+  const ssrContext = import.meta.env.QUASAR_SERVER ? useSSRContext() : null;
+  const cookies = import.meta.env.QUASAR_SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
   const localeCookie = computed(() => cookies.get(LocaleKey) || defaultLocale)
   const currenLocale = computed(() =>
     availableLocales.find((t) => t.iso == locale.value),

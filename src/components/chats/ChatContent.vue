@@ -3,12 +3,12 @@ import ChatInput from '@/components/chats/ChatInput.vue';
 import ChatMessage from '@/components/chats/ChatMessage.vue';
 import { getImgUrlFromFile, isImageFile } from '@/utils/fileUtil';
 import { biArrowDown } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
-import { useTheme } from 'src/composables/useTheme';
-import { chatMessageListApi, userItems } from 'src/libs/data';
-import { useAuthenStore } from 'src/stores/authenStore';
-import { useChatStore } from 'src/stores/chatStore';
-import type { VirtualScrollerUpdate } from 'src/types/common';
+import { useLang } from '@/composables/useLang';
+import { useTheme } from '@/composables/useTheme';
+import { chatMessageListApi, userItems } from '@/libs/data';
+import { useAuthenStore } from '@/stores/authenStore';
+import { useChatStore } from '@/stores/chatStore';
+import type { VirtualScrollerUpdate } from '@/types/common';
 import type {
   EmojiCountDto,
   EmojiType,
@@ -16,9 +16,9 @@ import type {
   GroupChatFileDto,
   GroupChatMsgDto,
   GroupChatMsgRequest,
-} from 'src/types/models';
-import { randomNumber } from 'src/utils/appUtil';
-import { FORMAT_DATE13, getCurrentDateByFormat } from 'src/utils/dateUtil';
+} from '@/types/models';
+import { randomNumber } from '@/utils/appUtil';
+import { FORMAT_DATE13, getCurrentDateByFormat } from '@/utils/dateUtil';
 import {
   defineAsyncComponent,
   nextTick,
@@ -33,7 +33,7 @@ import BaseCard from '../base/BaseCard.vue';
 import BaseInfiniteScroll from '../base/BaseInfiniteScroll.vue';
 import BaseVirtualScrollerDynamic from '../base/BaseVirtualScrollerDynamic.vue';
 import ChatContentHeader from './ChatContentHeader.vue';
-import { ChatMesageFocusableId } from 'src/libs/constant';
+import { ChatMesageFocusableId } from '@/libs/constant';
 const ChatReplyItem = defineAsyncComponent(() => import('@/components/chats/ChatReplyItem.vue'));
 const {
   showHeader = true,

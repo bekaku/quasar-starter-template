@@ -1,0 +1,16 @@
+{
+  "name": "quasar-ssr-app-express",
+  "version": "1.0.0",
+  "description": "Quasar SSR server folder",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^5.0.0",
+    "compression": "^1.8.1",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.8.1", 
+    "@types/express": "^5.0.6"
+  }
+}

@@ -43,7 +43,7 @@ import { ref, onMounted, defineAsyncComponent } from 'vue';
 import { useLang } from '@/composables/useLang';
 import type { NotificationDto } from '@/types/models';
 import UserNotifyService from '@/api/UserNotifyService';
-import { useNotification } from 'src/composables/useNotification';
+import { useNotification } from '@/composables/useNotification';
 import { biBell } from '@quasar/extras/bootstrap-icons';
 import BaseTooltip from '../base/BaseTooltip.vue';
 const SkeletonItem = defineAsyncComponent(() => import('@/components/skeleton/SkeletonItem.vue'));

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { biArrowDown, biArrowUp, biCode } from '@quasar/extras/bootstrap-icons';
-import BaseCard from 'src/components/base/BaseCard.vue';
-import BaseVirtualScrollerDynamic from 'src/components/base/BaseVirtualScrollerDynamic.vue';
-import type { VirtualScrollerUpdate } from 'src/types/common';
+import BaseCard from '@/components/base/BaseCard.vue';
+import BaseVirtualScrollerDynamic from '@/components/base/BaseVirtualScrollerDynamic.vue';
+import type { VirtualScrollerUpdate } from '@/types/common';
 import { onMounted, ref, useTemplateRef } from 'vue';
 
 const dataList = ref<any[]>([]);

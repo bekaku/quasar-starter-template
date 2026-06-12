@@ -1,8 +1,8 @@
 <script setup lang="ts" generic="T">
 import { checkExpansionChildActiveAlt } from '@/utils/appUtil';
 import { mdiChevronDown, mdiChevronRight } from '@quasar/extras/mdi-v7';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
 import { computed } from 'vue';
 import type { LabelValue } from '@/types/common';
 import BaseMenuItem from './BaseMenuItem.vue';

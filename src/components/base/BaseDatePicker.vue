@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { biCalendarWeek, biXCircleFill } from '@quasar/extras/bootstrap-icons';
-import { FORMAT_DATE5 } from 'src/utils/dateUtil';
+import { FORMAT_DATE5 } from '@/utils/dateUtil';
 import type { AppColor } from '@/types/common';
 import { convertDateFormatToThai } from '@/utils/dateUtil';
 import { ref } from 'vue';
-import { useLang } from 'src/composables/useLang';
-import { useBase } from 'src/composables/useBase';
+import { useLang } from '@/composables/useLang';
+import { useBase } from '@/composables/useBase';
 import BaseDate from './BaseDate.vue';
 const {
   autoClose = true,

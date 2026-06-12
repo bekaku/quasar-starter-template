@@ -14,15 +14,15 @@ import {
   biPerson,
 } from '@quasar/extras/bootstrap-icons';
 import { Cookies, useMeta } from 'quasar';
-import BaseButton from 'src/components/base/BaseButton.vue';
-import BaseInput from 'src/components/base/BaseInput.vue';
-import BaseLangugeSwitcherButton from 'src/components/base/BaseLangugeSwitcherButton.vue';
-import BaseLink from 'src/components/base/BaseLink.vue';
-import BasePage from 'src/components/base/BasePage.vue';
-import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
-import Ellipsis from 'src/components/base/BaseEllipsis.vue';
-import { useBase } from 'src/composables/useBase';
-import { AppAuthTokenKey } from 'src/libs/constant';
+import BaseButton from '@/components/base/BaseButton.vue';
+import BaseInput from '@/components/base/BaseInput.vue';
+import BaseLangugeSwitcherButton from '@/components/base/BaseLangugeSwitcherButton.vue';
+import BaseLink from '@/components/base/BaseLink.vue';
+import BasePage from '@/components/base/BasePage.vue';
+import BaseThemeSwitcher from '@/components/base/BaseThemeSwitcher.vue';
+import Ellipsis from '@/components/base/BaseEllipsis.vue';
+import { useBase } from '@/composables/useBase';
+import { AppAuthTokenKey } from '@/libs/constant';
 import { defineAsyncComponent, onMounted, ref } from 'vue';
 const ForgotPassword = defineAsyncComponent(() => import('@/components/app/ForgotPassword.vue'));
 const { getDeviceId, isSmallScreen } = useDevice();
@@ -39,13 +39,19 @@ const loginForm = ref(null);
 const deviceId = ref();
 const rememberMe = ref(false);
 const dialogForgotPassword = ref<boolean>(false);
-const appVersion = process.env.APP_VERSION;
+const appVersion = import.meta.env.QCLI_APP_VERSION;
 // useMeta({
 //   title: `${t('page.login')} | ${t('app.monogram')}`,
 // });
+onMounted(() => {
+  console.log('import.meta.env.QCLI_APP_BASE_API', import.meta.env.QCLI_APP_BASE_API)
+  console.log('import.meta.env.QCLI_APP_BASE_CDN_API', import.meta.env.QCLI_APP_BASE_CDN_API)
+  console.log('import.meta.env.QCLI_APP_PUBLIC_PATH', import.meta.env.QCLI_APP_PUBLIC_PATH)
+  console.log('import.meta.env.QCLI_APP_DEV_MODE', import.meta.env.QCLI_APP_DEV_MODE)
+})
 defineOptions({
   preFetch({ ssrContext, redirect }) {
-    const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
+    const cookies = import.meta.env.QUASAR_SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
     // detroyAuthCookie(cookies);
     if (cookies.get(AppAuthTokenKey)) {
       redirect({ path: '/' });
@@ -100,7 +106,7 @@ onMounted(async () => {
 const onSubmit = async () => {
   loading.value = true;
   const response = await singin({
-    user: {
+    data: {
       emailOrUsername: email.value,
       password: password.value,
       loginFrom: 'WEB',
@@ -114,7 +120,7 @@ const onSubmit = async () => {
     loading.value = false;
     // redirect to index page
     // window.location.replace('/');
-    window.location.replace(process.env.APP_PUBLIC_PATH || '/');
+    window.location.replace(import.meta.env.QCLI_APP_PUBLIC_PATH || '/');
   }
 };
 const onReset = () => {
@@ -229,7 +235,7 @@ const onReset = () => {
 
           <div class="text-center q-mt-lg">
             Don't have an account?
-            <BaseLink to="/signup" color="primary">Sign Up</BaseLink>
+            <BaseLink to="/auth/signup" color="primary">Sign Up</BaseLink>
             <!-- <BaseLink to="/auth/forgot-password">
                                {{ t('authen.forgetPassword') }}
                            </BaseLink> -->

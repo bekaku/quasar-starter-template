@@ -75,7 +75,7 @@ const buttons2 = [
     external: true,
   },
 ];
-const appVersion = process.env.APP_VERSION;
+const appVersion = import.meta.env.QCLI_APP_VERSION;
 </script>
 <style lang="sass">
 .YL

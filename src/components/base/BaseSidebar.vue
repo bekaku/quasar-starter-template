@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import { useBase } from '@/composables/useBase';
+import { useDevice } from '@/composables/useDevice';
+import { useLang } from '@/composables/useLang';
+import { additionalMenu } from '@/libs/navs';
+import { useAppStore } from '@/stores/appStore';
+import { getYearNow } from '@/utils/dateUtil';
 import { biCommand, biGear, biQuestionCircle, biSearch } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
-import { useAppStore } from 'src/stores/appStore';
 import { defineAsyncComponent, onBeforeUnmount, onMounted, ref } from 'vue';
-import { additionalMenu } from '@/libs/navs';
 import BaseDrawer from './BaseDrawer.vue';
 import BaseMenuItems from './BaseMenuItems.vue';
-import { getYearNow } from '@/utils/dateUtil';
-import { useDevice } from 'src/composables/useDevice';
-import { useAppConfig } from 'src/composables/useAppConfig';
 const SearchMenu = defineAsyncComponent(() => import('@/components/search/SearchMenu.vue'));
 const {
   overlay = false,
@@ -31,7 +30,6 @@ const {
 const { version: quasarVersion } = useQuasar();
 const { t } = useLang();
 const { appNavigateTo } = useBase();
-const { getConfig } = useAppConfig();
 const { isMobileOrTablet: checkMobileOrTablet } = useDevice();
 const appStore = useAppStore();
 const modelValue = defineModel<boolean>({ default: true });
@@ -39,7 +37,7 @@ const miniState = ref(true);
 const isMobileOrTablet = ref<boolean>(false);
 const searchTimeout = ref<any>();
 const showSearch = ref(false);
-const appVersion = process.env.APP_VERSION;
+const appVersion = import.meta.env.QCLI_APP_VERSION;
 onMounted(() => {
   checkMobileOrTablet().then((result) => {
     isMobileOrTablet.value = result;

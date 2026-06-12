@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BadgeProps } from 'src/types/props';
+import type { BadgeProps } from '@/types/props';
 const { floating = true, color, transparent, rounded } = defineProps<BadgeProps>();
 </script>
 <template>

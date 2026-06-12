@@ -2,7 +2,7 @@
 import { useLang } from '@/composables/useLang';
 import type { ChatMessageType, LabelValue } from '@/types/common';
 import type { GroupChatDto } from '@/types/models';
-import { useTheme } from 'src/composables/useTheme';
+import { useTheme } from '@/composables/useTheme';
 import { defineAsyncComponent, ref } from 'vue';
 import BaseTabs from '../base/BaseTabs.vue';
 const ChatGroupFiles = defineAsyncComponent(() => import('components/chats/ChatGroupFiles.vue'));

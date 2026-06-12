@@ -6,7 +6,7 @@ import { useChat } from '@/composables/useChat';
 import { useLang } from '@/composables/useLang';
 import type { GroupChatDto } from '@/types/models';
 import { biArrowRightShort } from '@quasar/extras/bootstrap-icons';
-import { chatHistoryListApi } from 'src/libs/data';
+import { chatHistoryListApi } from '@/libs/data';
 import { onMounted, ref } from 'vue';
 import BaseButton from '../base/BaseButton.vue';
 import BaseLink from '../base/BaseLink.vue';
@@ -37,7 +37,7 @@ const onItemClick = (item: GroupChatDto) => {
       </q-toolbar-title>
       <q-space />
 
-      <BaseLink to="/example/chats">
+      <BaseLink to="/chats/g/0">
         {{ t('chats.openChatPage') }}
       </BaseLink>
     </q-toolbar>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useRbac } from 'src/composables/useRbac';
-import type { RBACProps } from 'src/types/props';
+import { useRbac } from '@/composables/useRbac';
+import type { RBACProps } from '@/types/props';
 import { computed } from 'vue';
 
 const { rbac } = defineProps<{

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { biCode } from '@quasar/extras/bootstrap-icons';
 import { useVirtualList } from '@vueuse/core';
-import BaseButton from 'src/components/base/BaseButton.vue';
-import BaseCard from 'src/components/base/BaseCard.vue';
-import BaseInput from 'src/components/base/BaseInput.vue';
+import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCard from '@/components/base/BaseCard.vue';
+import BaseInput from '@/components/base/BaseInput.vue';
 import { computed, onMounted, shallowRef } from 'vue';
 
 const index = shallowRef<number>();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { biHouseDoor } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import { useDevice } from 'src/composables/useDevice';
+import { useDevice } from '@/composables/useDevice';
 import type { PropType } from 'vue';
 import { ref } from 'vue';
 type ISideType = 'left' | 'right' | undefined;

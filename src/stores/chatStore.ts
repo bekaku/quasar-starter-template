@@ -14,7 +14,7 @@ export const useChatStore = defineStore('chatStore', () => {
   const currentDateForShow = ref<string>();
 
   const openMiniChatPage = ref<boolean>(false);
-  const miniChatGroupId = ref<number>();
+  const miniChatGroupId = ref<number | string>();
   const miniChatMinimize = ref(false);
   const clearSetting = () => {
     chatId.value = undefined;

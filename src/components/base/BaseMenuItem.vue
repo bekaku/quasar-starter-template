@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="T">
 import type { LabelValue } from '@/types/common';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
 import { computed } from 'vue';
 import BaseAvatar from './BaseAvatar.vue';
 

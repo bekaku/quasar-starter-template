@@ -7,7 +7,7 @@ import { AppAuthTokenKey } from '@/libs/constant';
 import { formatRelativeFromNow } from '@/utils/dateUtil';
 import { biX } from '@quasar/extras/bootstrap-icons';
 import type { AxiosResponse } from 'axios';
-import { api } from 'boot/axios';
+import { api } from '@/boot/axios';
 import { Cookies } from 'quasar';
 import { useSSRContext } from 'vue';
 
@@ -15,8 +15,8 @@ export const useAxios = () => {
   const { canSyncActiveStatusToServer } = useDevice();
   const { appToast, appLoading, isDevMode } = useBase();
   const { locale } = useLang();
-  const ssrContext = process.env.SERVER ? useSSRContext() : null;
-  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
+  const ssrContext = import.meta.env.QUASAR_SERVER ? useSSRContext() : null;
+  const cookies = import.meta.env.QUASAR_SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   // const reqHeader = () => {
   //   return {
   //     Authorization: `Bearer ${token}`,
@@ -155,7 +155,7 @@ export const useAxios = () => {
       if (req.baseURL != undefined) {
         api.defaults.baseURL = req.baseURL;
       } else {
-        api.defaults.baseURL = process.env.APP_BASE_API || '';
+        api.defaults.baseURL = import.meta.env.QCLI_APP_BASE_API || '';
       }
 
       if (req.contentType) {

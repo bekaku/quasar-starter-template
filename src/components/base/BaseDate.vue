@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AppColor } from '@/types/common';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 import { computed, ref } from 'vue';
 const {
   autoClose = true,

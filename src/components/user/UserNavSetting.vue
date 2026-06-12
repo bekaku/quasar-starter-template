@@ -15,10 +15,10 @@ import {
   biSun,
 } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import BaseLangugeSwitcher from 'src/components/base/BaseLangugeSwitcher.vue';
-import BaseThemeSwitcher from 'src/components/base/BaseThemeSwitcher.vue';
-import { useDevice } from 'src/composables/useDevice';
-import { useTheme } from 'src/composables/useTheme';
+import BaseLangugeSwitcher from '@/components/base/BaseLangugeSwitcher.vue';
+import BaseThemeSwitcher from '@/components/base/BaseThemeSwitcher.vue';
+import { useDevice } from '@/composables/useDevice';
+import { useTheme } from '@/composables/useTheme';
 const { screen } = useQuasar();
 const { t, currenLocale } = useLang();
 const { isDark } = useTheme();
@@ -49,7 +49,7 @@ const { isSmallScreen } = useDevice();
     </q-item-section>
     <q-menu>
       <q-list dense style="min-width: 260px" class="q-pa-xs">
-        <q-item clickable v-close-popup to="/example/feed" class="rounded">
+        <q-item clickable v-close-popup to="/feed" class="rounded">
           <q-item-section avatar>
             <base-avatar
               v-if="authenStore.loginedAvatar"

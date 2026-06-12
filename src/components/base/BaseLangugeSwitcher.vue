@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { biCheck2 } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 const {
   closeOnClick = false,
   anchor = 'bottom left',

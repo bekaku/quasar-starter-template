@@ -6,7 +6,7 @@ import {
     biTags,
     biTrophy
 } from '@quasar/extras/bootstrap-icons';
-import { PageIdParamiter } from 'src/libs/constant';
+import { PageIdParamiter } from '@/libs/constant';
 export const TabTest: LabelValue<any>[] = [
     {
         label: 'Point',

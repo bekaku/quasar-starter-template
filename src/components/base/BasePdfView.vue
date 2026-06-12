@@ -10,17 +10,17 @@ import {
   biZoomOut,
 } from '@quasar/extras/bootstrap-icons';
 import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import SkeletonItem from 'src/components/skeleton/SkeletonItem.vue';
-import { useLang } from 'src/composables/useLang';
-import { useTheme } from 'src/composables/useTheme';
-import type { PdfWatermarkOptions } from 'src/types/common';
-import { isLinkFromWebCdn } from 'src/utils/appUtil';
-import { getBlobFromAxiosResponse, getFileNameFromAxiosResponse } from 'src/utils/fileUtil';
+import SkeletonItem from '@/components/skeleton/SkeletonItem.vue';
+import { useLang } from '@/composables/useLang';
+import { useTheme } from '@/composables/useTheme';
+import type { PdfWatermarkOptions } from '@/types/common';
+import { isLinkFromWebCdn } from '@/utils/appUtil';
+import { getBlobFromAxiosResponse, getFileNameFromAxiosResponse } from '@/utils/fileUtil';
 import { onMounted, ref, useTemplateRef } from 'vue';
 import BaseCheckbox from './BaseCheckbox.vue';
 import BasePdfViewCore from './BasePdfViewCore.vue';
 import BaseTooltip from './BaseTooltip.vue';
-import { useBase } from 'src/composables/useBase';
+import { useBase } from '@/composables/useBase';
 const {
   src,
   title,

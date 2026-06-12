@@ -34,9 +34,9 @@ export const validateEmail = (email: string) => {
     );
 };
 /**
- * 
- * @param name 
- * @returns 
+ *
+ * @param name
+ * @returns
  * ^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$
     └─────┬────┘└───┬──┘└─────┬─────┘└─────┬─────┘ └───┬───┘
        │         │         │            │           no _ or . at the end
@@ -382,7 +382,7 @@ export const detroyAuthCookie = (cookies: any) => {
     cookies.remove(AppAuthRefeshTokenKey, { path: '/', });
     cookies.remove(AppAuthTokenExpireKey, { path: '/', });
     cookies.remove(AppAuthTokenCreatedKey, { path: '/', });
-    if (process.env.SERVER) {
+    if (import.meta.env.QUASAR_SERVER) {
       cookies.remove(SucureDeviceIdAtt, { path: '/', });
     }
     // cookies.remove(AppAuthTokenKey, { path: '/', domain: !devMode ? AppDomain : undefined, });
@@ -505,16 +505,16 @@ export const cloneObjectV3 = <T>(obj: T) => {
 };
 
 export const isLinkFromWebApp = (link: string): boolean => {
-  if (!process.env.APP_API_DOMAIN) {
+  if (!import.meta.env.QCLI_APP_API_DOMAIN) {
     return false
   }
-  return link.includes(process.env.APP_API_DOMAIN)
+  return link.includes(import.meta.env.QCLI_APP_API_DOMAIN)
 }
 export const isLinkFromWebCdn = (link: string): boolean => {
-  if (!process.env.APP_BASE_CDN_API) {
+  if (!import.meta.env.QCLI_APP_BASE_CDN_API) {
     return false
   }
-  return link.includes(process.env.APP_BASE_CDN_API)
+  return link.includes(import.meta.env.QCLI_APP_BASE_CDN_API)
 }
 export const isLinkFromWebAppDev = (link: string): boolean => {
   return link.includes('localhost') || link.includes('127.0.0.1')

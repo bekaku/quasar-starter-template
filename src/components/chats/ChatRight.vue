@@ -14,8 +14,8 @@ import {
   biX
 } from '@quasar/extras/bootstrap-icons';
 import { useQuasar } from 'quasar';
-import type { ChatMessageType } from 'src/types/common';
-import type { GroupChatDto, UserDto } from 'src/types/models';
+import type { ChatMessageType } from '@/types/common';
+import type { GroupChatDto, UserDto } from '@/types/models';
 import { computed, ref } from 'vue';
 import BaseButton from '../base/BaseButton.vue';
 import BaseCard from '../base/BaseCard.vue';

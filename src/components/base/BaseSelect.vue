@@ -1,9 +1,9 @@
 <script setup lang="ts" generic="T">
 import type { LabelValue } from '@/types/common';
 import { biCheck, biChevronExpand, biX } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
-import { useTheme } from 'src/composables/useTheme';
-import { useValidation } from 'src/composables/useValidation';
+import { useLang } from '@/composables/useLang';
+import { useTheme } from '@/composables/useTheme';
+import { useValidation } from '@/composables/useValidation';
 import { computed, ref, watchEffect } from 'vue';
 import SkeletonItem from '../skeleton/SkeletonItem.vue';
 import BaseAvatar from './BaseAvatar.vue';

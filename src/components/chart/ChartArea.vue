@@ -6,7 +6,7 @@ import type {
   IChartSeries,
   Strokestyle,
 } from '@/types/chart';
-import { useTheme } from 'src/composables/useTheme';
+import { useTheme } from '@/composables/useTheme';
 import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 
 const {

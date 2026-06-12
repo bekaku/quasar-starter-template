@@ -4,7 +4,7 @@ import type { VueMoneyConFig } from '@/types/common';
 import BaseAvatar from './BaseAvatar.vue';
 import { numberFormat } from '@/utils/appUtil';
 import BaseInputMoney from './BaseInputMoney.vue';
-import type { AvatarProps } from 'src/types/props';
+import type { AvatarProps } from '@/types/props';
 const {
   dense = true,
   debounce = 0,

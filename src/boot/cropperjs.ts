@@ -1,8 +1,7 @@
-/* eslint-disable ts/no-unused-vars */
-import { boot } from 'quasar/wrappers';
+import { defineBoot } from '#q-app'
 import { CropperCanvas, CropperImage, CropperShade, CropperHandle, CropperSelection, CropperGrid, CropperCrosshair, CropperViewer } from 'cropperjs';
 // eslint-disable-next-line unused-imports/no-unused-vars
-export default boot(({ app }) => {
+export default defineBoot(({ app }) => {
   CropperCanvas.$define();
   CropperImage.$define();
   CropperShade.$define();
