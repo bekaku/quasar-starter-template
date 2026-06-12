@@ -6,7 +6,7 @@ import type { GroupChatRequest } from '@/types/models';
 export const useChatStore = defineStore('chatStore', () => {
   const removeChat = ref(false);
   const chatId = ref<number>();
-  const messageIdFocus = ref<number>();
+  const messageIdFocus = ref<number | string>();
   const toggleChatSetting = ref(false);
   const chatSettingType = ref<ChatSettingType>();
   const requestItem = ref<GroupChatRequest>();
