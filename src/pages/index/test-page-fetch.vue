@@ -8,7 +8,7 @@ import { useAppMeta } from '@/composables/useAppMeta';
 import PermissionService from '@/api/PermissionService';
 import { biArrowLeft, biPlus } from '@quasar/extras/bootstrap-icons';
 const BaseResult = defineAsyncComponent(() => import('@/components/base/BaseResult.vue'));
-const BaseLoadmore = defineAsyncComponent(() => import('@/components/BaseLoadmore.vue'));
+const BaseLoadmore = defineAsyncComponent(() => import('@/components/base/BaseLoadmore.vue'));
 const BaseSpinner = defineAsyncComponent(() => import('@/components/base/BaseSpinner.vue'));
 const { t } = useLang();
 const { pages, resetPaging } = usePaging(5);

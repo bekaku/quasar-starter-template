@@ -5,12 +5,13 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "express": "^5.0.0",
     "compression": "^1.8.1",
-    "helmet": "^8.1.0"
+    "express": "^5.0.0",
+    "helmet": "^8.1.0",
+    "serialize-javascript": "^7.0.5"
   },
   "devDependencies": {
-    "@types/compression": "^1.8.1", 
+    "@types/compression": "^1.8.1",
     "@types/express": "^5.0.6"
   }
 }
