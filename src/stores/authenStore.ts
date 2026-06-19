@@ -20,7 +20,7 @@ export const useAuthenStore = defineStore('authenStore', () => {
   const refreshTokenTimeout = ref<any>();
   const refreshTokenTimeoutNo = ref(0);
   const sessionExpired = ref(false);
-  const devMode = import.meta.env.NODE_ENV == 'development';
+  const devMode = import.meta.env.QUASAR_DEV;
   const tokenKey = computed(() => auth.value?.token);
   const loginedCover = computed(() => auth.value?.cover?.image);
   const loginedAvatar = computed(() => auth.value?.avatar?.image);
@@ -122,7 +122,7 @@ export const useAuthenStore = defineStore('authenStore', () => {
   const setRefreshTokenCookie = async (ssrContext: any, responseData: RefreshTokenResponse) => {
     return new Promise(async (resolve /* reject */) => {
       const ck: any = import.meta.env.QUASAR_SERVER && ssrContext ? Cookies.parseSSR(ssrContext) : Cookies;
-      const isDevMode = import.meta.env.NODE_ENV == 'development';
+      const isDevMode = import.meta.env.QUASAR_DEV;
       // if (isServerMode) {
       //   ck.set(SucureDeviceIdAtt, response.data.refreshToken, {
       //     expires: addDateByDays(ExpireCookieDays),

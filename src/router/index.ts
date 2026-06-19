@@ -12,7 +12,6 @@ export default defineRouter((/* { store, ssrContext } */) => {
   const Router = createRouter({
     // scrollBehavior: () => ({ left: 0, top: 0 }),
     scrollBehavior: (to, from, savedPosition) => {
-      // 1. ถ้ายูสเซอร์กดปุ่ม Back/Forward ของเบราว์เซอร์ ให้กลับไปตำแหน่งเดิม
       if (savedPosition) {
         return savedPosition
       }

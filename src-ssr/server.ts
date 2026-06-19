@@ -1,24 +1,22 @@
 /**
- * More info about this file:
  * https://v2.quasar.dev/quasar-cli-vite/developing-ssr/ssr-webserver
  *
- * Runs in Node context.
+ * Runs in Node.js context.
+ *
+ * Make sure to pnpm/yarn/npm/bun install (in /src-ssr folder)
+ * anything you import here.
  */
 
-/**
- * Make sure to yarn add / npm install (in your project root)
- * anything you import here (except for express and compression).
- */
-import { Server } from 'node:http';
-import compression from 'compression';
-import express, { Application, Request, Response } from 'express';
+import express from 'express';
+import type { Application, Request, Response } from 'express';
+import type { Server } from 'node:http';
 import {
+  defineSsrClose,
   defineSsrCreate,
   defineSsrInjectDevMiddleware,
   defineSsrListen,
-  defineSsrClose,
-  defineSsrServeStaticContent,
-  defineSsrRenderPreloadTag
+  defineSsrRenderPreloadTag,
+  defineSsrServeStaticContent
 } from '#q-app';
 
 declare module '#q-app' {
@@ -32,19 +30,25 @@ declare module '#q-app' {
 
 /**
  * Create your webserver and return its instance.
- *
- * Can be async: defineSsrCreate(async ({ ... }) => { ... })
  */
-export const create = defineSsrCreate((/* { ... } */) => {
+export const create = defineSsrCreate(async (/* { ... } */) => {
   const app = express();
 
-  // attackers can use this header to detect apps running Express
-  // and then launch specifically-targeted attacks
-  app.disable('x-powered-by');
-
-  // place here any middlewares that
-  // absolutely need to run before anything else
   if (import.meta.env.QUASAR_PROD) {
+    /**
+     * Optional: secure your app with Helmet
+     * (https://helmetjs.github.io/)
+     */
+    const { default: helmet } = await import('helmet');
+    // app.use(helmet());
+      app.use(
+        helmet({
+          contentSecurityPolicy: false,
+          crossOriginEmbedderPolicy: false
+        })
+      );
+
+    const { default: compression } = await import('compression');
     app.use(compression());
   }
 
@@ -58,11 +62,12 @@ export const create = defineSsrCreate((/* { ... } */) => {
  *
  * Can be async: defineSsrInjectDevMiddleware(async ({ app }) => { ... })
  */
-export const injectDevMiddleware = defineSsrInjectDevMiddleware(({ app }) => {
-  return (middleware) => {
-    app.use(middleware);
-  };
-});
+export const injectDevMiddleware = defineSsrInjectDevMiddleware(
+  ({ app }) =>
+    middleware => {
+      app.use(middleware);
+    }
+);
 
 /**
  * You need to make the server listen to the indicated port
@@ -74,17 +79,36 @@ export const injectDevMiddleware = defineSsrInjectDevMiddleware(({ app }) => {
  *
  * For production, you can instead export your
  * handler for serverless use or whatever else fits your needs.
- *
- * Can be async: defineSsrListen(async ({ app, devHttpsApp, port }) => { ... })
  */
-export const listen = defineSsrListen(({ app, devHttpsApp, port }) => {
-  const server = devHttpsApp || app;
-  return server.listen(port, () => {
-    if (import.meta.env.QUASAR_PROD) {
-      console.log('Server listening at port ' + port);
+export const listen = defineSsrListen(
+  async ({ app, devHttpsOptions, port }) => {
+    if (import.meta.env.QUASAR_DEV && devHttpsOptions) {
+      const https = await import('node:https');
+      const server = https.createServer(devHttpsOptions, (req, res) => {
+        app(req, res);
+      });
+      return server.listen(port);
     }
-  });
-});
+
+    /**
+     * For production HTTPS you can use the /src-ssr/server-assets folder
+     * to place your certificates and then read them here to create the server.
+     *
+     * Use resolve.serverAssets('path-to-file') to get the absolute path to the file
+     * or directly play with folders.serverAssets.
+     */
+
+    const http = await import('node:http');
+    const server = http.createServer((req, res) => {
+      app(req, res);
+    });
+    return server.listen(port, () => {
+      if (import.meta.env.QUASAR_PROD) {
+        console.log(`🚀 Server listening at port ${port}`);
+      }
+    });
+  }
+);
 
 /**
  * Should close the server and free up any resources.
@@ -94,11 +118,9 @@ export const listen = defineSsrListen(({ app, devHttpsApp, port }) => {
  * Should you need the result of the "listen()" call above,
  * you can use the "listenResult" param.
  *
- * Can be async: defineSsrClose(async ({ listenResult }) => { ... }))
+ * Can be async: defineSsrClose(async ({ listenResult }) => { ... })
  */
-export const close = defineSsrClose(({ listenResult }) => {
-  return listenResult.close();
-});
+export const close = defineSsrClose(({ listenResult }) => listenResult.close());
 
 const maxAge = import.meta.env.QUASAR_DEV ? 0 : 1000 * 60 * 60 * 24 * 30;
 
@@ -111,12 +133,16 @@ const maxAge = import.meta.env.QUASAR_DEV ? 0 : 1000 * 60 * 60 * 24 * 30;
  * Can be async: defineSsrServeStaticContent(async ({ app, resolve }) => {
  * Can return an async function: return async ({ urlPath = '/', pathToServe = '.', opts = {} }) => {
  */
-export const serveStaticContent = defineSsrServeStaticContent(({ app, resolve }) => {
-  return ({ urlPath = '/', pathToServe = '.', opts = {} }) => {
-    const serveFn = express.static(resolve.public(pathToServe), { maxAge, ...opts });
-    app.use(resolve.urlPath(urlPath), serveFn);
-  };
-});
+export const serveStaticContent = defineSsrServeStaticContent(
+  ({ app, resolve }) =>
+    ({ urlPath, pathToServe, opts = {} }) => {
+      const serveFn = express.static(resolve.public(pathToServe), {
+        maxAge,
+        ...opts
+      });
+      app.use(resolve.urlPath(urlPath), serveFn);
+    }
+);
 
 const jsRE = /\.js$/;
 const cssRE = /\.css$/;
@@ -130,34 +156,36 @@ const pngRE = /\.png$/;
  * Should return a String with HTML output
  * (if any) for preloading indicated file
  */
-export const renderPreloadTag = defineSsrRenderPreloadTag((file/* , { ssrContext } */) => {
-  if (jsRE.test(file) === true) {
-    return `<link rel="modulepreload" href="${file}" crossorigin>`;
-  }
+export const renderPreloadTag = defineSsrRenderPreloadTag(
+  (file /* , { ssrContext } */) => {
+    if (jsRE.test(file)) {
+      return `<link rel="modulepreload" href="${file}" crossorigin>`;
+    }
 
-  if (cssRE.test(file) === true) {
-    return `<link rel="stylesheet" href="${file}" crossorigin>`;
-  }
+    if (cssRE.test(file)) {
+      return `<link rel="stylesheet" href="${file}" crossorigin>`;
+    }
 
-  if (woffRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="font" type="font/woff" crossorigin>`;
-  }
+    if (woffRE.test(file)) {
+      return `<link rel="preload" href="${file}" as="font" type="font/woff" crossorigin>`;
+    }
 
-  if (woff2RE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="font" type="font/woff2" crossorigin>`;
-  }
+    if (woff2RE.test(file)) {
+      return `<link rel="preload" href="${file}" as="font" type="font/woff2" crossorigin>`;
+    }
 
-  if (gifRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="image" type="image/gif" crossorigin>`;
-  }
+    if (gifRE.test(file)) {
+      return `<link rel="preload" href="${file}" as="image" type="image/gif" crossorigin>`;
+    }
 
-  if (jpgRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="image" type="image/jpeg" crossorigin>`;
-  }
+    if (jpgRE.test(file)) {
+      return `<link rel="preload" href="${file}" as="image" type="image/jpeg" crossorigin>`;
+    }
 
-  if (pngRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="image" type="image/png" crossorigin>`;
-  }
+    if (pngRE.test(file)) {
+      return `<link rel="preload" href="${file}" as="image" type="image/png" crossorigin>`;
+    }
 
-  return '';
-});
+    return '';
+  }
+);

@@ -83,7 +83,12 @@ export default defineConfig((ctx) => {
         //   }
         // };
         viteConf.optimizeDeps = {
-          exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'],
+           ...viteConf.optimizeDeps,
+          // exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util', 'vue-i18n'],
+          exclude: [
+            ...(viteConf.optimizeDeps?.exclude ?? []),
+            '@ffmpeg/ffmpeg', '@ffmpeg/util', 'vue-i18n'
+          ]
           // include: ['pdfjs-dist'], // optionally specify dependency name
           // esbuildOptions: {
           //   supported: {

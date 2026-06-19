@@ -239,7 +239,7 @@ export const useBase = () => {
     }
   };
   const isDevMode = () => {
-    return import.meta.env.NODE_ENV == 'development';
+    return import.meta.env.QUASAR_DEV;
   };
   const inputSanitizeHtml = (str: string) => {
     if (!str) {

@@ -16,7 +16,7 @@ const JSONbigString = JSONbig({ storeAsString: true });
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({
-  // baseURL: import.meta.env.NODE_ENV == 'development' ? 'http://192.168.7.249:8080' : 'https://api.example.com',
+  // baseURL: import.meta.env.QUASAR_DEV ? 'http://192.168.7.249:8080' : 'https://api.example.com',
   baseURL: import.meta.env.QCLI_APP_BASE_API || '',
   withCredentials: false,
   timeout: import.meta.env.QCLI_APP_API_TIME_OUT ? +import.meta.env.QCLI_APP_API_TIME_OUT : 3 * 60000, // 60000 = 1 minute, 0 = no timeout

@@ -14,6 +14,7 @@ COPY ./pnpm-workspace.yaml* /app/
 COPY ./pnpm-lock.yaml* /app/
 
 COPY src-ssr/package.json ./src-ssr/
+COPY src-ssr/pnpm-lock.yaml* ./src-ssr/
 COPY src-ssr/pnpm-workspace.yaml* ./src-ssr/
 
 # Install global Quasar CLI and project dependencies

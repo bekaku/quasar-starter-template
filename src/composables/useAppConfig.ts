@@ -1,7 +1,6 @@
 export const useAppConfig = () => {
-
   const isProduction = () => {
-    return import.meta.env.NODE_ENV === 'production';
+    return import.meta.env.QUASAR_PROD;
   }
   const isServer = () => {
     return import.meta.env.QUASAR_SERVER;

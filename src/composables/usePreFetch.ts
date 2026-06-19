@@ -51,7 +51,7 @@ export const usePreFetch = (ssrContext: any, redirect: any) => {
       } else {
         api.defaults.baseURL = import.meta.env.QCLI_APP_BASE_API || '';
       }
-      if (import.meta.env.NODE_ENV == 'development') {
+      if (import.meta.env.QUASAR_DEV) {
         console.log(`usePrefecth > api ${api.defaults.baseURL}${req.API}`);
       }
       api({
