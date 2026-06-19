@@ -83,8 +83,8 @@ npm install
 API endpoint at `my-app/env/.env.dev` or `my-app/env/.env.prod`
 
 ```js
-APP_BASE_API= 'http://localhost:8080'
-APP_BASE_CDN_API= 'http://localhost:8080'
+QCLI_APP_BASE_API= 'http://localhost:8080'
+QCLI_APP_BASE_CDN_API= 'http://localhost:8080'
 ```
 modify /src/App.vue
 ```js

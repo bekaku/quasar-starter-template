@@ -14,8 +14,8 @@ import { useCache } from './useCache';
 import { useCookie } from './useCookie';
 import { useLang } from './useLang';
 export const useAuth = () => {
-  const ssrContext = process.env.SERVER ? useSSRContext() : null;
-  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
+  const ssrContext = import.meta.env.QUASAR_SERVER ? useSSRContext() : null;
+  const cookies = import.meta.env.QUASAR_SERVER ? Cookies.parseSSR(ssrContext) : Cookies; // otherwise we're on client
   const authenStore = useAuthenStore();
   const { appConfirm, appLoading, isDevMode, appNavigateTo } = useBase();
   const { t } = useLang();
@@ -77,7 +77,7 @@ export const useAuth = () => {
     }
 
     await singoutToServer({
-      refreshToken: {
+      data: {
         refreshToken: token,
         email: mail,
       },

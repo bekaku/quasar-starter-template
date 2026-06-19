@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { biCode } from '@quasar/extras/bootstrap-icons';
-import BaseCard from 'src/components/base/BaseCard.vue';
-import BaseInfiniteScroll from 'src/components/base/BaseInfiniteScroll.vue';
-import BaseVirtualScrollerRecycle from 'src/components/base/BaseVirtualScrollerRecycle.vue';
+import BaseCard from '@/components/base/BaseCard.vue';
+import BaseInfiniteScroll from '@/components/base/BaseInfiniteScroll.vue';
+import BaseVirtualScrollerRecycle from '@/components/base/BaseVirtualScrollerRecycle.vue';
 import { onMounted, ref, useTemplateRef } from 'vue';
 
 const scrollerRecycleRef = useTemplateRef<any>('scrollerRecycleRef');

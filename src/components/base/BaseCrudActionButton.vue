@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { biCopy, biEye, biFloppy, biPencil, biTrash } from '@quasar/extras/bootstrap-icons'
-import { useLang } from 'src/composables/useLang';
-import { appPreventDefult } from 'src/utils/appUtil';
+import { useLang } from '@/composables/useLang';
+import { appPreventDefult } from '@/utils/appUtil';
 import type { ICrudAction } from '@/types/common'
 import BaseButton from './BaseButton.vue';
 import BaseTooltip from './BaseTooltip.vue';

@@ -24,7 +24,7 @@ onMounted(() => {
   init();
 });
 const init = async () => {
-  if (process.env.SERVER) {
+  if (import.meta.env.QUASAR_SERVER) {
     return;
   }
   console.log('init Emoji')

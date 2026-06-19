@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AvatarProps } from 'src/types/props';
+import type { AvatarProps } from '@/types/props';
 import BaseAvatar from '../base/BaseAvatar.vue';
 
 const { dense = false } = defineProps<{

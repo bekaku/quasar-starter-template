@@ -4,9 +4,9 @@
 <!-- eslint-disable no-unused-vars -->
 <script setup lang="ts">
 import { biFileImage, biCheck, biArrowClockwise, biArrowCounterclockwise, biArrowLeftRight, biArrowsCollapse, biZoomIn, biZoomOut } from '@quasar/extras/bootstrap-icons';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
-import { blobToFile } from 'src/utils/fileUtil';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
+import { blobToFile } from '@/utils/fileUtil';
 import { onUnmounted, ref, useTemplateRef, watchEffect } from 'vue';
 import BaseFilePicker from './BaseFilePicker.vue';
 import BaseScrollArea from './BaseScrollArea.vue';

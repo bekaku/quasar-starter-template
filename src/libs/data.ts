@@ -1,8 +1,8 @@
-import type { FileManagerDto, GroupChatDto, GroupChatMsgDto, ApiResponse, Permission, RefreshTokenResponse, UserDto } from 'src/types/models';
+import type { FileManagerDto, GroupChatDto, GroupChatMsgDto, ApiResponse, Permission, RefreshTokenResponse, UserDto } from '@/types/models';
 import { FORMAT_DATE13, getCurrentDateByFormat } from '@/utils/dateUtil'
 import { biBarChart, biChatDots, biCreditCard, biCurrencyDollar, biGraphUp, biNewspaper, biPeople } from '@quasar/extras/bootstrap-icons';
-import type { LabelValue } from 'src/types/common';
-import type { ISeriresCategories } from 'src/types/chart';
+import type { LabelValue } from '@/types/common';
+import type { ISeriresCategories } from '@/types/chart';
 export const userData: UserDto = {
     id: 1,
     email: 'admin@mydomain.com',
@@ -481,13 +481,13 @@ export const dashboardHeroItems: LabelValue<string>[] = [
     {
         label: 'Social Feed',
         description: 'Example Facebook feed clone',
-        to: '/example/feed',
+        to: '/feed',
         icon: biNewspaper,
     },
     {
         label: 'Chats',
         description: 'Chat layout example',
-        to: '/example/chats',
+        to: '/chats/g/0',
         icon: biChatDots,
     },
     {

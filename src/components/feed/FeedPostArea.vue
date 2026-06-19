@@ -48,7 +48,7 @@ import { useLang } from '@/composables/useLang';
 import { useAuthenStore } from '@/stores/authenStore';
 import { biCardImage, biPencil, biPencilSquare, biPlayBtn } from '@quasar/extras/bootstrap-icons';
 import BaseCard from '../base/BaseCard.vue';
-import { useDevice } from 'src/composables/useDevice';
+import { useDevice } from '@/composables/useDevice';
 const { t } = useLang();
 const authenStore = useAuthenStore();
 const { isSmallScreen } = useDevice();

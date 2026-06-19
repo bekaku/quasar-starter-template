@@ -1,11 +1,11 @@
 import { Cookies } from 'quasar';
-import { AppAuthCuurentUserKey, AppAuthRefeshTokenKey, AppAuthTokenKey, ExpireCookieDays } from 'src/libs/constant';
-import type { CookieItem } from 'src/types/common';
-import type { RefreshTokenResponse } from 'src/types/models';
-import { addDateByDays } from 'src/utils/dateUtil';
+import { AppAuthCuurentUserKey, AppAuthRefeshTokenKey, AppAuthTokenKey, ExpireCookieDays } from '@/libs/constant';
+import type { CookieItem } from '@/types/common';
+import type { RefreshTokenResponse } from '@/types/models';
+import { addDateByDays } from '@/utils/dateUtil';
 import { useSSRContext } from 'vue';
 export const useCookie = () => {
-    const ssrContext = process.env.SERVER ? useSSRContext() : null;
+    const ssrContext = import.meta.env.QUASAR_SERVER ? useSSRContext() : null;
     const cookies = ssrContext ? Cookies.parseSSR(ssrContext) : Cookies;
 
     const setCookie = (key: string, value: string, sameSite: 'Strict' | 'Lax' | 'None', secure: boolean | undefined = false, expiresAt?: number | Date | string, path?: string, domain?: string) => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ChartMode, ChartPosition, ChartThemePalete } from '@/types/chart';
-import { useTheme } from 'src/composables/useTheme';
+import { useTheme } from '@/composables/useTheme';
 import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 interface GridPadding {
   top?: number;

@@ -61,7 +61,7 @@ const mapLatLong = ref<string | undefined>();
 const showMapLatLong = ref<boolean>(false);
 const chatInputRef = useTemplateRef<any>('chatInputRef');
 onMounted(() => {
-  if (!process.env.SERVER) {
+  if (!import.meta.env.QUASAR_SERVER) {
     registerEventListener();
   }
   onInputFocus();

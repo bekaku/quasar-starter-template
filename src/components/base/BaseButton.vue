@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useTheme } from 'src/composables/useTheme';
-import type { ButtonProps } from 'src/types/props';
+import { useTheme } from '@/composables/useTheme';
+import type { ButtonProps } from '@/types/props';
 import BaseRbac from './BaseRbac.vue';
 
 const {

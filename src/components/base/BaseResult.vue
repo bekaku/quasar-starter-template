@@ -25,7 +25,7 @@ import {
   mdiPaperclip,
   mdiRobotConfused
 } from '@quasar/extras/mdi-v7';
-import { useBase } from 'src/composables/useBase';
+import { useBase } from '@/composables/useBase';
 
 const {
   status = 'info',

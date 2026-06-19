@@ -6,7 +6,7 @@ import type {
 } from '@/types/models';
 import type { AppException, ForgotPasswordRequest, ResponseMessage, } from '@/types/common';
 import type { AxiosResponse } from 'axios';
-import { authenResponse } from 'src/libs/data';
+import { authenResponse } from '@/libs/data';
 export default () => {
   const { callAxios, callAxiosProcess } = useAxios();
   const singin = async (
@@ -58,7 +58,7 @@ export default () => {
     })
   };
   const removeAccessTokenSession = async (
-    id: number
+    id: number | string
   ): Promise<ResponseMessage | null> => {
     // return await callAxios<ResponseMessage>({
     //   API: `/api/appUser/removeAccessTokenSession?id=${id}`,

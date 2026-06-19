@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 import { biCheck2, biCheckSquareFill, biSearch, biSquare } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 import { computed, ref } from 'vue';
 import type { AppColor, LabelValue } from '@/types/common';
 import BaseCard from './BaseCard.vue';

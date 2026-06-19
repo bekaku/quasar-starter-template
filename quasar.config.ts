@@ -1,7 +1,7 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers';
+import { defineConfig } from '#q-app'
 import { fileURLToPath } from 'node:url';
 
 export default defineConfig((ctx) => {
@@ -42,6 +42,14 @@ export default defineConfig((ctx) => {
       },
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        src: ctx.appPaths.srcDir,
+        app: ctx.appPaths.appDir,
+        components: ctx.appPaths.resolve.src('components'),
+        layouts: ctx.appPaths.resolve.src('layouts'),
+        pages: ctx.appPaths.resolve.src('pages'),
+        assets: ctx.appPaths.resolve.src('assets'),
+        boot: ctx.appPaths.resolve.src('boot'),
+        stores: ctx.appPaths.resolve.src('stores')
       },
       typescript: {
         strict: true,
@@ -49,7 +57,8 @@ export default defineConfig((ctx) => {
         // extendTsConfig (tsConfig) {}
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
+      filenameBasedRouting: true,
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -57,12 +66,10 @@ export default defineConfig((ctx) => {
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
       // publicPath: '/quasar-starter', // for github static deploy
       publicPath: '/',
-      // analyze: true,
-      // env: {},
-      // rawDefine: {}
+      // defineEnv: {},
+      // define: {}
       // ignorePublicFolder: true,
       // minify: false,
-      // polyfillModulePreload: true,
       // distDir
 
       // extendViteConf (viteConf) {},
@@ -70,19 +77,29 @@ export default defineConfig((ctx) => {
 
       // eslint-disable-next-line no-empty-pattern
       extendViteConf(viteConf, { /* isServer, isClient */ }) {
-        viteConf.esbuild = {
-          supported: {
-            'top-level-await': true
-          }
-        };
+        // viteConf.esbuild = {
+        //   supported: {
+        //     'top-level-await': true
+        //   }
+        // };
         viteConf.optimizeDeps = {
+           ...viteConf.optimizeDeps,
+          // exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util', 'vue-i18n'],
+          exclude: [
+            ...(viteConf.optimizeDeps?.exclude ?? []),
+            '@ffmpeg/ffmpeg', '@ffmpeg/util', 'vue-i18n'
+          ]
           // include: ['pdfjs-dist'], // optionally specify dependency name
-          esbuildOptions: {
-            supported: {
-              'top-level-await': true
-            }
-          }
+          // esbuildOptions: {
+          //   supported: {
+          //     'top-level-await': true
+          //   }
+          // }
         };
+        if (!viteConf.build) {
+          viteConf.build = {}
+        }
+        viteConf.build.target = 'esnext'
       },
       viteVuePluginOptions: {
         // script: {
@@ -121,7 +138,6 @@ export default defineConfig((ctx) => {
         //   }
         // }, { server: false }]
       ],
-      envFolder: './env',
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
@@ -243,14 +259,12 @@ export default defineConfig((ctx) => {
     // https://v2.quasar.dev/quasar-cli-vite/developing-ssr/configuring-ssr
     ssr: {
       prodPort: 3000, // The default port that the production server should use
-      // (gets superseded if process.env.PORT is specified at runtime)
+      // (gets superseded if import.meta.env.PORT is specified at runtime)
 
       middlewares: [
         'render' // keep this as last one
       ],
 
-      // extendPackageJson (json) {},
-      // extendSSRWebserverConf (esbuildConf) {},
 
       // manualStoreSerialization: true,
       // manualStoreSsrContextInjection: true,
@@ -260,8 +274,6 @@ export default defineConfig((ctx) => {
       pwa: false
       // pwaOfflineHtmlFilename: 'offline.html', // do NOT use index.html as name!
 
-      // pwaExtendGenerateSWOptions (cfg) {},
-      // pwaExtendInjectManifestOptions (cfg) {}
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa

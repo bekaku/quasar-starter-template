@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { biCheck2, biMoon, biSun } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 import BaseButton from './BaseButton.vue';
 import BaseTooltip from './BaseTooltip.vue';
-import { useTheme } from 'src/composables/useTheme';
+import { useTheme } from '@/composables/useTheme';
 import { useQuasar } from 'quasar';
-import type { ITheme } from 'src/types/common';
+import type { ITheme } from '@/types/common';
 const {
   closeOnClick = false,
   anchor = 'bottom left',

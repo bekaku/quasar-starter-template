@@ -6,7 +6,7 @@ import {
     biHeartFill
 } from '@quasar/extras/bootstrap-icons';
 import { mdiEmoticonLol, mdiEmoticonSad, mdiHandPeaceVariant, mdiHeart, mdiThumbUp } from '@quasar/extras/mdi-v7';
-import { appPreventDefult } from 'src/utils/appUtil';
+import { appPreventDefult } from '@/utils/appUtil';
 import { ref } from 'vue';
 const { chatId, iconSize = 32 } = defineProps<{
   chatId: number| string;

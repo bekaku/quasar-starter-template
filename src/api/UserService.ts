@@ -8,7 +8,7 @@ import type {
   ApiResponse,
 } from '@/types/models';
 import type { ResponseMessage } from '@/types/common';
-import { userData, userListApi } from 'src/libs/data';
+import { userData, userListApi } from '@/libs/data';
 export default () => {
   const { callAxios } = useAxios();
 
@@ -36,7 +36,7 @@ export default () => {
     })
   };
   const updateUserAvatar = async (
-    fileManagerId: number
+    fileManagerId: number | string
   ): Promise<ResponseMessage | null> => {
     // return await callAxios<ResponseMessage>({
     //   API: `/api/appUser/updateUserAvatar?fileManagerId=${fileManagerId}`,
@@ -52,7 +52,7 @@ export default () => {
     })
   };
   const updateUserCover = async (
-    fileManagerId: number
+    fileManagerId: number | string
   ): Promise<ResponseMessage | null> => {
     // return await callAxios<ResponseMessage>({
     //   API: `/api/appUser/updateUserCover?fileManagerId=${fileManagerId}`,

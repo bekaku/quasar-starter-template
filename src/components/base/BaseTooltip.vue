@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AppColor } from '@/types/common';
-import { useTheme } from 'src/composables/useTheme';
+import { useTheme } from '@/composables/useTheme';
 defineProps<{
   color?: AppColor;
   label?: string;

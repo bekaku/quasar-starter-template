@@ -1,6 +1,6 @@
 import type { LabelValue } from '@/types/common';
 import { defineStore } from 'pinia';
-import type { RBACProps } from 'src/types/props';
+import type { RBACProps } from '@/types/props';
 import { ref } from 'vue';
 export const useAppStore = defineStore('appStore', () => {
     const permissions = ref<string[]>([]);
@@ -30,7 +30,7 @@ export const useAppStore = defineStore('appStore', () => {
         }
         return isHave
     }
-    
+
     const isHaveAllPermission = (codes: string[] | undefined): boolean => {
         if (codes == undefined || codes.length == 0) {
             return true;
@@ -134,14 +134,14 @@ export const useAppStore = defineStore('appStore', () => {
             if (!rbac.condition || rbac.condition == 'any') {
                 return isHavePermission(rbac.permissions);
             }
-    
+
             if (rbac.condition == 'all') {
                 return isHaveAllPermission(rbac.permissions);
             }
             if (rbac.condition == 'not') {
                 return !isHavePermission(rbac.permissions);
             }
-    
+
             return false;
         }
     const hasPermissionLazy = (rbac: RBACProps | undefined): Promise<boolean> => {

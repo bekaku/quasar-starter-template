@@ -2,8 +2,8 @@
 import type { ITheme, IThemeItem } from '@/types/common';
 import { biMoon, biSun } from '@quasar/extras/bootstrap-icons';
 import { Cookies, useQuasar } from 'quasar';
-import { ThemeKey } from 'src/libs/constant';
-import { addDateByDays } from 'src/utils/dateUtil';
+import { ThemeKey } from '@/libs/constant';
+import { addDateByDays } from '@/utils/dateUtil';
 import { computed, useSSRContext } from 'vue';
 import { useAppConfig } from './useAppConfig';
 
@@ -16,8 +16,8 @@ export const useTheme = () => {
     ];
     const { dark } = useQuasar();
     const { isProduction } = useAppConfig();
-    const ssrContext = process.env.SERVER ? useSSRContext() : null;
-    const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
+    const ssrContext = import.meta.env.QUASAR_SERVER ? useSSRContext() : null;
+    const cookies = import.meta.env.QUASAR_SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
     const isDark = computed<boolean>(() => dark.isActive);
 
     const currentTheme = computed(() => cookies.get(ThemeKey) || 'light')

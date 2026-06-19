@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { AppColor, LabelValue } from '@/types/common';
 import { useQuasar } from 'quasar';
-import { useLang } from 'src/composables/useLang';
-import { useRbac } from 'src/composables/useRbac';
+import { useLang } from '@/composables/useLang';
+import { useRbac } from '@/composables/useRbac';
 import { computed } from 'vue';
 const {
   animated = true,

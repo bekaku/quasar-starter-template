@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { biArrowUp } from '@quasar/extras/bootstrap-icons';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
 import { ref, useTemplateRef } from 'vue';
 
 const {

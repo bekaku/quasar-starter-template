@@ -4,7 +4,7 @@ import { useLang } from '@/composables/useLang';
 import { useAppStore } from '@/stores/appStore';
 import type { ICrudAction } from '@/types/common';
 import { biArrowLeft, biFile, biPencil, biTrash } from '@quasar/extras/bootstrap-icons';
-import { pascalToSnake } from 'src/utils/appUtil';
+import { pascalToSnake } from '@/utils/appUtil';
 import { computed } from 'vue';
 const {
   crudName,

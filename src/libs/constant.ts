@@ -1,5 +1,5 @@
-export const PrefixKey = process.env.APP_PREFIX_KEY;
-export const DefaultLocale = process.env.APP_DEFAULT_LOCALE || 'en';
+export const PrefixKey = import.meta.env.QCLI_APP_PREFIX_KEY;
+export const DefaultLocale = import.meta.env.QCLI_APP_DEFAULT_LOCALE || 'en';
 export const LocaleKey = PrefixKey + 'locale';
 export const ThemeKey = PrefixKey + 'theme';
 export const DefaultApiCLient = 'default';

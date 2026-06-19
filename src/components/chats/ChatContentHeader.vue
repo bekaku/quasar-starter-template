@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { biChevronDown, biSearch, biStarFill, biThreeDots } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
-import type { GroupChatDto, UserDto } from 'src/types/models';
+import { useLang } from '@/composables/useLang';
+import type { GroupChatDto, UserDto } from '@/types/models';
 import { computed, ref } from 'vue';
 import ChatGroupAvatar from './ChatGroupAvatar.vue';
 import ChatMenu from './ChatMenu.vue';

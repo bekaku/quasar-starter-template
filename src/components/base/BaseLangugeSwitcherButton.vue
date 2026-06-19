@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { biChevronExpand, biGlobe } from '@quasar/extras/bootstrap-icons'
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 import BaseLangugeSwitcher from './BaseLangugeSwitcher.vue';
 const { currentLangugeName } = useLang()
 const {

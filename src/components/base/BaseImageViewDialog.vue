@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FileManagerDto, ImageDto, UserProfileDto } from '@/types/models';
 import BaseImageView from './BaseImageView.vue';
-import { useDevice } from 'src/composables/useDevice';
+import { useDevice } from '@/composables/useDevice';
 const { showDeleteImage = false, maximized = true, fetch = false, showArrow = true, files = [], images = [], selectedIndex = 0 } = defineProps<{
     showDeleteImage?: boolean
     maximized?: boolean

@@ -1,12 +1,4 @@
- 
-
-declare namespace NodeJS {
-  interface ProcessEnv {
-    NODE_ENV: string;
-    VUE_ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
-    VUE_ROUTER_BASE: string | undefined;
-  }
-}
+interface ImportMetaEnv {}
 // custom module
 // declare module 'emoji-mart-vue-fast';
 // declare module 'vue-i18n/index';

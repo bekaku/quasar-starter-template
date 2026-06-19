@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { biX } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 import { onMounted, ref } from 'vue';
 import { additionalMenu } from '@/libs/navs';
 import type { LabelValue } from '@/types/common';
 import BaseDialog from '../base/BaseDialog.vue';
 import BaseCommandPalette from '../base/BaseCommandPalette.vue';
 import BaseButton from '../base/BaseButton.vue';
-import { useAppStore } from 'src/stores/appStore';
+import { useAppStore } from '@/stores/appStore';
 const { drawers } = useAppStore();
 const { t } = useLang();
 

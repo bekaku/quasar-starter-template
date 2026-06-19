@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseImage from '@/components/base/BaseImage.vue';
-import type { AvatarProps } from 'src/types/props';
+import type { AvatarProps } from '@/types/props';
 import BaseBadge from './BaseBadge.vue';
 const {
   spinnerColor = 'white',

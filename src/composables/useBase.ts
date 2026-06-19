@@ -12,7 +12,7 @@ import {
   biInfoCircle,
   biX
 } from '@quasar/extras/bootstrap-icons';
-import { DOMPurify } from 'boot/dompurify';
+import { DOMPurify } from '@/boot/dompurify';
 import { Clipboard } from '@capacitor/clipboard';
 
 export const useBase = () => {
@@ -239,7 +239,7 @@ export const useBase = () => {
     }
   };
   const isDevMode = () => {
-    return process.env.NODE_ENV == 'development';
+    return import.meta.env.QUASAR_DEV;
   };
   const inputSanitizeHtml = (str: string) => {
     if (!str) {

@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 import { biChevronExpand } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 
 withDefaults(
   defineProps<{

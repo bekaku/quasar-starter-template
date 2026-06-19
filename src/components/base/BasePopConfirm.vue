@@ -10,7 +10,7 @@
 import { useBase } from '@/composables/useBase';
 import { useLang } from '@/composables/useLang';
 import BaseButton from './BaseButton.vue';
-import type { AppColor } from 'src/types/common';
+import type { AppColor } from '@/types/common';
 
 const { t } = useLang();
 const { isDark } = useBase();

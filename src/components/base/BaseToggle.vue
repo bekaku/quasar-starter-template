@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 import { biCheck, biX } from '@quasar/extras/bootstrap-icons';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 
 const {
   color = 'primary',

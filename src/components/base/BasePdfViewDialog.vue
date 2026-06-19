@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useDevice } from 'src/composables/useDevice';
+import { useDevice } from '@/composables/useDevice';
 import BasePdfView from './BasePdfView.vue';
-import type { PdfWatermarkOptions } from 'src/types/common';
+import type { PdfWatermarkOptions } from '@/types/common';
 const {
   src,
   title,

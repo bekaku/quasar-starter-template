@@ -4,14 +4,14 @@ import type { RequestType } from '@/types/common';
 import { isAppException } from '@/utils/appUtil';
 import { AppAuthTokenKey, LocaleKey } from '@/libs/constant';
 import type { AxiosResponse } from 'axios';
-import { api } from 'boot/axios';
+import { api } from '@/boot/axios';
 import { Cookies } from 'quasar';
 export const usePreFetch = (ssrContext: any, redirect: any) => {
-  const ck: any = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
+  const ck: any = import.meta.env.QUASAR_SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
   const exceptionStore = useExceptionStore();
 
   const callAxios = async <T>(req: RequestType): Promise<T> => {
-    // TODO implement refresh token hear 
+    // TODO implement refresh token hear
     // await refeshTokenCheckProcess();
     return new Promise(async (resolve, /* reject */) => {
       const response = await callAxiosProcess<T>(req);
@@ -49,9 +49,9 @@ export const usePreFetch = (ssrContext: any, redirect: any) => {
       if (req.baseURL) {
         api.defaults.baseURL = req.baseURL;
       } else {
-        api.defaults.baseURL = process.env.APP_BASE_API || '';
+        api.defaults.baseURL = import.meta.env.QCLI_APP_BASE_API || '';
       }
-      if (process.env.NODE_ENV == 'development') {
+      if (import.meta.env.QUASAR_DEV) {
         console.log(`usePrefecth > api ${api.defaults.baseURL}${req.API}`);
       }
       api({

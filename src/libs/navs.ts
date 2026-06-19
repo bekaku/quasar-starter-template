@@ -38,7 +38,7 @@ import {
   biWindowSidebar
 } from '@quasar/extras/bootstrap-icons';
 import { mdiRobotConfused } from '@quasar/extras/mdi-v7';
-import type { LabelValue } from 'src/types/common';
+import type { LabelValue } from '@/types/common';
 export const appNavs: LabelValue<any>[] = [
   {
     children: [
@@ -248,7 +248,7 @@ export const additionalMenu: LabelValue<any>[] = [
         icon: biWindowSidebar,
         label: 'Social feed',
         translateLabel: false,
-        to: '/example/feed',
+        to: '/feed',
       },
       {
         icon: biPieChart,
@@ -260,7 +260,7 @@ export const additionalMenu: LabelValue<any>[] = [
         icon: biChatDots,
         label: 'Chat',
         translateLabel: false,
-        to: '/example/chats'
+        to: '/chats/g/0'
       },
       {
         icon: biTable,

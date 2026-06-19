@@ -12,7 +12,7 @@ import {
 } from '@/utils/fileUtil';
 
 export default () => {
-  const cdnBaseApi = process.env.APP_BASE_CDN_API || ''
+  const cdnBaseApi = import.meta.env.QCLI_APP_BASE_CDN_API || ''
   const { callAxios, callAxiosFile } = useAxios();
   const uploadApi = async (
     file: any,

@@ -2,7 +2,7 @@
 import { biClock, biXCircleFill } from '@quasar/extras/bootstrap-icons';
 import type { AppColor } from '@/types/common';
 import { ref } from 'vue';
-import { useLang } from 'src/composables/useLang';
+import { useLang } from '@/composables/useLang';
 import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 const {

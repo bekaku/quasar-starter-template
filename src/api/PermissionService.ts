@@ -1,6 +1,6 @@
 import { useAxios } from '@/composables/useAxios';
 import type { IAcl, Permission, ApiResponse } from '@/types/models';
-import { permissionListApi } from 'src/libs/data';
+import { permissionListApi } from '@/libs/data';
 export default () => {
   const { callAxios } = useAxios();
   const userAcl = async (getMenuList = 0): Promise<IAcl | null> => {

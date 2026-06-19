@@ -1,20 +1,13 @@
+import { defineBoot } from '#q-app';
 import { AppAuthRefeshTokenKey, LocaleKey } from '@/libs/constant';
-import type { AxiosInstance } from 'axios';
 import axios from 'axios';
-import { boot } from 'quasar/wrappers';
 // TODO cannot use external file import in boot file >  https://github.com/quasarframework/quasar/issues/17365
 import { Cookies } from 'quasar';
 // import { canRefreshToken } from '@/utils/JwtUtil';
 import { useAuthenStore } from '@/stores/authenStore';
 // import { getTokenStatus } from '@/utils/jwtUtil';
-import JSONbig from 'json-bigint'
+import JSONbig from 'json-bigint';
 const JSONbigString = JSONbig({ storeAsString: true });
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $axios: AxiosInstance;
-    $api: AxiosInstance;
-  }
-}
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -23,14 +16,14 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({
-  // baseURL: process.env.NODE_ENV == 'development' ? 'http://192.168.7.249:8080' : 'https://api.example.com',
-  baseURL: process.env.APP_BASE_API || '',
+  // baseURL: import.meta.env.QUASAR_DEV ? 'http://192.168.7.249:8080' : 'https://api.example.com',
+  baseURL: import.meta.env.QCLI_APP_BASE_API || '',
   withCredentials: false,
-  timeout: process.env.APP_API_TIME_OUT ? +process.env.APP_API_TIME_OUT : 3 * 60000, // 60000 = 1 minute, 0 = no timeout
+  timeout: import.meta.env.QCLI_APP_API_TIME_OUT ? +import.meta.env.QCLI_APP_API_TIME_OUT : 3 * 60000, // 60000 = 1 minute, 0 = no timeout
   headers: {
     // Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
-    'Accept-Apiclient': process.env.APP_API_CLIENT
+    'Accept-Apiclient': import.meta.env.QCLI_APP_API_CLIENT
     // 'Accept-Language': DefaultLocale,
   },
   validateStatus: status => status < 400, // Resolve only if the status code is less than 400
@@ -65,10 +58,10 @@ const processQueue = (error: any, token = null) => {
   failedQueue = [];
 };
 
-export default boot(({ app, redirect, ssrContext, store }) => {
+export default defineBoot(({ app, redirect, ssrContext, store }) => {
   const authenStore = useAuthenStore(store);
   // Check if interceptors are already set up
-  const isServer = process.env.SERVER;
+  const isServer = import.meta.env.QUASAR_SERVER;
   if (!isServer) {
     api.interceptors.request.use(async (config) => {
       // const ck = isServer ? Cookies.parseSSR(ssrContext) : Cookies;
@@ -115,7 +108,7 @@ export default boot(({ app, redirect, ssrContext, store }) => {
         return new Promise(async (resolve, reject) => {
           console.warn('/api/auth/refreshToken', refreshToken);
 
-          api.defaults.baseURL = process.env.APP_BASE_API || '';
+          api.defaults.baseURL = import.meta.env.QCLI_APP_BASE_API || '';
           api.defaults.responseType = 'json';
           api.defaults.headers['Content-Type'] = 'application/json';
           api.post('/api/auth/refreshToken', {

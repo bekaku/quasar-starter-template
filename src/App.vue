@@ -12,7 +12,7 @@ import { useAppStore } from '@/stores/appStore';
 import { useExceptionStore } from '@/stores/exceptionStore';
 import { detroyAuthCookie, isAppException } from '@/utils/appUtil';
 import { Cookies } from 'quasar';
-import { useDevice } from 'src/composables/useDevice';
+import { useDevice } from '@/composables/useDevice';
 import { useAuthenStore } from 'stores/authenStore';
 import { onBeforeUnmount, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -22,7 +22,7 @@ import { userData } from './libs/data';
 
 defineOptions({
   async preFetch({ currentRoute, ssrContext, redirect }) {
-    const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
+    const cookies = import.meta.env.QUASAR_SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
     const authenStore = useAuthenStore();
     const appStore = useAppStore();
     const { callAxiosProcess } = usePreFetch(ssrContext, redirect);

@@ -2,9 +2,9 @@
 import BaseTabs from '@/components/base/BaseTabs.vue';
 import type { LabelValue } from '@/types/common';
 import { useQuasar } from 'quasar';
-import { useBase } from 'src/composables/useBase';
-import { useLang } from 'src/composables/useLang';
-import { useRbac } from 'src/composables/useRbac';
+import { useBase } from '@/composables/useBase';
+import { useLang } from '@/composables/useLang';
+import { useRbac } from '@/composables/useRbac';
 import { computed } from 'vue';
 const {
   dense = true,

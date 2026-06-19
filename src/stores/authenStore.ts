@@ -10,7 +10,7 @@ import {
 } from '@/libs/constant';
 import { addDateByDays } from '@/utils/dateUtil';
 import { canRefreshToken } from '@/utils/jwtUtil';
-import { api } from 'boot/axios';
+import { api } from '@/boot/axios';
 import { defineStore } from 'pinia';
 import { Cookies } from 'quasar';
 import { computed, ref } from 'vue';
@@ -20,7 +20,7 @@ export const useAuthenStore = defineStore('authenStore', () => {
   const refreshTokenTimeout = ref<any>();
   const refreshTokenTimeoutNo = ref(0);
   const sessionExpired = ref(false);
-  const devMode = process.env.NODE_ENV == 'development';
+  const devMode = import.meta.env.QUASAR_DEV;
   const tokenKey = computed(() => auth.value?.token);
   const loginedCover = computed(() => auth.value?.cover?.image);
   const loginedAvatar = computed(() => auth.value?.avatar?.image);
@@ -31,7 +31,7 @@ export const useAuthenStore = defineStore('authenStore', () => {
 
   const refreshToken = async (ssrContext: any | undefined = undefined): Promise<RefeshTokenStatus> => {
     return new Promise(async (resolve /* reject */) => {
-      const isServerMode = process.env.SERVER;
+      const isServerMode = import.meta.env.QUASAR_SERVER;
       if (devMode) {
         console.log('refreshToken SERVER mode ', isServerMode);
       }
@@ -61,7 +61,7 @@ export const useAuthenStore = defineStore('authenStore', () => {
 
   const refreshTokenProcess = async (ssrContext: any): Promise<RefeshTokenStatus> => {
     return new Promise(async (resolve /* reject */) => {
-      const ck: any = process.env.SERVER && ssrContext ? Cookies.parseSSR(ssrContext) : Cookies;
+      const ck: any = import.meta.env.QUASAR_SERVER && ssrContext ? Cookies.parseSSR(ssrContext) : Cookies;
       const refreshTokenKey = ck.get(AppAuthRefeshTokenKey);
       // const deviceId = ck.get(SucureDeviceIdAtt);
       // if (isServerMode) {
@@ -70,7 +70,7 @@ export const useAuthenStore = defineStore('authenStore', () => {
       //   }
       // }
       api.defaults.headers.Authorization = `Bearer ${ck.get(AppAuthTokenKey)}`;
-      api.defaults.baseURL = process.env.APP_BASE_API || '';
+      api.defaults.baseURL = import.meta.env.QCLI_APP_BASE_API || '';
       api.defaults.headers['Content-Type'] = 'application/json';
       api.defaults.responseType = 'json';
       api.defaults.headers['Accept-Language'] = ck.get(LocaleKey);
@@ -121,8 +121,8 @@ export const useAuthenStore = defineStore('authenStore', () => {
 
   const setRefreshTokenCookie = async (ssrContext: any, responseData: RefreshTokenResponse) => {
     return new Promise(async (resolve /* reject */) => {
-      const ck: any = process.env.SERVER && ssrContext ? Cookies.parseSSR(ssrContext) : Cookies;
-      const isDevMode = process.env.NODE_ENV == 'development';
+      const ck: any = import.meta.env.QUASAR_SERVER && ssrContext ? Cookies.parseSSR(ssrContext) : Cookies;
+      const isDevMode = import.meta.env.QUASAR_DEV;
       // if (isServerMode) {
       //   ck.set(SucureDeviceIdAtt, response.data.refreshToken, {
       //     expires: addDateByDays(ExpireCookieDays),

@@ -1,0 +1,10 @@
+node_modules
+Dockerfile
+.git
+.gitignore
+.npmrc
+.quasar
+.vscode
+build
+dist
+src-ssr/node_modules

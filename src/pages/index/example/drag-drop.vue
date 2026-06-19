@@ -1,0 +1,641 @@
+<script setup lang="ts">
+import BaseAvatar from '@/components/base/BaseAvatar.vue';
+import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCard from '@/components/base/BaseCard.vue';
+import BasePage from '@/components/base/BasePage.vue';
+import BaseScrollArea from '@/components/base/BaseScrollArea.vue';
+import { useAppMeta } from '@/composables/useAppMeta';
+import { useDevice } from '@/composables/useDevice';
+import { useLang } from '@/composables/useLang';
+import {
+  biBug,
+  biCheck2,
+  biClock,
+  biCode,
+  biFileEarmark,
+  biGrid3x3Gap,
+} from '@quasar/extras/bootstrap-icons';
+import { computed, ref } from 'vue';
+import type { SortableEvent } from 'vue-draggable-plus';
+import { VueDraggable } from 'vue-draggable-plus';
+const { t } = useLang();
+const { setTitle } = useAppMeta();
+setTitle(`Drag drop | ${t('app.name')}`);
+const { isSmallScreen } = useDevice();
+// const drgaGroup = 'people';
+const listHeight = '65vh';
+const dragingTodo = ref(false);
+const dragingInProgress = ref(false);
+const dragingTesting = ref(false);
+const dragingDone = ref(false);
+const todoItems = ref<any[]>([
+  {
+    id: 1,
+    task: 'Task 1',
+    description: 'Analyze the new requirements gathered from the customer.',
+    chips: ['Meeting'],
+    avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
+  },
+  {
+    id: 2,
+    task: 'Task 10',
+    description: 'Show the retrieved data from the server in grid control.',
+    chips: ['Database', 'SQL'],
+    avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+  },
+  {
+    id: 3,
+    task: 'Task 3',
+    description: 'Arrange a web meeting with the customer to get new requirements.',
+    chips: ['Meeting'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+  {
+    id: 4,
+    task: 'Task 20',
+    description: 'Enhance editing functionality.',
+    chips: ['Editting'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+  {
+    id: 5,
+    task: 'Task 22',
+    description: 'Arrange web meeting with the customer to show editing demo.',
+    chips: ['Editting', 'Meeting'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+]);
+const inProgressItems = ref<any[]>([
+  {
+    id: 6,
+    task: 'Task 2',
+    description: 'Improve application performance',
+    chips: ['Improvment'],
+    avatar: 'https://cdn.quasar.dev/img/avatar4.jpg',
+  },
+  {
+    id: 7,
+    task: 'Task 4',
+    description: 'Fix the issues reported in the IE browser.',
+    chips: ['IE'],
+    avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+  },
+  {
+    id: 8,
+    task: 'Task 11',
+    description: 'Fix cannot open user’s default database SQL error.',
+    chips: ['Database', 'Sql2020'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+  {
+    id: 9,
+    task: 'Task 20',
+    description: 'Enhance editing functionality.',
+    chips: ['Editting'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+  {
+    id: 10,
+    task: 'Task 21',
+    description: 'Improve the performance of the editing functionality.',
+    chips: ['Performance'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+]);
+const testingItems = ref<any[]>([
+  {
+    id: 11,
+    task: 'Task 24',
+    description: 'Fix the issues reported by the customer.',
+    chips: ['Customer'],
+    avatar: 'https://cdn.quasar.dev/img/avatar4.jpg',
+  },
+  {
+    id: 12,
+    task: 'Task 25',
+    description: 'Fix the issues reported in Safari browser.',
+    chips: ['Fix', 'Safari'],
+    avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+  },
+  {
+    id: 13,
+    task: 'Task 26',
+    description: 'Check Login page validation.',
+    chips: ['Testing'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+  {
+    id: 14,
+    task: 'Task 27',
+    description: 'Fix the issues reported in data binding.',
+    chips: ['Editting', 'Test'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+  {
+    id: 15,
+    task: 'Task 29',
+    description: 'Fix editing issues reported in Firefox.',
+    chips: ['Fix'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+]);
+const doneItems = ref<any[]>([
+  {
+    id: 16,
+    task: 'Task 8',
+    description: 'Test the application in the IE browser.',
+    chips: ['REview', 'IE'],
+    avatar: 'https://cdn.quasar.dev/img/avatar4.jpg',
+  },
+  {
+    id: 17,
+    task: 'Task 13',
+    description: 'Analyze SQL server 2008 connection.',
+    chips: ['Analyze'],
+    avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+  },
+  {
+    id: 18,
+    task: 'Task 16',
+    description: 'Stored procedure for initial data binding of the grid.',
+    chips: ['Databinding'],
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+  },
+]);
+const isDragging = computed(
+  () => dragingTodo.value || dragingInProgress.value || dragingTesting.value || dragingDone.value,
+);
+
+const dragOptions = computed(() => {
+  return {
+    animation: 200,
+    group: 'description',
+    disabled: false,
+    ghostClass: 'ghost',
+    forceFallback: true,
+    fallbackOnBody: true,
+    fallbackClass: 'drag-fallback',
+    // handle: '.drag-handle'
+  };
+});
+
+const log = (ctx: any) => {
+  console.log('log', ctx);
+};
+const onStartDrag = (event: SortableEvent) => {
+  dragingTodo.value = true;
+};
+const onEndDrag = (event: SortableEvent) => {
+  dragingTodo.value = false;
+};
+const onDragStart = (event: any) => {
+  dragingTodo.value = true;
+  console.log('event', event);
+};
+
+// ฟังก์ชันทำงานตอน "ปล่อย/วาง" เสร็จแล้ว
+const onDragEnd = (event: any) => {
+  console.log('event', event);
+  dragingTodo.value = false;
+
+  // คุณสามารถดึงข้อมูลเพิ่มเติมได้ เช่น วางลงในลิสต์ไหน
+  // event.to คือ DOM ของลิสต์ปลายทาง
+  // event.from คือ DOM ของลิสต์ต้นทาง
+};
+</script>
+<template>
+  <BasePage>
+    <BaseCard title="Dragdrop" subtitle="https://github.com/Alfred-Skyblue/vue-draggable-plus">
+      <template #end>
+        <BaseButton
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/drag-drop.vue"
+          target="_blank"
+          :icon="biCode"
+          flat
+          round
+        >
+          <q-tooltip>View Source</q-tooltip>
+        </BaseButton>
+      </template>
+      <q-no-ssr>
+        <q-scroll-area :style="{ height: '75vh', maxWidth: '100vw' }">
+          <div class="row no-wrap">
+            <div class="holder" :class="{ 'holder-draging': isDragging }">
+              <div class="holder-header">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label class="text-subtitle1 text-weight-bold"> To do </q-item-label>
+                  </q-item-section>
+                  <q-item-section side> {{ todoItems.length }} </q-item-section>
+                </q-item>
+              </div>
+              <q-separator />
+              <div class="row q-pa-sm">
+                <div class="col">
+                  <BaseScrollArea :height="listHeight">
+                    <VueDraggable
+                      v-model="todoItems"
+                      :animation="250"
+                      group="my-tasks"
+                      class="drop-zone"
+                      @start="onDragStart"
+                      @end="onDragEnd"
+                    >
+                      <BaseCard
+                        v-for="(element, index) in todoItems"
+                        :key="element.id"
+                        class="holder-card todo"
+                        :margin="false"
+                      >
+                        <q-card-section>
+                          <q-item class="q-pl-none" dense>
+                            <q-item-section>
+                              <q-item-label class="text-subtitle1 text-weight-bold">
+                                {{ element.task }}
+                              </q-item-label>
+                            </q-item-section>
+                            <q-item-section v-if="isSmallScreen" side>
+                              <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
+                            </q-item-section>
+                          </q-item>
+                          <div class="text-body2">{{ element.description }}</div>
+                          <div class="q-gutter-sm q-pt-sm">
+                            <q-chip
+                              v-for="(chip, chipIndex) in element.chips"
+                              :key="`${index}-chip-${chipIndex}-${chip}`"
+                              class="chip"
+                              dense
+                            >
+                              {{ chip }}
+                            </q-chip>
+                          </div>
+                          <q-item dense>
+                            <q-item-section
+                              ><q-icon :name="biFileEarmark" size="18px" color="warning"
+                            /></q-item-section>
+                            <q-item-section side>
+                              <BaseAvatar :src="element.avatar" size="24px" />
+                            </q-item-section>
+                          </q-item>
+                        </q-card-section>
+                      </BaseCard>
+                    </VueDraggable>
+                  </BaseScrollArea>
+                </div>
+              </div>
+            </div>
+            <!--End List-->
+            <div class="holder" :class="{ 'holder-draging': isDragging }">
+              <div class="holder-header">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label class="text-subtitle1 text-weight-bold">
+                      In Progress</q-item-label
+                    >
+                  </q-item-section>
+                  <q-item-section side> {{ inProgressItems.length }} </q-item-section>
+                </q-item>
+              </div>
+              <q-separator />
+              <div class="row q-pa-sm">
+                <div class="col">
+                  <BaseScrollArea :height="listHeight">
+                    <VueDraggable
+                      v-model="inProgressItems"
+                      :animation="250"
+                      group="my-tasks"
+                      class="drop-zone"
+                      @start="onDragStart"
+                      @end="onDragEnd"
+                    >
+                      <BaseCard
+                        v-for="(element, index) in inProgressItems"
+                        :key="element.id"
+                        class="holder-card inprogress"
+                        :margin="false"
+                      >
+                        <q-card-section>
+                          <q-item class="q-pl-none" dense>
+                            <q-item-section>
+                              <q-item-label class="text-subtitle1 text-weight-bold">
+                                {{ element.task }}
+                              </q-item-label>
+                            </q-item-section>
+                            <q-item-section v-if="isSmallScreen" side>
+                              <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
+                            </q-item-section>
+                          </q-item>
+                          <div class="text-body2">{{ element.description }}</div>
+                          <div class="q-gutter-sm q-pt-sm">
+                            <q-chip
+                              v-for="(chip, chipIndex) in element.chips"
+                              :key="`${index}-chip-${chipIndex}-${chip}`"
+                              class="chip"
+                              dense
+                            >
+                              {{ chip }}
+                            </q-chip>
+                          </div>
+                          <q-item dense>
+                            <q-item-section
+                              ><q-icon :name="biClock" size="18px" color="primary"
+                            /></q-item-section>
+                            <q-item-section side>
+                              <BaseAvatar :src="element.avatar" size="24px" />
+                            </q-item-section>
+                          </q-item>
+                        </q-card-section>
+                      </BaseCard>
+                    </VueDraggable>
+                  </BaseScrollArea>
+                </div>
+              </div>
+            </div>
+            <!--End List-->
+            <div class="holder" :class="{ 'holder-draging': isDragging }">
+              <div class="holder-header">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label class="text-subtitle1 text-weight-bold"> Testing</q-item-label>
+                  </q-item-section>
+                  <q-item-section side> {{ testingItems.length }} </q-item-section>
+                </q-item>
+              </div>
+              <q-separator />
+              <div class="row q-pa-sm">
+                <div class="col">
+                  <BaseScrollArea :height="listHeight">
+                    <VueDraggable
+                      v-model="testingItems"
+                      :animation="250"
+                      group="my-tasks"
+                      class="drop-zone"
+                      @start="onDragStart"
+                      @end="onDragEnd"
+                    >
+                      <BaseCard
+                        v-for="(element, index) in testingItems"
+                        :key="element.id"
+                        class="holder-card testing"
+                        :margin="false"
+                      >
+                        <q-card-section>
+                          <q-item class="q-pl-none" dense>
+                            <q-item-section>
+                              <q-item-label class="text-subtitle1 text-weight-bold">
+                                {{ element.task }}
+                              </q-item-label>
+                            </q-item-section>
+                            <q-item-section v-if="isSmallScreen" side>
+                              <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
+                            </q-item-section>
+                          </q-item>
+                          <div class="text-body2">{{ element.description }}</div>
+                          <div class="q-gutter-sm q-pt-sm">
+                            <q-chip
+                              v-for="(chip, chipIndex) in element.chips"
+                              :key="`${index}-chip-${chipIndex}-${chip}`"
+                              class="chip"
+                              dense
+                            >
+                              {{ chip }}
+                            </q-chip>
+                          </div>
+                          <q-item dense>
+                            <q-item-section
+                              ><q-icon :name="biBug" size="18px" color="negative"
+                            /></q-item-section>
+                            <q-item-section side>
+                              <BaseAvatar :src="element.avatar" size="24px" />
+                            </q-item-section>
+                          </q-item>
+                        </q-card-section>
+                      </BaseCard>
+                    </VueDraggable>
+                  </BaseScrollArea>
+                </div>
+              </div>
+            </div>
+            <!--End List-->
+            <div class="holder" :class="{ 'holder-draging': isDragging }">
+              <div class="holder-header">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label class="text-subtitle1 text-weight-bold"> Done</q-item-label>
+                  </q-item-section>
+                  <q-item-section side> {{ doneItems.length }} </q-item-section>
+                </q-item>
+              </div>
+              <q-separator />
+              <div class="row q-pa-sm">
+                <div class="col">
+                  <BaseScrollArea :height="listHeight">
+                    <VueDraggable
+                      v-model="doneItems"
+                      :animation="250"
+                      group="my-tasks"
+                      class="drop-zone"
+                      @start="onDragStart"
+                      @end="onDragEnd"
+                    >
+                      <BaseCard
+                        v-for="(element, index) in doneItems"
+                        :key="element.id"
+                        class="holder-card done"
+                        :margin="false"
+                      >
+                        <q-card-section>
+                          <q-item class="q-pl-none" dense>
+                            <q-item-section>
+                              <q-item-label class="text-subtitle1 text-weight-bold">
+                                {{ element.task }}
+                              </q-item-label>
+                            </q-item-section>
+                            <q-item-section v-if="isSmallScreen" side>
+                              <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
+                            </q-item-section>
+                          </q-item>
+                          <div class="text-body2">{{ element.description }}</div>
+                          <div class="q-gutter-sm q-pt-sm">
+                            <q-chip
+                              v-for="(chip, chipIndex) in element.chips"
+                              :key="`${index}-chip-${chipIndex}-${chip}`"
+                              class="chip"
+                              dense
+                            >
+                              {{ chip }}
+                            </q-chip>
+                          </div>
+                          <q-item dense>
+                            <q-item-section
+                              ><q-icon :name="biCheck2" size="18px" color="positive"
+                            /></q-item-section>
+                            <q-item-section side>
+                              <BaseAvatar :src="element.avatar" size="24px" />
+                            </q-item-section>
+                          </q-item>
+                        </q-card-section>
+                      </BaseCard>
+                    </VueDraggable>
+                    <!-- <draggable
+                      v-model="doneItems"
+                      item-key="id"
+                      class="drag-area"
+                      :handle="!isSmallScreen ? '' : '.handle'"
+                      v-bind="dragOptions"
+                      :component-data="{ name: 'flip-list', type: 'transition' }"
+                      @change="log"
+                      @start="dragingTesting = true"
+                      @end="dragingTesting = false"
+                    >
+                      <template #item="{ element, index }">
+                        <BaseCard class="holder-card done" :margin="false">
+                          <q-card-section>
+                            <q-item class="q-pl-none" dense>
+                              <q-item-section>
+                                <q-item-label class="text-subtitle1 text-weight-bold">
+                                  {{ element.task }}
+                                </q-item-label>
+                              </q-item-section>
+                              <q-item-section v-if="isSmallScreen" side>
+                                <BaseButton class="handle" flat :icon="biGrid3x3Gap" round />
+                              </q-item-section>
+                            </q-item>
+                            <div class="text-body2">{{ element.description }}</div>
+                            <div class="q-gutter-sm q-pt-sm">
+                              <q-chip
+                                v-for="(chip, chipIndex) in element.chips"
+                                :key="`${index}-chip-${chipIndex}-${chip}`"
+                                class="chip"
+                                dense
+                              >
+                                {{ chip }}
+                              </q-chip>
+                            </div>
+                            <q-item dense>
+                              <q-item-section
+                                ><q-icon :name="biCheck2" size="18px" color="positive"
+                              /></q-item-section>
+                              <q-item-section side>
+                                <BaseAvatar :src="element.avatar" size="24px" />
+                              </q-item-section>
+                            </q-item>
+                          </q-card-section>
+                        </BaseCard>
+                      </template>
+                    </draggable> -->
+                  </BaseScrollArea>
+                </div>
+              </div>
+            </div>
+            <!--End List-->
+          </div>
+          <!--End row-->
+        </q-scroll-area>
+      </q-no-ssr>
+    </BaseCard>
+  </BasePage>
+</template>
+<style lang="scss" scoped>
+.drop-zone {
+  min-height: 100px; /* ปรับตัวเลขได้ตามความเหมาะสมของ UI คุณ */
+  /* แนะนำให้ลองใส่ background สีอ่อนๆ หรือ border ประ ไว้ชั่วคราว
+     เพื่อให้เห็นว่ากล่องมีพื้นที่รับของจริงๆ เวลาว่างเปล่า */
+  background-color: #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.item {
+  /* สไตล์ของไอเทมแต่ละชิ้น */
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+
+.no-move {
+  transition: transform 0s;
+}
+
+.ghost {
+  opacity: 0.5;
+  background: var(--color-primary-100);
+  border: 1px dashed var(--color-primary-500) !important;
+}
+
+.holder {
+  min-width: 350px !important;
+  max-width: 350px !important;
+  min-height: 70vh;
+  margin: 0 10px;
+  border: 1px solid var(--color-zinc-200);
+  border-radius: 10px;
+  background-color: var(--color-zinc-100);
+}
+.drag-area {
+  min-height: 70vh;
+  user-select: none;
+}
+.holder-draging {
+  border: 1.5px dashed var(--color-primary-500) !important;
+}
+
+.holder-header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #fff;
+}
+
+.holder-card {
+  cursor: pointer;
+  margin-bottom: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  // &:active {
+  //   cursor: grabbing;
+  // }
+}
+.holder-card .chip {
+  background-color: var(--color-zinc-200);
+}
+
+.drag-fallback {
+  opacity: 0.8;
+  pointer-events: none !important;
+}
+.sortable-fallback,
+.sortable-drag {
+  cursor: grabbing !important;
+}
+.drag-fallback {
+  opacity: 0.8;
+  cursor: grabbing !important;
+  pointer-events: none !important;
+}
+body.sortable-dragging,
+body.sortable-dragging * {
+  cursor: grabbing !important;
+}
+body.body--dark {
+  .holder {
+    border: 1px solid var(--color-zinc-600);
+    background-color: var(--color-zinc-600);
+  }
+  .holder-header {
+    background-color: var(--color-zinc-700);
+  }
+  .holder-card .chip {
+    background-color: var(--color-zinc-600);
+  }
+  .ghost {
+    opacity: 0.5;
+    background: var(--color-zinc-600);
+  }
+}
+</style>
