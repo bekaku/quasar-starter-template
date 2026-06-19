@@ -15,6 +15,7 @@
     "dev": "quasar dev",
     "dev:ssr": "quasar dev -m ssr",
     "postinstall": "quasar prepare",
+    "ssrinstall": "cd src-ssr && pnpm install",
     "build": "quasar build",
     "build:ssr": "quasar build -m ssr",
     "build:pwa": "quasar build -m pwa",
