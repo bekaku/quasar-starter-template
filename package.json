@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "quasar dev",
     "dev:ssr": "quasar dev -m ssr",
-    "postinstall": "quasar prepare",
+    "postinstall": "quasar prepare && cd src-ssr && pnpm install",
     "ssrinstall": "cd src-ssr && pnpm install",
     "build": "quasar build",
     "build:ssr": "quasar build -m ssr",
