@@ -4,7 +4,7 @@ import type { LabelValue } from '@/types/common';
 import { useQuasar } from 'quasar';
 import { useBase } from '@/composables/useBase';
 import { useLang } from '@/composables/useLang';
-import { useRbac } from '@/composables/useRbac';
+import { useRoleBase } from '@/composables/useRoleBase';
 import { computed } from 'vue';
 const {
   dense = true,
@@ -22,7 +22,7 @@ const {
 const { screen } = useQuasar();
 const { t } = useLang();
 const { getParam } = useBase();
-const { hasPermission } = useRbac();
+const { hasPermission } = useRoleBase();
 const getLink = (item: LabelValue<any>) => {
   let link = item.to;
   const params = item.params;

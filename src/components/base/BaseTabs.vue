@@ -2,7 +2,7 @@
 import type { AppColor, LabelValue } from '@/types/common';
 import { useQuasar } from 'quasar';
 import { useLang } from '@/composables/useLang';
-import { useRbac } from '@/composables/useRbac';
+import { useRoleBase } from '@/composables/useRoleBase';
 import { computed } from 'vue';
 const {
   animated = true,
@@ -35,7 +35,7 @@ const {
 const { screen } = useQuasar();
 const { t } = useLang();
 const modelValue = defineModel<string | undefined>();
-const { hasPermission } = useRbac();
+const { hasPermission } = useRoleBase();
 const emit = defineEmits<{
   'on-change': [any];
 }>();

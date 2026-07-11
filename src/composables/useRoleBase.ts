@@ -1,5 +1,5 @@
 import { useAppStore } from '@/stores/appStore';
-export const useRbac = () => {
+export const useRoleBase = () => {
     const { hasPermission, hasPermissionLazy } = useAppStore();
     return {
         hasPermission,
