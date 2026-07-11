@@ -326,12 +326,12 @@ export const additionalMenu: LabelValue<any>[] = [
         translateLabel: false,
         to: '/example/swiper'
       },
-      {
-        icon: biArrowDownUp,
-        label: 'Virtual scroller',
-        translateLabel: false,
-        to: '/example/virtual-scroller'
-      },
+      // {
+      //   icon: biArrowDownUp,
+      //   label: 'Virtual scroller',
+      //   translateLabel: false,
+      //   to: '/example/virtual-scroller'
+      // },
       {
         icon: biBug,
         label: 'Test page',
