@@ -2,6 +2,18 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/assets/(.*)",
+      "destination": "/dist/ssr/client/assets/$1"
+    },
+    {
+      "source": "/icons/(.*)",
+      "destination": "/dist/ssr/client/icons/$1"
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "/dist/ssr/client/favicon.ico"
+    },
+    {
       "source": "/(.*)",
       "destination": "/api/index"
     }
