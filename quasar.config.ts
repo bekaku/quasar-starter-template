@@ -271,7 +271,8 @@ export default defineConfig((ctx) => {
       // manualStoreHydration: true,
       // manualPostHydrationTrigger: true,
 
-      pwa: false
+      pwa: false,
+      prodScriptNamedExport: 'default', // Vercel only
       // pwaOfflineHtmlFilename: 'offline.html', // do NOT use index.html as name!
 
     },

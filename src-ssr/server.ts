@@ -22,7 +22,8 @@ import {
 declare module '#q-app' {
   interface SsrDriver {
     app: Application;
-    listenResult: Server;
+    listenResult: Server | { default: Application };
+    // listenResult: Server;
     request: Request;
     response: Response;
   }
@@ -41,12 +42,12 @@ export const create = defineSsrCreate(async (/* { ... } */) => {
      */
     const { default: helmet } = await import('helmet');
     // app.use(helmet());
-      app.use(
-        helmet({
-          contentSecurityPolicy: false,
-          crossOriginEmbedderPolicy: false
-        })
-      );
+    app.use(
+      helmet({
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false
+      })
+    );
 
     const { default: compression } = await import('compression');
     app.use(compression());
@@ -82,6 +83,12 @@ export const injectDevMiddleware = defineSsrInjectDevMiddleware(
  */
 export const listen = defineSsrListen(
   async ({ app, devHttpsOptions, port }) => {
+    // --- Add this block for Vercel-- -
+    if (import.meta.env.QUASAR_PROD) {
+      // Return the Express app to the default export for Vercel to use.
+      return { default: app };
+    }
+
     if (import.meta.env.QUASAR_DEV && devHttpsOptions) {
       const https = await import('node:https');
       const server = https.createServer(devHttpsOptions, (req, res) => {
@@ -89,6 +96,8 @@ export const listen = defineSsrListen(
       });
       return server.listen(port);
     }
+
+
 
     /**
      * For production HTTPS you can use the /src-ssr/server-assets folder
@@ -120,7 +129,12 @@ export const listen = defineSsrListen(
  *
  * Can be async: defineSsrClose(async ({ listenResult }) => { ... })
  */
-export const close = defineSsrClose(({ listenResult }) => listenResult.close());
+export const close = defineSsrClose(({ listenResult }) => {
+  // return listenResult.close()
+  if ('close' in listenResult) {
+    return listenResult.close();
+  }
+});
 
 const maxAge = import.meta.env.QUASAR_DEV ? 0 : 1000 * 60 * 60 * 24 * 30;
 
