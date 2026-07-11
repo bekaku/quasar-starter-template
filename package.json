@@ -18,6 +18,7 @@
     "ssrinstall": "cd src-ssr && pnpm install",
     "build": "quasar build",
     "build:ssr": "quasar build -m ssr",
+    "build:ssr-vercel": "quasar build -m ssr && cd dist/ssr && npm install",
     "build:pwa": "quasar build -m pwa",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
