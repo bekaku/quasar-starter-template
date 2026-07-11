@@ -2,16 +2,28 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/files/(.*)",
+      "destination": "/files/$1"
+    },
+    {
+      "source": "/images/(.*)",
+      "destination": "/images/$1"
+    },
+    {
+      "source": "/logo/(.*)",
+      "destination": "/logo/$1"
+    },
+    {
       "source": "/assets/(.*)",
-      "destination": "/dist/ssr/client/assets/$1"
+      "destination": "/assets/$1"
     },
     {
       "source": "/icons/(.*)",
-      "destination": "/dist/ssr/client/icons/$1"
+      "destination": "/icons/$1"
     },
     {
       "source": "/favicon.ico",
-      "destination": "/dist/ssr/client/favicon.ico"
+      "destination": "/favicon.ico"
     },
     {
       "source": "/(.*)",
