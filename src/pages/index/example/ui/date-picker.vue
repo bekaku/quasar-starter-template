@@ -33,7 +33,7 @@ const onUpdateDateRange = (v: string) => {
     <BaseCard title="Date time picker">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/date-picker.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/date-picker.vue"
           target="_blank"
           :icon="biCode"
           flat

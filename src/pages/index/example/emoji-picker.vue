@@ -31,7 +31,7 @@ const onEmojiClick = (emoji: string) => {
     <BaseCard title="Emoji picker">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/emoji-picker.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/emoji-picker.vue"
           target="_blank"
           :icon="biCode"
           flat

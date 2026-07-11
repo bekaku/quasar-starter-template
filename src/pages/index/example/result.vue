@@ -24,7 +24,7 @@ setTitle(`Result | ${t('app.name')}`);
     <BaseCard title="Alert">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/result.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/result.vue"
           target="_blank"
           :icon="biCode"
           flat

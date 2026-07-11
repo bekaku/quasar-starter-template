@@ -65,7 +65,7 @@ const testExtractHashTag = () => {
     <BaseCard title="Content Text">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/content-text.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/content-text.vue"
           target="_blank"
           :icon="biCode"
           flat

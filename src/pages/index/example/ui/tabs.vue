@@ -51,7 +51,7 @@ const toggleOptions: LabelValue<string>[] = [
     <BaseCard flat :bordered="false" title="Tabs route">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/tabs.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/tabs.vue"
           target="_blank"
           :icon="biCode"
           flat

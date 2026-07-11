@@ -80,7 +80,7 @@ npm install
 
 # In case you want to use my API, edit the following file.
 
-API endpoint at `my-app/env/.env.dev` or `my-app/env/.env.prod`
+API endpoint at `my-app/.env` or `my-app/.env.local`
 
 ```js
 QCLI_APP_BASE_API= 'http://localhost:8080'
@@ -98,13 +98,6 @@ defineOptions({
         API: '/api/appUser/currentUserData',
         method: 'GET',
       });
-    /*
-     const userDataResponse: any = {
-        status: 200,
-        statusText: 'OK',
-        data: userData,
-      };
-      */
   },
 });
 ```
@@ -158,7 +151,7 @@ modify /src/api/AuthenService.ts
        API: '/api/auth/requestVerifyCodeToResetPwd',
        method: 'POST',
        body: {
-         forgotPasswordRequest: req
+         data: req
        },
      });
   };
@@ -169,7 +162,7 @@ modify /src/api/AuthenService.ts
        API: '/api/auth/sendVerifyCodeToResetPwd',
        method: 'POST',
        body: {
-         forgotPasswordRequest: req
+         data: req
        },
      });
   };
@@ -180,7 +173,7 @@ modify /src/api/AuthenService.ts
        API: '/api/auth/resetPassword',
        method: 'POST',
        body: {
-         forgotPasswordRequest: req
+         data: req
        },
      });
   };
@@ -378,7 +371,7 @@ const findAll = async (q: string): Promise<ApiResponse<UserDto> | null> => {
       API: '/api/appUser/updatePersonalData',
       method: 'PUT',
       body: {
-        user: req,
+        data: req,
       },
     });
   };
@@ -390,7 +383,7 @@ const findAll = async (q: string): Promise<ApiResponse<UserDto> | null> => {
       API: '/api/appUser/updateEmail',
       method: 'PUT',
       body: {
-        user: req,
+        data: req,
       },
     });
   };
@@ -469,6 +462,71 @@ Docker run
 docker-compose build
 docker-compose up -d
 ```
+
+## Deployment
+
+### Vercel Serverless (Default)
+
+This starter template is pre-configured to deploy seamlessly on [Vercel](https://vercel.com/) using SSR (Server-Side Rendering) mode with Serverless Functions.
+
+**How it works:**
+- The `vercel.json` file handles route rewrites and directs traffic to the serverless function.
+- The `api/index.js` file acts as the entry point for Vercel's serverless environment.
+- The `package.json` includes a `postinstall` script to ensure server dependencies are installed correctly during the Vercel build phase.
+
+**To deploy on Vercel:**
+1. Import your repository into Vercel.
+2. In the project settings, set the **Framework Preset** to `Other`, **Build Command** to `pnpm run build:ssr-vercel`, **Output Directory** to `dist/ssr/client`.
+3. Vercel will automatically detect the configuration and deploy your Quasar SSR app.
+
+---
+
+### Deploying to Other Platforms
+
+If you prefer to deploy this application to a different environment (e.g., standard Node.js server, Docker, AWS, or DigitalOcean), you **must remove** the Vercel-specific configurations to prevent conflicts.
+
+**Follow these steps to revert to the standard Quasar SSR setup:**
+
+1. **Delete Vercel files:** Remove the `vercel.json` file and the entire `api` directory from the root of your project.
+
+2. **Update `quasar.config.js`:**
+   Locate the `ssr` configuration block and remove the `prodScriptNamedExport` property:
+   ```javascript
+   ssr: {
+     // Remove or comment out the following line:
+     // prodScriptNamedExport: 'default',
+     
+     pwa: false,
+     // ...
+   }
+   ```
+3. **Update `src-ssr/server.ts`:**
+```javascript
+export const listen = defineSsrListen(
+  async ({ app, devHttpsOptions, port }) => {
+
+    // Remove this block entirely
+    // if (import.meta.env.QUASAR_PROD) {
+    //   return { default: app };
+    // }
+
+    // Keep the rest of the default listening logic...
+  }
+);
+```
+3. **Update `src-ssr/server.ts`:**
+Revert the `SsrDriver` interface declaration at the top of the file back to its default state:
+```javascript
+declare module '#q-app' {
+  interface SsrDriver {
+    app: Application;
+    listenResult: Server; // Remove the " | { default: Application }" part
+    request: Request;
+    response: Response;
+  }
+}
+```
+Once these changes are made, your project will run as a standard long-running Node.js process when built for production (`quasar build -m ssr`), ready to be deployed anywhere.
 
 ### Customize the configuration
 

@@ -22,7 +22,7 @@ const lorem =
               <BaseButton :icon="biSearch" round flat />
               <BaseButton :icon="biPlusCircle" round flat />
               <BaseButton
-                href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/card.vue"
+                href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/card.vue"
                 target="_blank"
                 :icon="biCode"
                 flat

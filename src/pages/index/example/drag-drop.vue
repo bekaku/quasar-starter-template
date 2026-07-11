@@ -208,7 +208,7 @@ const onDragEnd = (event: any) => {
     <BaseCard title="Dragdrop" subtitle="https://github.com/Alfred-Skyblue/vue-draggable-plus">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/drag-drop.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/drag-drop.vue"
           target="_blank"
           :icon="biCode"
           flat

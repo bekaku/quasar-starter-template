@@ -89,7 +89,7 @@ note、abstract、info、tip、success、question、warning、failure、danger�
     <BaseTextHeader title="Markdown">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/markdown-editor.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/markdown-editor.vue"
           target="_blank"
           :icon="biCode"
           flat

@@ -22,7 +22,7 @@ const { isSmallScreen } = useDevice();
     <BaseTextHeader title="Transitions">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/user.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/user.vue"
           target="_blank"
           :icon="biCode"
           flat

@@ -121,7 +121,7 @@ csont putResponse:Permission = await callAxios<Permission>({
       <template #end>
         <q-item-section side>
           <BaseButton
-            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/composables/use-axios.vue"
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/composables/use-axios.vue"
             target="_blank"
             :icon="biCode"
             flat

@@ -37,7 +37,7 @@ const nextPage = (index: number, done: any) => {
     <BaseCard title="Infinite scroll">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/infinite-scroll.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/infinite-scroll.vue"
           target="_blank"
           :icon="biCode"
           flat

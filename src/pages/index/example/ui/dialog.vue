@@ -44,7 +44,7 @@ const onConfirmToClose = async () => {
     <BaseCard title="Dialog">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/dialog.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/dialog.vue"
           target="_blank"
           :icon="biCode"
           flat

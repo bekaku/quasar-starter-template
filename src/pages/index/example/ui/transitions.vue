@@ -27,7 +27,7 @@ const text =
     <BaseTextHeader title="Transitions">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/transitions.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/transitions.vue"
           target="_blank"
           :icon="biCode"
           flat

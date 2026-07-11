@@ -30,7 +30,7 @@ const progress = ref(false);
     <BaseCard title="Color">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/button.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/button.vue"
           target="_blank"
           :icon="biCode"
           flat

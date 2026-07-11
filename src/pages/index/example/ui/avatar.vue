@@ -42,7 +42,7 @@ const getTooltipBy = (index: number) => {
       <template #end>
         <q-item-section side>
           <BaseButton
-            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/avatar.vue"
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/avatar.vue"
             target="_blank"
             :icon="biCode"
             flat

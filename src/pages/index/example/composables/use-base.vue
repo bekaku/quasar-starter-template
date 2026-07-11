@@ -69,7 +69,7 @@ const onCopyText = async () => {
       <template #end>
         <q-item-section side>
           <BaseButton
-            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/composables/use-base.vue"
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/composables/use-base.vue"
             target="_blank"
             :icon="biCode"
             flat

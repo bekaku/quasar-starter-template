@@ -217,7 +217,7 @@ const onItemClick = () => {
     <BaseCard flat :bordered="false" title="Dropdown menu">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/menu.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/menu.vue"
           target="_blank"
           :icon="biCode"
           flat

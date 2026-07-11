@@ -112,7 +112,7 @@ const setImagesFileView = (file: FileManagerDto) => {
     <BaseCard title="Image Only">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/image-view.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/image-view.vue"
           target="_blank"
           :icon="biCode"
           flat

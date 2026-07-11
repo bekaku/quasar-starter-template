@@ -80,7 +80,7 @@ const setShowChart = (no: number) => {
     <BaseTextHeader title="Charts">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/charts.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/charts.vue"
           target="_blank"
           :icon="biCode"
           flat

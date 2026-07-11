@@ -83,7 +83,7 @@ const onCustomRemove2 = (index: number) => {
     <BaseCard title="Simple Picker">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/file-picker.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/file-picker.vue"
           target="_blank"
           :icon="biCode"
           flat

@@ -33,7 +33,7 @@ const options: LabelValue<number>[] = [
     <BaseCard title="Toggle, Options , Radios">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/toggle.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/toggle.vue"
           target="_blank"
           :icon="biCode"
           flat

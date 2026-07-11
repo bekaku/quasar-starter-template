@@ -180,7 +180,7 @@ const onLazyScroll = (to: number, ref: any) => {
     <BaseCard title="Select">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/select.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/select.vue"
           target="_blank"
           :icon="biCode"
           flat

@@ -54,7 +54,7 @@ onMounted(() => {
           <q-tooltip> Reload data </q-tooltip>
         </BaseButton>
           <BaseButton
-            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/composables/use-pagefecth.vue"
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/composables/use-pagefecth.vue"
             target="_blank"
             :icon="biCode"
             flat

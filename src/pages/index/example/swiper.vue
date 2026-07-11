@@ -189,7 +189,7 @@ const slideOptsVertical: SlideOptions = {
     <BaseTextHeader title="Swipper">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/swiper.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/swiper.vue"
           target="_blank"
           :icon="biCode"
           flat

@@ -54,7 +54,7 @@ const onInputUpdate = (val: string | number | undefined | null) => {
     <BaseTextHeader title="Input Text">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/ui/input-text.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/ui/input-text.vue"
           target="_blank"
           :icon="biCode"
           flat

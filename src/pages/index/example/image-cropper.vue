@@ -53,7 +53,7 @@ const onCropImageEnd = (imageUrl: string) => {
     <BaseCard title="Image Cropper" subtitle="Ratio">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/image-cropper.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/image-cropper.vue"
           target="_blank"
           :icon="biCode"
           flat

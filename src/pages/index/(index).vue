@@ -53,7 +53,7 @@ const recentSalseItems = ref<LabelValue<string>[]>(dashBaordRecentSalseItems);
       <template #end>
         <q-item-section side>
           <BaseButton
-            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index.vue"
+            href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/(index).vue"
             target="_blank"
             :icon="biCode"
             flat

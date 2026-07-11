@@ -253,7 +253,7 @@ const onItemDelete = async (indexOrIds: number | number[], isSingle: boolean) =>
   if (isSingle) {
     dataList.value = dataList.value.filter((item, index) => index !== indexOrIds);
   } else if (Array.isArray(indexOrIds)) {
-    dataList.value = dataList.value.filter((item) => item.id && !indexOrIds.includes(item.id));
+    dataList.value = dataList.value.filter((item) => item.id && !indexOrIds.includes(item.id as number));
   }
 };
 const onNewForm = () => {
@@ -285,7 +285,7 @@ const onColClick = (event: any, index: number, headerOption: ICrudListHeader, co
     <BaseTextHeader title="Crud Table" class="q-py-md">
       <template #end>
         <BaseButton
-          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/example/crud-table.vue"
+          href="https://github.com/bekaku/quasar-starter-template/blob/main/src/pages/index/example/crud-table.vue"
           target="_blank"
           :icon="biCode"
           flat
