@@ -78,7 +78,7 @@ pnpm install
 npm install
 ```
 
-# In case you want to use my API, edit the following file.
+<!-- # In case you want to use my API, edit the following file.
 
 API endpoint at `my-app/.env` or `my-app/.env.local`
 
@@ -396,7 +396,7 @@ const getOgMeta = async (link: string): Promise<OgMeta | null> => {
       method: 'GET',
     });
   };
-```
+``` -->
 
 Config your Project at `my-app`/quasar.config.ts
 
